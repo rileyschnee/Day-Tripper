@@ -13,6 +13,9 @@
 		BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3F20F92990005B79F5 /* Assets.xcassets */; };
 		BEA5FD4320F92990005B79F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD4120F92990005B79F5 /* LaunchScreen.storyboard */; };
 		BEA5FD4620F92990005B79F5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD4520F92990005B79F5 /* main.m */; };
+		BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5020F929CD005B79F5 /* QuizViewController.m */; };
+		BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */; };
+		BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5620F92A01005B79F5 /* ItinViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +29,12 @@
 		BEA5FD4220F92990005B79F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BEA5FD4420F92990005B79F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BEA5FD4520F92990005B79F5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		BEA5FD4F20F929CD005B79F5 /* QuizViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizViewController.h; sourceTree = "<group>"; };
+		BEA5FD5020F929CD005B79F5 /* QuizViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = QuizViewController.m; sourceTree = "<group>"; };
+		BEA5FD5220F929E2005B79F5 /* ResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsViewController.h; sourceTree = "<group>"; };
+		BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
+		BEA5FD5520F92A01005B79F5 /* ItinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItinViewController.h; sourceTree = "<group>"; };
+		BEA5FD5620F92A01005B79F5 /* ItinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItinViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,9 @@
 		BEA5FD3520F9298F005B79F5 /* DayTripper */ = {
 			isa = PBXGroup;
 			children = (
+				BEA5FD4E20F929BF005B79F5 /* Models */,
+				BEA5FD4D20F929B9005B79F5 /* Views */,
+				BEA5FD4C20F929AF005B79F5 /* View Controllers */,
 				BEA5FD3620F9298F005B79F5 /* AppDelegate.h */,
 				BEA5FD3720F9298F005B79F5 /* AppDelegate.m */,
 				BEA5FD3920F9298F005B79F5 /* ViewController.h */,
@@ -69,6 +81,33 @@
 				BEA5FD4520F92990005B79F5 /* main.m */,
 			);
 			path = DayTripper;
+			sourceTree = "<group>";
+		};
+		BEA5FD4C20F929AF005B79F5 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BEA5FD4F20F929CD005B79F5 /* QuizViewController.h */,
+				BEA5FD5020F929CD005B79F5 /* QuizViewController.m */,
+				BEA5FD5220F929E2005B79F5 /* ResultsViewController.h */,
+				BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */,
+				BEA5FD5520F92A01005B79F5 /* ItinViewController.h */,
+				BEA5FD5620F92A01005B79F5 /* ItinViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		BEA5FD4D20F929B9005B79F5 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		BEA5FD4E20F929BF005B79F5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -143,7 +182,10 @@
 			files = (
 				BEA5FD3B20F9298F005B79F5 /* ViewController.m in Sources */,
 				BEA5FD4620F92990005B79F5 /* main.m in Sources */,
+				BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
+				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
+				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
