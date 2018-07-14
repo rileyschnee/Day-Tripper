@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3720F9298F005B79F5 /* AppDelegate.m */; };
 		BEA5FD3B20F9298F005B79F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3A20F9298F005B79F5 /* ViewController.m */; };
 		BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3C20F9298F005B79F5 /* Main.storyboard */; };
@@ -19,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
+		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		BEA5FD3320F9298F005B79F5 /* DayTripper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTripper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5FD3620F9298F005B79F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEA5FD3720F9298F005B79F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -48,6 +51,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		53E8420320F9A03F003FE31A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				53E8420420F9A060003FE31A /* APIManager.h */,
+				53E8420520F9A060003FE31A /* APIManager.m */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 		BEA5FD2A20F9298F005B79F5 = {
 			isa = PBXGroup;
 			children = (
@@ -67,6 +79,7 @@
 		BEA5FD3520F9298F005B79F5 /* DayTripper */ = {
 			isa = PBXGroup;
 			children = (
+				53E8420320F9A03F003FE31A /* Utils */,
 				BEA5FD4E20F929BF005B79F5 /* Models */,
 				BEA5FD4D20F929B9005B79F5 /* Views */,
 				BEA5FD4C20F929AF005B79F5 /* View Controllers */,
@@ -184,6 +197,7 @@
 				BEA5FD4620F92990005B79F5 /* main.m in Sources */,
 				BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
+				53E8420620F9A060003FE31A /* APIManager.m in Sources */,
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 			);
