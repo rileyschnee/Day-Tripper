@@ -10,6 +10,7 @@
 #import "ResultsCell.h"
 #import "ItinViewController.h"
 #import "Functions.h"
+#import "Trip.h"
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *places;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -47,6 +48,23 @@
         }
         
     }
+    //save the trip
+    //declare trip object
+    Trip *trip = [Trip new];
+    // TODO: change this
+    trip.city = self.location;
+    trip.places = [chosenPlaces copy];
+    trip.planner = [PFUser currentUser];
+    
+    //actually save the trip
+    [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"woohoo");
+        }
+    }];
+    
+    //end saving the trip
+    
     
     ItinViewController *itinViewController = [segue destinationViewController];
     itinViewController.places = chosenPlaces;
@@ -64,12 +82,12 @@
 }
 
 - (void)fetchResults{
-    self.places = [[NSMutableArray alloc] init];
-    Place *temp1 = [[Place alloc] init];
-    Place *temp2 = [[Place alloc] init];
-    Place *temp3 = [[Place alloc] init];
-    Place *temp4 = [[Place alloc] init];
-    Place *temp5 = [[Place alloc] init];
+    self.places = [NSMutableArray new];
+    Place *temp1 = [Place new];
+    Place *temp2 = [Place new];
+    Place *temp3 = [Place new];
+    Place *temp4 = [Place new];
+    Place *temp5 = [Place new];
 
     temp1.name = @"MOMA";
     [self.places addObject:temp1];

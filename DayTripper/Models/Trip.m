@@ -10,4 +10,20 @@
 
 @implementation Trip
 
+@dynamic city;
+@dynamic places;
+@dynamic planner;
+
++ (nonnull NSString *)parseClassName {
+    return @"Trip";
+}
+
++ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withCompletion: (PFBooleanResultBlock  _Nullable)completion {
+    
+    Trip *newTrip = trip;
+    newTrip.city = name;
+    newTrip.planner = [PFUser currentUser];
+    
+    [newTrip saveInBackgroundWithBlock: completion];
+}
 @end

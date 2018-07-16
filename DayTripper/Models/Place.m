@@ -9,5 +9,10 @@
 #import "Place.h"
 
 @implementation Place
+@dynamic name;
+
++ (nonnull NSString *)parseClassName {
+    return @"Place";
+}
 
 @end

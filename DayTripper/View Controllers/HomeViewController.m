@@ -10,6 +10,7 @@
 #import "Trip.h"
 #import "TripCell.h"
 #import "ItinViewController.h"
+#import "ProfileCell.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
@@ -23,6 +24,9 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     // Do any additional setup after loading the view.
+    ProfileCell *profCell = [ProfileCell new];
+    [self.tableView addSubview:profCell];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {

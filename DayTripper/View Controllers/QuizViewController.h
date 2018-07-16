@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface QuizViewController : UIViewController
+@property (weak, nonatomic) IBOutlet UITextField *locationField;
 
 @end
