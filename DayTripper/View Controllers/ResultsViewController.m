@@ -67,7 +67,7 @@
     
     
     ItinViewController *itinViewController = [segue destinationViewController];
-    itinViewController.places = chosenPlaces;
+    itinViewController.trip = trip;
     
 }
 
