@@ -7,8 +7,11 @@
 //
 
 #import "ResultsViewController.h"
+#import "ResultsCell.h"
 
-@interface ResultsViewController ()
+@interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) NSMutableArray *places;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -16,7 +19,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     // Do any additional setup after loading the view.
+    self.places = [[NSMutableArray alloc] init];
+    Place *temp = [[Place alloc] init];
+    temp.name = @"MOMA";
+    [self.places addObject:temp];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +43,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
+    cell.place = self.places[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.places.count;
+}
+
 
 @end

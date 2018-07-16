@@ -7,9 +7,12 @@
 //
 
 #import "ItinViewController.h"
+#import "ItinCell.h"
+#import "Place.h"
 
-@interface ItinViewController ()
-
+@interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *places;
 @end
 
 @implementation ItinViewController
@@ -17,6 +20,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    // Do any additional setup after loading the view.
+    self.places = [[NSMutableArray alloc] init];
+    Place *temp = [[Place alloc] init];
+    temp.name = @"MOMA";
+    [self.places addObject:temp];
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -33,5 +44,16 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ItinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItinCell" forIndexPath:indexPath];
+    cell.place = self.places[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.places.count;
+}
+
 
 @end

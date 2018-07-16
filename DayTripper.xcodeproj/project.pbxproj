@@ -18,6 +18,9 @@
 		BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5020F929CD005B79F5 /* QuizViewController.m */; };
 		BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */; };
 		BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5620F92A01005B79F5 /* ItinViewController.m */; };
+		BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */; };
+		BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8D20FD016E0048C0DB /* Place.m */; };
+		BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9320FD03BC0048C0DB /* ItinCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +44,12 @@
 		BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		BEA5FD5520F92A01005B79F5 /* ItinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItinViewController.h; sourceTree = "<group>"; };
 		BEA5FD5620F92A01005B79F5 /* ItinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItinViewController.m; sourceTree = "<group>"; };
+		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
+		BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
+		BEEA9D8C20FD016E0048C0DB /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
+		BEEA9D8D20FD016E0048C0DB /* Place.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
+		BEEA9D9220FD03BC0048C0DB /* ItinCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItinCell.h; sourceTree = "<group>"; };
+		BEEA9D9320FD03BC0048C0DB /* ItinCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItinCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,6 +126,10 @@
 		BEA5FD4D20F929B9005B79F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */,
+				BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */,
+				BEEA9D9220FD03BC0048C0DB /* ItinCell.h */,
+				BEEA9D9320FD03BC0048C0DB /* ItinCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -124,6 +137,8 @@
 		BEA5FD4E20F929BF005B79F5 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BEEA9D8C20FD016E0048C0DB /* Place.h */,
+				BEEA9D8D20FD016E0048C0DB /* Place.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -198,10 +213,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */,
+				BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */,
 				BEA5FD3B20F9298F005B79F5 /* ViewController.m in Sources */,
 				BEA5FD4620F92990005B79F5 /* main.m in Sources */,
 				BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
+				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
