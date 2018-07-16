@@ -8,7 +8,9 @@
 
 #import "APIManager.h"
 
+
 @implementation APIManager
+
 
 - (void) getRequest:(NSString *)url params:(NSDictionary*)params completion:(void (^)(NSArray *))completion{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
@@ -52,12 +54,15 @@
 
 -(NSString *) buildQueryStringFromDictionary:(NSDictionary *)parameters {
     NSString *urlVars = nil;
+    NSString *totalString = @"";
     for (NSString *key in parameters) {
         NSString *value = parameters[key];
         value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
         urlVars = [NSString stringWithFormat:@"%@%@=%@", urlVars ? @"&": @"", key, value];
+        totalString = [NSString stringWithFormat:@"%@%@", totalString, urlVars];
     }
-    return [NSString stringWithFormat:@"%@%@", urlVars ? @"?" : @"", urlVars ? urlVars : @""];
+    
+    return [NSString stringWithFormat:@"%@%@", totalString ? @"?" : @"", totalString ? totalString : @""];
 }
 
 - (void) getRequest:(NSString *)url completion:(void (^)(NSArray *))completion{
