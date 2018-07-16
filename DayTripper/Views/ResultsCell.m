@@ -25,6 +25,7 @@
 }
 
 -(void)setPlace:(Place *)place{
+    _place = place;
     self.placeNameLabel.text = place.name;
 }
 

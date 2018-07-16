@@ -10,5 +10,6 @@
 
 @interface ItinViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
+@property (strong, nonatomic) NSMutableArray *places;
 
 @end

@@ -12,7 +12,6 @@
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *places;
 @end
 
 @implementation ItinViewController
@@ -23,10 +22,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     // Do any additional setup after loading the view.
-    self.places = [[NSMutableArray alloc] init];
-    Place *temp = [[Place alloc] init];
-    temp.name = @"MOMA";
-    [self.places addObject:temp];
     [self.tableView reloadData];
 }
 
