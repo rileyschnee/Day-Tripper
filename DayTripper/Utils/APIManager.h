@@ -10,6 +10,7 @@
 
 @interface APIManager : NSObject
 // this method will perform a get request given a URL
+//parameters should be strings
 - (void) getRequest:(NSString *)url completion:(void (^)(NSArray *))completion;
 
 // this method will perform a get request given a URL and a dictionary of parameters for header fields

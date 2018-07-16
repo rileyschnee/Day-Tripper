@@ -11,6 +11,7 @@
 #import "ItinViewController.h"
 #import "Functions.h"
 #import "Trip.h"
+#import "APIManager.h"
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *places;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -27,11 +28,6 @@
 
     // Do any additional setup after loading the view.
     [self fetchResults];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 
@@ -51,7 +47,6 @@
     //save the trip
     //declare trip object
     Trip *trip = [Trip new];
-    // TODO: change this
     trip.city = self.location;
     trip.places = [chosenPlaces copy];
     trip.planner = [PFUser currentUser];
@@ -59,12 +54,10 @@
     //actually save the trip
     [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
-            NSLog(@"woohoo");
         }
     }];
     
     //end saving the trip
-    
     
     ItinViewController *itinViewController = [segue destinationViewController];
     itinViewController.trip = trip;
@@ -83,25 +76,37 @@
 
 - (void)fetchResults{
     self.places = [NSMutableArray new];
-    Place *temp1 = [Place new];
-    Place *temp2 = [Place new];
-    Place *temp3 = [Place new];
-    Place *temp4 = [Place new];
-    Place *temp5 = [Place new];
 
-    temp1.name = @"MOMA";
-    [self.places addObject:temp1];
-    temp2.name = @"Palace of Fine Arts";
-    [self.places addObject:temp2];
-    temp3.name = @"Ghiridelli Square";
-    [self.places addObject:temp3];
-    temp4.name = @"Fisherman's Wharf";
-    [self.places addObject:temp4];
-    temp5.name = @"Sausalito";
-    [self.places addObject:temp5];
-    [self.tableView reloadData];
+    APIManager *apiManager = [[APIManager alloc] init];
+    //make the request
+    NSString *baseURL =  @"https://api.foursquare.com/v2/venues/search";
+    //params
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    [paramsDict setObject:@"40.7484,-73.9857" forKey:@"ll"];
+    [paramsDict setObject:@"20180716" forKey:@"v"];
+    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
+    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    
+    __weak typeof(self) weakSelf = self;
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+            NSArray *venues = responseDict[0][@"response"][@"venues"];
+            for (NSDictionary *venue in venues) {
+                Place *place = [Place new];
+                place.name = venue[@"name"];
+                [weakSelf.places addObject:place];
+            }
+            [weakSelf refreshAsync];
+    }];
+    
     
 }
+
+-(void) refreshAsync {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
 
 
 @end
