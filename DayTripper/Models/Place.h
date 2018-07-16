@@ -7,8 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-
-@interface Place : NSObject
+#import <Parse/Parse.h>
+@interface Place : PFObject <PFSubclassing>
 @property (strong, nonatomic) NSString *name;
 
 @end

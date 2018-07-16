@@ -7,9 +7,10 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <Parse/Parse.h>
 
-@interface Trip : NSObject
+@interface Trip : PFObject <PFSubclassing>
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSMutableArray *places;
-
+@property (strong, nonatomic) PFUser *planner;
 @end
