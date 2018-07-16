@@ -26,12 +26,33 @@
     // Do any additional setup after loading the view.
     ProfileCell *profCell = [ProfileCell new];
     [self.tableView addSubview:profCell];
+    [self fetchTrips];
     [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)fetchTrips {
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
+    [query orderByDescending:@"createdAt"];
+    [query includeKey:@"planner"];
+    [query includeKey:@"places"];
+    [query whereKey:@"planner" equalTo:[PFUser currentUser]];
+    query.limit = 20;
+    
+    [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
+        if (trips != nil) {
+            self.trips = trips;
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+    
 }
 
 
