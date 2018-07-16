@@ -47,6 +47,7 @@
         }
         
     }
+    
     ItinViewController *itinViewController = [segue destinationViewController];
     itinViewController.places = chosenPlaces;
     
