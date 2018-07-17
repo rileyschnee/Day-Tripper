@@ -81,7 +81,8 @@
     NSString *baseURL =  @"https://api.foursquare.com/v2/venues/search";
     //params
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
-    [paramsDict setObject:@"40.7484,-73.9857" forKey:@"ll"];
+    NSString *coordinates = [NSString stringWithFormat:@"%f%@%f",self.latitude, @",", self.longitude];
+    [paramsDict setObject:coordinates forKey:@"ll"];
     [paramsDict setObject:@"20180716" forKey:@"v"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];

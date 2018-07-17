@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
 @property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
 @property (nonatomic) double latitude;
+- (IBAction)didTap:(id)sender;
 @property (nonatomic) double longitude;
 @end
 
@@ -84,4 +85,7 @@
 }
 
 
+- (IBAction)didTap:(id)sender {
+    [self.locationField resignFirstResponder];
+}
 @end
