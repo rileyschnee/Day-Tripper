@@ -8,8 +8,11 @@
 
 #import "QuizViewController.h"
 #import "ResultsViewController.h"
+#import <MapKit/MapKit.h>
 
-@interface QuizViewController ()
+@interface QuizViewController () <MKLocalSearchCompleterDelegate>
+@property (strong, nonatomic) MKLocalSearchCompleter *completer;
+@property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
 
 @end
 
@@ -17,9 +20,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.completer = [[MKLocalSearchCompleter alloc] init];
+    self.completer.delegate = self;
+    self.completer.filterType = MKSearchCompletionFilterTypeLocationsAndQueries;
+    
 }
 
+
+
+- (void) completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
+    for (MKLocalSearchCompletion *completion in completer.results) {
+        NSLog(@"------ %@",completion.description);
+    }
+}
+
+- (void) completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
+    NSLog(@"Completer failed with error: %@",error.description);
+    
+}
 
 
 #pragma mark - Navigation
