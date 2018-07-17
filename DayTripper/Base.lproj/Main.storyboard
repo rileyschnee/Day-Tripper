@@ -156,6 +156,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <navigationItem key="navigationItem" title="Quiz" id="TQN-Aa-oHL"/>
+                    <connections>
+                        <outlet property="locationField" destination="sBN-HE-7u1" id="36j-RU-rZd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
