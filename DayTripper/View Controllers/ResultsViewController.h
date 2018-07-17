@@ -10,4 +10,6 @@
 
 @interface ResultsViewController : UIViewController
 @property (nonatomic, strong) NSString* location;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 @end

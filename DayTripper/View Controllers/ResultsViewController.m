@@ -25,7 +25,6 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.functions = [[Functions alloc] init];
-
     // Do any additional setup after loading the view.
     [self fetchResults];
 }
