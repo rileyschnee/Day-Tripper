@@ -10,6 +10,8 @@
 
 #import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
+#import "Place.h"
 
 @interface Functions : NSObject
 

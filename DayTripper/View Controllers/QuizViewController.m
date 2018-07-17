@@ -12,6 +12,8 @@
 
 @interface QuizViewController () <MKLocalSearchCompleterDelegate>
 @property (strong, nonatomic) MKLocalSearchCompleter *completer;
+@property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
+@property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
 @property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
