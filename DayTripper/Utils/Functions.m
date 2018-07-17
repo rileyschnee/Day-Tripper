@@ -22,4 +22,10 @@
     return [cells copy];
 }
 
+- (double) distanceBetweenTwoPlaces:(Place*)place1 place2:(Place*)place2 {
+    CLLocation *startLocation = [[CLLocation alloc] initWithLatitude:place1.latitude longitude:place1.longitude];
+    CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:place2.latitude longitude:place2.longitude];
+    return [startLocation distanceFromLocation:endLocation];
+}
+
 @end

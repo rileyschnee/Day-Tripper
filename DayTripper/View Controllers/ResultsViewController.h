@@ -12,4 +12,6 @@
 @property (nonatomic, strong) NSString* location;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (strong, nonatomic) NSDate* windowStartTime;
+@property (strong, nonatomic) NSDate* windowEndTime;
 @end
