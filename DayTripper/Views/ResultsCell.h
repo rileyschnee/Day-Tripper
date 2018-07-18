@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "Place.h"
+#import "Food.h"
+#import "Activity.h"
 
 @interface ResultsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *checkButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
-@property (strong, nonatomic) Place *place;
+@property (strong, nonatomic) id <Activity> activity;
 @end

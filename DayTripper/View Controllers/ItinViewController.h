@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Trip.h"
+#import "Activity.h"
+#import "Place.h"
+#import "Food.h"
 
 @interface ItinViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;

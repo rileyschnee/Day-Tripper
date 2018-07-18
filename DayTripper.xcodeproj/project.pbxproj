@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C5A20FEC07500D798A9 /* Food.m */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
 		5C6057ECF2ED632B7FD53472 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 629547CFF9336AD176C733AB /* libPods-DayTripper.a */; };
 		BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3720F9298F005B79F5 /* AppDelegate.m */; };
-		BEA5FD3B20F9298F005B79F5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3A20F9298F005B79F5 /* ViewController.m */; };
 		BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3C20F9298F005B79F5 /* Main.storyboard */; };
 		BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3F20F92990005B79F5 /* Assets.xcassets */; };
 		BEA5FD4320F92990005B79F5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD4120F92990005B79F5 /* LaunchScreen.storyboard */; };
@@ -31,6 +31,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0EAE0C5320FE9E0200D798A9 /* Activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
+		0EAE0C5920FEC07500D798A9 /* Food.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
+		0EAE0C5A20FEC07500D798A9 /* Food.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Food.m; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -42,8 +45,6 @@
 		BEA5FD3320F9298F005B79F5 /* DayTripper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTripper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5FD3620F9298F005B79F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEA5FD3720F9298F005B79F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		BEA5FD3920F9298F005B79F5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		BEA5FD3A20F9298F005B79F5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		BEA5FD3D20F9298F005B79F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BEA5FD3F20F92990005B79F5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BEA5FD4220F92990005B79F5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -133,8 +134,6 @@
 				BEA5FD4C20F929AF005B79F5 /* View Controllers */,
 				BEA5FD3620F9298F005B79F5 /* AppDelegate.h */,
 				BEA5FD3720F9298F005B79F5 /* AppDelegate.m */,
-				BEA5FD3920F9298F005B79F5 /* ViewController.h */,
-				BEA5FD3A20F9298F005B79F5 /* ViewController.m */,
 				BEA5FD3C20F9298F005B79F5 /* Main.storyboard */,
 				BEA5FD3F20F92990005B79F5 /* Assets.xcassets */,
 				BEA5FD4120F92990005B79F5 /* LaunchScreen.storyboard */,
@@ -183,6 +182,9 @@
 				BEEA9D8D20FD016E0048C0DB /* Place.m */,
 				BEEA9D9C20FD12310048C0DB /* Trip.h */,
 				BEEA9D9D20FD12310048C0DB /* Trip.m */,
+				0EAE0C5320FE9E0200D798A9 /* Activity.h */,
+				0EAE0C5920FEC07500D798A9 /* Food.h */,
+				0EAE0C5A20FEC07500D798A9 /* Food.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -317,12 +319,12 @@
 				BEEA9D9820FD12140048C0DB /* ProfileCell.m in Sources */,
 				BEEA9D9E20FD12310048C0DB /* Trip.m in Sources */,
 				BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */,
-				BEA5FD3B20F9298F005B79F5 /* ViewController.m in Sources */,
 				BEA5FD4620F92990005B79F5 /* main.m in Sources */,
 				BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */,
 				BEEA9D9B20FD12220048C0DB /* TripCell.m in Sources */,
 				BEEA9DA420FD322B0048C0DB /* LoginViewController.m in Sources */,
 				BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */,
+				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,

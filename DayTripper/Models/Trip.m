@@ -11,7 +11,7 @@
 @implementation Trip
 
 @dynamic city;
-@dynamic places;
+@dynamic activities;
 @dynamic planner;
 
 + (nonnull NSString *)parseClassName {

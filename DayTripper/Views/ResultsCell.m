@@ -8,6 +8,7 @@
 
 #import "ResultsCell.h"
 
+
 @implementation ResultsCell
 
 - (void)awakeFromNib {
@@ -24,9 +25,9 @@
     self.checkButton.selected = !self.checkButton.selected;
 }
 
--(void)setPlace:(Place *)place{
-    _place = place;
-    self.placeNameLabel.text = place.name;
+-(void)setActivity:(id<Activity>)activity{
+    _activity = activity;
+    self.placeNameLabel.text = activity.name;
 }
 
 

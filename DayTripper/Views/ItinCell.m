@@ -21,9 +21,9 @@
     // Configure the view for the selected state
 }
 
--(void)setPlace:(Place *)place{
-    _place = place;
-    self.placeNameLabel.text = place.name;
+-(void)setActivity:(id<Activity>)activity{
+    _activity = activity;
+    self.placeNameLabel.text = activity.name;
 }
 
 @end

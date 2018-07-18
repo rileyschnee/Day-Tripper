@@ -8,7 +8,6 @@
 
 #import "ItinViewController.h"
 #import "ItinCell.h"
-#import "Place.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -42,12 +41,12 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ItinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItinCell" forIndexPath:indexPath];
-    cell.place = self.trip.places[indexPath.row];
+    cell.activity = self.trip.activities[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.trip.places.count;
+    return self.trip.activities.count;
 }
 
 

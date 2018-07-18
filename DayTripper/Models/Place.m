@@ -7,20 +7,12 @@
 //
 
 #import "Place.h"
-
+#import "Activity.h"
 @implementation Place
 @dynamic name;
 
 + (nonnull NSString *)parseClassName {
     return @"Place";
-}
-
-- (void) setEndTime:(NSDate *)endTime {
-    self.endTime = endTime;
-    //calculate duration of event
-    if (self.startTime != nil) {
-        self.duration = [self.endTime timeIntervalSinceDate:self.startTime];
-    }
 }
 
 @end
