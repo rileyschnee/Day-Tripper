@@ -61,20 +61,29 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    //NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
-//    for(ResultsCell *cell in [self.functions getCellsFromTable:self.tableView]){
-//        if(cell.checkButton.selected){
-//            [self.chosenPlaces addObject:cell.place];
-//        }
-//
-//    }
-    //save the trip
-    //declare trip object
+
     if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
-        detailPage.activity = self.activities[indexPath.row];
+        //get the activity
+        NSArray *places = self.activities[0];
+        NSArray *food = self.activities[1];
+        NSArray *events = self.activities[2];
+        int selectedIndex = (int) indexPath.row;
+        int selectedSection = (int) indexPath.section;
+        if (selectedSection == 0) {
+            detailPage.activity = places[selectedIndex];
+        } else if (selectedSection == 1) {
+            detailPage.activity = food[selectedIndex];
+        }
+        else {
+            detailPage.activity = events[selectedIndex];
+        }
+        
+        //end getting the activity
+
+        
         
     } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
         self.trip.planner = [PFUser currentUser];
@@ -173,6 +182,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             Food *food = [Food new];
             food.name = venue[@"name"];
             food.website = venue[@"url"];
+            food.latitude = [venue[@"coordinates"][@"latitude"] doubleValue];
+            food.longitude = [venue[@"coordinates"][@"longitude"] doubleValue];
             [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];
@@ -208,6 +219,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         for (NSDictionary *event in events) {
             Event *eventObj = [Event new];
             eventObj.name = event[@"title"];
+            eventObj.latitude = [event[@"location"][0] doubleValue];
+            eventObj.longitude = [event[@"location"][1] doubleValue];
             [self.activities[2] addObject:eventObj];
         }
         [weakSelf refreshAsync];
