@@ -61,20 +61,32 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    //NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
-//    for(ResultsCell *cell in [self.functions getCellsFromTable:self.tableView]){
-//        if(cell.checkButton.selected){
-//            [self.chosenPlaces addObject:cell.place];
-//        }
-//
-//    }
-    //save the trip
-    //declare trip object
+
     if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
+        NSLog(@"%@", self.activities[indexPath.section][indexPath.row]);
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
+        
+//        //get the activity
+//        NSArray *places = self.activities[0];
+//        NSArray *food = self.activities[1];
+//        NSArray *events = self.activities[2];
+//        int selectedIndex = (int) indexPath.row;
+//        int selectedSection = (int) indexPath.section;
+//        if (selectedSection == 0) {
+//            detailPage.activity = places[selectedIndex];
+//        } else if (selectedSection == 1) {
+//            detailPage.activity = food[selectedIndex];
+//        }
+//        else {
+//            detailPage.activity = events[selectedIndex];
+//        }
+//
+//        //end getting the activity
+
+        
         
     } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
         self.trip.planner = [PFUser currentUser];

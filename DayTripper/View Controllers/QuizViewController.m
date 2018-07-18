@@ -18,6 +18,9 @@
 @property (nonatomic) double latitude;
 - (IBAction)didTap:(id)sender;
 @property (nonatomic) double longitude;
+//used to identify last location typed by user
+@property (nonatomic) int lastEditedLocation;
+@property (nonatomic) int prevTextFieldLength;
 @end
 
 @implementation QuizViewController
@@ -27,15 +30,27 @@
     [self.locationField setDelegate:self];
     self.latitude = 0;
     self.longitude = 0;
+    [self.locationField addTarget:self
+                           action:@selector(textFieldDidChange:)
+                 forControlEvents:UIControlEventEditingChanged];
+    
 }
 
-- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+- (void)textFieldDidChange:(UITextField *)textField {
     
     if ([textField.text length] > 4)
     {
-        [self completerRunText:textField.text];
+        
+        if (textField.text.length < self.prevTextFieldLength) {
+            self.prevTextFieldLength = (int) textField.text.length;
+        }
+        else {
+            self.lastEditedLocation = ((int) [textField.text length]);
+            [self completerRunText:textField.text];
+        }
     }
-    return YES;
+
+    
 }
 
 - (void) completerRunText:(NSString *)query {
@@ -53,7 +68,17 @@
         NSString *completion = [result.description componentsSeparatedByString:@">"][1];
         [self getAddressFromName:completion];
         self.locationField.text = completion;
+        [self selectPartOfTextField:self.locationField];
+        self.prevTextFieldLength = (int) self.locationField.text.length;
     }
+}
+
+- (void) selectPartOfTextField:(UITextField*) textField {
+    UITextRange *selectedRange = [textField selectedTextRange];
+    int positionToStartHighlighting = ( (int) self.locationField.text.length) - self.lastEditedLocation;
+    UITextPosition *newPosition = [textField positionFromPosition:selectedRange.end offset:-positionToStartHighlighting];
+    UITextRange *newRange = [textField textRangeFromPosition:newPosition toPosition:selectedRange.start];
+    [textField setSelectedTextRange:newRange];
 }
 
 - (void) getAddressFromName:(NSString*) name {
@@ -66,7 +91,7 @@
             self.latitude = item.placemark.location.coordinate.latitude;
             self.longitude = item.placemark.location.coordinate.longitude;
         }
-        }];
+    }];
 }
 
 - (void) completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
