@@ -1,0 +1,6 @@
+framework module Pods_DayTripper {
+  umbrella header "Pods-DayTripper-umbrella.h"
+
+  export *
+  module * { export * }
+}
