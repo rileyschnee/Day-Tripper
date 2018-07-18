@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C5A20FEC07500D798A9 /* Food.m */; };
+		0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C5D20FFA9A900D798A9 /* DetailsViewController.m */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -35,6 +36,8 @@
 		0EAE0C5320FE9E0200D798A9 /* Activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		0EAE0C5920FEC07500D798A9 /* Food.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Food.h; sourceTree = "<group>"; };
 		0EAE0C5A20FEC07500D798A9 /* Food.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Food.m; sourceTree = "<group>"; };
+		0EAE0C5C20FFA9A900D798A9 /* DetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DetailsViewController.h; sourceTree = "<group>"; };
+		0EAE0C5D20FFA9A900D798A9 /* DetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DetailsViewController.m; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -159,6 +162,8 @@
 				BEEA9DA020FD12970048C0DB /* HomeViewController.m */,
 				BEEA9DA220FD322B0048C0DB /* LoginViewController.h */,
 				BEEA9DA320FD322B0048C0DB /* LoginViewController.m */,
+				0EAE0C5C20FFA9A900D798A9 /* DetailsViewController.h */,
+				0EAE0C5D20FFA9A900D798A9 /* DetailsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				BEEA9DA420FD322B0048C0DB /* LoginViewController.m in Sources */,
 				BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */,
 				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
+				0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,
