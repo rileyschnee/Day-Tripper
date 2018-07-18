@@ -299,7 +299,7 @@
                     <navigationItem key="navigationItem" title="Results" id="KoM-Z7-VML">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="aJ8-JO-5jn">
                             <connections>
-                                <segue destination="R5t-SS-ykh" kind="show" id="znw-IY-XCr"/>
+                                <segue destination="R5t-SS-ykh" kind="show" identifier="toItenView" id="znw-IY-XCr"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
