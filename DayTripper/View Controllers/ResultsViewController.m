@@ -13,6 +13,8 @@
 #import "Trip.h"
 #import "APIManager.h"
 #import "Activity.h"
+#import "DetailsViewController.h"
+
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -53,22 +55,29 @@
 //    }
     //save the trip
     //declare trip object
-    
-    self.trip.planner = [PFUser currentUser];
+    if([sender isKindOfClass:[ResultsCell class]]){
+        ResultsCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        DetailsViewController * detailPage = [segue destinationViewController];
+        detailPage.activity = self.activities[indexPath.row];
+        
+    } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
+        self.trip.planner = [PFUser currentUser];
 
-    //actually save the trip
-    [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (succeeded) {
-            NSLog(@"Trip successfully saved!");
-        } else {
-            NSLog(@"Error saving trip");
-        }
-    }];
+        //actually save the trip
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Trip successfully saved!");
+            } else {
+                NSLog(@"Error saving trip");
+            }
+        }];
     
-    //end saving the trip
+        //end saving the trip
     
-    ItinViewController *itinViewController = [segue destinationViewController];
-    itinViewController.trip = self.trip;
+        ItinViewController *itinViewController = [segue destinationViewController];
+        itinViewController.trip = self.trip;
+    }
     
 }
 
@@ -102,6 +111,8 @@
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
                 place.name = venue[@"name"];
+                place.latitude = [venue[@"location"][@"lat"] doubleValue];
+                place.longitude = [venue[@"location"][@"lng"] doubleValue];
                 [weakSelf.activities addObject:place];
             }
         //[weakSelf fetchResultsYelp];
