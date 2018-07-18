@@ -20,6 +20,7 @@
 @property (strong, nonatomic) Trip *trip;
 @property (strong, nonatomic) NSMutableArray *food;
 @property (strong, nonatomic) NSMutableArray *places;
+@property (strong, nonatomic) NSMutableArray *events;
 
 @end
 
@@ -41,8 +42,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     self.activities = [NSMutableArray new];
     self.places = [NSMutableArray new];
     self.food = [NSMutableArray new];
+    self.events = [NSMutableArray new];
+
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
+    [self.activities addObject:self.events];
     [self fetchResults4SQ];
     [self fetchResultsYelp];
     [self fetchResultsEvents];
@@ -131,6 +135,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 place.name = venue[@"name"];
                 [weakSelf.activities[0] addObject:place];
             }
+        [weakSelf refreshAsync];
+
     }];
 }
 
@@ -158,6 +164,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             food.website = venue[@"url"];
             [self.activities[1] addObject:food];
         }
+        [weakSelf refreshAsync];
+
     }];
 }
 
@@ -189,7 +197,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         for (NSDictionary *event in events) {
             Event *eventObj = [Event new];
             eventObj.name = event[@"title"];
-            [self.activities addObject:eventObj];
+            [self.activities[2] addObject:eventObj];
         }
         [weakSelf refreshAsync];
     }];
@@ -221,10 +229,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     return [dateFormatter stringFromDate:newDate];
 }
-
-
-
-
 
 
 -(void) refreshAsync {
