@@ -18,9 +18,13 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Functions *functions;
 @property (strong, nonatomic) Trip *trip;
+@property (strong, nonatomic) NSMutableArray *food;
+@property (strong, nonatomic) NSMutableArray *places;
+
 @end
 
 @implementation ResultsViewController
+NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -31,8 +35,14 @@
     self.trip = [Trip new];
     self.trip.city = self.location;
 
+    [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:HeaderViewIdentifier];
+
     // Do any additional setup after loading the view.
     self.activities = [NSMutableArray new];
+    self.places = [NSMutableArray new];
+    self.food = [NSMutableArray new];
+    [self.activities addObject:self.places];
+    [self.activities addObject:self.food];
     [self fetchResults4SQ];
     [self fetchResultsYelp];
 }
@@ -75,11 +85,27 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
     cell.delegate = self;
-    cell.activity = self.activities[indexPath.row];
+    cell.activity = self.activities[indexPath.section][indexPath.row];
     return cell;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+    if(section == 0){
+        header.textLabel.text = @"Places";
+    } else if(section == 1){
+        header.textLabel.text = @"Food";
+    } else {
+        header.textLabel.text = @"Events";
+    }
+    return header;
+}
+
+
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.activities[section] count];
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.activities.count;
 }
 
@@ -102,7 +128,7 @@
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
                 place.name = venue[@"name"];
-                [weakSelf.activities addObject:place];
+                [weakSelf.activities[0] addObject:place];
             }
         //[weakSelf fetchResultsYelp];
             [weakSelf refreshAsync];
@@ -133,7 +159,7 @@
             Food *food = [Food new];
             food.name = venue[@"name"];
             food.website = venue[@"url"];
-            [self.activities addObject:food];
+            [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];
     }];
@@ -163,6 +189,7 @@
     return [self.trip.activities containsObject:activity];
     
 }
+
 
 
 @end
