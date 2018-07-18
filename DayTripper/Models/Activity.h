@@ -13,6 +13,7 @@
 
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *categories;
+@property (strong, nonatomic) NSString *primaryCategory;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSDate* startTime;

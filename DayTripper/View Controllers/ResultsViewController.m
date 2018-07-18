@@ -226,6 +226,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             eventObj.name = event[@"title"];
             eventObj.longitude = [event[@"location"][0] doubleValue];
             eventObj.latitude = [event[@"location"][1] doubleValue];
+            NSLog(@"%@", event[@"category"]);
+            eventObj.categories = [[NSMutableArray alloc] init];
             [eventObj.categories addObject:event[@"category"]];
             [self.activities[2] addObject:eventObj];
         }

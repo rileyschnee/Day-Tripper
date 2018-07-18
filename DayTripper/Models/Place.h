@@ -10,5 +10,4 @@
 #import <Parse/Parse.h>
 #import "Activity.h"
 @interface Place : PFObject <PFSubclassing, Activity>
-
 @end
