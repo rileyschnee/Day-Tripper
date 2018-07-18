@@ -36,6 +36,7 @@
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
 		53E8420820FCF386003FE31A /* Functions.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Functions.m; sourceTree = "<group>"; };
 		53E8420A20FE445A003FE31A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		53E8420C20FF7861003FE31A /* Activity.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Activity.h; sourceTree = "<group>"; };
 		5606AA381453D105832A639F /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
 		629547CFF9336AD176C733AB /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.release.xcconfig"; sourceTree = "<group>"; };
@@ -183,6 +184,7 @@
 				BEEA9D8D20FD016E0048C0DB /* Place.m */,
 				BEEA9D9C20FD12310048C0DB /* Trip.h */,
 				BEEA9D9D20FD12310048C0DB /* Trip.m */,
+				53E8420C20FF7861003FE31A /* Activity.h */,
 			);
 			path = Models;
 			sourceTree = "<group>";

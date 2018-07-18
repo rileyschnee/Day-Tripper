@@ -44,7 +44,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
-    [query includeKey:@"places"];
+    [query includeKey:@"activities"];
     [query whereKey:@"planner" equalTo:[PFUser currentUser]];
     query.limit = 20;
     

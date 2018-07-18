@@ -11,6 +11,6 @@
 
 @interface Trip : PFObject <PFSubclassing>
 @property (strong, nonatomic) NSString *city;
-@property (strong, nonatomic) NSMutableArray *places;
+@property (strong, nonatomic) NSMutableArray *activities;
 @property (strong, nonatomic) PFUser *planner;
 @end

@@ -12,11 +12,11 @@
 #import "Functions.h"
 #import "Trip.h"
 #import "APIManager.h"
+#import "Activity.h"
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
-@property (strong, nonatomic) NSMutableArray *places;
+@property (strong, nonatomic) NSMutableArray *activities;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Functions *functions;
-@property (strong, nonatomic) NSMutableArray *chosenPlaces;
 @property (strong, nonatomic) Trip *trip;
 @end
 
@@ -28,7 +28,6 @@
     self.tableView.dataSource = self;
 
     self.functions = [[Functions alloc] init];
-    NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
     self.trip = [Trip new];
     self.trip.city = self.location;
 
@@ -74,16 +73,16 @@
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
     cell.delegate = self;
-    cell.place = self.places[indexPath.row];
+    cell.activity = self.activities[indexPath.row];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.places.count;
+    return self.activities.count;
 }
 
 - (void)fetchResults{
-    self.places = [NSMutableArray new];
+    self.activities = [NSMutableArray new];
 
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -102,7 +101,7 @@
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
                 place.name = venue[@"name"];
-                [weakSelf.places addObject:place];
+                [weakSelf.activities addObject:place];
             }
             [weakSelf refreshAsync];
     }];
@@ -117,24 +116,20 @@
 }
 
 
-
-- (void)addPlaceToTrip:(Place *)place {
-    [self.trip addUniqueObject:place forKey:@"places"];
-    NSLog(@"Added %@ to chosenPlaces", place.name);
+-(void)addActivityToTrip:(id <Activity>) activity {
+    [self.trip addUniqueObject:activity forKey:@"activities"];
     //[self.trip saveInBackground];
+    
 }
-
-- (BOOL)isPlaceInTrip:(Place *)place {
-    NSLog(@"%d - for place %@", [self.chosenPlaces containsObject:place], place.name);
-    return [self.trip.places containsObject:place];
+-(void)removeActivityFromTrip:(id <Activity>) activity {
+    [self.trip removeObject:activity forKey:@"activities"];
+    //[self.trip saveInBackground];
+    
+}
+-(BOOL)isActivityInTrip:(id <Activity>) activity {
+    return [self.trip.activities containsObject:activity];
     
 }
 
-- (void)removePlaceFromTrip:(Place *)place {
-    [self.trip removeObject:place forKey:@"places"];
-    NSLog(@"Removed %@ from chosenPlaces", place.name);
-    //[self.trip saveInBackground];
-
-}
 
 @end

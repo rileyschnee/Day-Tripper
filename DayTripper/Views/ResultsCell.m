@@ -22,20 +22,19 @@
 }
 - (IBAction)clickedCheckButton:(id)sender {
     if(!self.checkButton.selected){
-        [self.delegate addPlaceToTrip:self.place];
+        [self.delegate addActivityToTrip:self.activity];
         self.checkButton.selected = YES;
     } else {
-        [self.delegate removePlaceFromTrip:self.place];
+        [self.delegate removeActivityFromTrip:self.activity];
         self.checkButton.selected = NO;
     }
 }
 
--(void)setPlace:(Place *)place{
-    _place = place;
-    self.placeNameLabel.text = place.name;
+-(void)setActivity:(id<Activity>)activity{
+    _activity = activity;
+    self.placeNameLabel.text = activity.name;
     // Make the button checked if the place is found in the places added to the chosen places array
-    self.checkButton.selected = [self.delegate isPlaceInTrip:place];
-    NSLog(@"%d", [self.delegate isPlaceInTrip:place]);
+    self.checkButton.selected = [self.delegate isActivityInTrip:activity];
 }
 
 
