@@ -41,10 +41,19 @@
     
     
     //self.locationLabel.text = self.activity.location;
-    self.categoriesLabel.text = self.activity.category;
+    if([[self.activity activityType] isEqualToString:@"Place"]){
+        self.categoriesLabel.text = self.activity.categories[0][@"name"];
+    } if([[self.activity activityType] isEqualToString:@"Food"]){
+        self.categoriesLabel.text = self.activity.categories[0][@"title"];
+    } else {
+        self.categoriesLabel.text = self.activity.categories[0];
+    }
+    //self.categoriesLabel.text = self.activity.category;
     
 }
-
+- (void)setActivity:(id<Activity>)activity{
+    _activity = activity;
+}
 
 
 - (void)didReceiveMemoryWarning {

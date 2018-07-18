@@ -12,11 +12,12 @@
 @protocol Activity
 
 @property (strong, nonatomic) NSString *name;
-@property (strong, nonatomic) NSString *category;
+@property (strong, nonatomic) NSMutableArray *categories;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSDate* startTime;
 @property (strong, nonatomic) NSDate* endTime;
 @property (nonatomic) double duration;
+- (NSString *)activityType;
 
 @end

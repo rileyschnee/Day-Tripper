@@ -74,7 +74,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
-        detailPage.activity = self.activities[indexPath.row];
+        detailPage.activity = self.activities[indexPath.section][indexPath.row];
         
     } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
         self.trip.planner = [PFUser currentUser];
@@ -144,6 +144,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 place.name = venue[@"name"];
                 place.latitude = [venue[@"location"][@"lat"] doubleValue];
                 place.longitude = [venue[@"location"][@"lng"] doubleValue];
+                place.categories = venue[@"categories"];
                 [weakSelf.activities[0] addObject:place];
             }
         [weakSelf refreshAsync];
@@ -173,6 +174,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             Food *food = [Food new];
             food.name = venue[@"name"];
             food.website = venue[@"url"];
+            food.latitude = [venue[@"coordinates"][@"latitude"] doubleValue];
+            food.longitude = [venue[@"coordinates"][@"longitude"] doubleValue];
+            food.categories = venue[@"categories"];
             [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];
@@ -208,6 +212,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         for (NSDictionary *event in events) {
             Event *eventObj = [Event new];
             eventObj.name = event[@"title"];
+            eventObj.longitude = [event[@"location"][0] doubleValue];
+            eventObj.latitude = [event[@"location"][1] doubleValue];
+            [eventObj.categories addObject:event[@"category"]];
             [self.activities[2] addObject:eventObj];
         }
         [weakSelf refreshAsync];

@@ -10,8 +10,17 @@
 #import "Activity.h"
 @implementation Place
 @dynamic name;
+@dynamic categories;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic duration;
+@dynamic endTime;
+@dynamic startTime;
 
 + (nonnull NSString *)parseClassName {
+    return @"Place";
+}
+- (NSString *)activityType{
     return @"Place";
 }
 
