@@ -22,12 +22,20 @@
     // Configure the view for the selected state
 }
 - (IBAction)clickedCheckButton:(id)sender {
-    self.checkButton.selected = !self.checkButton.selected;
+    if(!self.checkButton.selected){
+        [self.delegate addActivityToTrip:self.activity];
+        self.checkButton.selected = YES;
+    } else {
+        [self.delegate removeActivityFromTrip:self.activity];
+        self.checkButton.selected = NO;
+    }
 }
 
 -(void)setActivity:(id<Activity>)activity{
     _activity = activity;
     self.placeNameLabel.text = activity.name;
+    // Make the button checked if the place is found in the places added to the chosen places array
+    self.checkButton.selected = [self.delegate isActivityInTrip:activity];
 }
 
 

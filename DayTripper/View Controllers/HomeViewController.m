@@ -21,6 +21,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:true];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     // Do any additional setup after loading the view.
@@ -40,7 +44,7 @@
     PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
-    [query includeKey:@"places"];
+    [query includeKey:@"activities"];
     [query whereKey:@"planner" equalTo:[PFUser currentUser]];
     query.limit = 20;
     
@@ -82,3 +86,4 @@
     return self.trips.count;
 }
 @end
+

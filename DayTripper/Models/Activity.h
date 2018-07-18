@@ -15,5 +15,8 @@
 @property (strong, nonatomic) NSString *category;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (strong, nonatomic) NSDate* startTime;
+@property (strong, nonatomic) NSDate* endTime;
+@property (nonatomic) double duration;
 
 @end
