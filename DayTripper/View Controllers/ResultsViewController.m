@@ -12,10 +12,12 @@
 #import "Functions.h"
 #import "Trip.h"
 #import "APIManager.h"
-@interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource>
+@interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *places;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) Functions *functions;
+@property (strong, nonatomic) NSMutableArray *chosenPlaces;
+@property (strong, nonatomic) Trip *trip;
 @end
 
 @implementation ResultsViewController
@@ -24,7 +26,12 @@
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     self.functions = [[Functions alloc] init];
+    NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
+    self.trip = [Trip new];
+    self.trip.city = self.location;
+
     // Do any additional setup after loading the view.
     [self fetchResults];
 }
@@ -36,35 +43,37 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
-    for(ResultsCell *cell in [self.functions getCellsFromTable:self.tableView]){
-        if(cell.checkButton.selected){
-            [chosenPlaces addObject:cell.place];
-        }
-        
-    }
+    //NSMutableArray *chosenPlaces = [[NSMutableArray alloc] init];
+//    for(ResultsCell *cell in [self.functions getCellsFromTable:self.tableView]){
+//        if(cell.checkButton.selected){
+//            [self.chosenPlaces addObject:cell.place];
+//        }
+//
+//    }
     //save the trip
     //declare trip object
-    Trip *trip = [Trip new];
-    trip.city = self.location;
-    trip.places = [chosenPlaces copy];
-    trip.planner = [PFUser currentUser];
+    
+    self.trip.planner = [PFUser currentUser];
     
     //actually save the trip
-    [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+    [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
+            NSLog(@"Trip successfully saved!");
+        } else {
+            NSLog(@"Error saving trip");
         }
     }];
     
     //end saving the trip
     
     ItinViewController *itinViewController = [segue destinationViewController];
-    itinViewController.trip = trip;
+    itinViewController.trip = self.trip;
     
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
+    cell.delegate = self;
     cell.place = self.places[indexPath.row];
     return cell;
 }
@@ -107,5 +116,24 @@
 }
 
 
+
+- (void)addPlaceToTrip:(Place *)place {
+    [self.trip addUniqueObject:place forKey:@"places"];
+    NSLog(@"Added %@ to chosenPlaces", place.name);
+    //[self.trip saveInBackground];
+}
+
+- (BOOL)isPlaceInTrip:(Place *)place {
+    NSLog(@"%d - for place %@", [self.chosenPlaces containsObject:place], place.name);
+    return [self.trip.places containsObject:place];
+    
+}
+
+- (void)removePlaceFromTrip:(Place *)place {
+    [self.trip removeObject:place forKey:@"places"];
+    NSLog(@"Removed %@ from chosenPlaces", place.name);
+    //[self.trip saveInBackground];
+
+}
 
 @end
