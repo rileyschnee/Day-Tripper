@@ -15,7 +15,7 @@
 - (void) getRequest:(NSString *)url params:(NSDictionary*)params completion:(void (^)(NSArray *))completion{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
     //iterate through dictionary
-    NSString* appendStr = [self buildQueryStringFromDictionary:params];
+    NSString* appendStr = [self buildQueryStringFromDictionary:params request:request];
     [request setHTTPMethod:@"GET"];
     NSString* finalURL = [NSString stringWithFormat:@"%@%@", url, appendStr];
     [request setURL:[NSURL URLWithString:finalURL]];
@@ -52,14 +52,19 @@
                 }] resume];
 }
 
--(NSString *) buildQueryStringFromDictionary:(NSDictionary *)parameters {
+-(NSString *) buildQueryStringFromDictionary:(NSDictionary *)parameters request:(NSMutableURLRequest*)request {
     NSString *urlVars = nil;
     NSString *totalString = @"";
     for (NSString *key in parameters) {
         NSString *value = parameters[key];
-        value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
-        urlVars = [NSString stringWithFormat:@"%@%@=%@", urlVars ? @"&": @"", key, value];
-        totalString = [NSString stringWithFormat:@"%@%@", totalString, urlVars];
+        if ([key isEqualToString:@"Authorization"]) {
+            [request setValue:value forHTTPHeaderField:@"Authorization"];
+        }
+        else {
+            value = [value stringByAddingPercentEncodingWithAllowedCharacters:[NSCharacterSet URLHostAllowedCharacterSet]];
+            urlVars = [NSString stringWithFormat:@"%@%@=%@", urlVars ? @"&": @"", key, value];
+            totalString = [NSString stringWithFormat:@"%@%@", totalString, urlVars];
+        }
     }
     
     return [NSString stringWithFormat:@"%@%@", totalString ? @"?" : @"", totalString ? totalString : @""];

@@ -8,8 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Place.h"
+#import "Food.h"
 #import "Activity.h"
-
 @protocol ResultsCellDelegate
 -(void)addActivityToTrip:(id <Activity>) activity;
 -(void)removeActivityFromTrip:(id <Activity>) activity;

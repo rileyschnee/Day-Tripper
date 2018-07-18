@@ -8,6 +8,7 @@
 
 #import "ResultsCell.h"
 
+
 @implementation ResultsCell
 
 - (void)awakeFromNib {

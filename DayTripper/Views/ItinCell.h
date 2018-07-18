@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "Place.h"
+#import "Activity.h"
+#import "Food.h"
 
 @interface ItinCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;

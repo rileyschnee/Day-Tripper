@@ -7,6 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ResultsCell.h"
+#import "ItinViewController.h"
+#import "Functions.h"
+#import "Trip.h"
+#import "APIManager.h"
+#import "Activity.h"
+#import "Food.h"
 
 @interface ResultsViewController : UIViewController
 @property (nonatomic, strong) NSString* location;

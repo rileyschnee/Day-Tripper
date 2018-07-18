@@ -32,7 +32,9 @@
     self.trip.city = self.location;
 
     // Do any additional setup after loading the view.
-    [self fetchResults];
+    self.activities = [NSMutableArray new];
+    [self fetchResults4SQ];
+    [self fetchResultsYelp];
 }
 
 
@@ -53,7 +55,7 @@
     //declare trip object
     
     self.trip.planner = [PFUser currentUser];
-    
+
     //actually save the trip
     [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
@@ -81,8 +83,7 @@
     return self.activities.count;
 }
 
-- (void)fetchResults{
-    self.activities = [NSMutableArray new];
+- (void)fetchResults4SQ{
 
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -103,11 +104,43 @@
                 place.name = venue[@"name"];
                 [weakSelf.activities addObject:place];
             }
+        //[weakSelf fetchResultsYelp];
             [weakSelf refreshAsync];
     }];
     
     
 }
+- (void)fetchResultsYelp{
+    
+    APIManager *apiManager = [[APIManager alloc] init];
+    //make the request
+    NSString *baseURL =  @"https://api.yelp.com/v3/businesses/search";
+    //params
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    NSString *lat = [NSString stringWithFormat:@"%f",self.latitude];
+    NSString *lon = [NSString stringWithFormat:@"%f",self.longitude];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
+    [paramsDict setObject:lat forKey:@"latitude"];
+    [paramsDict setObject:lon forKey:@"longitude"];
+    [paramsDict setObject:@"food" forKey:@"categories"];
+    [paramsDict setObject:apiToken forKey:@"Authorization"];
+    
+    
+    __weak typeof(self) weakSelf = self;
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        NSArray *venues = responseDict[0][@"businesses"];
+        for (NSDictionary *venue in venues) {
+            Food *food = [Food new];
+            food.name = venue[@"name"];
+            food.website = venue[@"url"];
+            [self.activities addObject:food];
+        }
+        [weakSelf refreshAsync];
+    }];
+    
+    
+}
+
 
 -(void) refreshAsync {
     dispatch_async(dispatch_get_main_queue(), ^{

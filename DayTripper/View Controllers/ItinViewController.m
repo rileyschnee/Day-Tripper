@@ -8,7 +8,6 @@
 
 #import "ItinViewController.h"
 #import "ItinCell.h"
-#import "Place.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
