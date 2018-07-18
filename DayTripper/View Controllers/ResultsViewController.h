@@ -14,6 +14,7 @@
 #import "APIManager.h"
 #import "Activity.h"
 #import "Food.h"
+#import "Event.h"
 
 @interface ResultsViewController : UIViewController
 @property (nonatomic, strong) NSString* location;
