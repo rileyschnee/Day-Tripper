@@ -14,4 +14,6 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *activities;
 @property (strong, nonatomic) PFUser *planner;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 @end

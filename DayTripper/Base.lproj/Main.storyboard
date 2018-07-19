@@ -359,7 +359,7 @@
                     <navigationItem key="navigationItem" title="Results" id="KoM-Z7-VML">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="aJ8-JO-5jn">
                             <connections>
-                                <segue destination="3cp-a0-XYn" kind="show" id="wJV-j0-lVJ"/>
+                                <segue destination="3cp-a0-XYn" kind="show" identifier="toItinView" id="wJV-j0-lVJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>

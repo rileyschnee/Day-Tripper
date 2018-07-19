@@ -65,12 +65,13 @@
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if([[segue destinationViewController] isKindOfClass:[ItinViewController class]]){
+
+    if([[segue destinationViewController] isKindOfClass:[UITabBarController class]]){
         UITableViewCell  *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Trip *trip = self.trips[indexPath.item];
-        ItinViewController *itinerary = [segue destinationViewController];
+        UITabBarController *tabbar = [segue destinationViewController];
+        ItinViewController *itinerary = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
         itinerary.trip = trip;
     }
 }

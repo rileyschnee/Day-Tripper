@@ -22,9 +22,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    NSLog(@"%f", self.trip.latitude);
 
-//    MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(lat, lon), MKCoordinateSpanMake(0.1, 0.1));
-//    [self.mapView setRegion:region animated:false];
+    MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.trip.latitude, self.trip.longitude), MKCoordinateSpanMake(0.1, 0.1));
+    [self.mapView setRegion:region animated:false];
     
     for (id<Activity> activity in self.trip.activities) {
         MKPointAnnotation *point = [MKPointAnnotation new];
