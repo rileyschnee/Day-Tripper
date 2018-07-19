@@ -350,7 +350,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Rjy-be-AoK"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Itinerary" id="Ruz-WR-9XW"/>
+                    <navigationItem key="navigationItem" title="Itinerary" id="Ruz-WR-9XW">
+                        <barButtonItem key="rightBarButtonItem" title="Home" id="Soc-Xn-XJh">
+                            <connections>
+                                <segue destination="Gze-x7-aax" kind="show" id="C14-4c-OnT"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="CHf-HN-S0X" id="9mY-g6-AHh"/>
                     </connections>
@@ -384,5 +390,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="znw-IY-XCr"/>
+        <segue reference="C14-4c-OnT"/>
     </inferredMetricsTieBreakers>
 </document>
