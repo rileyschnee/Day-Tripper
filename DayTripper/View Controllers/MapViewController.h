@@ -13,4 +13,6 @@
 @interface MapViewController : UIViewController
 
 @property (strong, nonatomic) Trip *trip;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 @end
