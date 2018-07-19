@@ -27,8 +27,6 @@
 @property (strong, nonatomic) MKLocalSearchCompleter *completer;
 @property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
-@property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
-@property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (strong, nonatomic) id<QuizReusableViewDelegate> delegate;
 
 @property (nonatomic) int lastEditedLocation;

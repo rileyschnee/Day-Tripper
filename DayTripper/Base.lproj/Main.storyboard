@@ -67,7 +67,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-ZG-ClK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="261.60000000000002" y="133.5832083958021"/>
+            <point key="canvasLocation" x="92" y="134"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="gbB-5T-wHn">
@@ -86,7 +86,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuo-d6-5YC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1097" y="1025"/>
+            <point key="canvasLocation" x="596" y="1064"/>
         </scene>
         <!--Item-->
         <scene sceneID="CK3-X5-INY">
@@ -111,7 +111,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hc-X8-h2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3125.5999999999999" y="1122.1889055472266"/>
+            <point key="canvasLocation" x="1710" y="1064"/>
         </scene>
         <!--Item-->
         <scene sceneID="Ug4-9n-LTa">
@@ -127,7 +127,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-PQ-zIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="1911"/>
+            <point key="canvasLocation" x="1159" y="1845"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="nqs-Um-67F">
@@ -190,7 +190,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1933.5999999999999" y="604.94752623688157"/>
+            <point key="canvasLocation" x="2676" y="134"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="DqU-Vw-sSI">
@@ -294,20 +294,6 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="279"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="9eV-ff-ngO">
-                                            <rect key="frame" x="202" y="154" width="165" height="117"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <date key="date" timeIntervalSinceReferenceDate="553551813.26275206">
-                                                <!--2018-07-17 20:23:33 +0000-->
-                                            </date>
-                                        </datePicker>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="End Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bHz-ya-8ox">
-                                            <rect key="frame" x="248" y="125" width="72" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="San Francisco, CA" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sBN-HE-7u1">
                                             <rect key="frame" x="71" y="60" width="232" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -322,26 +308,10 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="FSt-hX-M8E">
-                                            <rect key="frame" x="8" y="154" width="162" height="117"/>
-                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                            <date key="date" timeIntervalSinceReferenceDate="553551813.26275206">
-                                                <!--2018-07-17 20:23:33 +0000-->
-                                            </date>
-                                        </datePicker>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Start Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWb-kt-avZ">
-                                            <rect key="frame" x="49" y="125" width="80" height="21"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                     </subviews>
                                     <gestureRecognizers/>
                                     <connections>
-                                        <outlet property="endTimePicker" destination="9eV-ff-ngO" id="ZS9-EQ-HsQ"/>
                                         <outlet property="locationField" destination="sBN-HE-7u1" id="rZu-JA-bDb"/>
-                                        <outlet property="startTimePicker" destination="FSt-hX-M8E" id="Urw-DW-ttF"/>
                                     </connections>
                                 </collectionReusableView>
                             </collectionView>
@@ -363,7 +333,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1096.8" y="-302.6986506746627"/>
+            <point key="canvasLocation" x="924" y="134"/>
         </scene>
         <!--Results-->
         <scene sceneID="DVV-4I-Nwd">
@@ -428,7 +398,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3kD-Gr-zsp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1935" y="-303"/>
+            <point key="canvasLocation" x="1833" y="134"/>
         </scene>
         <!--Itinerary-->
         <scene sceneID="nn3-QT-JUb">
@@ -477,7 +447,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YL6-ty-OXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4543.1999999999998" y="298.2008995502249"/>
+            <point key="canvasLocation" x="-674" y="1846"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bJo-mK-6I4">
@@ -514,7 +484,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xDs-JF-htN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3222" y="216"/>
+            <point key="canvasLocation" x="-1577" y="1846"/>
         </scene>
     </scenes>
     <resources>
@@ -523,7 +493,7 @@
         <image name="placeholder" width="927" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rY6-fE-GI8"/>
+        <segue reference="FOd-75-pXi"/>
         <segue reference="wJV-j0-lVJ"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
