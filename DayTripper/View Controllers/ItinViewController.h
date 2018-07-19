@@ -12,7 +12,7 @@
 #import "Place.h"
 #import "Food.h"
 
-@interface ItinViewController : UIViewController
+@interface ItinViewController : UIViewController <UITabBarControllerDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
 @property (strong, nonatomic) Trip *trip;
 @end

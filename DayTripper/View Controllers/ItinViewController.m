@@ -8,6 +8,7 @@
 
 #import "ItinViewController.h"
 #import "ItinCell.h"
+#import "MapViewController.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -20,6 +21,7 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tabBarController.delegate = self;
     // Do any additional setup after loading the view.
     [self.tableView reloadData];
 }
@@ -27,6 +29,14 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    if([viewController isKindOfClass:[MapViewController class]]){
+        MapViewController *mapController = (MapViewController *) viewController;
+        mapController.trip = self.trip; 
+    }
+    return TRUE;
 }
 
 /*

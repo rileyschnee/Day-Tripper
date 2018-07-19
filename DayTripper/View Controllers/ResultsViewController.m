@@ -99,7 +99,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
         //end saving the trip
     
-        ItinViewController *itinViewController = [segue destinationViewController];
+        
+        UITabBarController *tabbar = [segue destinationViewController];
+        ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
         itinViewController.trip = self.trip;
     }
     
