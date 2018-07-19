@@ -158,19 +158,39 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rlh-3u-Ftz">
+                                <rect key="frame" x="16" y="343" width="343" height="313"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="KeT-eB-eXf" appends="YES" id="Fiv-NP-GMp"/>
+                                    <outletCollection property="gestureRecognizers" destination="rpD-Ue-7L3" appends="YES" id="TNY-Lj-OSp"/>
+                                </connections>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="v7w-M7-ML2"/>
                     </view>
                     <connections>
                         <outlet property="categoriesLabel" destination="1pk-xJ-TTB" id="8lv-qh-X1R"/>
+                        <outlet property="imageView" destination="rlh-3u-Ftz" id="zPG-RY-mGX"/>
                         <outlet property="locationLabel" destination="I1e-Lc-xk8" id="U7O-Gv-WaP"/>
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzs-HC-Zqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <swipeGestureRecognizer direction="left" id="KeT-eB-eXf">
+                    <connections>
+                        <action selector="swipeLeft:" destination="6N9-Ay-TK4" id="HNY-8O-4Tq"/>
+                    </connections>
+                </swipeGestureRecognizer>
+                <swipeGestureRecognizer direction="right" id="rpD-Ue-7L3">
+                    <connections>
+                        <action selector="swipeRight:" destination="6N9-Ay-TK4" id="Mcf-Lb-oc8"/>
+                    </connections>
+                </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1934" y="-1269"/>
+            <point key="canvasLocation" x="1933.5999999999999" y="604.94752623688157"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="DqU-Vw-sSI">
@@ -481,6 +501,7 @@
     <resources>
         <image name="checkbox-empty" width="240" height="240"/>
         <image name="checkbox-fill" width="240" height="240"/>
+        <image name="placeholder" width="927" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="wJV-j0-lVJ"/>

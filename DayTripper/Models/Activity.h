@@ -16,6 +16,8 @@
 @property (strong, nonatomic) NSString *primaryCategory;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+//what the id the api assigns to the Activity
+@property (strong, nonatomic) NSString *apiId;
 @property (strong, nonatomic) NSDate* startTime;
 @property (strong, nonatomic) NSDate* endTime;
 @property (nonatomic) double duration;

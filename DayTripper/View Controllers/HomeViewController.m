@@ -27,6 +27,7 @@
     [super viewDidAppear:true];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    [self.navigationItem setHidesBackButton:YES];
     // Do any additional setup after loading the view.
     ProfileCell *profCell = [ProfileCell new];
     [self.tableView addSubview:profCell];
