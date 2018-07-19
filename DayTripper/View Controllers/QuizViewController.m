@@ -16,9 +16,8 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *startTimePicker;
 @property (weak, nonatomic) IBOutlet UIDatePicker *endTimePicker;
 @property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
-@property (nonatomic) double latitude;
+
 - (IBAction)didTap:(id)sender;
-@property (nonatomic) double longitude;
 //used to identify last location typed by user
 @property (nonatomic) int lastEditedLocation;
 @property (nonatomic) int prevTextFieldLength;

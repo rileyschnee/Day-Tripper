@@ -10,5 +10,7 @@
 
 @interface QuizViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
 
 @end

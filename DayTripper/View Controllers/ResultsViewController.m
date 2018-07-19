@@ -113,11 +113,26 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         
             //end saving the trip
         
-            ItinViewController *itinViewController = [segue destinationViewController];
-            itinViewController.trip = self.trip;
-        }
-    }
+    } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
+        self.trip.planner = [PFUser currentUser];
+
+        //actually save the trip
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                NSLog(@"Trip successfully saved!");
+            } else {
+                NSLog(@"Error saving trip");
+            }
+        }];
     
+        //end saving the trip
+    
+        
+        UITabBarController *tabbar = [segue destinationViewController];
+        ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+        itinViewController.trip = self.trip;
+    }
+    }   
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
