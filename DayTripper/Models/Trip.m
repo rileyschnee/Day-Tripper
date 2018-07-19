@@ -11,6 +11,7 @@
 @implementation Trip
 
 @dynamic city;
+@dynamic name;
 @dynamic activities;
 @dynamic planner;
 

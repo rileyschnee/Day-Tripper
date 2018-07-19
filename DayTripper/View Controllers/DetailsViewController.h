@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Activity.h"
+#import "Place.h"
+#import "Food.h"
+#import "Event.h"
 
 @interface DetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;

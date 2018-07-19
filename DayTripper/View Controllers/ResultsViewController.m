@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *food;
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) NSMutableArray *events;
+@property (strong, nonatomic) NSString* tripName;
 
 @end
 
@@ -33,6 +34,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tripName = @"";
 
     self.functions = [[Functions alloc] init];
     self.trip = [Trip new];
@@ -66,24 +69,49 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
-        //get the activity
-        NSArray *places = self.activities[0];
-        NSArray *food = self.activities[1];
-        NSArray *events = self.activities[2];
-        int selectedIndex = (int) indexPath.row;
-        int selectedSection = (int) indexPath.section;
-        if (selectedSection == 0) {
-            detailPage.activity = places[selectedIndex];
-        } else if (selectedSection == 1) {
-            detailPage.activity = food[selectedIndex];
+        detailPage.activity = self.activities[indexPath.section][indexPath.row];
+
+    } else {
+        if (self.tripName.length == 0) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
+                                                                                      message: @"Enter the trip name"
+                                                                               preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"Trip Name";
+                textField.textColor = [UIColor blueColor];
+                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+                textField.borderStyle = UITextBorderStyleRoundedRect;
+            }];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                NSArray * textfields = alertController.textFields;
+                UITextField * namefield = textfields[0];
+                if (namefield.text.length == 0) {
+                    self.tripName = self.trip.city;
+                }
+                else {
+                    self.tripName = namefield.text;
+                }
+                [self performSegueWithIdentifier:@"toItenView" sender:nil];
+                
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
         }
         else {
-            detailPage.activity = events[selectedIndex];
-        }
-        
-        //end getting the activity
+            self.trip.planner = [PFUser currentUser];
+            self.trip.name = self.tripName;
 
+            //actually save the trip
+            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Trip successfully saved!");
+                } else {
+                    NSLog(@"Error saving trip");
+                }
+            }];
         
+            //end saving the trip
         
     } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
         self.trip.planner = [PFUser currentUser];
@@ -104,7 +132,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
         itinViewController.trip = self.trip;
     }
-    
+    }   
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -155,6 +183,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 place.name = venue[@"name"];
                 place.latitude = [venue[@"location"][@"lat"] doubleValue];
                 place.longitude = [venue[@"location"][@"lng"] doubleValue];
+                place.categories = venue[@"categories"];
                 [weakSelf.activities[0] addObject:place];
             }
         [weakSelf refreshAsync];
@@ -186,6 +215,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             food.website = venue[@"url"];
             food.latitude = [venue[@"coordinates"][@"latitude"] doubleValue];
             food.longitude = [venue[@"coordinates"][@"longitude"] doubleValue];
+            food.categories = venue[@"categories"];
             [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];
@@ -221,8 +251,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         for (NSDictionary *event in events) {
             Event *eventObj = [Event new];
             eventObj.name = event[@"title"];
-            eventObj.latitude = [event[@"location"][0] doubleValue];
-            eventObj.longitude = [event[@"location"][1] doubleValue];
+            eventObj.longitude = [event[@"location"][0] doubleValue];
+            eventObj.latitude = [event[@"location"][1] doubleValue];
+            eventObj.categories = [[NSMutableArray alloc] init];
+            [eventObj.categories addObject:event[@"category"]];
             [self.activities[2] addObject:eventObj];
         }
         [weakSelf refreshAsync];

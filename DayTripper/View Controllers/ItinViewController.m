@@ -21,7 +21,10 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     self.tabBarController.delegate = self;
+
+    self.navigationItem.hidesBackButton = YES;
     // Do any additional setup after loading the view.
     [self.tableView reloadData];
 }

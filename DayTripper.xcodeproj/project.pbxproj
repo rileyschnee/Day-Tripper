@@ -16,6 +16,8 @@
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
 		53E8421120FFA920003FE31A /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8421020FFA920003FE31A /* Event.m */; };
 		5C6057ECF2ED632B7FD53472 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 629547CFF9336AD176C733AB /* libPods-DayTripper.a */; };
+		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
+		BE69F26C21000631000122D6 /* yelpCategories.json in Resources */ = {isa = PBXBuildFile; fileRef = BE69F26B21000631000122D6 /* yelpCategories.json */; };
 		BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3720F9298F005B79F5 /* AppDelegate.m */; };
 		BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3C20F9298F005B79F5 /* Main.storyboard */; };
 		BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3F20F92990005B79F5 /* Assets.xcassets */; };
@@ -54,6 +56,9 @@
 		5606AA381453D105832A639F /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
 		629547CFF9336AD176C733AB /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.release.xcconfig"; sourceTree = "<group>"; };
+		BE69F2662100007F000122D6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		BE69F2672100007F000122D6 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		BE69F26B21000631000122D6 /* yelpCategories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = yelpCategories.json; sourceTree = "<group>"; };
 		BEA5FD3320F9298F005B79F5 /* DayTripper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTripper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5FD3620F9298F005B79F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEA5FD3720F9298F005B79F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -106,6 +111,9 @@
 				53E8420520F9A060003FE31A /* APIManager.m */,
 				53E8420720FCF386003FE31A /* Functions.h */,
 				53E8420820FCF386003FE31A /* Functions.m */,
+				BE69F2662100007F000122D6 /* Constants.h */,
+				BE69F2672100007F000122D6 /* Constants.m */,
+				BE69F26B21000631000122D6 /* yelpCategories.json */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -278,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEA5FD4320F92990005B79F5 /* LaunchScreen.storyboard in Resources */,
+				BE69F26C21000631000122D6 /* yelpCategories.json in Resources */,
 				BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */,
 				BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */,
 			);
@@ -355,6 +364,7 @@
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 				53E8420920FCF386003FE31A /* Functions.m in Sources */,
+				BE69F2682100007F000122D6 /* Constants.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
