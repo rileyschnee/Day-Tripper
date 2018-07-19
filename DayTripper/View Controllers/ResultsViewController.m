@@ -74,6 +74,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         
 =======
 
+<<<<<<< HEAD
+>>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
+=======
 >>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
     }
     
@@ -108,6 +111,12 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             self.trip.name = self.tripName;
             self.trip.planner = [PFUser currentUser];
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+            self.trip.latitude = self.latitude;
+            self.trip.longitude = self.longitude;
+
+>>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
 =======
             self.trip.latitude = self.latitude;
             self.trip.longitude = self.longitude;
@@ -130,17 +139,23 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             itinViewController.trip = self.trip;
 <<<<<<< HEAD
+<<<<<<< HEAD
           //  itinViewController.latitude = self.latitude;
           //  itinViewController.longitude = self.longitude;
             
         }
     }
 =======
+=======
+>>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
             itinViewController.latitude = self.latitude;
             itinViewController.longitude = self.longitude;
         
     }
 }
+<<<<<<< HEAD
+>>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
+=======
 >>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
 }
 
