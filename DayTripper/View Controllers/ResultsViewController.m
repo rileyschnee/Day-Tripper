@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) NSString* tripName;
+@property (strong, nonatomic) NSMutableArray *tempArray;
 
 @end
 
@@ -70,14 +71,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
-<<<<<<< HEAD
-        
-=======
 
-<<<<<<< HEAD
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
-=======
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
     }
     
     else {
@@ -110,18 +104,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         else {
             self.trip.name = self.tripName;
             self.trip.planner = [PFUser currentUser];
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
             self.trip.latitude = self.latitude;
             self.trip.longitude = self.longitude;
-
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
-=======
-            self.trip.latitude = self.latitude;
-            self.trip.longitude = self.longitude;
-
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
             
             //actually save the trip
             [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
@@ -138,25 +122,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             UITabBarController *tabbar = [segue destinationViewController];
             ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             itinViewController.trip = self.trip;
-<<<<<<< HEAD
-<<<<<<< HEAD
-          //  itinViewController.latitude = self.latitude;
-          //  itinViewController.longitude = self.longitude;
-            
-        }
-    }
-=======
-=======
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
             itinViewController.latitude = self.latitude;
             itinViewController.longitude = self.longitude;
         
+        }
     }
-}
-<<<<<<< HEAD
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
-=======
->>>>>>> f7bd08ebe0fb00ac28da387268ec92748f7ee76f
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -326,15 +296,16 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
 }
 -(void)removeActivityFromTrip:(id <Activity>) activity {
-    [self.trip removeObject:activity forKey:@"activities"];
+    //NSLog(@"%@", self.trip.activities);
+    self.tempArray = self.trip[@"activities"];
+    [self.tempArray removeObject:activity];
+    self.trip[@"activities"] = self.tempArray;
     //[self.trip saveInBackground];
-    
 }
 -(BOOL)isActivityInTrip:(id <Activity>) activity {
     return [self.trip.activities containsObject:activity];
     
 }
 
-
-
 @end
+    
