@@ -79,7 +79,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="R5t-SS-ykh" kind="relationship" relationship="viewControllers" id="1ZN-pL-lbg"/>
+                        <segue destination="rsN-eR-3wP" kind="relationship" relationship="viewControllers" id="1ZN-pL-lbg"/>
                         <segue destination="4OX-FQ-8wP" kind="relationship" relationship="viewControllers" id="3Dn-lQ-eCR"/>
                         <segue destination="b7a-6T-rES" kind="relationship" relationship="viewControllers" id="wNs-ne-OLL"/>
                     </connections>
@@ -418,7 +418,7 @@
                     <navigationItem key="navigationItem" title="Results" id="KoM-Z7-VML">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="aJ8-JO-5jn">
                             <connections>
-                                <segue destination="3cp-a0-XYn" kind="show" identifier="toItinView" id="wJV-j0-lVJ"/>
+                                <segue destination="3cp-a0-XYn" kind="presentation" identifier="toItinView" id="wJV-j0-lVJ"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -469,15 +469,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Rjy-be-AoK"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="RYT-b8-vzc"/>
                     <navigationItem key="navigationItem" title="Itinerary" id="Ruz-WR-9XW"/>
                     <connections>
                         <outlet property="tableView" destination="CHf-HN-S0X" id="9mY-g6-AHh"/>
+                        <segue destination="Gze-x7-aax" kind="show" identifier="itinToHome" id="irg-7C-q8O"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YL6-ty-OXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3126" y="134"/>
+            <point key="canvasLocation" x="4543.1999999999998" y="298.2008995502249"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="bJo-mK-6I4">
@@ -497,6 +497,25 @@
             </objects>
             <point key="canvasLocation" x="-745" y="134"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="C8f-gn-VrH">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rsN-eR-3wP" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="RYT-b8-vzc"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s7F-3j-tzs">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="R5t-SS-ykh" kind="relationship" relationship="rootViewController" id="rY6-fE-GI8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="xDs-JF-htN" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3222" y="216"/>
+        </scene>
     </scenes>
     <resources>
         <image name="checkbox-empty" width="240" height="240"/>
@@ -504,6 +523,8 @@
         <image name="placeholder" width="927" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="rY6-fE-GI8"/>
         <segue reference="wJV-j0-lVJ"/>
+        <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
 </document>

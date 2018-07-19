@@ -120,7 +120,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
             
             UITabBarController *tabbar = [segue destinationViewController];
-            ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+            UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+            ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
+            
+            //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             itinViewController.trip = self.trip;
             itinViewController.latitude = self.latitude;
             itinViewController.longitude = self.longitude;

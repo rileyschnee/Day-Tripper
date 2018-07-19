@@ -72,7 +72,8 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         Trip *trip = self.trips[indexPath.item];
         UITabBarController *tabbar = [segue destinationViewController];
-        ItinViewController *itinerary = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+        ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
         itinerary.trip = trip;
     }
 }

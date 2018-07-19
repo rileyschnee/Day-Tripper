@@ -16,23 +16,28 @@
 
 @implementation ItinViewController
 
+- (void)viewDidAppear:(BOOL)animated {
+
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-
-    self.tabBarController.delegate = self;
-
+    UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
     self.navigationItem.hidesBackButton = YES;
+    self.navigationItem.leftBarButtonItem = homeButton;
+    
+    self.tabBarController.delegate = self;
     // Do any additional setup after loading the view.
     [self.tableView reloadData];
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)back{
+    [self performSegueWithIdentifier:@"itinToHome" sender:nil];
 }
+
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     if([viewController isKindOfClass:[MapViewController class]]){
