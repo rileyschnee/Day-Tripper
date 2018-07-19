@@ -71,7 +71,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
 
-    } else {
+    }
+    
+    else {
         if (self.tripName.length == 0) {
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
                                                                                       message: @"Enter the trip name"
@@ -91,7 +93,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 else {
                     self.tripName = namefield.text;
                 }
-                [self performSegueWithIdentifier:@"toItenView" sender:nil];
+                [self performSegueWithIdentifier:@"toItinView" sender:nil];
                 
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -99,9 +101,12 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
         }
         else {
-            self.trip.planner = [PFUser currentUser];
             self.trip.name = self.tripName;
+            self.trip.planner = [PFUser currentUser];
+            self.trip.latitude = self.latitude;
+            self.trip.longitude = self.longitude;
 
+            
             //actually save the trip
             [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
@@ -110,29 +115,18 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                     NSLog(@"Error saving trip");
                 }
             }];
-        
+            
             //end saving the trip
+            
+            
+            UITabBarController *tabbar = [segue destinationViewController];
+            ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+            itinViewController.trip = self.trip;
+            itinViewController.latitude = self.latitude;
+            itinViewController.longitude = self.longitude;
         
-    } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
-        self.trip.planner = [PFUser currentUser];
-
-        //actually save the trip
-        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"Trip successfully saved!");
-            } else {
-                NSLog(@"Error saving trip");
-            }
-        }];
-    
-        //end saving the trip
-    
-        
-        UITabBarController *tabbar = [segue destinationViewController];
-        ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
-        itinViewController.trip = self.trip;
     }
-    }   
+}
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

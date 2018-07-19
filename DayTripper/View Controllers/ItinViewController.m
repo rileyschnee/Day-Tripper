@@ -37,7 +37,10 @@
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     if([viewController isKindOfClass:[MapViewController class]]){
         MapViewController *mapController = (MapViewController *) viewController;
-        mapController.trip = self.trip; 
+        mapController.trip = self.trip;
+        mapController.latitude = self.latitude;
+        mapController.longitude = self.longitude;
+        
     }
     return TRUE;
 }
