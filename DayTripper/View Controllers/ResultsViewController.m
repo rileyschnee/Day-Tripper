@@ -23,6 +23,7 @@
 @property (strong, nonatomic) NSMutableArray *food;
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) NSMutableArray *events;
+@property (strong, nonatomic) NSString* tripName;
 
 @end
 
@@ -33,6 +34,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [super viewDidLoad];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.tripName = @"";
 
     self.functions = [[Functions alloc] init];
     self.trip = [Trip new];
@@ -66,44 +69,53 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
-        NSLog(@"%@", self.activities[indexPath.section][indexPath.row]);
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
-        
-//        //get the activity
-//        NSArray *places = self.activities[0];
-//        NSArray *food = self.activities[1];
-//        NSArray *events = self.activities[2];
-//        int selectedIndex = (int) indexPath.row;
-//        int selectedSection = (int) indexPath.section;
-//        if (selectedSection == 0) {
-//            detailPage.activity = places[selectedIndex];
-//        } else if (selectedSection == 1) {
-//            detailPage.activity = food[selectedIndex];
-//        }
-//        else {
-//            detailPage.activity = events[selectedIndex];
-//        }
-//
-//        //end getting the activity
 
-        
-        
-    } else if ([sender isKindOfClass:[UIBarButtonItem class]]){
-        self.trip.planner = [PFUser currentUser];
+    } else {
+        if (self.tripName.length == 0) {
+            UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
+                                                                                      message: @"Enter the trip name"
+                                                                               preferredStyle:UIAlertControllerStyleAlert];
+            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"Trip Name";
+                textField.textColor = [UIColor blueColor];
+                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+                textField.borderStyle = UITextBorderStyleRoundedRect;
+            }];
+            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+                NSArray * textfields = alertController.textFields;
+                UITextField * namefield = textfields[0];
+                if (namefield.text.length == 0) {
+                    self.tripName = self.trip.city;
+                }
+                else {
+                    self.tripName = namefield.text;
+                }
+                [self performSegueWithIdentifier:@"toItenView" sender:nil];
+                
+            }]];
+            [self presentViewController:alertController animated:YES completion:nil];
+            
+            
+        }
+        else {
+            self.trip.planner = [PFUser currentUser];
+            self.trip.name = self.tripName;
 
-        //actually save the trip
-        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-                NSLog(@"Trip successfully saved!");
-            } else {
-                NSLog(@"Error saving trip");
-            }
-        }];
-    
-        //end saving the trip
-    
-        ItinViewController *itinViewController = [segue destinationViewController];
-        itinViewController.trip = self.trip;
+            //actually save the trip
+            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    NSLog(@"Trip successfully saved!");
+                } else {
+                    NSLog(@"Error saving trip");
+                }
+            }];
+        
+            //end saving the trip
+        
+            ItinViewController *itinViewController = [segue destinationViewController];
+            itinViewController.trip = self.trip;
+        }
     }
     
 }
@@ -226,7 +238,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             eventObj.name = event[@"title"];
             eventObj.longitude = [event[@"location"][0] doubleValue];
             eventObj.latitude = [event[@"location"][1] doubleValue];
-            NSLog(@"%@", event[@"category"]);
             eventObj.categories = [[NSMutableArray alloc] init];
             [eventObj.categories addObject:event[@"category"]];
             [self.activities[2] addObject:eventObj];
