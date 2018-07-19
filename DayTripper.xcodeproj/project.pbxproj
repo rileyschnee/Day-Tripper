@@ -15,6 +15,7 @@
 		53E8421120FFA920003FE31A /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8421020FFA920003FE31A /* Event.m */; };
 		5C6057ECF2ED632B7FD53472 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 629547CFF9336AD176C733AB /* libPods-DayTripper.a */; };
 		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
+		BE69F26C21000631000122D6 /* yelpCategories.json in Resources */ = {isa = PBXBuildFile; fileRef = BE69F26B21000631000122D6 /* yelpCategories.json */; };
 		BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3720F9298F005B79F5 /* AppDelegate.m */; };
 		BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3C20F9298F005B79F5 /* Main.storyboard */; };
 		BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3F20F92990005B79F5 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.release.xcconfig"; sourceTree = "<group>"; };
 		BE69F2662100007F000122D6 /* Constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		BE69F2672100007F000122D6 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		BE69F26B21000631000122D6 /* yelpCategories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = yelpCategories.json; sourceTree = "<group>"; };
 		BEA5FD3320F9298F005B79F5 /* DayTripper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTripper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5FD3620F9298F005B79F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEA5FD3720F9298F005B79F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				53E8420820FCF386003FE31A /* Functions.m */,
 				BE69F2662100007F000122D6 /* Constants.h */,
 				BE69F2672100007F000122D6 /* Constants.m */,
+				BE69F26B21000631000122D6 /* yelpCategories.json */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BEA5FD4320F92990005B79F5 /* LaunchScreen.storyboard in Resources */,
+				BE69F26C21000631000122D6 /* yelpCategories.json in Resources */,
 				BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */,
 				BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */,
 			);

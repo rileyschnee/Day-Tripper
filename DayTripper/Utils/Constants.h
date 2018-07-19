@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface Constants : NSObject
-@property (strong, nonatomic) NSMutableArray *placeCategories;
-@property (strong, nonatomic) NSMutableArray *foodCategories;
-@property (strong, nonatomic) NSMutableArray *eventCategories;
-
+@property (strong, nonatomic) NSDictionary *placeCategories;
+@property (strong, nonatomic) NSDictionary *foodCategories;
+@property (strong, nonatomic) NSDictionary *eventCategories;
+-(void)cats;
 @end

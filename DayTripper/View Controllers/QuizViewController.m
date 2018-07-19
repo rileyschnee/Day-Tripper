@@ -9,6 +9,7 @@
 #import "QuizViewController.h"
 #import "ResultsViewController.h"
 #import <MapKit/MapKit.h>
+#import "Constants.h"
 
 @interface QuizViewController () <MKLocalSearchCompleterDelegate>
 @property (strong, nonatomic) MKLocalSearchCompleter *completer;
@@ -33,6 +34,8 @@
     [self.locationField addTarget:self
                            action:@selector(textFieldDidChange:)
                  forControlEvents:UIControlEventEditingChanged];
+    Constants *yelpCats = [[Constants alloc] init];
+    [yelpCats cats];
     
 }
 
