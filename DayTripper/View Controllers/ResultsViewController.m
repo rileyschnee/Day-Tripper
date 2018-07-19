@@ -169,6 +169,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 place.latitude = [venue[@"location"][@"lat"] doubleValue];
                 place.longitude = [venue[@"location"][@"lng"] doubleValue];
                 place.categories = venue[@"categories"];
+                place.apiId = venue[@"id"];
                 [weakSelf.activities[0] addObject:place];
             }
         [weakSelf refreshAsync];
@@ -201,6 +202,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             food.latitude = [venue[@"coordinates"][@"latitude"] doubleValue];
             food.longitude = [venue[@"coordinates"][@"longitude"] doubleValue];
             food.categories = venue[@"categories"];
+            food.apiId = venue[@"id"];
             [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];

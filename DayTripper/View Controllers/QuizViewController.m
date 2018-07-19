@@ -34,8 +34,8 @@
     [self.locationField addTarget:self
                            action:@selector(textFieldDidChange:)
                  forControlEvents:UIControlEventEditingChanged];
-    Constants *yelpCats = [[Constants alloc] init];
-    [yelpCats cats];
+    //Constants *yelpCats = [[Constants alloc] init];
+    //[yelpCats cats];
     
 }
 
