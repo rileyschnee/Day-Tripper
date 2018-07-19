@@ -24,6 +24,7 @@
 @property (strong, nonatomic) NSMutableArray *places;
 @property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) NSString* tripName;
+@property (strong, nonatomic) NSMutableArray *tempArray;
 
 @end
 
@@ -36,19 +37,19 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     self.tableView.dataSource = self;
     
     self.tripName = @"";
-
+    
     self.functions = [[Functions alloc] init];
     self.trip = [Trip new];
     self.trip.city = self.location;
-
+    
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:HeaderViewIdentifier];
-
+    
     // Do any additional setup after loading the view.
     self.activities = [NSMutableArray new];
     self.places = [NSMutableArray new];
     self.food = [NSMutableArray new];
     self.events = [NSMutableArray new];
-
+    
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
     [self.activities addObject:self.events];
@@ -64,14 +65,16 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-
+    
     if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
 
-    } else {
+    }
+    
+    else {
         if (self.tripName.length == 0) {
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
                                                                                       message: @"Enter the trip name"
@@ -91,7 +94,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 else {
                     self.tripName = namefield.text;
                 }
-                [self performSegueWithIdentifier:@"toItenView" sender:nil];
+                [self performSegueWithIdentifier:@"toItinView" sender:nil];
                 
             }]];
             [self presentViewController:alertController animated:YES completion:nil];
@@ -99,9 +102,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
         }
         else {
-            self.trip.planner = [PFUser currentUser];
             self.trip.name = self.tripName;
-
+            self.trip.planner = [PFUser currentUser];
+            self.trip.latitude = self.latitude;
+            self.trip.longitude = self.longitude;
+            
             //actually save the trip
             [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
@@ -110,14 +115,18 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                     NSLog(@"Error saving trip");
                 }
             }];
-        
+            
             //end saving the trip
-        
-            ItinViewController *itinViewController = [segue destinationViewController];
+            
+            
+            UITabBarController *tabbar = [segue destinationViewController];
+            ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             itinViewController.trip = self.trip;
+            itinViewController.latitude = self.latitude;
+            itinViewController.longitude = self.longitude;
+        
         }
     }
-    
 }
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
@@ -173,7 +182,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 [weakSelf.activities[0] addObject:place];
             }
         [weakSelf refreshAsync];
-
+        
     }];
 }
 
@@ -206,7 +215,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             [self.activities[1] addObject:food];
         }
         [weakSelf refreshAsync];
-
+        
     }];
 }
 
@@ -289,15 +298,16 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
 }
 -(void)removeActivityFromTrip:(id <Activity>) activity {
-    [self.trip removeObject:activity forKey:@"activities"];
+    //NSLog(@"%@", self.trip.activities);
+    self.tempArray = self.trip[@"activities"];
+    [self.tempArray removeObject:activity];
+    self.trip[@"activities"] = self.tempArray;
     //[self.trip saveInBackground];
-    
 }
 -(BOOL)isActivityInTrip:(id <Activity>) activity {
     return [self.trip.activities containsObject:activity];
     
 }
 
-
-
 @end
+    

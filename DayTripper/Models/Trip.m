@@ -14,6 +14,8 @@
 @dynamic name;
 @dynamic activities;
 @dynamic planner;
+@dynamic latitude;
+@dynamic longitude;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";

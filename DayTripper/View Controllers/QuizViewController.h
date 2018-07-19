@@ -7,8 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuizReusableViewDelegate.h"
+#import "QuizViewControllerDelegate.h"
+#import "QuizReusableView.h"
 
-@interface QuizViewController : UIViewController
-@property (weak, nonatomic) IBOutlet UITextField *locationField;
+//@protocol QuizViewControllerDelegate
+//@property (weak, nonatomic) IBOutlet UITextField *locationField;
+//@end
 
+@interface QuizViewController : UIViewController <QuizReusableViewDelegate>
+@property (nonatomic) double latitude;
+@property (nonatomic) double longitude;
+@property (strong, nonatomic) NSString *location;
+@property (strong, nonatomic) id<QuizViewControllerDelegate> delegate;
 @end
