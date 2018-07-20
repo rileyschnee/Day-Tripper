@@ -11,7 +11,5 @@
 
 @interface Food : PFObject <PFSubclassing, Activity>
 
-@property (strong, nonatomic) NSURL *website;
-
 
 @end

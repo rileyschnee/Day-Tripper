@@ -28,7 +28,6 @@
 @property (strong, nonatomic) NSMutableString *catQueryPlace;
 @property (strong, nonatomic) NSMutableString *catQueryFood;
 @property (strong, nonatomic) NSMutableString *catQueryEvent;
-
 @end
 
 @implementation ResultsViewController
@@ -190,6 +189,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
                 place.name = venue[@"name"];
+                place.website = venue[@"url"];
                 place.latitude = [venue[@"location"][@"lat"] doubleValue];
                 place.longitude = [venue[@"location"][@"lng"] doubleValue];
                 place.categories = venue[@"categories"];
@@ -266,6 +266,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         for (NSDictionary *event in events) {
             Event *eventObj = [Event new];
             eventObj.name = event[@"title"];
+            //no website exists for the event yet
+            eventObj.website = @"";
             eventObj.longitude = [event[@"location"][0] doubleValue];
             eventObj.latitude = [event[@"location"][1] doubleValue];
             eventObj.categories = [[NSMutableArray alloc] init];
