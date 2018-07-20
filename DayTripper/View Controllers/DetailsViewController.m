@@ -18,7 +18,10 @@
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSMutableArray *imageUrls;
 @property (nonatomic) int currentImageIndex;
+- (IBAction)didTapDirections:(id)sender;
+
 @property (nonatomic) int currNumEventPhotos;
+
 @end
 
 @implementation DetailsViewController
@@ -39,6 +42,10 @@
         }else{
             self.somePlacemarks = [placemarks copy];
             self.somePlacemark = [placemarks firstObject];
+
+            NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
+            NSString *address = [partsAddr componentsJoinedByString:@", "];
+            self.locationLabel.text =  address;
         }
     }];
     
@@ -61,6 +68,31 @@
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
         [self getEventPhotoObjectsByLocation];
     }
+}
+
+
+- (IBAction)didTapDirections:(id)sender {
+    NSString *baseURL = @"https://www.google.com/maps/dir/?api=1";
+    NSNumber *numberlat = [NSNumber numberWithDouble:self.activity.latitude];
+    NSNumber *numberlong = [NSNumber numberWithDouble:self.activity.longitude];
+    NSString *destinationlat = [numberlat stringValue];
+    NSString *destinationlong = [numberlong stringValue];
+    NSArray *array = [[NSArray alloc] initWithObjects:@"&destination=", destinationlat, @",", destinationlong, nil];
+    NSString *url = [array componentsJoinedByString:@""];
+    NSString *URL = [baseURL stringByAppendingString:url];
+    NSURL *googleURL = [NSURL URLWithString:URL];
+//    [[UIApplication sharedApplication] openURL:googleURL options:<#(nonnull NSDictionary<NSString *,id> *)#> completionHandler:^(BOOL success) {
+//        if (success){
+//            NSLog("YAY dir");
+//        }else{
+//            NSLog(" NO YAY fail");
+//        }
+//    }];
+    
+
+    
+    
+
 }
 
 - (void)setActivity:(id<Activity>)activity{
@@ -269,6 +301,7 @@
     [self.images addObject:image];
     
 }
+
 
 
 @end
