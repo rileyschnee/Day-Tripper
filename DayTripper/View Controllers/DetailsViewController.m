@@ -45,11 +45,11 @@
     
     //self.locationLabel.text = self.activity.location;
     if([[self.activity activityType] isEqualToString:@"Place"]){
-        self.categoriesLabel.text = self.activity.categories[0][@"name"];
+        self.categoriesLabel.text = [[self.activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
-        self.categoriesLabel.text = self.activity.categories[0][@"title"];
+        self.categoriesLabel.text = [[self.activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
-        self.categoriesLabel.text = [NSString stringWithFormat:@"%@", self.activity.categories[0]];
+        self.categoriesLabel.text = [[self.activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     }
     //self.categoriesLabel.text = self.activity.category;
     
@@ -63,9 +63,8 @@
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
         [self getEventPhotoObjectsByLocation];
     }
-    
-    
 }
+
 - (void)setActivity:(id<Activity>)activity{
     _activity = activity;
 }

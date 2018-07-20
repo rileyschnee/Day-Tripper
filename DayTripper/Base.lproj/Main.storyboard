@@ -158,7 +158,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView multipleTouchEnabled="YES" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rlh-3u-Ftz">
+                            <imageView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="rlh-3u-Ftz">
                                 <rect key="frame" x="16" y="343" width="343" height="313"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
@@ -494,7 +494,6 @@
         <image name="placeholder" width="927" height="720"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="FOd-75-pXi"/>
         <segue reference="wJV-j0-lVJ"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
