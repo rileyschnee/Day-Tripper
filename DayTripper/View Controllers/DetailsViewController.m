@@ -18,6 +18,7 @@
 @property (strong, nonatomic) NSMutableArray *images;
 @property (strong, nonatomic) NSMutableArray *imageUrls;
 @property (nonatomic) int currentImageIndex;
+@property (nonatomic) int currNumEventPhotos;
 @end
 
 @implementation DetailsViewController
@@ -59,7 +60,10 @@
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
         //get yelp images
         [self fetchYelpPhotos:self.activity.apiId];
+    } else if ([[self.activity activityType] isEqualToString:@"Event"]){
+        [self getEventPhotoObjectsByLocation];
     }
+    
     
 }
 - (void)setActivity:(id<Activity>)activity{
@@ -190,7 +194,7 @@
 }
 -(void)handleSwipeLeft:(id)sender
 {
-    if(self.currentImageIndex < (self.imageUrls.count - 1))
+    if(self.currentImageIndex < (self.images.count - 1))
     {
         self.currentImageIndex = self.currentImageIndex + 1;
         [self addAnimationPresentToView:self.imageView];
@@ -209,6 +213,63 @@
     
 }
 
+
+# pragma mark - Google Places Request for Event API
+//given a lat and long will search to find nearby places and their photo ids
+- (void) getEventPhotoObjectsByLocation {
+    __weak typeof(self) weakSelf = self;
+    APIManager *apiManager = [[APIManager alloc] init];
+    //make the request
+    NSString *baseURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+    //params
+    NSString* locationParam = [NSString stringWithFormat:@"%f%@%f", self.activity.latitude, @",", self.activity.longitude];
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    
+    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"] forKey:@"key"];
+    [paramsDict setObject:locationParam forKey:@"location"];
+    [paramsDict setObject:@"100" forKey:@"radius"];
+    
+    int maxNumPhotos = 3;
+    
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        NSArray *placesResults = responseDict[0][@"results"];
+        for (NSDictionary* place in placesResults) {
+            if (self.currNumEventPhotos >= maxNumPhotos) {
+                break;
+            }
+            NSArray* photoRefs = place[@"photos"];
+            if (photoRefs.count > 0) {
+                for (NSDictionary* photoRef in photoRefs) {
+                    if (self.currNumEventPhotos >= maxNumPhotos) {
+                        break;
+                    }
+                    NSString* photoRefString = photoRef[@"photo_reference"];
+                    if (photoRefString.length > 0) {
+                        if (self.currNumEventPhotos < maxNumPhotos) {
+                            [self getImageFromPhotoRef: photoRefString];
+                            self.currNumEventPhotos = self.currNumEventPhotos + 1;
+                        }
+                    }
+                }
+            }
+        }
+        [weakSelf setImageAsync];
+    }];
+}
+
+- (void) getImageFromPhotoRef:(NSString*) photoReference {
+    APIManager *apiManager = [[APIManager alloc] init];
+    
+    NSString *baseURL = @"https://maps.googleapis.com/maps/api/place/photo";
+    NSString* maxWidth = @"?maxwidth=600";
+    NSString* photoRef = [NSString stringWithFormat:@"%@%@", @"&photoreference=", photoReference];
+    NSString* key = [NSString stringWithFormat:@"%@%@", @"&key=", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"]];
+    NSString* finalURL = [NSString stringWithFormat:@"%@%@%@%@", baseURL, maxWidth, photoRef, key];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalURL]];
+    UIImage *image = [UIImage imageWithData:data];
+    [self.images addObject:image];
+    
+}
 
 
 @end
