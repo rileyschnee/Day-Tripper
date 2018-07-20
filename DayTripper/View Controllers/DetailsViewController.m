@@ -25,9 +25,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.nameLabel.text = self.activity.name;
     self.somePlacemarks = [[NSArray<CLPlacemark *> alloc] init];
+    //init the images arrays that will be used for storing images
     self.imageUrls = [[NSMutableArray alloc] init];
     self.images = [[NSMutableArray alloc] init];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
@@ -39,11 +39,9 @@
         }else{
             self.somePlacemarks = [placemarks copy];
             self.somePlacemark = [placemarks firstObject];
-            
         }
     }];
     
-    //self.locationLabel.text = self.activity.location;
     if([[self.activity activityType] isEqualToString:@"Place"]){
         self.categoriesLabel.text = self.activity.categories[0][@"name"];
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
@@ -151,8 +149,10 @@
 
 -(void) setImageAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *image = self.images[0];
-        [self.imageView setImage:image];
+        if (self.images.count > 0) {
+            UIImage *image = self.images[0];
+            [self.imageView setImage:image];
+        }
     });
 }
 

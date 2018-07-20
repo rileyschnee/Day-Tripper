@@ -42,12 +42,13 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     self.tripName = @"";
     
     self.functions = [[Functions alloc] init];
+    
     self.trip = [Trip new];
     self.trip.city = self.location;
     
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:HeaderViewIdentifier];
     
-    // Do any additional setup after loading the view.
+    //set up different arrays for different types of things to do
     self.activities = [NSMutableArray new];
     self.places = [NSMutableArray new];
     self.food = [NSMutableArray new];
@@ -78,7 +79,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
     }
     
+    //this is called if the "Done" button is pressed
     else {
+        //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
                                                                                       message: @"Enter the trip name"
@@ -92,6 +95,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 NSArray * textfields = alertController.textFields;
                 UITextField * namefield = textfields[0];
+                //if the user does not provide a trip name, then set the name equal to the city
                 if (namefield.text.length == 0) {
                     self.tripName = self.trip.city;
                 }
@@ -105,6 +109,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
             
         }
+        //reaches here is a trip name exists
         else {
             self.trip.name = self.tripName;
             self.trip.planner = [PFUser currentUser];
@@ -119,8 +124,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                     NSLog(@"Error saving trip");
                 }
             }];
-            
-            //end saving the trip
             
             
             UITabBarController *tabbar = [segue destinationViewController];
@@ -163,6 +166,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return self.activities.count;
 }
 
+//gets the places for the results
 - (void)fetchResults4SQ{
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -181,6 +185,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        //parse the request
             NSArray *venues = responseDict[0][@"response"][@"venues"];
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
@@ -196,6 +201,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }];
 }
 
+//gets the food results
 - (void)fetchResultsYelp{
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -212,7 +218,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     if(![self.catQueryFood isEqualToString:@""]){
         [paramsDict setObject:self.catQueryFood forKey:@"categories"];
     }
-    
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
         NSArray *venues = responseDict[0][@"businesses"];
@@ -271,34 +276,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }];
 }
 
-- (NSString *) generatCurrentDateFourSquare {
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyyMMdd"];
-    return [dateFormatter stringFromDate:today];
-}
-
-- (NSString *) generatCurrentDateEvents {
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    return [dateFormatter stringFromDate:today];
-}
-
-- (NSString *) generatEndDateEvents {
-    NSDate *today = [NSDate date];
-    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
-    //push 7 days ahead
-    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
-    [dateComponents setDay:7];
-    NSDate *newDate = [[NSCalendar currentCalendar]
-                       dateByAddingComponents:dateComponents
-                       toDate:today options:0];
-    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-    return [dateFormatter stringFromDate:newDate];
-}
-
-
+//reloads the tableview asynchronously
 -(void) refreshAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
@@ -308,22 +286,18 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 -(void)addActivityToTrip:(id <Activity>) activity {
     [self.trip addUniqueObject:activity forKey:@"activities"];
-    //[self.trip saveInBackground];
-    
 }
 -(void)removeActivityFromTrip:(id <Activity>) activity {
-    //NSLog(@"%@", self.trip.activities);
     self.tempArray = self.trip[@"activities"];
     [self.tempArray removeObject:activity];
     self.trip[@"activities"] = self.tempArray;
-    //[self.trip saveInBackground];
 }
 -(BOOL)isActivityInTrip:(id <Activity>) activity {
     return [self.trip.activities containsObject:activity];
-    
 }
 
 
+//sets up querying for all of the categories
 -(void)setQueryStrings{
     self.catQueryPlace = [NSMutableString new];
     self.catQueryFood = [NSMutableString new];
@@ -349,7 +323,38 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     NSLog(@"%@", self.catQueryPlace);
     NSLog(@"%@", self.catQueryFood);
     NSLog(@"%@", self.catQueryEvent);
+}
 
+#pragma mark - date functions
+
+//gets the current date in the format that four square wants
+- (NSString *) generatCurrentDateFourSquare {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyyMMdd"];
+    return [dateFormatter stringFromDate:today];
+}
+
+//gets current date in format that predicthq wants
+- (NSString *) generatCurrentDateEvents {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:today];
+}
+
+//gets the date one week from now
+- (NSString *) generatEndDateEvents {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
+    //push 7 days ahead
+    NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+    [dateComponents setDay:7];
+    NSDate *newDate = [[NSCalendar currentCalendar]
+                       dateByAddingComponents:dateComponents
+                       toDate:today options:0];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    return [dateFormatter stringFromDate:newDate];
 }
 
 @end
