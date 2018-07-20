@@ -10,12 +10,13 @@
 #import "QuizReusableViewDelegate.h"
 #import "QuizViewControllerDelegate.h"
 #import "QuizReusableView.h"
+#import "CategoryCollectionCell.h"
 
 //@protocol QuizViewControllerDelegate
 //@property (weak, nonatomic) IBOutlet UITextField *locationField;
 //@end
 
-@interface QuizViewController : UIViewController <QuizReusableViewDelegate>
+@interface QuizViewController : UIViewController <QuizReusableViewDelegate, CategoryCollectionCellDelegate>
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSString *location;

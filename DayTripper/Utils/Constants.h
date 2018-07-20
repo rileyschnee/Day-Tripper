@@ -12,6 +12,5 @@
 @property (strong, nonatomic) NSMutableDictionary *placeCategories;
 @property (strong, nonatomic) NSMutableDictionary *foodCategories;
 @property (strong, nonatomic) NSMutableDictionary *eventCategories;
-
 - (void)setCategories;
 @end

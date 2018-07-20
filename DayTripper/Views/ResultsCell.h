@@ -10,11 +10,11 @@
 #import "Place.h"
 #import "Food.h"
 #import "Activity.h"
+
 @protocol ResultsCellDelegate
 -(void)addActivityToTrip:(id <Activity>) activity;
 -(void)removeActivityFromTrip:(id <Activity>) activity;
 -(BOOL)isActivityInTrip:(id <Activity>) activity;
-
 @end
 
 @interface ResultsCell : UITableViewCell

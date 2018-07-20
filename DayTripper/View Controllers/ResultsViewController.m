@@ -25,6 +25,9 @@
 @property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) NSString* tripName;
 @property (strong, nonatomic) NSMutableArray *tempArray;
+@property (strong, nonatomic) NSMutableString *catQueryPlace;
+@property (strong, nonatomic) NSMutableString *catQueryFood;
+@property (strong, nonatomic) NSMutableString *catQueryEvent;
 
 @end
 
@@ -53,6 +56,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
     [self.activities addObject:self.events];
+    [self setQueryStrings];
     [self fetchResults4SQ];
     [self fetchResultsYelp];
     [self fetchResultsEvents];
@@ -171,6 +175,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:currDate forKey:@"v"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    if(![self.catQueryPlace isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -202,7 +209,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:lon forKey:@"longitude"];
     [paramsDict setObject:@"food" forKey:@"categories"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
+    if(![self.catQueryFood isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryFood forKey:@"categories"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -242,7 +251,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:startDate forKey:@"end.gte"];
     [paramsDict setObject:endDate forKey:@"end.lte"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
+    if(![self.catQueryEvent isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryEvent forKey:@"category"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -310,6 +321,35 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 -(BOOL)isActivityInTrip:(id <Activity>) activity {
     return [self.trip.activities containsObject:activity];
     
+}
+
+
+-(void)setQueryStrings{
+    self.catQueryPlace = [NSMutableString new];
+    self.catQueryFood = [NSMutableString new];
+    self.catQueryEvent = [NSMutableString new];
+    for(NSString *cat in self.placeCategories){
+        [self.catQueryPlace appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.placeCategories lastObject]]){
+            [self.catQueryPlace appendString:@","];
+        }
+    }
+    for(NSString *cat in self.foodCategories){
+        [self.catQueryFood appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.foodCategories lastObject]]){
+            [self.catQueryFood appendString:@","];
+        }
+    }
+    for(NSString *cat in self.eventCategories){
+        [self.catQueryEvent appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.eventCategories lastObject]]){
+            [self.catQueryEvent appendString:@","];
+        }
+    }
+    NSLog(@"%@", self.catQueryPlace);
+    NSLog(@"%@", self.catQueryFood);
+    NSLog(@"%@", self.catQueryEvent);
+
 }
 
 @end
