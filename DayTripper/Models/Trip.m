@@ -16,16 +16,21 @@
 @dynamic planner;
 @dynamic latitude;
 @dynamic longitude;
+@dynamic attendees;
+@dynamic tripDate;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";
 }
 
-+ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withCompletion: (PFBooleanResultBlock  _Nullable)completion {
-    
++ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withLocation:(NSString * _Nullable)city withCompletion: (PFBooleanResultBlock  _Nullable)completion {
+
     Trip *newTrip = trip;
     newTrip.city = name;
     newTrip.planner = [PFUser currentUser];
+    newTrip.tripDate = date;
+    newTrip.latitude = lat;
+    newTrip.longitude = lon;
     
     [newTrip saveInBackgroundWithBlock: completion];
 }

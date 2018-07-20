@@ -69,6 +69,7 @@
             self.delegate.latitude = item.placemark.location.coordinate.latitude;
             self.delegate.longitude = item.placemark.location.coordinate.longitude;
             self.delegate.location = self.locationField.text;
+            self.delegate.tripDate = self.datePicker.date;
         }
     }];
 }

@@ -10,4 +10,5 @@
 @property (strong, nonatomic) NSString *location;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+@property (strong, nonatomic) NSDate *tripDate;
 @end

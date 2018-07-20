@@ -55,6 +55,7 @@
     resultsViewController.placeCategories = self.chosenPlaceCategories;
     resultsViewController.foodCategories = self.chosenFoodCategories;
     resultsViewController.eventCategories = self.chosenEventCategories;
+    resultsViewController.tripDate = self.tripDate;
 }
 
 
@@ -63,7 +64,12 @@
     cell.categoryLabel.text = self.allCategories[indexPath.item];
     cell.delegate = self;
     cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
-    
+    cell.selected = [self isCategoryInArray:cell.categoryLabel.text];
+    if(cell.selected){
+        cell.backgroundColor = [UIColor yellowColor];
+    } else {
+        cell.backgroundColor = [UIColor whiteColor];
+    }
     if([self.cats.placeCategories objectForKey:cell.categoryLabel.text] != nil){
         cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
     } else if([self.cats.foodCategories objectForKey:cell.categoryLabel.text] != nil){

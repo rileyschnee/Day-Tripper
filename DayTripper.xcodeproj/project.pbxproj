@@ -29,6 +29,8 @@
 		BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5020F929CD005B79F5 /* QuizViewController.m */; };
 		BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */; };
 		BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5620F92A01005B79F5 /* ItinViewController.m */; };
+		BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */; };
+		BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA3210262E300933DB7 /* TripReusableView.m */; };
 		BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */; };
 		BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8D20FD016E0048C0DB /* Place.m */; };
 		BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9320FD03BC0048C0DB /* ItinCell.m */; };
@@ -83,6 +85,10 @@
 		BEA5FD5320F929E2005B79F5 /* ResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsViewController.m; sourceTree = "<group>"; };
 		BEA5FD5520F92A01005B79F5 /* ItinViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItinViewController.h; sourceTree = "<group>"; };
 		BEA5FD5620F92A01005B79F5 /* ItinViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItinViewController.m; sourceTree = "<group>"; };
+		BEA6BF9F210262B800933DB7 /* UserCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCollectionCell.h; sourceTree = "<group>"; };
+		BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCollectionCell.m; sourceTree = "<group>"; };
+		BEA6BFA2210262E300933DB7 /* TripReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripReusableView.h; sourceTree = "<group>"; };
+		BEA6BFA3210262E300933DB7 /* TripReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripReusableView.m; sourceTree = "<group>"; };
 		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		BEEA9D8C20FD016E0048C0DB /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -214,6 +220,10 @@
 				BE45190C210104E600CFA8AC /* QuizReusableView.h */,
 				BE45190D210104E600CFA8AC /* QuizReusableView.m */,
 				BE45190F21012AA900CFA8AC /* QuizReusableViewDelegate.h */,
+				BEA6BF9F210262B800933DB7 /* UserCollectionCell.h */,
+				BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */,
+				BEA6BFA2210262E300933DB7 /* TripReusableView.h */,
+				BEA6BFA3210262E300933DB7 /* TripReusableView.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -362,8 +372,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */,
 				BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */,
 				0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */,
+				BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */,
 				BEEA9D9820FD12140048C0DB /* ProfileCell.m in Sources */,
 				BEEA9D9E20FD12310048C0DB /* Trip.m in Sources */,
 				BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */,
@@ -526,13 +538,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P2TSRFLHL6;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappskim.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -544,15 +556,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-
-				DEVELOPMENT_TEAM = P2TSRFLHL6;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-
-				PRODUCT_BUNDLE_IDENTIFIER = makerappskim.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

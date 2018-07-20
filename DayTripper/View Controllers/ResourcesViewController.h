@@ -7,7 +7,13 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Trip.h"
+#import "TripReusableView.h"
+#import "UserCollectionCell.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
 @interface ResourcesViewController : UIViewController
+@property (strong, nonatomic) Trip *trip;
 
 @end

@@ -9,6 +9,7 @@
 #import "ItinViewController.h"
 #import "ItinCell.h"
 #import "MapViewController.h"
+#import "ResourcesViewController.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -21,10 +22,8 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    //create a home button that goes to Home View Controller
-    UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
-    self.navigationItem.hidesBackButton = YES;
-    self.navigationItem.leftBarButtonItem = homeButton;
+    
+    
     self.tabBarController.delegate = self;
     [self.tableView reloadData];
 }
@@ -41,6 +40,12 @@
         mapController.trip = self.trip;
         mapController.latitude = self.latitude;
         mapController.longitude = self.longitude;
+    }
+    if([viewController isKindOfClass:[ResourcesViewController class]]){
+        ResourcesViewController *resController = (ResourcesViewController *) viewController;
+        resController.trip = self.trip;
+        NSLog(@"SETTING TRIP IN ININ VIEW");
+
     }
     return TRUE;
 }

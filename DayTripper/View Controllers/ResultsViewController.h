@@ -25,5 +25,6 @@
 @property (strong, nonatomic) NSMutableArray *placeCategories;
 @property (strong, nonatomic) NSMutableArray *foodCategories;
 @property (strong, nonatomic) NSMutableArray *eventCategories;
+@property (strong, nonatomic) NSDate *tripDate;
 
 @end

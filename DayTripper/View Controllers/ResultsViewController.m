@@ -115,7 +115,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             self.trip.planner = [PFUser currentUser];
             self.trip.latitude = self.latitude;
             self.trip.longitude = self.longitude;
-            
+            self.trip.tripDate = self.tripDate;
+
             //actually save the trip
             [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
                 if (succeeded) {
@@ -125,7 +126,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 }
             }];
             
-            
             UITabBarController *tabbar = [segue destinationViewController];
             UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
             ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
@@ -134,7 +134,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             itinViewController.trip = self.trip;
             itinViewController.latitude = self.latitude;
             itinViewController.longitude = self.longitude;
-        
+            //create a home button that goes to Home View Controller
+            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:itinViewController action:@selector(back)];
+            itinViewController.navigationItem.hidesBackButton = YES;
+            itinViewController.navigationItem.leftBarButtonItem = homeButton;
         }
     }
 }

@@ -15,11 +15,10 @@
     //[self addGestureRecognizer:tap];
     self.selected = [self.delegate isCategoryInArray:self.categoryLabel.text];
     if(self.selected){
-        self.backgroundColor = [UIColor blueColor];
+        self.backgroundColor = [UIColor yellowColor];
     }
 }
 - (void)toggleCatStatus:(UITapGestureRecognizer *)sender{
-    NSLog(@"MADE IT TO THE CATCOLLECTIONCELL TOGGLE!");
     if(!self.selected){
         [self.delegate addCategoryToArray:self.categoryLabel.text];
         self.selected = YES;
@@ -35,6 +34,8 @@
         self.backgroundColor = [UIColor whiteColor];
     }
 }
+
+
 
 
 

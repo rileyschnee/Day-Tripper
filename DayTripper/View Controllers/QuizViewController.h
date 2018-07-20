@@ -20,5 +20,6 @@
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSString *location;
+@property (strong, nonatomic) NSDate *tripDate;
 @property (strong, nonatomic) id<QuizViewControllerDelegate> delegate;
 @end
