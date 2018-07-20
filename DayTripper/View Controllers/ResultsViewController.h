@@ -22,4 +22,8 @@
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSDate* windowStartTime;
 @property (strong, nonatomic) NSDate* windowEndTime;
+@property (strong, nonatomic) NSMutableArray *placeCategories;
+@property (strong, nonatomic) NSMutableArray *foodCategories;
+@property (strong, nonatomic) NSMutableArray *eventCategories;
+
 @end

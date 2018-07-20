@@ -11,6 +11,8 @@
 
 @implementation APIManager
 
+//example 
+
 
 - (void) getRequest:(NSString *)url params:(NSDictionary*)params completion:(void (^)(NSArray *))completion{
     NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];

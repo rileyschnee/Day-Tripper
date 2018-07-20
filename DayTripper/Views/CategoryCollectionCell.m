@@ -9,5 +9,34 @@
 #import "CategoryCollectionCell.h"
 
 @implementation CategoryCollectionCell
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleCatStatus:)];
+    //[self addGestureRecognizer:tap];
+    self.selected = [self.delegate isCategoryInArray:self.categoryLabel.text];
+    if(self.selected){
+        self.backgroundColor = [UIColor blueColor];
+    }
+}
+- (void)toggleCatStatus:(UITapGestureRecognizer *)sender{
+    NSLog(@"MADE IT TO THE CATCOLLECTIONCELL TOGGLE!");
+    if(!self.selected){
+        [self.delegate addCategoryToArray:self.categoryLabel.text];
+        self.selected = YES;
+        
+    } else {
+        [self.delegate removeCategoryFromArray:self.categoryLabel.text];
+        self.selected = NO;
+    }
+    
+    if(self.selected){
+        self.backgroundColor = [UIColor yellowColor];
+    } else {
+        self.backgroundColor = [UIColor whiteColor];
+    }
+}
+
+
+
 
 @end

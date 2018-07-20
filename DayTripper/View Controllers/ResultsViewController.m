@@ -25,6 +25,9 @@
 @property (strong, nonatomic) NSMutableArray *events;
 @property (strong, nonatomic) NSString* tripName;
 @property (strong, nonatomic) NSMutableArray *tempArray;
+@property (strong, nonatomic) NSMutableString *catQueryPlace;
+@property (strong, nonatomic) NSMutableString *catQueryFood;
+@property (strong, nonatomic) NSMutableString *catQueryEvent;
 
 @end
 
@@ -39,12 +42,13 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     self.tripName = @"";
     
     self.functions = [[Functions alloc] init];
+    
     self.trip = [Trip new];
     self.trip.city = self.location;
     
     [self.tableView registerClass:[UITableViewHeaderFooterView class] forHeaderFooterViewReuseIdentifier:HeaderViewIdentifier];
     
-    // Do any additional setup after loading the view.
+    //set up different arrays for different types of things to do
     self.activities = [NSMutableArray new];
     self.places = [NSMutableArray new];
     self.food = [NSMutableArray new];
@@ -53,6 +57,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
     [self.activities addObject:self.events];
+    [self setQueryStrings];
     [self fetchResults4SQ];
     [self fetchResultsYelp];
     [self fetchResultsEvents];
@@ -74,7 +79,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
     }
     
+    //this is called if the "Done" button is pressed
     else {
+        //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
                                                                                       message: @"Enter the trip name"
@@ -88,6 +95,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
                 NSArray * textfields = alertController.textFields;
                 UITextField * namefield = textfields[0];
+                //if the user does not provide a trip name, then set the name equal to the city
                 if (namefield.text.length == 0) {
                     self.tripName = self.trip.city;
                 }
@@ -101,6 +109,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
             
         }
+        //reaches here is a trip name exists
         else {
             self.trip.name = self.tripName;
             self.trip.planner = [PFUser currentUser];
@@ -115,8 +124,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                     NSLog(@"Error saving trip");
                 }
             }];
-            
-            //end saving the trip
             
             
             UITabBarController *tabbar = [segue destinationViewController];
@@ -159,6 +166,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return self.activities.count;
 }
 
+//gets the places for the results
 - (void)fetchResults4SQ{
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -171,9 +179,13 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:currDate forKey:@"v"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    if(![self.catQueryPlace isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        //parse the request
             NSArray *venues = responseDict[0][@"response"][@"venues"];
             for (NSDictionary *venue in venues) {
                 Place *place = [Place new];
@@ -189,6 +201,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }];
 }
 
+//gets the food results
 - (void)fetchResultsYelp{
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -202,8 +215,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:lon forKey:@"longitude"];
     [paramsDict setObject:@"food" forKey:@"categories"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
-    
+    if(![self.catQueryFood isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryFood forKey:@"categories"];
+    }
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
         NSArray *venues = responseDict[0][@"businesses"];
@@ -242,7 +256,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:startDate forKey:@"end.gte"];
     [paramsDict setObject:endDate forKey:@"end.lte"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
+    if(![self.catQueryEvent isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryEvent forKey:@"category"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -260,6 +276,58 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }];
 }
 
+//reloads the tableview asynchronously
+-(void) refreshAsync {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+}
+
+
+-(void)addActivityToTrip:(id <Activity>) activity {
+    [self.trip addUniqueObject:activity forKey:@"activities"];
+}
+-(void)removeActivityFromTrip:(id <Activity>) activity {
+    self.tempArray = self.trip[@"activities"];
+    [self.tempArray removeObject:activity];
+    self.trip[@"activities"] = self.tempArray;
+}
+-(BOOL)isActivityInTrip:(id <Activity>) activity {
+    return [self.trip.activities containsObject:activity];
+}
+
+
+//sets up querying for all of the categories
+-(void)setQueryStrings{
+    self.catQueryPlace = [NSMutableString new];
+    self.catQueryFood = [NSMutableString new];
+    self.catQueryEvent = [NSMutableString new];
+    for(NSString *cat in self.placeCategories){
+        [self.catQueryPlace appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.placeCategories lastObject]]){
+            [self.catQueryPlace appendString:@","];
+        }
+    }
+    for(NSString *cat in self.foodCategories){
+        [self.catQueryFood appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.foodCategories lastObject]]){
+            [self.catQueryFood appendString:@","];
+        }
+    }
+    for(NSString *cat in self.eventCategories){
+        [self.catQueryEvent appendString:[NSString stringWithFormat:@"%@", cat]];
+        if(![cat isEqual:[self.eventCategories lastObject]]){
+            [self.catQueryEvent appendString:@","];
+        }
+    }
+    NSLog(@"%@", self.catQueryPlace);
+    NSLog(@"%@", self.catQueryFood);
+    NSLog(@"%@", self.catQueryEvent);
+}
+
+#pragma mark - date functions
+
+//gets the current date in the format that four square wants
 - (NSString *) generatCurrentDateFourSquare {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
@@ -267,6 +335,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return [dateFormatter stringFromDate:today];
 }
 
+//gets current date in format that predicthq wants
 - (NSString *) generatCurrentDateEvents {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
@@ -274,6 +343,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return [dateFormatter stringFromDate:today];
 }
 
+//gets the date one week from now
 - (NSString *) generatEndDateEvents {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
@@ -285,31 +355,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                        toDate:today options:0];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     return [dateFormatter stringFromDate:newDate];
-}
-
-
--(void) refreshAsync {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });
-}
-
-
--(void)addActivityToTrip:(id <Activity>) activity {
-    [self.trip addUniqueObject:activity forKey:@"activities"];
-    //[self.trip saveInBackground];
-    
-}
--(void)removeActivityFromTrip:(id <Activity>) activity {
-    //NSLog(@"%@", self.trip.activities);
-    self.tempArray = self.trip[@"activities"];
-    [self.tempArray removeObject:activity];
-    self.trip[@"activities"] = self.tempArray;
-    //[self.trip saveInBackground];
-}
--(BOOL)isActivityInTrip:(id <Activity>) activity {
-    return [self.trip.activities containsObject:activity];
-    
 }
 
 @end

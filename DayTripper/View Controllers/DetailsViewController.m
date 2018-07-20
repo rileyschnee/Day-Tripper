@@ -19,15 +19,18 @@
 @property (strong, nonatomic) NSMutableArray *imageUrls;
 @property (nonatomic) int currentImageIndex;
 - (IBAction)didTapDirections:(id)sender;
+
+@property (nonatomic) int currNumEventPhotos;
+
 @end
 
 @implementation DetailsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.nameLabel.text = self.activity.name;
     self.somePlacemarks = [[NSArray<CLPlacemark *> alloc] init];
+    //init the images arrays that will be used for storing images
     self.imageUrls = [[NSMutableArray alloc] init];
     self.images = [[NSMutableArray alloc] init];
     CLLocation *location = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
@@ -39,20 +42,19 @@
         }else{
             self.somePlacemarks = [placemarks copy];
             self.somePlacemark = [placemarks firstObject];
+
             NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
             NSString *address = [partsAddr componentsJoinedByString:@", "];
             self.locationLabel.text =  address;
-            
         }
     }];
     
-    //self.locationLabel.text = self.activity.location;
     if([[self.activity activityType] isEqualToString:@"Place"]){
-        self.categoriesLabel.text = self.activity.categories[0][@"name"];
+        self.categoriesLabel.text = [[self.activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
-        self.categoriesLabel.text = self.activity.categories[0][@"title"];
+        self.categoriesLabel.text = [[self.activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
-        self.categoriesLabel.text = [NSString stringWithFormat:@"%@", self.activity.categories[0]];
+        self.categoriesLabel.text = [[self.activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     }
     //self.categoriesLabel.text = self.activity.category;
     
@@ -63,9 +65,11 @@
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
         //get yelp images
         [self fetchYelpPhotos:self.activity.apiId];
+    } else if ([[self.activity activityType] isEqualToString:@"Event"]){
+        [self getEventPhotoObjectsByLocation];
     }
-    
 }
+
 
 - (IBAction)didTapDirections:(id)sender {
     NSString *baseURL = @"https://www.google.com/maps/dir/?api=1";
@@ -176,8 +180,10 @@
 
 -(void) setImageAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIImage *image = self.images[0];
-        [self.imageView setImage:image];
+        if (self.images.count > 0) {
+            UIImage *image = self.images[0];
+            [self.imageView setImage:image];
+        }
     });
 }
 
@@ -219,7 +225,7 @@
 }
 -(void)handleSwipeLeft:(id)sender
 {
-    if(self.currentImageIndex < (self.imageUrls.count - 1))
+    if(self.currentImageIndex < (self.images.count - 1))
     {
         self.currentImageIndex = self.currentImageIndex + 1;
         [self addAnimationPresentToView:self.imageView];
@@ -237,5 +243,65 @@
     }
     
 }
+
+
+# pragma mark - Google Places Request for Event API
+//given a lat and long will search to find nearby places and their photo ids
+- (void) getEventPhotoObjectsByLocation {
+    __weak typeof(self) weakSelf = self;
+    APIManager *apiManager = [[APIManager alloc] init];
+    //make the request
+    NSString *baseURL = @"https://maps.googleapis.com/maps/api/place/nearbysearch/json";
+    //params
+    NSString* locationParam = [NSString stringWithFormat:@"%f%@%f", self.activity.latitude, @",", self.activity.longitude];
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    
+    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"] forKey:@"key"];
+    [paramsDict setObject:locationParam forKey:@"location"];
+    [paramsDict setObject:@"100" forKey:@"radius"];
+    
+    int maxNumPhotos = 3;
+    
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        NSArray *placesResults = responseDict[0][@"results"];
+        for (NSDictionary* place in placesResults) {
+            if (self.currNumEventPhotos >= maxNumPhotos) {
+                break;
+            }
+            NSArray* photoRefs = place[@"photos"];
+            if (photoRefs.count > 0) {
+                for (NSDictionary* photoRef in photoRefs) {
+                    if (self.currNumEventPhotos >= maxNumPhotos) {
+                        break;
+                    }
+                    NSString* photoRefString = photoRef[@"photo_reference"];
+                    if (photoRefString.length > 0) {
+                        if (self.currNumEventPhotos < maxNumPhotos) {
+                            [self getImageFromPhotoRef: photoRefString];
+                            self.currNumEventPhotos = self.currNumEventPhotos + 1;
+                        }
+                    }
+                }
+            }
+        }
+        [weakSelf setImageAsync];
+    }];
+}
+
+- (void) getImageFromPhotoRef:(NSString*) photoReference {
+    APIManager *apiManager = [[APIManager alloc] init];
+    
+    NSString *baseURL = @"https://maps.googleapis.com/maps/api/place/photo";
+    NSString* maxWidth = @"?maxwidth=600";
+    NSString* photoRef = [NSString stringWithFormat:@"%@%@", @"&photoreference=", photoReference];
+    NSString* key = [NSString stringWithFormat:@"%@%@", @"&key=", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"]];
+    NSString* finalURL = [NSString stringWithFormat:@"%@%@%@%@", baseURL, maxWidth, photoRef, key];
+    NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalURL]];
+    UIImage *image = [UIImage imageWithData:data];
+    [self.images addObject:image];
+    
+}
+
+
 
 @end

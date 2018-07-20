@@ -21,6 +21,7 @@
 
     // Configure the view for the selected state
 }
+
 - (IBAction)clickedCheckButton:(id)sender {
     if(!self.checkButton.selected){
         [self.delegate addActivityToTrip:self.activity];
