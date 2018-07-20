@@ -175,6 +175,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:currDate forKey:@"v"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
     [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    if(![self.catQueryPlace isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -206,7 +209,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:lon forKey:@"longitude"];
     [paramsDict setObject:@"food" forKey:@"categories"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
+    if(![self.catQueryFood isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryFood forKey:@"categories"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -246,7 +251,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:startDate forKey:@"end.gte"];
     [paramsDict setObject:endDate forKey:@"end.lte"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
+    if(![self.catQueryEvent isEqualToString:@""]){
+        [paramsDict setObject:self.catQueryEvent forKey:@"category"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
