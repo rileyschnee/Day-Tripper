@@ -10,6 +10,8 @@
 
 @implementation Constants
 
+// categories for quiz view
+
 - (void)setCategories{
     NSMutableDictionary *placeDictionary = [NSMutableDictionary dictionary];
     //PLACES
