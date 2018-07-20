@@ -81,13 +81,13 @@
     NSString *url = [array componentsJoinedByString:@""];
     NSString *URL = [baseURL stringByAppendingString:url];
     NSURL *googleURL = [NSURL URLWithString:URL];
-//    [[UIApplication sharedApplication] openURL:googleURL options:<#(nonnull NSDictionary<NSString *,id> *)#> completionHandler:^(BOOL success) {
-//        if (success){
-//            NSLog("YAY dir");
-//        }else{
-//            NSLog(" NO YAY fail");
-//        }
-//    }];
+        [[UIApplication sharedApplication] openURL:googleURL options:@{} completionHandler:^(BOOL success) {
+        if (success){
+            NSLog(@"YAY dir");
+        }else{
+            NSLog(@" NO YAY fail");
+        }
+    }];
     
 
     
