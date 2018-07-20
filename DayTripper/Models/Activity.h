@@ -18,9 +18,10 @@
 @property (nonatomic) double longitude;
 //what the id the api assigns to the Activity
 @property (strong, nonatomic) NSString *apiId;
-@property (strong, nonatomic) NSDate* startTime;
-@property (strong, nonatomic) NSDate* endTime;
+@property (strong, nonatomic) NSString* startTime;
+@property (strong, nonatomic) NSString* endTime;
 @property (nonatomic) double duration;
+@property (strong, nonatomic) NSString *website;
 - (NSString *)activityType;
 
 @end
