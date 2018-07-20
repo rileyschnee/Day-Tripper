@@ -19,9 +19,10 @@
 @property (strong, nonatomic) NSMutableArray *imageUrls;
 @property (nonatomic) int currentImageIndex;
 - (IBAction)didTapDirections:(id)sender;
-
 @property (nonatomic) int currNumEventPhotos;
-
+@property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
+@property (weak, nonatomic) IBOutlet UIButton *websiteLink;
+@property (strong, nonatomic) NSString* websiteToGoTo;
 @end
 
 @implementation DetailsViewController
@@ -60,13 +61,22 @@
     
     //get the images related to location
     if([[self.activity activityType] isEqualToString:@"Place"]){
+        [self.hoursLabel setHidden:YES];
         //get foursquare images
         [self fetch4SQPhotos:self.activity.apiId];
+        //hide website button
+        [self.websiteLink setHidden:YES];
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
         //get yelp images
         [self fetchYelpPhotos:self.activity.apiId];
+        //get the hours
+        [self fetchYelpHours:self.activity.apiId];
+        //set website url
+        self.websiteToGoTo = self.activity.website;
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
+        [self.hoursLabel setHidden:YES];
         [self getEventPhotoObjectsByLocation];
+        [self.websiteLink setHidden:YES];
     }
 }
 
@@ -81,13 +91,13 @@
     NSString *url = [array componentsJoinedByString:@""];
     NSString *URL = [baseURL stringByAppendingString:url];
     NSURL *googleURL = [NSURL URLWithString:URL];
-//    [[UIApplication sharedApplication] openURL:googleURL options:<#(nonnull NSDictionary<NSString *,id> *)#> completionHandler:^(BOOL success) {
-//        if (success){
-//            NSLog("YAY dir");
-//        }else{
-//            NSLog(" NO YAY fail");
-//        }
-//    }];
+        [[UIApplication sharedApplication] openURL:googleURL options:@{} completionHandler:^(BOOL success) {
+        if (success){
+            NSLog(@"YAY dir");
+        }else{
+            NSLog(@" NO YAY fail");
+        }
+    }];
     
 
     
@@ -155,7 +165,6 @@
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
     NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
-    
 
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
         NSArray *photos = responseDict[0][@"photos"];
@@ -166,6 +175,77 @@
 
     }];
 }
+
+//gets hours of operation
+- (void) fetchYelpHours: (NSString*) tripId {
+    //get index of current day of the week
+    NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+    NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
+    int oldweekdayIndex = (int) [comps weekday];
+    //now map such that monday represents 0 and sunday is 6
+    int weekdayIndex = [self mapToNewIndex:oldweekdayIndex];
+    
+    APIManager *apiManager = [[APIManager alloc] init];
+    //make the request
+    NSString *baseURL =  [NSString stringWithFormat:@"%@%@", @"https://api.yelp.com/v3/businesses/", tripId];
+    //params
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
+    [paramsDict setObject:apiToken forKey:@"Authorization"];
+    
+    __weak typeof(self) weakSelf = self;
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        NSArray *days = responseDict[0][@"hours"][0][@"open"];
+        NSDictionary* currDayObject = days[weekdayIndex];
+        NSString* startTimeString = [self militaryTimeToAMPM: currDayObject[@"start"]];
+        NSString* endTimeString = [self militaryTimeToAMPM: currDayObject[@"end"]];
+        [weakSelf setHoursAsync:startTimeString endTimeString:endTimeString];
+    }];
+}
+
+//this function converts the Yelp Military time to normal AM/PM time
+- (NSString*) militaryTimeToAMPM: (NSString *) milTime {
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    dateFormatter.dateFormat = @"HHmm";
+    NSDate *date = [dateFormatter dateFromString:milTime];
+    
+    dateFormatter.dateFormat = @"hh:mm a";
+    NSString *pmamDateString = [dateFormatter stringFromDate:date];
+    return pmamDateString;
+}
+
+//converts week index starting at sunday to week index number starting at monday
+- (int) mapToNewIndex:(int) oldIndex {
+    switch (oldIndex)
+    {
+        case 0:
+            return 6;
+            break;
+        case 1:
+            return 0;
+            break;
+        case 2:
+            return 1;
+            break;
+        case 3:
+            return 2;
+            break;
+        case 4:
+            return 3;
+            break;
+        case 5:
+            return 4;
+            break;
+        case 6:
+            return 5;
+            break;
+        default:
+            return 0;
+            break;
+    }
+}
+
+
 
 - (void) populateImageArray {
     __weak typeof(self) weakSelf = self;
@@ -186,6 +266,22 @@
         }
     });
 }
+
+-(void) setHoursAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString {
+    dispatch_async(dispatch_get_main_queue(), ^{
+         self.hoursLabel.text = [NSString stringWithFormat:@"%@%@%@", startTimeString, @" - ", endTimeString];
+    });
+   
+}
+
+
+- (IBAction)tapWebsiteLink:(id)sender {
+    if (![self.websiteLink isHidden]) {
+        //go to url if not hidden
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString: self.websiteToGoTo]];
+    }
+}
+
 
 
 

@@ -240,7 +240,7 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-YA-jiw">
-                                <rect key="frame" x="16" y="228" width="46" height="21"/>
+                                <rect key="frame" x="16" y="228" width="166" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -250,6 +250,9 @@
                                 <rect key="frame" x="16" y="257" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Website Link "/>
+                                <connections>
+                                    <action selector="tapWebsiteLink:" destination="6N9-Ay-TK4" eventType="touchUpInside" id="mE9-wV-ucc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzX-XG-6uq">
                                 <rect key="frame" x="223" y="161" width="87" height="30"/>
@@ -262,9 +265,11 @@
                     </view>
                     <connections>
                         <outlet property="categoriesLabel" destination="1pk-xJ-TTB" id="8lv-qh-X1R"/>
+                        <outlet property="hoursLabel" destination="bjg-YA-jiw" id="iMW-df-1Kg"/>
                         <outlet property="imageView" destination="rlh-3u-Ftz" id="zPG-RY-mGX"/>
                         <outlet property="locationLabel" destination="I1e-Lc-xk8" id="U7O-Gv-WaP"/>
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
+                        <outlet property="websiteLink" destination="7bN-wR-qUV" id="4Vv-aM-c95"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzs-HC-Zqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
