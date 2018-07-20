@@ -40,8 +40,6 @@
     self.allCategories = [self.cats.placeCategories allKeys];
     self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
     self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
-
-    NSLog(@"%@", self.allCategories);
 }
 
 

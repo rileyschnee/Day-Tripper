@@ -30,6 +30,8 @@
     }];
  
  */
+
+//see above
 - (void) getRequest:(NSString *)url params:(NSDictionary*)params completion:(void (^)(NSArray *))completion;
 
 @end
