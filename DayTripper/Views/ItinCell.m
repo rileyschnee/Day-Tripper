@@ -24,6 +24,7 @@
 -(void)setActivity:(id<Activity>)activity{
     _activity = activity;
     self.placeNameLabel.text = activity.name;
+    self.placeCategoryLabel.text = [Functions primaryActivityCategory:activity];
 }
 
 @end

@@ -24,6 +24,7 @@
 - (void)setTrip:(Trip *)trip{
     _trip = trip;
     self.tripNameLabel.text = trip.name;
+    self.tripCityLabel.text = trip.city;
 }
 
 @end

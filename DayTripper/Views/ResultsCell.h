@@ -10,6 +10,7 @@
 #import "Place.h"
 #import "Food.h"
 #import "Activity.h"
+#import "Functions.h"
 
 @protocol ResultsCellDelegate
 -(void)addActivityToTrip:(id <Activity>) activity;
@@ -20,6 +21,7 @@
 @interface ResultsCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIButton *checkButton;
 @property (weak, nonatomic) IBOutlet UILabel *placeNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *placeCategoryLabel;
 @property (strong, nonatomic) id <Activity> activity;
 @property (weak, nonatomic) id<ResultsCellDelegate> delegate;
 @end

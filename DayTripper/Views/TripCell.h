@@ -12,4 +12,5 @@
 @interface TripCell : UITableViewCell
 @property (strong, nonatomic) Trip *trip;
 @property (weak, nonatomic) IBOutlet UILabel *tripNameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *tripCityLabel;
 @end
