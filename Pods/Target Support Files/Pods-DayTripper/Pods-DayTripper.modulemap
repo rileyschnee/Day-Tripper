@@ -1,4 +1,4 @@
-framework module Pods_DayTripper {
+module Pods_DayTripper {
   umbrella header "Pods-DayTripper-umbrella.h"
 
   export *

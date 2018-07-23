@@ -289,11 +289,10 @@
                                     <action selector="tapWebsiteLink:" destination="6N9-Ay-TK4" eventType="touchUpInside" id="mE9-wV-ucc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LzX-XG-6uq">
-                                <rect key="frame" x="223" y="161" width="87" height="30"/>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-0q-IAK">
+                                <rect key="frame" x="123" y="191" width="240" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Uber button "/>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="v7w-M7-ML2"/>
@@ -304,6 +303,7 @@
                         <outlet property="imageView" destination="rlh-3u-Ftz" id="zPG-RY-mGX"/>
                         <outlet property="locationLabel" destination="I1e-Lc-xk8" id="U7O-Gv-WaP"/>
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
+                        <outlet property="uberView" destination="fBV-0q-IAK" id="Lvc-VZ-VFX"/>
                         <outlet property="websiteLink" destination="7bN-wR-qUV" id="4Vv-aM-c95"/>
                     </connections>
                 </viewController>
