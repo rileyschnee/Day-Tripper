@@ -13,6 +13,7 @@
 		0EAE0C6420FFF71D00D798A9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6320FFF71D00D798A9 /* MapViewController.m */; };
 		2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */; };
 		537A4B8121065AA000E64CBD /* random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8021065AA000E64CBD /* random.swift */; };
+		537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537A4B8221066FFC00E64CBD /* MessageUI.framework */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -54,6 +55,7 @@
 		0EAE0C6320FFF71D00D798A9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DayTripper-Bridging-Header.h"; sourceTree = "<group>"; };
 		537A4B8021065AA000E64CBD /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
+		537A4B8221066FFC00E64CBD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */,
 				53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */,
 				2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */,
 			);
@@ -150,6 +153,7 @@
 		731F9CD8286E73966710B098 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				537A4B8221066FFC00E64CBD /* MessageUI.framework */,
 				53E8420A20FE445A003FE31A /* MapKit.framework */,
 				9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */,
 			);
