@@ -43,6 +43,10 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
     cell.user = self.trip.attendees[indexPath.item];
+    NSLog(@"%i", self.trip.attendees.count);
+    cell.profilePicView.file = cell.user[@"picture"];
+    [cell.profilePicView loadInBackground];
+
     return cell;
 }
 

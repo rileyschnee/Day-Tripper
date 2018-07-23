@@ -58,7 +58,6 @@
     // Do something with the images (based on your use case)
     //editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
     [self.profilePicView setImage:editedImage];
-    
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
