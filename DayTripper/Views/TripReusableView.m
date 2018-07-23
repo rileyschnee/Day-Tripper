@@ -68,16 +68,18 @@
         if (trips != nil) {
             Trip* trip = trips[0];
             NSMutableArray* currAttendees = [trip.attendees mutableCopy];
-            [currAttendees addObject:user];
-            self.trip.attendees = [currAttendees copy];
-            //save trip
-            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    [self clearUsernameLabelAsync];
-                    //send email to other user
-                    [self sendAdditionEmail:user];
-                }
-            }];
+            if ([currAttendees containsObject:user]) {
+                [currAttendees addObject:user];
+                self.trip.attendees = [currAttendees copy];
+                //save trip
+                [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [self clearUsernameLabelAsync];
+                        //send email to other user
+                        [self sendAdditionEmail:user];
+                    }
+                }];
+            }
         } else {
             NSLog(@"%@", error.localizedDescription);
         }

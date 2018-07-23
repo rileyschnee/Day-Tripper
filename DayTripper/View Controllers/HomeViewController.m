@@ -51,7 +51,7 @@
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
     [query includeKey:@"activities"];
-    [query whereKey:@"planner" equalTo:[PFUser currentUser]];
+    [query whereKey:@"attendees" equalTo:[PFUser currentUser]];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
