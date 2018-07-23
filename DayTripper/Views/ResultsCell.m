@@ -37,6 +37,8 @@
     self.placeNameLabel.text = activity.name;
     // Make the button checked if the place is found in the places added to the chosen places array
     self.checkButton.selected = [self.delegate isActivityInTrip:activity];
+    self.placeCategoryLabel.text = [Functions primaryActivityCategory:activity];
+
 }
 
 

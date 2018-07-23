@@ -19,6 +19,7 @@
 @property (strong, nonatomic) NSMutableArray *chosenFoodCategories;
 @property (strong, nonatomic) NSMutableArray *chosenEventCategories;
 @property (strong, nonatomic) NSMutableArray *chosenCategories;
+@property (strong, nonatomic) UICollectionViewFlowLayout *layout;
 @end
 
 @implementation QuizViewController
@@ -27,6 +28,7 @@
     [super viewDidLoad];
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     
     self.latitude = 0;
     self.longitude = 0;
@@ -62,22 +64,27 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCell" forIndexPath:indexPath];
     cell.categoryLabel.text = self.allCategories[indexPath.item];
-    // make label width depend on text width
-    CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]}];
-    [cell.categoryLabel sizeThatFits:textSize];
-    //get the width and height of the label (CGSize contains two parameters: width and height)
-    CGSize labelSize = cell.categoryLabel.frame.size;
-    //cell.frame.size = labelSize;
-    NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
+    //NSLog(@"%@", cell.categoryLabel.text);
     
+    CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+    [cell.categoryLabel sizeThatFits:textSize];
+        //get the width and height of the label (CGSize contains two parameters: width and height)
+    CGSize labelSize = cell.categoryLabel.frame.size;
+    //self.layout.itemSize = labelSize;
+    //cell.frame.size = labelSize;
+    //NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
+     
+    
+    CGRect temp = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, labelSize.width, 100);
+    cell.frame = temp;
     cell.delegate = self;
-    cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
+    //cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
     cell.selected = [self isCategoryInArray:cell.categoryLabel.text];
-    if(cell.selected){
-        cell.backgroundColor = [UIColor yellowColor];
-    } else {
-        cell.backgroundColor = [UIColor whiteColor];
-    }
+//    if(cell.selected){
+//        cell.backgroundColor = [UIColor yellowColor];
+//    } else {
+//        cell.backgroundColor = [UIColor whiteColor];
+//    }
     if([self.cats.placeCategories objectForKey:cell.categoryLabel.text] != nil){
         cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
     } else if([self.cats.foodCategories objectForKey:cell.categoryLabel.text] != nil){
@@ -120,10 +127,10 @@
 }
 
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-    
-    return [(NSString*)[self.allCategories objectAtIndex:indexPath.item] sizeWithAttributes:NULL];
-}
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+//
+//    return [(NSString*)[self.allCategories objectAtIndex:indexPath.item] sizeWithAttributes:NULL];
+//}
 
 - (void)addCategoryToArray:(NSString *)cat {
     NSLog(@"Added %@ to chosenCategories", cat);

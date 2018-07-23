@@ -29,6 +29,7 @@
     [self.usernameToAdd resignFirstResponder];
 }
 
+//gets the user by the given username
 - (void) getUserByUsername:(NSString*) username {
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:username];
@@ -55,7 +56,7 @@
     });
 }
 
-
+//takes the user object and adds the object to the attendees for the trip
 - (void) addUserToAttendee:(PFUser*) user {
     //get the current trip
     PFQuery *query = [PFQuery queryWithClassName:@"Trip"];
@@ -67,18 +68,41 @@
         if (trips != nil) {
             Trip* trip = trips[0];
             NSMutableArray* currAttendees = [trip.attendees mutableCopy];
-            [currAttendees addObject:user];
-            self.trip.attendees = [currAttendees copy];
-            //save trip
-            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    [self clearUsernameLabelAsync];
-                }
-            }];
+            if ([currAttendees containsObject:user]) {
+                [currAttendees addObject:user];
+                self.trip.attendees = [currAttendees copy];
+                //save trip
+                [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (succeeded) {
+                        [self clearUsernameLabelAsync];
+                        //send email to other user
+                        [self sendAdditionEmail:user];
+                    }
+                }];
+            }
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
     }];
 }
+
+//sends an email to added user saying they were added
+- (void) sendAdditionEmail:(PFUser*) user {
+    if([MFMailComposeViewController canSendMail]) {
+        MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
+        UINavigationController* navController = [UIApplication sharedApplication].keyWindow.rootViewController;
+        UITabBarController* tabBarController = navController.topViewController;
+        UIViewController* activeVC = tabBarController.selectedViewController;
+        mailCont.mailComposeDelegate = activeVC;
+        
+        [mailCont setSubject:@"You were invited to a trip!"];
+        [mailCont setToRecipients:[NSArray arrayWithObject:user.email]];
+        [mailCont setMessageBody:@"Message body" isHTML:NO];
+        
+        [activeVC presentViewController:mailCont animated:YES completion:nil];
+    }
+}
+
+
 
 @end

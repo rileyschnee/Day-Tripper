@@ -16,5 +16,6 @@
 @interface Functions : NSObject
 
 - (NSArray*) getCellsFromTable:(UITableView*)tableView;
++ (NSString *)primaryActivityCategory:(id<Activity>)activity;
 
 @end

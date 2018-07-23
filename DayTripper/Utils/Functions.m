@@ -7,6 +7,7 @@
 //
 
 #import "Functions.h"
+#import "Activity.h"
 
 @implementation Functions
 
@@ -29,6 +30,21 @@
     CLLocation *startLocation = [[CLLocation alloc] initWithLatitude:place1.latitude longitude:place1.longitude];
     CLLocation *endLocation = [[CLLocation alloc] initWithLatitude:place2.latitude longitude:place2.longitude];
     return [startLocation distanceFromLocation:endLocation];
+}
+
++ (NSString *)primaryActivityCategory:(id<Activity>)activity{
+    if(activity.categories.count == 0){
+        return @"";
+    } else if([[activity activityType] isEqualToString:@"Place"]){\
+        NSLog(@"%@", activity.categories);
+        return [[activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
+    } else if([[activity activityType] isEqualToString:@"Food"]){
+        return [[activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
+    } else if ([[activity activityType] isEqualToString:@"Event"]){
+        return [[activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
+    } else {
+        return @"NO CATEGORY";
+    }
 }
 
 @end

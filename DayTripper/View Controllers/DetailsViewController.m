@@ -10,6 +10,8 @@
 #import <Corelocation/Corelocation.h>
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "Functions.h"
+
 @import UberRides;
 
 @interface DetailsViewController () <CLLocationManagerDelegate>
@@ -51,6 +53,7 @@
     
     
 
+
     
     //CATEGORIES
     if([[self.activity activityType] isEqualToString:@"Place"]){
@@ -66,6 +69,9 @@
     self.imageUrls = [[NSMutableArray alloc] init];
     self.images = [[NSMutableArray alloc] init];
     self.currentImageIndex = 0;
+
+    self.categoriesLabel.text = [Functions primaryActivityCategory:self.activity];
+        
     //get the images related to location
     if([[self.activity activityType] isEqualToString:@"Place"]){
         [self.hoursLabel setHidden:YES];

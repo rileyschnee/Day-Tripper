@@ -10,6 +10,7 @@
 #import "ItinCell.h"
 #import "MapViewController.h"
 #import "ResourcesViewController.h"
+#import "DetailsViewController.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -59,5 +60,16 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.trip.activities.count;
 }
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([sender isKindOfClass:[ItinCell class]]){
+        ItinCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        DetailsViewController * detailPage = [segue destinationViewController];
+        detailPage.activity = self.trip.activities[indexPath.row];
+        
+    }
+}
+
 
 @end
