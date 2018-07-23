@@ -187,13 +187,30 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ofz-cf-ve3">
+                                            <rect key="frame" x="8" y="303" width="297" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <nil key="textColor"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <textInputTraits key="textInputTraits"/>
+                                        </textField>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSt-OL-Cfq">
+                                            <rect key="frame" x="319" y="303" width="30" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Add"/>
+                                            <connections>
+                                                <action selector="addUserToTrip:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="LeD-rb-4GD"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
+                                    <gestureRecognizers/>
                                     <connections>
                                         <outlet property="highLabel" destination="bXa-i0-Nfl" id="k4K-mn-kmh"/>
                                         <outlet property="lowLabel" destination="TF0-eY-URR" id="Che-QY-Usz"/>
                                         <outlet property="tripCityLabel" destination="93o-qz-ag8" id="SHI-3r-Z4V"/>
                                         <outlet property="tripDateLabel" destination="Lcr-96-5LE" id="poT-Kd-cu2"/>
                                         <outlet property="tripNameLabel" destination="l0K-YT-6c5" id="H3K-47-aNc"/>
+                                        <outlet property="usernameToAdd" destination="Ofz-cf-ve3" id="uvE-8b-6Rs"/>
                                         <outlet property="weatherView" destination="eMY-WN-H0a" id="ScS-T3-dwF"/>
                                     </connections>
                                 </collectionReusableView>

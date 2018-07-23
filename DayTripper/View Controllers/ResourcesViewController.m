@@ -112,8 +112,8 @@
 
 - (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString* highString = [NSString stringWithFormat:@"%f", [self kelvinToFahrenheit:high]];
-        NSString* lowString = [NSString stringWithFormat:@"%f", [self kelvinToFahrenheit:low]];
+        NSString* highString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:high], @" F"];
+        NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
         header.highLabel.text = highString;
         header.lowLabel.text = lowString;
     });

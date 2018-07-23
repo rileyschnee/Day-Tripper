@@ -16,6 +16,69 @@
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy"];
     self.tripDateLabel.text = [dateFormatter stringFromDate:self.trip.tripDate];
-    NSLog(@"SETTING TRIP IN REUSABLE VIEW");
+    [self addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapGestureTap:)]];
 }
+
+//when clicked, this button will add the given username to the attendees trip array
+- (IBAction)addUserToTrip:(id)sender {    
+    NSString* usernameToAdd = self.usernameToAdd.text;
+    [self getUserByUsername:usernameToAdd];
+}
+
+- (IBAction)tapGestureTap:(id)sender {
+    [self.usernameToAdd resignFirstResponder];
+}
+
+- (void) getUserByUsername:(NSString*) username {
+    PFQuery *query = [PFUser query];
+    [query whereKey:@"username" equalTo:username];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        if (users != nil) {
+            if (users.count > 0) {
+                PFUser* user = users[0];
+                [self addUserToAttendee:user];
+            }
+            else {
+                // TODO handle user not existing
+            }
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
+//reloads the tableview asynchronously
+-(void) clearUsernameLabelAsync {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        self.usernameToAdd.text = @"";
+    });
+}
+
+
+- (void) addUserToAttendee:(PFUser*) user {
+    //get the current trip
+    PFQuery *query = [PFQuery queryWithClassName:@"Trip"];
+    [query whereKey:@"name" equalTo:self.trip.name];
+    [query includeKey:@"attendees"];
+    query.limit = 1;
+    // fetch data asynchronously
+    [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
+        if (trips != nil) {
+            Trip* trip = trips[0];
+            NSMutableArray* currAttendees = [trip.attendees mutableCopy];
+            [currAttendees addObject:user];
+            self.trip.attendees = [currAttendees copy];
+            //save trip
+            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                if (succeeded) {
+                    [self clearUsernameLabelAsync];
+                }
+            }];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+        }
+    }];
+}
+
 @end
