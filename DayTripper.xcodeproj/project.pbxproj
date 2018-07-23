@@ -32,10 +32,10 @@
 		BEA5FD5720F92A01005B79F5 /* ItinViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD5620F92A01005B79F5 /* ItinViewController.m */; };
 		BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */; };
 		BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA3210262E300933DB7 /* TripReusableView.m */; };
+		BEB308F6210678DA00336EA4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308F5210678DA00336EA4 /* SettingsViewController.m */; };
 		BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */; };
 		BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8D20FD016E0048C0DB /* Place.m */; };
 		BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9320FD03BC0048C0DB /* ItinCell.m */; };
-		BEEA9D9820FD12140048C0DB /* ProfileCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9720FD12140048C0DB /* ProfileCell.m */; };
 		BEEA9D9B20FD12220048C0DB /* TripCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9A20FD12220048C0DB /* TripCell.m */; };
 		BEEA9D9E20FD12310048C0DB /* Trip.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9D20FD12310048C0DB /* Trip.m */; };
 		BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9DA020FD12970048C0DB /* HomeViewController.m */; };
@@ -91,14 +91,14 @@
 		BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCollectionCell.m; sourceTree = "<group>"; };
 		BEA6BFA2210262E300933DB7 /* TripReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripReusableView.h; sourceTree = "<group>"; };
 		BEA6BFA3210262E300933DB7 /* TripReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripReusableView.m; sourceTree = "<group>"; };
+		BEB308F4210678DA00336EA4 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		BEB308F5210678DA00336EA4 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		BEEA9D8C20FD016E0048C0DB /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
 		BEEA9D8D20FD016E0048C0DB /* Place.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Place.m; sourceTree = "<group>"; };
 		BEEA9D9220FD03BC0048C0DB /* ItinCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ItinCell.h; sourceTree = "<group>"; };
 		BEEA9D9320FD03BC0048C0DB /* ItinCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ItinCell.m; sourceTree = "<group>"; };
-		BEEA9D9620FD12140048C0DB /* ProfileCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileCell.h; sourceTree = "<group>"; };
-		BEEA9D9720FD12140048C0DB /* ProfileCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCell.m; sourceTree = "<group>"; };
 		BEEA9D9920FD12220048C0DB /* TripCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TripCell.h; sourceTree = "<group>"; };
 		BEEA9D9A20FD12220048C0DB /* TripCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripCell.m; sourceTree = "<group>"; };
 		BEEA9D9C20FD12310048C0DB /* Trip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Trip.h; sourceTree = "<group>"; };
@@ -214,6 +214,8 @@
 				0EAE0C6220FFF71D00D798A9 /* MapViewController.h */,
 				0EAE0C6320FFF71D00D798A9 /* MapViewController.m */,
 				BE45191021012B5E00CFA8AC /* QuizViewControllerDelegate.h */,
+				BEB308F4210678DA00336EA4 /* SettingsViewController.h */,
+				BEB308F5210678DA00336EA4 /* SettingsViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -225,8 +227,6 @@
 				BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */,
 				BEEA9D9220FD03BC0048C0DB /* ItinCell.h */,
 				BEEA9D9320FD03BC0048C0DB /* ItinCell.m */,
-				BEEA9D9620FD12140048C0DB /* ProfileCell.h */,
-				BEEA9D9720FD12140048C0DB /* ProfileCell.m */,
 				BEEA9D9920FD12220048C0DB /* TripCell.h */,
 				BEEA9D9A20FD12220048C0DB /* TripCell.m */,
 				BE451909210104AB00CFA8AC /* CategoryCollectionCell.h */,
@@ -400,9 +400,9 @@
 				BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */,
 				BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */,
 				537A4B8121065AA000E64CBD /* random.swift in Sources */,
+				BEB308F6210678DA00336EA4 /* SettingsViewController.m in Sources */,
 				0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */,
 				BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */,
-				BEEA9D9820FD12140048C0DB /* ProfileCell.m in Sources */,
 				BEEA9D9E20FD12310048C0DB /* Trip.m in Sources */,
 				BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */,
 				BEA5FD4620F92990005B79F5 /* main.m in Sources */,

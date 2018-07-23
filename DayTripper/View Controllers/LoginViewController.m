@@ -51,7 +51,8 @@
     // set user properties
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    
+    UIImage *image = [UIImage imageNamed:@"profile-pic-placeholder"];
+    newUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(image)];
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {

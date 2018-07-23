@@ -10,10 +10,13 @@
 #import "Trip.h"
 #import "TripCell.h"
 #import "ItinViewController.h"
-#import "ProfileCell.h"
+#import <Parse/Parse.h>
+#import <ParseUI/ParseUI.h>
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -29,8 +32,10 @@
     self.tableView.dataSource = self;
     [self.navigationItem setHidesBackButton:YES];
     // Do any additional setup after loading the view.
-    ProfileCell *profCell = [ProfileCell new];
-    [self.tableView addSubview:profCell];
+
+    self.profileImageView.file = PFUser.currentUser[@"picture"];
+    self.usernameLabel.text = PFUser.currentUser.username;
+    
     [self fetchTrips];
     [self.tableView reloadData];
 }
