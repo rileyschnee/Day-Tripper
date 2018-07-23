@@ -10,8 +10,10 @@
 #import <Corelocation/Corelocation.h>
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+@import UberRides;
 
 @interface DetailsViewController ()
+
 @property (strong, nonatomic) NSArray<CLPlacemark *> *somePlacemarks;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
 @property (strong, nonatomic) CLPlacemark *somePlacemark;
@@ -23,6 +25,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
 @property (weak, nonatomic) IBOutlet UIButton *websiteLink;
 @property (strong, nonatomic) NSString* websiteToGoTo;
+@property (weak, nonatomic) IBOutlet UIView *uberView;
+
 @end
 
 @implementation DetailsViewController
@@ -37,6 +41,19 @@
     CLLocation *location = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
     self.currentImageIndex = 0;
     CLGeocoder *geocoder = [[CLGeocoder alloc] init];
+    
+    //add the uber button
+    UBSDKRideParametersBuilder *builder = [[UBSDKRideParametersBuilder alloc] init];
+    CLLocation *pickupLocation = [[CLLocation alloc] initWithLatitude:37.787654 longitude:-122.402760];
+    CLLocation *dropoffLocation = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
+    [builder setPickupLocation:pickupLocation];
+    [builder setDropoffLocation:dropoffLocation];
+    UBSDKRideParameters *rideParameters = [builder build];
+    
+    UBSDKRideRequestButton *button = [[UBSDKRideRequestButton alloc] initWithRideParameters:rideParameters];
+    [self.uberView addSubview:button];
+    
+    
     [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
         if (error){
             NSLog (@"%@", error.localizedDescription);

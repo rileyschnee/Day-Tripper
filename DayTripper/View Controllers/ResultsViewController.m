@@ -115,6 +115,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             self.trip.latitude = self.latitude;
             self.trip.longitude = self.longitude;
             self.trip.tripDate = self.tripDate;
+            //create array with planner
+            NSMutableArray* attendees = [[NSMutableArray alloc] init];
+            [attendees addObject:[PFUser currentUser]];
+            self.trip.attendees = [attendees copy];
 
             //actually save the trip
             [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

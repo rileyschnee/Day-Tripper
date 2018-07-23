@@ -9,4 +9,5 @@ target 'DayTripper' do
   pod 'AFNetworking'
   pod 'Parse'
   pod 'ParseUI'
+  pod 'UberRides', '~> 0.9'
 end

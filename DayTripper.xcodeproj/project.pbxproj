@@ -11,11 +11,12 @@
 		0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C5D20FFA9A900D798A9 /* DetailsViewController.m */; };
 		0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6020FFF6F000D798A9 /* ResourcesViewController.m */; };
 		0EAE0C6420FFF71D00D798A9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6320FFF71D00D798A9 /* MapViewController.m */; };
+		2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */; };
+		537A4B8121065AA000E64CBD /* random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8021065AA000E64CBD /* random.swift */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
 		53E8421120FFA920003FE31A /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8421020FFA920003FE31A /* Event.m */; };
-		5C6057ECF2ED632B7FD53472 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 629547CFF9336AD176C733AB /* libPods-DayTripper.a */; };
 		BE45190B210104AB00CFA8AC /* CategoryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */; };
 		BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190D210104E600CFA8AC /* QuizReusableView.m */; };
 		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
@@ -51,6 +52,8 @@
 		0EAE0C6020FFF6F000D798A9 /* ResourcesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourcesViewController.m; sourceTree = "<group>"; };
 		0EAE0C6220FFF71D00D798A9 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0EAE0C6320FFF71D00D798A9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DayTripper-Bridging-Header.h"; sourceTree = "<group>"; };
+		537A4B8021065AA000E64CBD /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -58,9 +61,8 @@
 		53E8420A20FE445A003FE31A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		53E8420F20FFA920003FE31A /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		53E8421020FFA920003FE31A /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		5606AA381453D105832A639F /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
-		629547CFF9336AD176C733AB /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.release.xcconfig"; sourceTree = "<group>"; };
+		9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A59493FA9C312E5904AB92 /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
 		BE451909210104AB00CFA8AC /* CategoryCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionCell.h; sourceTree = "<group>"; };
 		BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionCell.m; sourceTree = "<group>"; };
 		BE45190C210104E600CFA8AC /* QuizReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizReusableView.h; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 		BEEA9DA020FD12970048C0DB /* HomeViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		BEEA9DA220FD322B0048C0DB /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		BEEA9DA320FD322B0048C0DB /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		C29CB80C4D0D3DAC530D7868 /* Pods-DayTripper.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.release.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,13 +116,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */,
-				5C6057ECF2ED632B7FD53472 /* libPods-DayTripper.a in Frameworks */,
+				2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A266B1C4DC868D75BDAAC72 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B7A59493FA9C312E5904AB92 /* Pods-DayTripper.debug.xcconfig */,
+				C29CB80C4D0D3DAC530D7868 /* Pods-DayTripper.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		53E8420320F9A03F003FE31A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,7 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				53E8420A20FE445A003FE31A /* MapKit.framework */,
-				629547CFF9336AD176C733AB /* libPods-DayTripper.a */,
+				9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -149,8 +161,8 @@
 			children = (
 				BEA5FD3520F9298F005B79F5 /* DayTripper */,
 				BEA5FD3420F9298F005B79F5 /* Products */,
-				E0C7B2DDC051DAB7727C817F /* Pods */,
 				731F9CD8286E73966710B098 /* Frameworks */,
+				0A266B1C4DC868D75BDAAC72 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -176,6 +188,8 @@
 				BEA5FD4120F92990005B79F5 /* LaunchScreen.storyboard */,
 				BEA5FD4420F92990005B79F5 /* Info.plist */,
 				BEA5FD4520F92990005B79F5 /* main.m */,
+				537A4B8021065AA000E64CBD /* random.swift */,
+				537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */,
 			);
 			path = DayTripper;
 			sourceTree = "<group>";
@@ -244,15 +258,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		E0C7B2DDC051DAB7727C817F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				5606AA381453D105832A639F /* Pods-DayTripper.debug.xcconfig */,
-				A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -260,11 +265,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = BEA5FD4920F92990005B79F5 /* Build configuration list for PBXNativeTarget "DayTripper" */;
 			buildPhases = (
-				0E5DAC1DA9E13C063FDA0A6D /* [CP] Check Pods Manifest.lock */,
+				805083646746A198C68439AC /* [CP] Check Pods Manifest.lock */,
 				BEA5FD2F20F9298F005B79F5 /* Sources */,
 				BEA5FD3020F9298F005B79F5 /* Frameworks */,
 				BEA5FD3120F9298F005B79F5 /* Resources */,
-				BD9E2FD4B81C0DC1C23A5C84 /* [CP] Copy Pods Resources */,
+				D25AF3BFBF7B863D2F3B85D5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -286,6 +291,12 @@
 				TargetAttributes = {
 					BEA5FD3220F9298F005B79F5 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -323,7 +334,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0E5DAC1DA9E13C063FDA0A6D /* [CP] Check Pods Manifest.lock */ = {
+		805083646746A198C68439AC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -341,7 +352,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		BD9E2FD4B81C0DC1C23A5C84 /* [CP] Copy Pods Resources */ = {
+		D25AF3BFBF7B863D2F3B85D5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -352,6 +363,16 @@
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/pt-BR.lproj",
+				"${PODS_ROOT}/UberCore/source/UberCore/Resources/en.lproj",
+				"${PODS_ROOT}/UberCore/source/UberCore/Resources/hi-In.lproj",
+				"${PODS_ROOT}/UberCore/source/UberCore/Resources/Media.xcassets",
+				"${PODS_ROOT}/UberCore/source/UberCore/Resources/pt-br.lproj",
+				"${PODS_ROOT}/UberCore/source/UberCore/Resources/ru.lproj",
+				"${PODS_ROOT}/UberRides/source/UberRides/Resources/en.lproj",
+				"${PODS_ROOT}/UberRides/source/UberRides/Resources/hi-In.lproj",
+				"${PODS_ROOT}/UberRides/source/UberRides/Resources/Media.xcassets",
+				"${PODS_ROOT}/UberRides/source/UberRides/Resources/pt-br.lproj",
+				"${PODS_ROOT}/UberRides/source/UberRides/Resources/ru.lproj",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -359,6 +380,10 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/hi-In.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-br.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -374,6 +399,7 @@
 			files = (
 				BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */,
 				BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */,
+				537A4B8121065AA000E64CBD /* random.swift in Sources */,
 				0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */,
 				BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */,
 				BEEA9D9820FD12140048C0DB /* ProfileCell.m in Sources */,
@@ -534,36 +560,45 @@
 		};
 		BEA5FD4A20F92990005B79F5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5606AA381453D105832A639F /* Pods-DayTripper.debug.xcconfig */;
+			baseConfigurationReference = B7A59493FA9C312E5904AB92 /* Pods-DayTripper.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J73QEJBHCK;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmikeDayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		BEA5FD4B20F92990005B79F5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A82AC31EF85963AC90CE849A /* Pods-DayTripper.release.xcconfig */;
+			baseConfigurationReference = C29CB80C4D0D3DAC530D7868 /* Pods-DayTripper.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = J73QEJBHCK;
+				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmikeDayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

@@ -19,5 +19,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *tripCityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tripDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highLabel;
+@property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
 @end
