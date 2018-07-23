@@ -10,6 +10,8 @@
 #import <Corelocation/Corelocation.h>
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
+#import "Functions.h"
+
 @import UberRides;
 
 @interface DetailsViewController ()
@@ -66,16 +68,8 @@
             self.locationLabel.text =  address;
         }
     }];
-    
-    if([[self.activity activityType] isEqualToString:@"Place"]){
-        self.categoriesLabel.text = [[self.activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    } else if([[self.activity activityType] isEqualToString:@"Food"]){
-        self.categoriesLabel.text = [[self.activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    } else if ([[self.activity activityType] isEqualToString:@"Event"]){
-        self.categoriesLabel.text = [[self.activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    }
-    //self.categoriesLabel.text = self.activity.category;
-    
+    self.categoriesLabel.text = [Functions primaryActivityCategory:self.activity];
+        
     //get the images related to location
     if([[self.activity activityType] isEqualToString:@"Place"]){
         [self.hoursLabel setHidden:YES];
