@@ -62,6 +62,14 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCell" forIndexPath:indexPath];
     cell.categoryLabel.text = self.allCategories[indexPath.item];
+    // make label width depend on text width
+    CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:12.0f]}];
+    [cell.categoryLabel sizeThatFits:textSize];
+    //get the width and height of the label (CGSize contains two parameters: width and height)
+    CGSize labelSize = cell.categoryLabel.frame.size;
+    //cell.frame.size = labelSize;
+    NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
+    
     cell.delegate = self;
     cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
     cell.selected = [self isCategoryInArray:cell.categoryLabel.text];
@@ -109,6 +117,12 @@
         }
     }
     
+}
+
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
+    
+    return [(NSString*)[self.allCategories objectAtIndex:indexPath.item] sizeWithAttributes:NULL];
 }
 
 - (void)addCategoryToArray:(NSString *)cat {

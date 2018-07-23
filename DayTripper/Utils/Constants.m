@@ -30,6 +30,7 @@
             [placeDictionary setObject:alias forKey:title];
         }
     }
+    NSLog(@"%i", (int)placeDictionary.count);
     self.placeCategories = placeDictionary;
     
     // FOOD
@@ -37,11 +38,14 @@
     //get JSON file
     NSMutableDictionary *fullDictFood = [self JSONFromFile:@"yelpCategories"];
     for (NSMutableDictionary *cat in fullDictFood) {
-        NSString *title = [cat objectForKey:@"title"];
-        NSString *alias = [cat objectForKey:@"alias"];
-        // Add alias-title key-value pair to dictionary
-        [foodDictionary setObject:alias forKey:title];
+        if([self isFoodCategory:cat]){
+            NSString *title = [cat objectForKey:@"title"];
+            NSString *alias = [cat objectForKey:@"alias"];
+            // Add alias-title key-value pair to dictionary
+            [foodDictionary setObject:alias forKey:title];
+        }
     }
+    NSLog(@"%i", (int)foodDictionary.count);
     self.foodCategories = foodDictionary;
     
     //EVENTS
@@ -59,6 +63,11 @@
     }
     self.eventCategories = eventDictionary;
     
+}
+
+
+- (BOOL)isFoodCategory:(NSMutableDictionary *)cat{
+    return [[cat objectForKey:@"parents"] containsObject:@"food"] || [[cat objectForKey:@"parents"] containsObject:@"retaurants"] || [[cat objectForKey:@"parents"] containsObject:@"nightlife"];
 }
     
 
