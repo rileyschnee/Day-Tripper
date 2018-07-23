@@ -7,6 +7,8 @@
 //
 
 #import "ResourcesViewController.h"
+#import "APIManager.h"
+
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -46,10 +48,13 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
-    NSLog(@"SETTING TRIP IN VC FUNCTION FOR HEADER VIEW");
-
     header.trip = self.trip;
     header.tripNameLabel.text = self.trip.name;
+    
+    //get weather info
+    [self getWeather:header];
+    
+    
     return header;
 }
 
@@ -57,5 +62,65 @@
     return self.trip.attendees.count;
 }
 
+
+//gets the high and low for the day
+- (void) getWeather:(TripReusableView* ) header {
+    APIManager *apiManager = [[APIManager alloc] init];
+    NSString *baseURL =  @"https://api.openweathermap.org/data/2.5/forecast";
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    [paramsDict setObject:[NSString stringWithFormat:@"%f", self.trip.latitude] forKey:@"lat"];
+    [paramsDict setObject:[NSString stringWithFormat:@"%f", self.trip.longitude] forKey:@"lon"];
+    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_OPENWEATHER"] forKey:@"appid"];
+    
+    __weak typeof(self) weakSelf = self;
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        //forecasts are every three hours and only go up to five days
+        NSArray *forecasts = responseDict[0][@"list"];
+        // TODO: get weather beyond today
+        NSString* currDay = @"";
+        double currHigh = 0;
+        double currLow = 0;
+        for (NSDictionary* forecast in forecasts) {
+            NSString* listedDateTime = forecast[@"dt_txt"];
+            double listedHigh = [forecast[@"main"][@"temp_max"] doubleValue];
+            double listedLow = [forecast[@"main"][@"temp_min"] doubleValue];
+            //extract date from date_time
+            NSString* listedDate = [listedDateTime componentsSeparatedByString:@" "][1];
+            // see if new day
+            if (currDay.length == 0) {
+                currDay = listedDate;
+                currHigh = listedHigh;
+                currLow = listedLow;
+            }
+            else {
+                if ([currDay isEqualToString:listedDate]) {
+                    //compare high and lows
+                    if (listedHigh > currHigh) {
+                        currHigh = listedHigh;
+                    }
+                    if (listedLow < currLow) {
+                        currLow = listedLow;
+                    }
+                }
+            }
+            
+        }
+        [weakSelf setWeatherLabels:header high:currHigh low:currLow];
+        
+    }];
+}
+
+- (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        NSString* highString = [NSString stringWithFormat:@"%f", [self kelvinToFahrenheit:high]];
+        NSString* lowString = [NSString stringWithFormat:@"%f", [self kelvinToFahrenheit:low]];
+        header.highLabel.text = highString;
+        header.lowLabel.text = lowString;
+    });
+}
+
+- (double) kelvinToFahrenheit:(double)kelvin {
+    return (kelvin * (9.0/5.0)) - 459.67;
+}
 
 @end
