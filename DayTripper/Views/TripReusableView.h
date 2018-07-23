@@ -10,9 +10,10 @@
 #import "Trip.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import <MessageUI/MFMailComposeViewController.h>
 
 
-@interface TripReusableView : UICollectionReusableView
+@interface TripReusableView : UICollectionReusableView 
 @property (strong, nonatomic) Trip *trip;
 @property (weak, nonatomic) IBOutlet UIView *weatherView;
 @property (weak, nonatomic) IBOutlet UILabel *tripNameLabel;

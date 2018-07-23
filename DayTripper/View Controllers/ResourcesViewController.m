@@ -10,7 +10,7 @@
 #import "APIManager.h"
 
 
-@interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
@@ -122,5 +122,10 @@
 - (double) kelvinToFahrenheit:(double)kelvin {
     return (kelvin * (9.0/5.0)) - 459.67;
 }
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
+
 
 @end
