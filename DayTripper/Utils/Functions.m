@@ -33,7 +33,10 @@
 }
 
 + (NSString *)primaryActivityCategory:(id<Activity>)activity{
-    if([[activity activityType] isEqualToString:@"Place"]){
+    if(activity.categories.count == 0){
+        return @"";
+    } else if([[activity activityType] isEqualToString:@"Place"]){\
+        NSLog(@"%@", activity.categories);
         return [[activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if([[activity activityType] isEqualToString:@"Food"]){
         return [[activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];

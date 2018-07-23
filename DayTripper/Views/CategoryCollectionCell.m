@@ -14,9 +14,11 @@
     //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleCatStatus:)];
     //[self addGestureRecognizer:tap];
     self.selected = [self.delegate isCategoryInArray:self.categoryLabel.text];
-    if(self.selected){
-        self.backgroundColor = [UIColor yellowColor];
-    }
+//    if(self.selected){
+//        self.backgroundColor = [UIColor yellowColor];
+//    }
+    [self toggleWordColor];
+
 }
 - (void)toggleCatStatus:(UITapGestureRecognizer *)sender{
     if(!self.selected){
@@ -27,20 +29,22 @@
         [self.delegate removeCategoryFromArray:self.categoryLabel.text];
         self.selected = NO;
     }
+    [self toggleWordColor];
     
+//    if(self.selected){
+//        self.backgroundColor = [UIColor yellowColor];
+//    } else {
+//        self.backgroundColor = [UIColor whiteColor];
+//    }
+}
+
+- (void)toggleWordColor{
     if(self.selected){
-        self.backgroundColor = [UIColor yellowColor];
+        self.categoryLabel.textColor = [UIColor colorWithRed:0.93 green:0.35 blue:0.02 alpha:1.0];
     } else {
-        self.backgroundColor = [UIColor whiteColor];
+        self.categoryLabel.textColor = [UIColor blackColor];
     }
 }
-
-
-- (void)setBounds:(CGRect)bounds {
-    [super setBounds:bounds];
-    self.contentView.frame = bounds;
-}
-
 
 
 @end

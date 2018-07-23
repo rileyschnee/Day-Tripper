@@ -366,5 +366,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return [dateFormatter stringFromDate:newDate];
 }
 
+
 @end
     
