@@ -12,6 +12,7 @@
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 
 @end
 
@@ -42,6 +43,7 @@
         }
     }];
     
+    
 }
 
 - (void)registerUser{
@@ -53,6 +55,7 @@
     newUser.password = self.passwordField.text;
     UIImage *image = [UIImage imageNamed:@"profile-pic-placeholder"];
     newUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(image)];
+    newUser.email = self.emailField.text;
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
