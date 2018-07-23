@@ -2,19 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>privacy - location usage description</key>
+	<string>I need Location</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>I need Location</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>I need Location</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-	<key>UberClientID</key>
-	<string></string>
-	<key>UberServerToken</key>
-	<string></string>
-	<key>UberDisplayName</key>
-	<string>DayTripper</string>
-	<key>LSApplicationQueriesSchemes</key>
-	<array>
-		<string>uber</string>
-		<string>uberauth</string>
-	</array>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -29,6 +24,11 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>uber</string>
+		<string>uberauth</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -52,5 +52,11 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UberClientID</key>
+	<string></string>
+	<key>UberDisplayName</key>
+	<string>DayTripper</string>
+	<key>UberServerToken</key>
+	<string></string>
 </dict>
 </plist>

@@ -12,7 +12,7 @@
 #import "UIImageView+AFNetworking.h"
 @import UberRides;
 
-@interface DetailsViewController ()
+@interface DetailsViewController () <CLLocationManagerDelegate>
 
 @property (strong, nonatomic) NSArray<CLPlacemark *> *somePlacemarks;
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -26,7 +26,10 @@
 @property (weak, nonatomic) IBOutlet UIButton *websiteLink;
 @property (strong, nonatomic) NSString* websiteToGoTo;
 @property (weak, nonatomic) IBOutlet UIView *uberView;
-
+@property (strong, nonatomic) CLLocationManager *locationManager;
+@property (strong, nonatomic) CLGeocoder *geocoder;
+@property (nonatomic) double currentLat;
+@property (nonatomic) double currentLong;
 @end
 
 @implementation DetailsViewController
@@ -34,39 +37,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.nameLabel.text = self.activity.name;
-    self.somePlacemarks = [[NSArray<CLPlacemark *> alloc] init];
-    //init the images arrays that will be used for storing images
-    self.imageUrls = [[NSMutableArray alloc] init];
-    self.images = [[NSMutableArray alloc] init];
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
-    self.currentImageIndex = 0;
-    CLGeocoder *geocoder = [[CLGeocoder alloc] init];
     
-    //add the uber button
-    UBSDKRideParametersBuilder *builder = [[UBSDKRideParametersBuilder alloc] init];
-    CLLocation *pickupLocation = [[CLLocation alloc] initWithLatitude:37.787654 longitude:-122.402760];
-    CLLocation *dropoffLocation = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
-    [builder setPickupLocation:pickupLocation];
-    [builder setDropoffLocation:dropoffLocation];
-    UBSDKRideParameters *rideParameters = [builder build];
-    
-    UBSDKRideRequestButton *button = [[UBSDKRideRequestButton alloc] initWithRideParameters:rideParameters];
-    [self.uberView addSubview:button];
+    //UBER + LOCATION
+    self.geocoder = [[CLGeocoder alloc] init];
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    [self.locationManager startUpdatingLocation];
+    [self.locationManager requestWhenInUseAuthorization];
+    [self.locationManager startMonitoringSignificantLocationChanges];
+    [self.locationManager startUpdatingLocation];
     
     
-    [geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
-        if (error){
-            NSLog (@"%@", error.localizedDescription);
-        }else{
-            self.somePlacemarks = [placemarks copy];
-            self.somePlacemark = [placemarks firstObject];
+    
 
-            NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
-            NSString *address = [partsAddr componentsJoinedByString:@", "];
-            self.locationLabel.text =  address;
-        }
-    }];
     
+    //CATEGORIES
     if([[self.activity activityType] isEqualToString:@"Place"]){
         self.categoriesLabel.text = [[self.activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
@@ -74,8 +60,12 @@
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
         self.categoriesLabel.text = [[self.activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
     }
-    //self.categoriesLabel.text = self.activity.category;
     
+    //IMAGES
+    //init the images arrays that will be used for storing images
+    self.imageUrls = [[NSMutableArray alloc] init];
+    self.images = [[NSMutableArray alloc] init];
+    self.currentImageIndex = 0;
     //get the images related to location
     if([[self.activity activityType] isEqualToString:@"Place"]){
         [self.hoursLabel setHidden:YES];
@@ -97,15 +87,54 @@
     }
 }
 
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *currLocation = [locations lastObject];
+    self.currentLat = currLocation.coordinate.latitude;
+    self.currentLong = currLocation.coordinate.longitude;
+//    NSLog(@"%f", self.currentLat);
+//    NSLog(@"%f", self.currentLong);
+    
+        // stopping locationManager from fetching again
+        [self.locationManager stopUpdatingLocation];
+    
+    //add the uber button
+    UBSDKRideParametersBuilder *builder = [[UBSDKRideParametersBuilder alloc] init];
+    CLLocation *pickupLocation = [[CLLocation alloc] initWithLatitude:self.currentLat longitude:self.currentLong];
+    CLLocation *dropoffLocation = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
+    [builder setPickupLocation:pickupLocation];
+    [builder setDropoffLocation:dropoffLocation];
+    [builder setDropoffNickname:[NSString stringWithFormat:@"%@", self.activity.name]];
+    UBSDKRideParameters *rideParameters = [builder build];
+    
+    self.somePlacemarks = [[NSArray<CLPlacemark *> alloc] init];
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:self.activity.latitude longitude:self.activity.longitude];
+    [self.geocoder reverseGeocodeLocation:location completionHandler:^(NSArray<CLPlacemark *> * _Nullable placemarks, NSError * _Nullable error) {
+        if (error){
+            NSLog (@"%@", error.localizedDescription);
+        }else{
+            self.somePlacemarks = [placemarks copy];
+            self.somePlacemark = [placemarks firstObject];
+            
+            NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
+            NSString *address = [partsAddr componentsJoinedByString:@", "];
+            self.locationLabel.text =  address;
+            [builder setDropoffAddress:[NSString stringWithFormat:@"%@", self.somePlacemark.name]];
+        }
+    }];
+    
+    UBSDKRideRequestButton *button = [[UBSDKRideRequestButton alloc] initWithRideParameters:rideParameters];
+    [self.uberView addSubview:button];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    NSLog(@"failed to fetch current location : %@", error);
+}
+
 
 - (IBAction)didTapDirections:(id)sender {
     NSString *baseURL = @"https://www.google.com/maps/dir/?api=1";
-    NSNumber *numberlat = [NSNumber numberWithDouble:self.activity.latitude];
-    NSNumber *numberlong = [NSNumber numberWithDouble:self.activity.longitude];
-    NSString *destinationlat = [numberlat stringValue];
-    NSString *destinationlong = [numberlong stringValue];
-    NSArray *array = [[NSArray alloc] initWithObjects:@"&destination=", destinationlat, @",", destinationlong, nil];
-    NSString *url = [array componentsJoinedByString:@""];
+    NSString *url = [NSString stringWithFormat:@"%@%f%@%f%@%f%@%f", @"&origin=", self.currentLat, @",", self.currentLong,@"&destination=", self.activity.latitude, @",", self.activity.longitude];
     NSString *URL = [baseURL stringByAppendingString:url];
     NSURL *googleURL = [NSURL URLWithString:URL];
         [[UIApplication sharedApplication] openURL:googleURL options:@{} completionHandler:^(BOOL success) {
@@ -115,11 +144,6 @@
             NSLog(@" NO YAY fail");
         }
     }];
-    
-
-    
-    
-
 }
 
 - (void)setActivity:(id<Activity>)activity{
