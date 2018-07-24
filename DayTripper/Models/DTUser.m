@@ -11,8 +11,8 @@
 @implementation DTUser
 @dynamic picture;
 
-+ (nonnull NSString *)parseClassName {
-    return @"DTUser";
-}
+//+ (nonnull NSString *)parseClassName {
+//    return @"DTUser";
+//}
 
 @end

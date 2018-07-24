@@ -65,8 +65,7 @@
     PFUser.currentUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
     PFUser.currentUser.username = self.usernameField.text;
     [PFUser.currentUser saveInBackground];
-    [self.navigationController popViewControllerAnimated:YES];
-    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickedLogout:(id)sender {
