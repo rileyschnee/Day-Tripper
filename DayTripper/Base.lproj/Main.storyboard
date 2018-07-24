@@ -225,7 +225,7 @@
             </objects>
             <point key="canvasLocation" x="3703.1999999999998" y="1857.1214392803599"/>
         </scene>
-        <!--Item-->
+        <!--Map View Controller-->
         <scene sceneID="CK3-X5-INY">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="4OX-FQ-8wP" customClass="MapViewController" sceneMemberID="viewController">
@@ -241,7 +241,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="uex-PT-5dn"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="owS-Ax-KjH"/>
+                    <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
                     <connections>
                         <outlet property="mapView" destination="yia-Ot-unD" id="sKC-fR-sem"/>
                     </connections>
@@ -250,7 +250,7 @@
             </objects>
             <point key="canvasLocation" x="596" y="1858"/>
         </scene>
-        <!--Item-->
+        <!--Resources View Controller-->
         <scene sceneID="Ug4-9n-LTa">
             <objects>
                 <viewController storyboardIdentifier="ResourcesViewController" id="b7a-6T-rES" customClass="ResourcesViewController" sceneMemberID="viewController">
@@ -276,7 +276,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="E09-GF-fNA" customClass="PFImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="profile-pic-placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="E09-GF-fNA" customClass="PFImageView">
                                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 </imageView>
@@ -379,7 +379,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="QPa-HF-Sac"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="BPh-Wo-58n"/>
+                    <tabBarItem key="tabBarItem" title="" image="info-tab-small" id="BPh-Wo-58n"/>
                     <connections>
                         <outlet property="collectionView" destination="A9f-9Y-uf3" id="QmR-EH-gLc"/>
                     </connections>
@@ -793,11 +793,11 @@
             </objects>
             <point key="canvasLocation" x="-745" y="134"/>
         </scene>
-        <!--Item-->
+        <!--Navigation Controller-->
         <scene sceneID="C8f-gn-VrH">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="rsN-eR-3wP" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="RYT-b8-vzc"/>
+                    <tabBarItem key="tabBarItem" title="" image="itin-tab-small" id="RYT-b8-vzc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s7F-3j-tzs">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
@@ -852,11 +852,14 @@
     <resources>
         <image name="checkbox-empty" width="240" height="240"/>
         <image name="checkbox-fill" width="240" height="240"/>
+        <image name="info-tab-small" width="31" height="31"/>
+        <image name="itin-tab-small" width="31" height="31"/>
+        <image name="map-tab-small" width="31" height="31"/>
         <image name="picture-placeholder" width="240" height="240"/>
         <image name="profile-pic-placeholder" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ZN-pL-lbg"/>
+        <segue reference="rY6-fE-GI8"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
         <segue reference="irg-7C-q8O"/>
