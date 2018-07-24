@@ -8,7 +8,7 @@
 
 #import "ResourcesViewController.h"
 #import "APIManager.h"
-
+#import "ProfileViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -30,15 +30,24 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if([sender isKindOfClass:[UICollectionViewCell class]]){
+        UICollectionViewCell  *tappedCell = sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+        PFUser *user = self.trip.attendees[indexPath.item];
+        NSLog(@"%d", [[segue destinationViewController] isKindOfClass:[ProfileViewController class]]);
+        ProfileViewController *profileViewController = [segue destinationViewController];
+        
+        profileViewController.user = user;
+    }
 }
-*/
+
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];

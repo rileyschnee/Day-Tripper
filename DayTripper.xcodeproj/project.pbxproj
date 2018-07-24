@@ -35,6 +35,7 @@
 		BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA3210262E300933DB7 /* TripReusableView.m */; };
 		BEB308F6210678DA00336EA4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308F5210678DA00336EA4 /* SettingsViewController.m */; };
 		BEB308F92106A17200336EA4 /* DTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308F82106A17200336EA4 /* DTUser.m */; };
+		BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308FB21079B1A00336EA4 /* ProfileViewController.m */; };
 		BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */; };
 		BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8D20FD016E0048C0DB /* Place.m */; };
 		BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D9320FD03BC0048C0DB /* ItinCell.m */; };
@@ -98,6 +99,8 @@
 		BEB308F5210678DA00336EA4 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BEB308F72106A17200336EA4 /* DTUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTUser.h; sourceTree = "<group>"; };
 		BEB308F82106A17200336EA4 /* DTUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTUser.m; sourceTree = "<group>"; };
+		BEB308FA21079B1A00336EA4 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		BEB308FB21079B1A00336EA4 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		BEEA9D8C20FD016E0048C0DB /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -223,6 +226,8 @@
 				BE45191021012B5E00CFA8AC /* QuizViewControllerDelegate.h */,
 				BEB308F4210678DA00336EA4 /* SettingsViewController.h */,
 				BEB308F5210678DA00336EA4 /* SettingsViewController.m */,
+				BEB308FA21079B1A00336EA4 /* ProfileViewController.h */,
+				BEB308FB21079B1A00336EA4 /* ProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 				BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */,
 				BEB308F92106A17200336EA4 /* DTUser.m in Sources */,
 				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
+				BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */,
 				0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
