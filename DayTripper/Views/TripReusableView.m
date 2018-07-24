@@ -12,7 +12,11 @@
 - (void)setTrip:(Trip *)trip{
     _trip = trip;
     self.tripNameLabel.text = self.trip.name;
-    self.tripCityLabel.text = [self.trip.city substringToIndex:[self.trip.city rangeOfString:@","].location];
+    if([self.trip.city containsString:@","]){
+        self.tripCityLabel.text = [self.trip.city substringToIndex:[self.trip.city rangeOfString:@","].location];
+    } else {
+        self.tripCityLabel.text = self.trip.city;
+    }
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy"];
     self.tripDateLabel.text = [dateFormatter stringFromDate:self.trip.tripDate];
