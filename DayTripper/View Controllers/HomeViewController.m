@@ -79,6 +79,7 @@
         UITabBarController *tabbar = [segue destinationViewController];
         UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
         ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
+        //create edit bar button item
         itinerary.trip = trip;
     }
 }
