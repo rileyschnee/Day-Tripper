@@ -12,40 +12,84 @@
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+//email ui components
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
+@property (weak, nonatomic) IBOutlet UIView *emailBar;
+@property (weak, nonatomic) IBOutlet UILabel *emailLabel;
 
+
+@property (weak, nonatomic) IBOutlet UISegmentedControl *actionSelector;
+//the action button is either sign up or login depending on what the selector is selected to
+@property (weak, nonatomic) IBOutlet UIButton *actionButton;
 @end
 
 @implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    //set up field styles
+    [self setUpTextFieldStyles:self.usernameField];
+    [self setUpTextFieldStyles:self.passwordField];
+    [self setUpTextFieldStyles:self.emailField];
+    
+}
+
+//this function sets up the text field styles by removing border and bg
+- (void) setUpTextFieldStyles:(UITextField*) field {
+    //init the uitextfield styles
+    [field setBorderStyle:UITextBorderStyleNone];
+    [field setNeedsDisplay];
 }
 
 -(void)dismissKeyboard {
     [self.usernameField endEditing:YES];
     [self.passwordField endEditing:YES];
+    [self.emailField endEditing:YES];
 }
 
-- (IBAction)clickSignUp:(id)sender {
-    if([self.passwordField.text isEqual:@""]){
-        [self noPasswordAlert];
-    } else if([self.usernameField.text isEqual:@""]){
-        [self noUsernameAlert];
-    }else{
-        [self registerUser];
+//when the selector goes to sign up or to login
+- (IBAction)actionSelectorChanged:(UISegmentedControl *)sender {
+    if (sender.selectedSegmentIndex == 0) {
+        // sign up - show email
+        [self.emailField setHidden:NO];
+        [self.emailBar setHidden:NO];
+        [self.emailLabel setHidden:NO];
+        [self.actionButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+    } else {
+        // login - hide the email
+        [self.emailField setHidden:YES];
+        [self.emailBar setHidden:YES];
+        [self.emailLabel setHidden:YES];
+        [self.actionButton setTitle:@"Login" forState:UIControlStateNormal];
     }
 }
-- (IBAction)clickLogin:(id)sender {
-    if([self.passwordField.text isEqual:@""]){
-        [self noPasswordAlert];
-    } else if([self.usernameField.text isEqual:@""]){
-        [self noUsernameAlert];
-    }else{
-        [self loginUser];
+
+
+- (IBAction)actionButtonPressed:(id)sender {
+    if (self.actionSelector.selectedSegmentIndex == 0) {
+        //sign up
+        if([self.passwordField.text isEqual:@""]){
+            [self noPasswordAlert];
+        } else if([self.usernameField.text isEqual:@""]){
+            [self noUsernameAlert];
+        } else if([self.emailField.text isEqual:@""]){
+            [self noEmailAlert];
+        } else{
+            [self registerUser];
+        }
+    }
+    else {
+        //login
+        if([self.passwordField.text isEqual:@""]){
+            [self noPasswordAlert];
+        } else if([self.usernameField.text isEqual:@""]){
+            [self noUsernameAlert];
+        }else{
+            [self loginUser];
+        }
     }
 }
 
@@ -101,13 +145,23 @@
 }
 
 - (void)noUsernameAlert{
-    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Username" message:@"You must enter a username" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Username" message:@"You must enter an username" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
     }];
     // add the OK action to the alert controller
     [emptyUSRAlert addAction:okAction];
     [self presentViewController:emptyUSRAlert animated:YES completion:nil];
 }
+
+- (void)noEmailAlert{
+    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Email" message:@"You must enter an email" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [emptyUSRAlert addAction:okAction];
+    [self presentViewController:emptyUSRAlert animated:YES completion:nil];
+}
+
 
 - (void)errorAlert{
     // Present error alert controller
