@@ -14,6 +14,8 @@
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+//this variable represents the array of activities in their table view ordering
+@property (nonatomic, strong) NSMutableArray* tableOrdering;
 @end
 
 @implementation ItinViewController
@@ -23,9 +25,14 @@
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
-    
     self.tabBarController.delegate = self;
+    self.tableOrdering = [self.trip.activities mutableCopy];
+    
+    //create edit bar button item
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
+    self.tabBarController.navigationItem.rightBarButtonItem = editButton;
+    self.navigationItem.rightBarButtonItem = editButton;
+    
     [self.tableView reloadData];
 }
 
@@ -33,6 +40,25 @@
     [self performSegueWithIdentifier:@"itinToHome" sender:nil];
 }
 
+- (IBAction)editTableView:(UIBarButtonItem*)sender {
+    if ([sender.title isEqualToString:@"Edit"]) {
+        self.tableView.editing = YES;
+        sender.title = @"Done";
+    }
+    else {
+        self.tableView.editing = NO;
+        sender.title = @"Edit";
+        //save the table
+        self.trip.activities = [self.tableOrdering copy];
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+            } else {
+                NSLog(@"Error saving trip");
+            }
+        }];
+        
+    }
+}
 
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
     //pass data to map view if going to map view
@@ -45,20 +71,9 @@
     if([viewController isKindOfClass:[ResourcesViewController class]]){
         ResourcesViewController *resController = (ResourcesViewController *) viewController;
         resController.trip = self.trip;
-        NSLog(@"SETTING TRIP IN ININ VIEW");
 
     }
     return TRUE;
-}
-
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ItinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItinCell" forIndexPath:indexPath];
-    cell.activity = self.trip.activities[indexPath.row];
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.trip.activities.count;
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
@@ -70,6 +85,36 @@
         
     }
 }
+
+
+#pragma mark - Table View methods
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ItinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItinCell" forIndexPath:indexPath];
+    cell.activity = self.tableOrdering[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.tableOrdering.count;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    return YES;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
+{
+    id <Activity> activity = self.tableOrdering[sourceIndexPath.row];
+    [self.tableOrdering removeObjectAtIndex:sourceIndexPath.row];
+    [self.tableOrdering insertObject:activity atIndex:destinationIndexPath.row];
+}
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self.tableOrdering removeObjectAtIndex:indexPath.row];
+    [self.tableView reloadData];
+}
+
 
 
 @end
