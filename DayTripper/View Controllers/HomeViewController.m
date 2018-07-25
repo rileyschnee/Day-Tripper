@@ -34,6 +34,7 @@
     // Do any additional setup after loading the view.
 
     self.profileImageView.file = PFUser.currentUser[@"picture"];
+    [self.profileImageView loadInBackground];
     self.usernameLabel.text = PFUser.currentUser.username;
     
     [self fetchTrips];
@@ -46,7 +47,6 @@
 }
 
 - (void)fetchTrips {
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];

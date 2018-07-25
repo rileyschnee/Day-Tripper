@@ -137,9 +137,14 @@
     // set user properties
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
-    UIImage *image = [UIImage imageNamed:@"profile-pic-placeholder"];
-    newUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(image)];
     newUser.email = self.emailField.text;
+    UIImage *image = [UIImage imageNamed:@"profile-pic-placeholder"];
+    PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(image)];
+    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            newUser[@"picture"] = file;
+        }
+    }];
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
@@ -153,6 +158,7 @@
 }
 
 
+/****** ALERT FUNCTIONS ******/
 
 - (void)noPasswordAlert{
     UIAlertController *emptyPWDAlert = [UIAlertController alertControllerWithTitle:@"Empty Password" message:@"You must enter a password" preferredStyle:(UIAlertControllerStyleAlert)];

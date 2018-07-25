@@ -25,6 +25,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.profilePicImage.file = PFUser.currentUser[@"picture"];
+    [self.profilePicImage loadInBackground];
     self.profilePicImage.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     self.usernameField.text = PFUser.currentUser.username;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -50,7 +51,7 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
+
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
@@ -61,10 +62,22 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)saveProfile:(id)sender {
-    PFUser.currentUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
+    NSLog(@"Saving...");
+    PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
+    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            PFUser.currentUser[@"picture"] = file;
+        }else{
+            NSLog(@"Unable to save picture");
+        }
+    }];
     PFUser.currentUser.username = self.usernameField.text;
+    NSLog(@"About to save");
     [PFUser.currentUser saveInBackground];
+    NSLog(@"Saved!");
+    [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
