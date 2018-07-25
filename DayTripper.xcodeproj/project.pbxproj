@@ -16,6 +16,7 @@
 		537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537A4B8221066FFC00E64CBD /* MessageUI.framework */; };
 		537A4B862108F42400E64CBD /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B852108F42400E64CBD /* ChatViewController.m */; };
 		537A4B892108FB8E00E64CBD /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B882108FB8E00E64CBD /* ChatCell.m */; };
+		537A4B8C210912B000E64CBD /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8B210912B000E64CBD /* ChatMessage.m */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -64,6 +65,8 @@
 		537A4B852108F42400E64CBD /* ChatViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		537A4B872108FB8E00E64CBD /* ChatCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatCell.h; sourceTree = "<group>"; };
 		537A4B882108FB8E00E64CBD /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
+		537A4B8A210912B000E64CBD /* ChatMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
+		537A4B8B210912B000E64CBD /* ChatMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -278,6 +281,8 @@
 				53E8421020FFA920003FE31A /* Event.m */,
 				BEB308F72106A17200336EA4 /* DTUser.h */,
 				BEB308F82106A17200336EA4 /* DTUser.m */,
+				537A4B8A210912B000E64CBD /* ChatMessage.h */,
+				537A4B8B210912B000E64CBD /* ChatMessage.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -446,6 +451,7 @@
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,
+				537A4B8C210912B000E64CBD /* ChatMessage.m in Sources */,
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 				BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */,

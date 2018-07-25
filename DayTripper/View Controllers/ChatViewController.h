@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "Trip.h"
 
 @interface ChatViewController : UIViewController
-
+@property (strong, nonatomic) Trip* trip;
 @end
