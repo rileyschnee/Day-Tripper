@@ -38,7 +38,6 @@
     self.usernameLabel.text = PFUser.currentUser.username;
     
     [self fetchTrips];
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -51,7 +50,7 @@
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
     [query includeKey:@"activities"];
-    [query whereKey:@"attendees" equalTo:[PFUser currentUser]];
+    [query whereKey:@"attendees" containsString:[PFUser currentUser].objectId];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
