@@ -11,7 +11,10 @@
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+// password ui components
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIView *passwordContainingView;
+
 //email ui components
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UIView *emailBar;
@@ -58,13 +61,29 @@
         [self.emailBar setHidden:NO];
         [self.emailLabel setHidden:NO];
         [self.actionButton setTitle:@"Sign Up" forState:UIControlStateNormal];
+        //move down password
+        [UIView animateWithDuration:0.5f animations:^{
+            [self moveElementVertically:30];
+        }];
     } else {
         // login - hide the email
         [self.emailField setHidden:YES];
         [self.emailBar setHidden:YES];
         [self.emailLabel setHidden:YES];
         [self.actionButton setTitle:@"Login" forState:UIControlStateNormal];
+        //move up password
+        [UIView animateWithDuration:0.5f animations:^{
+            [self moveElementVertically:-30];
+        }];
+        
     }
+}
+
+//function that moves element by delta y
+- (void) moveElementVertically:(int) points {
+    CGRect frame = self.passwordContainingView.frame;
+    frame.origin.y = frame.origin.y + points;
+    [self.passwordContainingView setFrame:frame];
 }
 
 
