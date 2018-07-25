@@ -42,7 +42,8 @@
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
         PFUser *user = self.trip.attendees[indexPath.item];
         NSLog(@"%d", [[segue destinationViewController] isKindOfClass:[ProfileViewController class]]);
-        ProfileViewController *profileViewController = [segue destinationViewController];
+        UINavigationController *navController = [segue destinationViewController];
+        ProfileViewController *profileViewController = navController.topViewController;
         
         profileViewController.user = user;
     }
