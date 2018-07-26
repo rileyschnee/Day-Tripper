@@ -276,8 +276,6 @@
 				0EAE0C5A20FEC07500D798A9 /* Food.m */,
 				53E8420F20FFA920003FE31A /* Event.h */,
 				53E8421020FFA920003FE31A /* Event.m */,
-				BEB308F72106A17200336EA4 /* DTUser.h */,
-				BEB308F82106A17200336EA4 /* DTUser.m */,
 				537A4B8A210912B000E64CBD /* ChatMessage.h */,
 				537A4B8B210912B000E64CBD /* ChatMessage.m */,
 			);
@@ -595,14 +593,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P2TSRFLHL6;
+				DEVELOPMENT_TEAM = J73QEJBHCK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappskim.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -618,14 +616,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P2TSRFLHL6;
+				DEVELOPMENT_TEAM = J73QEJBHCK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappskim.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
