@@ -372,6 +372,16 @@
                                                 <action selector="addUserToTrip:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="LeD-rb-4GD"/>
                                             </connections>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meE-d1-hHQ">
+                                            <rect key="frame" x="170" y="244" width="189" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Share to Google Photos">
+                                                <color key="titleColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="shareToAlbum:" destination="b7a-6T-rES" eventType="touchUpInside" id="Fo7-Dw-3Kn"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <gestureRecognizers/>
                                     <connections>
