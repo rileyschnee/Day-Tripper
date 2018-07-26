@@ -32,6 +32,7 @@
     [self.profilePicImage loadInBackground];
     self.profilePicImage.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     self.usernameField.text = PFUser.currentUser.username;
+    self.nameField.text = PFUser.currentUser[@"name"];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
@@ -78,6 +79,7 @@
     NSLog(@"Saving...");
     PFUser.currentUser[@"picture"] = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.profilePicView.image)];
     PFUser.currentUser.username = self.usernameField.text;
+    PFUser.currentUser[@"name"] = self.nameField.text;
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"Successfully saved profile changes");
