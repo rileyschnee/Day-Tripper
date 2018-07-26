@@ -67,11 +67,11 @@
             [self moveElementVertically:30];
         }];
     } else {
+        [self.actionButton setTitle:@"Login" forState:UIControlStateNormal];
         // login - hide the email
         [self.emailField setHidden:YES];
         [self.emailBar setHidden:YES];
         [self.emailLabel setHidden:YES];
-        [self.actionButton setTitle:@"Login" forState:UIControlStateNormal];
         //move up password
         [UIView animateWithDuration:0.5f animations:^{
             [self moveElementVertically:-30];

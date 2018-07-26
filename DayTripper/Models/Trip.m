@@ -13,6 +13,7 @@
 @dynamic city;
 @dynamic name;
 @dynamic activities;
+@dynamic chats;
 @dynamic planner;
 @dynamic latitude;
 @dynamic longitude;
@@ -31,6 +32,7 @@
     newTrip.tripDate = date;
     newTrip.latitude = lat;
     newTrip.longitude = lon;
+    newTrip.chats = [[NSMutableArray alloc] init];
     newTrip.attendees = [NSMutableArray new];
     [newTrip addUniqueObject:[PFUser currentUser].objectId forKey:@"attendees"];
     
