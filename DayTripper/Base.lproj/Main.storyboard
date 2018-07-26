@@ -309,7 +309,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aOZ-Z5-470"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Vx5-93-EBN"/>
+                    <navigationItem key="navigationItem" id="Vx5-93-EBN">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="brg-73-pS5">
+                            <connections>
+                                <action selector="didTapBack:" destination="z1o-P9-mJB" id="FPN-uU-cyA"/>
+                                <segue destination="3cp-a0-XYn" kind="presentation" identifier="backToTab" id="Ikg-ro-xOw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="pWY-ZS-Cae" id="l78-fN-Li8"/>
                         <outlet property="profilePicView" destination="sxp-Vr-a6m" id="27A-cI-HhU"/>
@@ -1168,7 +1175,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8ht-wb-x5R"/>
-        <segue reference="PNT-r8-qhW"/>
+
+        <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
