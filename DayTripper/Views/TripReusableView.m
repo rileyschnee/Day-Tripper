@@ -25,7 +25,7 @@
 
 //when clicked, this button will add the given username to the attendees trip array
 - (IBAction)addUserToTrip:(id)sender {    
-    NSString* usernameToAdd = self.usernameToAdd.text;
+    NSString* usernameToAdd = [self.usernameToAdd.text lowercaseString];
     [self getUserByUsername:usernameToAdd];
 }
 
@@ -63,7 +63,6 @@
 
 //takes the user object and adds the object to the attendees for the trip
 - (void) addUserToAttendee:(PFUser*) user {
-
     if (![self.trip.attendees containsObject:user.objectId]) {
         [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
         //[currAttendees addObject:user];

@@ -309,7 +309,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="aOZ-Z5-470"/>
                     </view>
-                    <navigationItem key="navigationItem" id="Vx5-93-EBN"/>
+                    <navigationItem key="navigationItem" id="Vx5-93-EBN">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="brg-73-pS5">
+                            <connections>
+                                <action selector="didTapBack:" destination="z1o-P9-mJB" id="FPN-uU-cyA"/>
+                                <segue destination="3cp-a0-XYn" kind="presentation" identifier="backToTab" id="Ikg-ro-xOw"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="pWY-ZS-Cae" id="l78-fN-Li8"/>
                         <outlet property="profilePicView" destination="sxp-Vr-a6m" id="27A-cI-HhU"/>
@@ -1010,7 +1017,7 @@
         <!--Itinerary-->
         <scene sceneID="nn3-QT-JUb">
             <objects>
-                <viewController id="R5t-SS-ykh" customClass="ItinViewController" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="R5t-SS-ykh" customClass="ItinViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Npg-IU-zBr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

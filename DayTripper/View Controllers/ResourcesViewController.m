@@ -48,6 +48,7 @@
         ProfileViewController *profileViewController = (ProfileViewController *)navController.topViewController;
         NSLog(@"%@", user.username);
         profileViewController.user = user;
+        profileViewController.trip = self.trip;
     }
 }
 

@@ -87,9 +87,6 @@
     CLLocation *currLocation = [locations lastObject];
     self.currentLat = currLocation.coordinate.latitude;
     self.currentLong = currLocation.coordinate.longitude;
-//    NSLog(@"%f", self.currentLat);
-//    NSLog(@"%f", self.currentLong);
-    
         // stopping locationManager from fetching again
         [self.locationManager stopUpdatingLocation];
     
@@ -120,6 +117,13 @@
     
     UBSDKRideRequestButton *button = [[UBSDKRideRequestButton alloc] initWithRideParameters:rideParameters];
     [self.uberView addSubview:button];
+    //make button centered and at the bottom
+    button.translatesAutoresizingMaskIntoConstraints = false;
+    NSLayoutConstraint* horizontalConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
+    NSLayoutConstraint* verticalConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.7 constant:0];
+    [self.view addConstraint:horizontalConstraint];
+    [self.view addConstraint:verticalConstraint];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
