@@ -9,8 +9,9 @@
 #import "ResourcesViewController.h"
 #import "APIManager.h"
 #import "ProfileViewController.h"
+#import "TripReusableView.h"
 
-@interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate>
+@interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *attendeeUsers;
 @end
@@ -47,6 +48,7 @@
         ProfileViewController *profileViewController = (ProfileViewController *)navController.topViewController;
         NSLog(@"%@", user.username);
         profileViewController.user = user;
+        profileViewController.trip = self.trip;
     }
 }
 
@@ -57,12 +59,14 @@
     PFFile* file = cell.user[@"picture"];
     cell.profilePicView.file = file;
     [cell.profilePicView loadInBackground];
+    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
     return cell;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
     header.trip = self.trip;
+    header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
     
     //get weather info
@@ -165,6 +169,10 @@
     
     
     
+}
+
+- (void)reloadAttendeeData {
+    [self fetchAttendees];
 }
 
 @end

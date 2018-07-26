@@ -12,11 +12,13 @@
 #import "ItinViewController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "SettingsViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -36,7 +38,8 @@
     self.profileImageView.file = PFUser.currentUser[@"picture"];
     [self.profileImageView loadInBackground];
     self.usernameLabel.text = PFUser.currentUser.username;
-    
+    self.nameLabel.text = PFUser.currentUser[@"name"];
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
     [self fetchTrips];
 }
 
@@ -97,5 +100,15 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.trips.count;
 }
+
+- (void)reloadUserInfo{
+    self.profileImageView.file = PFUser.currentUser[@"picture"];
+    [self.profileImageView loadInBackground];
+    self.usernameLabel.text = PFUser.currentUser.username;
+    self.nameLabel.text = PFUser.currentUser[@"name"];
+    self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
+    
+}
+
 @end
 
