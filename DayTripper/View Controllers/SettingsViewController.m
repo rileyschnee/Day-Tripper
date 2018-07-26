@@ -15,6 +15,9 @@
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *nameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordFieldFirst;
+@property (weak, nonatomic) IBOutlet UITextField *passwordFieldSecond;
 
 @end
 
@@ -62,8 +65,15 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 - (IBAction)saveProfile:(id)sender {
+    if((![self.passwordFieldFirst.text isEqualToString:@""] && ![self.passwordFieldSecond.text isEqualToString:@""]) && [self.passwordFieldFirst.text isEqualToString:self.passwordFieldSecond.text]){
+        PFUser.currentUser.password = self.passwordFieldFirst.text;
+    } else if(![self.passwordFieldFirst.text isEqualToString:self.passwordFieldSecond.text]){
+        [self sendPasswordAlert];
+        return;
+    }
     PFUser.currentUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
     PFUser.currentUser.username = self.usernameField.text;
+    
     [PFUser.currentUser saveInBackground];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -82,6 +92,18 @@
 }
 - (IBAction)clickedCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
+
+- (void)sendPasswordAlert{
+    UIAlertController *pwdAlert = [UIAlertController alertControllerWithTitle:@"Password Error" message:@"Passwords do not match" preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [pwdAlert addAction:okAction];
+    [self presentViewController:pwdAlert animated:YES completion:nil];
 }
 
 
