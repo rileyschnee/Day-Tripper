@@ -4,21 +4,21 @@
 <dict>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
-    <key>NSAppTransportSecurity</key>
-    <dict>
-        <key>NSAllowsArbitraryLoads</key>
-        <true/>
-        <key>NSExceptionDomains</key>
-        <dict>
-            <key>yourdomain.com</key>
-            <dict>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-                <key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
-                <false/>
-            </dict>
-        </dict>
-    </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>yourdomain.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSThirdPartyExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
@@ -43,9 +43,9 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Need camera access to take pictures</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>I need Location</string>
+	<string></string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>I need Location</string>
+	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Need library access to upload images</string>
 	<key>UILaunchStoryboardName</key>
@@ -76,6 +76,6 @@
 	<key>UberServerToken</key>
 	<string></string>
 	<key>privacy - location usage description</key>
-	<string>I need Location</string>
+	<string></string>
 </dict>
 </plist>
