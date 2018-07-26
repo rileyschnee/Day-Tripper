@@ -46,7 +46,8 @@
 }
 
 - (void)fetchTrips {
-    PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; 
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
     [query includeKey:@"activities"];
