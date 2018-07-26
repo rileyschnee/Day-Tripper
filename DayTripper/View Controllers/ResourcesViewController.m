@@ -54,11 +54,9 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
     cell.user = self.attendeeUsers[indexPath.item];
-    NSLog(@"%@", self.attendeeUsers);
-    NSLog(@"%@", cell.user);
-    cell.profilePicView.file = cell.user[@"picture"];
+    PFFile* file = cell.user[@"picture"];
+    cell.profilePicView.file = file;
     [cell.profilePicView loadInBackground];
-    NSLog(@"%lu", (unsigned long)self.attendeeUsers.count);
     return cell;
 }
 
@@ -145,7 +143,6 @@
     query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
         if (users != nil){
-            NSLog(@"%@", users);
             self.attendeeUsers = [users mutableCopy];
             [self.collectionView reloadData];
         } else {
