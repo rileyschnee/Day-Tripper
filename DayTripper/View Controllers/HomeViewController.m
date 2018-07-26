@@ -34,10 +34,10 @@
     // Do any additional setup after loading the view.
 
     self.profileImageView.file = PFUser.currentUser[@"picture"];
+    [self.profileImageView loadInBackground];
     self.usernameLabel.text = PFUser.currentUser.username;
     
     [self fetchTrips];
-    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,12 +46,11 @@
 }
 
 - (void)fetchTrips {
-    
     PFQuery *query = [PFQuery queryWithClassName:@"Trip"]; //how to define a query
     [query orderByDescending:@"createdAt"];
     [query includeKey:@"planner"];
     [query includeKey:@"activities"];
-    [query whereKey:@"attendees" equalTo:[PFUser currentUser]];
+    [query whereKey:@"attendees" containsString:[PFUser currentUser].objectId];
     query.limit = 20;
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {

@@ -50,19 +50,8 @@
     [self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager startUpdatingLocation];
     
-    
-    
-
-
-    
     //CATEGORIES
-    if([[self.activity activityType] isEqualToString:@"Place"]){
-        self.categoriesLabel.text = [[self.activity.categories[0][@"name"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    } else if([[self.activity activityType] isEqualToString:@"Food"]){
-        self.categoriesLabel.text = [[self.activity.categories[0][@"title"] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    } else if ([[self.activity activityType] isEqualToString:@"Event"]){
-        self.categoriesLabel.text = [[self.activity.categories[0] stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];
-    }
+    self.categoriesLabel.text = [Functions primaryActivityCategory:self.activity];
     
     //IMAGES
     //init the images arrays that will be used for storing images

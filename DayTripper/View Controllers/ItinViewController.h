@@ -17,4 +17,5 @@
 @property (strong, nonatomic) Trip *trip;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
+- (void)back;
 @end

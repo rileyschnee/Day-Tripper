@@ -19,6 +19,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *passwordFieldFirst;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFieldSecond;
 
+@property (strong, nonatomic) PFFile *profilePic;
 @end
 
 
@@ -28,6 +29,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.profilePicImage.file = PFUser.currentUser[@"picture"];
+    [self.profilePicImage loadInBackground];
     self.profilePicImage.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     self.usernameField.text = PFUser.currentUser.username;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
@@ -53,17 +55,18 @@
 }
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
-    
+
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
+    //self.profilePic = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(editedImage)];
     // Do something with the images (based on your use case)
     //editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
     [self.profilePicView setImage:editedImage];
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)saveProfile:(id)sender {
     if((![self.passwordFieldFirst.text isEqualToString:@""] && ![self.passwordFieldSecond.text isEqualToString:@""]) && [self.passwordFieldFirst.text isEqualToString:self.passwordFieldSecond.text]){
         PFUser.currentUser.password = self.passwordFieldFirst.text;
@@ -71,11 +74,20 @@
         [self sendPasswordAlert];
         return;
     }
-    PFUser.currentUser[@"picture"] = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
-    PFUser.currentUser.username = self.usernameField.text;
     
-    [PFUser.currentUser saveInBackground];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    NSLog(@"Saving...");
+    PFUser.currentUser[@"picture"] = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.profilePicView.image)];
+    PFUser.currentUser.username = self.usernameField.text;
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            NSLog(@"Successfully saved profile changes");
+        }else{
+            NSLog(@"Unable to save profile changes");
+        }
+    }];
+    NSLog(@"Saved!");
+    [self.navigationController popViewControllerAnimated:YES];
+    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)clickedLogout:(id)sender {

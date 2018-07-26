@@ -82,50 +82,16 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     else {
         //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
-            UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
-                                                                                      message: @"Enter the trip name"
-                                                                               preferredStyle:UIAlertControllerStyleAlert];
-            [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-                textField.placeholder = @"Trip Name";
-                textField.textColor = [UIColor blueColor];
-                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-                textField.borderStyle = UITextBorderStyleRoundedRect;
-            }];
-            [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-                NSArray * textfields = alertController.textFields;
-                UITextField * namefield = textfields[0];
-                //if the user does not provide a trip name, then set the name equal to the city
-                if (namefield.text.length == 0) {
-                    self.tripName = self.trip.city;
-                }
-                else {
-                    self.tripName = namefield.text;
-                }
-                [self performSegueWithIdentifier:@"toItinView" sender:nil];
-                
-            }]];
-            [self presentViewController:alertController animated:YES completion:nil];
-            
-            
+            [self alertForTripName];
         }
         //reaches here is a trip name exists
         else {
-            self.trip.name = self.tripName;
-            self.trip.planner = [PFUser currentUser];
-            self.trip.latitude = self.latitude;
-            self.trip.longitude = self.longitude;
-            self.trip.tripDate = self.tripDate;
-            //create array with planner
-            NSMutableArray* attendees = [[NSMutableArray alloc] init];
-            [attendees addObject:[PFUser currentUser]];
-            self.trip.attendees = [attendees copy];
-
-            //actually save the trip
-            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    NSLog(@"Trip successfully saved!");
+            
+            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    NSLog(@"YAY! YOUR TRIP SAVED");
                 } else {
-                    NSLog(@"Error saving trip");
+                    NSLog(@"Trip didn't save");
                 }
             }];
             
@@ -366,6 +332,32 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return [dateFormatter stringFromDate:newDate];
 }
 
+
+- (void)alertForTripName{
+    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
+                                                                              message: @"Enter the trip name"
+                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.placeholder = @"Trip Name";
+        textField.textColor = [UIColor blueColor];
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.borderStyle = UITextBorderStyleRoundedRect;
+    }];
+    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+        NSArray * textfields = alertController.textFields;
+        UITextField * namefield = textfields[0];
+        //if the user does not provide a trip name, then set the name equal to the city
+        if (namefield.text.length == 0) {
+            self.tripName = self.trip.city;
+        }
+        else {
+            self.tripName = namefield.text;
+        }
+        [self performSegueWithIdentifier:@"toItinView" sender:nil];
+        
+    }]];
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 @end
     

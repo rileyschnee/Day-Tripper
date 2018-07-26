@@ -13,12 +13,13 @@
 @property (strong, nonatomic) NSString *city;
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSMutableArray *activities;
+@property (strong, nonatomic) NSMutableArray *chats;
 @property (strong, nonatomic) PFUser *planner;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSMutableArray *attendees;
 @property (strong, nonatomic) NSDate *tripDate;
 
-+ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withLocation:(NSString * _Nullable)city withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
