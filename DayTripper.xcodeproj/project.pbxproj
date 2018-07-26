@@ -107,6 +107,8 @@
 		BEB308F5210678DA00336EA4 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
 		BEB308FA21079B1A00336EA4 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		BEB308FB21079B1A00336EA4 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		BEB308FD210A8ACA00336EA4 /* CategoryCollectionViewDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionViewDelegate.h; sourceTree = "<group>"; };
+		BEB308FE210A8BC000336EA4 /* QuizViewControllerForCellDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizViewControllerForCellDelegate.h; sourceTree = "<group>"; };
 		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
 		BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultsCell.m; sourceTree = "<group>"; };
 		BEEA9D8C20FD016E0048C0DB /* Place.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Place.h; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				BEB308FB21079B1A00336EA4 /* ProfileViewController.m */,
 				537A4B842108F42400E64CBD /* ChatViewController.h */,
 				537A4B852108F42400E64CBD /* ChatViewController.m */,
+				BEB308FE210A8BC000336EA4 /* QuizViewControllerForCellDelegate.h */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -243,6 +246,7 @@
 		BEA5FD4D20F929B9005B79F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BEB308FD210A8ACA00336EA4 /* CategoryCollectionViewDelegate.h */,
 				BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */,
 				BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */,
 				BEEA9D9220FD03BC0048C0DB /* ItinCell.h */,
