@@ -9,11 +9,6 @@
 #import "UserCollectionCell.h"
 
 @implementation UserCollectionCell
-- (void)setUser:(PFUser *)user{
-    _user = user;
-    //self.profilePicView.file = user[@"picture"];
-    //[self.profilePicView loadInBackground];
-    self.image = user[@"picture"];
-    //self.profilePicView.file = self.image;
-}
+
 @end
+

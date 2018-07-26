@@ -23,15 +23,24 @@
     return @"Trip";
 }
 
-+ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withLocation:(NSString * _Nullable)city withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withCompletion: (PFBooleanResultBlock  _Nullable)completion {
 
     Trip *newTrip = trip;
-    newTrip.city = name;
+    newTrip.name = name;
     newTrip.planner = [PFUser currentUser];
     newTrip.tripDate = date;
     newTrip.latitude = lat;
     newTrip.longitude = lon;
+    newTrip.attendees = [NSMutableArray new];
+    [newTrip addUniqueObject:[PFUser currentUser].objectId forKey:@"attendees"];
     
-    [newTrip saveInBackgroundWithBlock: completion];
+    //actually save the trip
+    [newTrip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if (succeeded) {
+            NSLog(@"Trip successfully saved!");
+        } else {
+            NSLog(@"Error saving trip");
+        }
+    }];
 }
 @end

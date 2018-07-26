@@ -12,7 +12,7 @@
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
-
+@property (strong, nonatomic) NSMutableArray *attendeeUsers;
 @end
 
 @implementation ResourcesViewController
@@ -22,6 +22,7 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    [self fetchAttendees];
     
 }
 
@@ -40,11 +41,11 @@
     if([sender isKindOfClass:[UICollectionViewCell class]]){
         UICollectionViewCell  *tappedCell = sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
-        PFUser *user = self.trip.attendees[indexPath.item];
+        PFUser *user = self.attendeeUsers[indexPath.item];
         NSLog(@"%d", [[segue destinationViewController] isKindOfClass:[ProfileViewController class]]);
         UINavigationController *navController = [segue destinationViewController];
-        ProfileViewController *profileViewController = navController.topViewController;
-        
+        ProfileViewController *profileViewController = (ProfileViewController *)navController.topViewController;
+        NSLog(@"%@", user.username);
         profileViewController.user = user;
     }
 }
@@ -52,11 +53,12 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
-    cell.user = self.trip.attendees[indexPath.item];
-    NSLog(@"%i", self.trip.attendees.count);
+    cell.user = self.attendeeUsers[indexPath.item];
+    NSLog(@"%@", self.attendeeUsers);
+    NSLog(@"%@", cell.user);
     cell.profilePicView.file = cell.user[@"picture"];
     [cell.profilePicView loadInBackground];
-
+    NSLog(@"%lu", (unsigned long)self.attendeeUsers.count);
     return cell;
 }
 
@@ -73,7 +75,8 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.trip.attendees.count;
+    NSLog(@"%lu", self.attendeeUsers.count);
+    return self.attendeeUsers.count;
 }
 
 
@@ -132,6 +135,25 @@
         header.lowLabel.text = lowString;
     });
 }
+- (void)fetchAttendees{
+    NSLog(@"%@", self.trip.attendees);
+    //NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", self.trip.attendees];
+    PFQuery *query = [PFUser query /*WithPredicate:pred*/];
+    [query whereKey:@"objectId" containedIn:self.trip.attendees];
+    [query includeKey:@"picture"];
+    [query includeKey:@"username"];
+    query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
+        if (users != nil){
+            NSLog(@"%@", users);
+            self.attendeeUsers = [users mutableCopy];
+            [self.collectionView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+            NSLog(@"Error fetching attendees");
+        }
+    }];
+}
 
 - (double) kelvinToFahrenheit:(double)kelvin {
     return (kelvin * (9.0/5.0)) - 459.67;
@@ -141,5 +163,11 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (IBAction)shareToAlbum:(id)sender {
+    
+    
+    
+    
+}
 
 @end

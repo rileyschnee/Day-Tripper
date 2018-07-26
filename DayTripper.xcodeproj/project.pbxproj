@@ -34,7 +34,6 @@
 		BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA0210262B800933DB7 /* UserCollectionCell.m */; };
 		BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA6BFA3210262E300933DB7 /* TripReusableView.m */; };
 		BEB308F6210678DA00336EA4 /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308F5210678DA00336EA4 /* SettingsViewController.m */; };
-		BEB308F92106A17200336EA4 /* DTUser.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308F82106A17200336EA4 /* DTUser.m */; };
 		BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BEB308FB21079B1A00336EA4 /* ProfileViewController.m */; };
 		BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */; };
 		BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */ = {isa = PBXBuildFile; fileRef = BEEA9D8D20FD016E0048C0DB /* Place.m */; };
@@ -97,8 +96,6 @@
 		BEA6BFA3210262E300933DB7 /* TripReusableView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TripReusableView.m; sourceTree = "<group>"; };
 		BEB308F4210678DA00336EA4 /* SettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		BEB308F5210678DA00336EA4 /* SettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		BEB308F72106A17200336EA4 /* DTUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DTUser.h; sourceTree = "<group>"; };
-		BEB308F82106A17200336EA4 /* DTUser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DTUser.m; sourceTree = "<group>"; };
 		BEB308FA21079B1A00336EA4 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
 		BEB308FB21079B1A00336EA4 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
 		BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultsCell.h; sourceTree = "<group>"; };
@@ -266,8 +263,6 @@
 				0EAE0C5A20FEC07500D798A9 /* Food.m */,
 				53E8420F20FFA920003FE31A /* Event.h */,
 				53E8421020FFA920003FE31A /* Event.m */,
-				BEB308F72106A17200336EA4 /* DTUser.h */,
-				BEB308F82106A17200336EA4 /* DTUser.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -427,7 +422,6 @@
 				BEEA9D9B20FD12220048C0DB /* TripCell.m in Sources */,
 				BEEA9DA420FD322B0048C0DB /* LoginViewController.m in Sources */,
 				BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */,
-				BEB308F92106A17200336EA4 /* DTUser.m in Sources */,
 				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
 				BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */,
 				0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */,
@@ -581,14 +575,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -604,14 +598,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
