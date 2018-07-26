@@ -23,6 +23,9 @@
 
 @implementation ChatViewController
 
+//turns hex into ui color
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 // constant for keyboard movement
 int MOVEMENT_KEYBOARD = 200;
 
@@ -31,6 +34,7 @@ int MOVEMENT_KEYBOARD = 200;
     self.messageBody.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.chats = [[NSMutableArray alloc] init];
     
     //get the trip from the itin view
@@ -152,6 +156,15 @@ int MOVEMENT_KEYBOARD = 200;
     ChatMessage* chat = self.chats[indexPath.row];
     cell.usernameLabel.text = [NSString stringWithFormat:@"%@%@", chat.username, @":"];
     cell.messageLabel.text = chat.message;
+    //color the message blue if from user
+    if ([chat.username isEqualToString:[PFUser currentUser].username]) {
+        cell.messageContainerView.backgroundColor = UIColorFromRGB(0x5C8EC3);
+        cell.messageLabel.textColor = [UIColor whiteColor];
+    }
+    
+    //message styling
+    cell.messageContainerView.layer.cornerRadius = 16;
+    cell.messageContainerView.clipsToBounds = true;
     return cell;
 }
 
