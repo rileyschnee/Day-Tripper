@@ -30,16 +30,15 @@
     self.tabBarController.delegate = self;
     self.tableOrdering = [self.trip.activities mutableCopy];
     
-    //create edit bar button item
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
-    self.tabBarController.navigationItem.rightBarButtonItem = editButton;
-    self.navigationItem.rightBarButtonItem = editButton;
-    
     [self.tableView reloadData];
     
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    //create edit bar button item
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
+    self.tabBarController.navigationItem.rightBarButtonItem = editButton;
+    
     //set global Trip
     //needed to transfer data between tabs
      AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];

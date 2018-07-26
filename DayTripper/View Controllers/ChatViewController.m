@@ -46,6 +46,12 @@ int MOVEMENT_KEYBOARD = 200;
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(displayChatConversation) userInfo:nil repeats:true];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    //hide bar button item
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
+}
+
+
 - (IBAction)onTapGestureRecognizer:(id)sender {
     [self.messageBody resignFirstResponder];
 }
