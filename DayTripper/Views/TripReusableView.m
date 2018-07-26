@@ -25,7 +25,7 @@
 
 //when clicked, this button will add the given username to the attendees trip array
 - (IBAction)addUserToTrip:(id)sender {    
-    NSString* usernameToAdd = self.usernameToAdd.text;
+    NSString* usernameToAdd = [self.usernameToAdd.text lowercaseString];
     [self getUserByUsername:usernameToAdd];
 }
 
@@ -63,16 +63,6 @@
 
 //takes the user object and adds the object to the attendees for the trip
 - (void) addUserToAttendee:(PFUser*) user {
-//    //get the current trip
-//    PFQuery *query = [PFQuery queryWithClassName:@"Trip"];
-//    [query whereKey:@"name" equalTo:self.trip.name];
-//    [query includeKey:@"attendees"];
-//    query.limit = 1;
-//    // fetch data asynchronously
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
-//        if (trips != nil) {
-//            Trip* trip = trips[0];
-            //NSMutableArray* currAttendees = [self.trip.attendees mutableCopy];
             if (![self.trip.attendees containsObject:user.objectId]) {
                 [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
                 //[currAttendees addObject:user];
@@ -89,11 +79,6 @@
                     }
                 }];
             }
-//            }
-//        } else {
-//            NSLog(@"%@", error.localizedDescription);
-//        }
-//    }];
 }
 
 //sends an email to added user saying they were added
