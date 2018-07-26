@@ -82,7 +82,7 @@
                     if (succeeded) {
                         [self clearUsernameLabelAsync];
                         //send email to other user
-                        [self sendAdditionEmail:user];
+                        //[self sendAdditionEmail:user];
                         NSLog(@"Successfully saved attendees list");
                     } else {
                         NSLog(@"Problem saving attendee list");

@@ -15,7 +15,7 @@
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
-
+@property (strong, nonatomic) PFFile *profilePic;
 @end
 
 
@@ -55,7 +55,7 @@
     // Get the image captured by the UIImagePickerController
     UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
+    //self.profilePic = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(editedImage)];
     // Do something with the images (based on your use case)
     //editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
     [self.profilePicView setImage:editedImage];
@@ -65,17 +65,15 @@
 
 - (IBAction)saveProfile:(id)sender {
     NSLog(@"Saving...");
-    PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
-    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    PFUser.currentUser[@"picture"] = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.profilePicView.image)];
+    PFUser.currentUser.username = self.usernameField.text;
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
-            PFUser.currentUser[@"picture"] = file;
+            NSLog(@"Successfully saved profile changes");
         }else{
-            NSLog(@"Unable to save picture");
+            NSLog(@"Unable to save profile changes");
         }
     }];
-    PFUser.currentUser.username = self.usernameField.text;
-    NSLog(@"About to save");
-    [PFUser.currentUser saveInBackground];
     NSLog(@"Saved!");
     [self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
