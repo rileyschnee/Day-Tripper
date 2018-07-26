@@ -9,8 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "HomeViewController.h"
+@protocol SettingsViewControllerDelegate
+- (void)reloadUserInfo;
+@end
 
 @interface SettingsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicImage;
-
+@property (strong, nonatomic) id<SettingsViewControllerDelegate> delegate;
 @end

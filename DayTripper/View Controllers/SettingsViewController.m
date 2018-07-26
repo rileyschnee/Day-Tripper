@@ -28,19 +28,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    // UI for Text Fields
+    [self.usernameField setBorderStyle:UITextBorderStyleNone];
+    [self.nameField setBorderStyle:UITextBorderStyleNone];
+    [self.passwordFieldFirst setBorderStyle:UITextBorderStyleNone];
+    [self.passwordFieldSecond setBorderStyle:UITextBorderStyleNone];
+    
+    // Setting initial information
     self.profilePicImage.file = PFUser.currentUser[@"picture"];
     [self.profilePicImage loadInBackground];
     self.profilePicImage.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     self.usernameField.text = PFUser.currentUser.username;
     self.nameField.text = PFUser.currentUser[@"name"];
+    
+    // Tap Gesture Recognizer
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
 }
 
 -(void)dismissKeyboard {
-    //[self.nameField endEditing:YES];
+    [self.nameField endEditing:YES];
     [self.usernameField endEditing:YES];
-    //[self.bioField endEditing:YES];
+    [self.passwordFieldFirst endEditing:YES];
+    [self.passwordFieldSecond endEditing:YES];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -77,9 +87,11 @@
     }
     
     NSLog(@"Saving...");
+    // Set current user's new information
     PFUser.currentUser[@"picture"] = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.profilePicView.image)];
     PFUser.currentUser.username = self.usernameField.text;
     PFUser.currentUser[@"name"] = self.nameField.text;
+    // Save changes
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"Successfully saved profile changes");
@@ -88,8 +100,10 @@
         }
     }];
     NSLog(@"Saved!");
-    [self.navigationController popViewControllerAnimated:YES];
-    //[self dismissViewControllerAnimated:YES completion:nil];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.delegate reloadUserInfo];
+
 }
 
 - (IBAction)clickedLogout:(id)sender {

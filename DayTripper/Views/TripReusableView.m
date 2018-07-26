@@ -75,6 +75,7 @@
                 //send email to other user
                 //[self sendAdditionEmail:user];
                 NSLog(@"Successfully saved attendees list");
+                [self.delegate reloadAttendeeData];
             } else {
                 NSLog(@"Problem saving attendee list");
             }

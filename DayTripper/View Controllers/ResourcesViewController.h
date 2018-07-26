@@ -13,7 +13,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-@interface ResourcesViewController : UIViewController
+@interface ResourcesViewController : UIViewController 
 @property (strong, nonatomic) Trip *trip;
 
 @end

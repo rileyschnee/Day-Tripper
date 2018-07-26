@@ -12,6 +12,10 @@
 #import <ParseUI/ParseUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
 
+@protocol TripReusableViewDelegate
+- (void)reloadAttendeeData;
+@end
+
 
 @interface TripReusableView : UICollectionReusableView 
 @property (strong, nonatomic) Trip *trip;
@@ -22,4 +26,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *highLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
+@property (strong, nonatomic) id<TripReusableViewDelegate> delegate;
 @end
