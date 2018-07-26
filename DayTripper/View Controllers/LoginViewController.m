@@ -10,7 +10,7 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 
-@interface LoginViewController ()
+@interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 // password ui components
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
@@ -39,6 +39,8 @@
     [self setUpTextFieldStyles:self.passwordField];
     [self setUpTextFieldStyles:self.emailField];
     
+    self.usernameField.delegate = self;
+    
 }
 
 //this function sets up the text field styles by removing border and bg
@@ -52,6 +54,18 @@
     [self.usernameField endEditing:YES];
     [self.passwordField endEditing:YES];
     [self.emailField endEditing:YES];
+}
+
+//prevent user from typing spaces in user name or if username is too long
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    if ([string rangeOfCharacterFromSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]].location != NSNotFound) {
+        return NO;
+    }
+    if (textField.text.length > 16 && range.length == 0) {
+        return NO;
+    }
+    return YES;
+
 }
 
 //when the selector goes to sign up or to login
@@ -114,7 +128,7 @@
 }
 
 - (void)loginUser{
-    NSString *username = self.usernameField.text;
+    NSString *username = [self.usernameField.text lowercaseString];
     NSString *password = self.passwordField.text;
     
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
@@ -133,9 +147,8 @@
 - (void)registerUser{
     // initialize a user object
     PFUser *newUser = [PFUser user];
-    
     // set user properties
-    newUser.username = self.usernameField.text;
+    newUser.username = [self.usernameField.text lowercaseString];
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
     newUser[@"name"] = self.usernameField.text;
@@ -149,8 +162,15 @@
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
-            NSLog(@"Error: %@", error.localizedDescription);
-            [self errorAlert];
+            if ([error.localizedDescription containsString:@"Account already exists for this email"]) {
+                [self emailAlreadyExistsAlert];
+            }
+            else if ([error.localizedDescription containsString:@"Account already exists for this username"]) {
+                [self usernameAlreadyExistsAlert];
+            }
+            else {
+                [self errorAlert];
+            }
         } else {
             // manually segue to logged in view
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
@@ -189,6 +209,27 @@
     [self presentViewController:emptyUSRAlert animated:YES completion:nil];
 }
 
+- (void)usernameAlreadyExistsAlert{
+    // Present error alert controller
+    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Username already exists" message:@"Please try using a different username" preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [errorAlert addAction:okAction];
+    [self presentViewController:errorAlert animated:YES completion:nil];
+}
+
+- (void) emailAlreadyExistsAlert{
+    // Present error alert controller
+    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Email already exists" message:@"Please try using a different email" preferredStyle:(UIAlertControllerStyleAlert)];
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [errorAlert addAction:okAction];
+    [self presentViewController:errorAlert animated:YES completion:nil];
+}
 
 - (void)errorAlert{
     // Present error alert controller

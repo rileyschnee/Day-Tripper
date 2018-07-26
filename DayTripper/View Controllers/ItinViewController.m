@@ -24,12 +24,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //fix extra space at the top of the table view
+    self.edgesForExtendedLayout = UIRectEdgeNone;
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.tabBarController.delegate = self;
     self.tableOrdering = [self.trip.activities mutableCopy];
-    
     [self.tableView reloadData];
     
 }
@@ -37,7 +38,14 @@
 - (void)viewDidAppear:(BOOL)animated {
     //create edit bar button item
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
-    self.tabBarController.navigationItem.rightBarButtonItem = editButton;
+    if (self.fromHome) {
+        self.tabBarController.navigationItem.rightBarButtonItem = editButton;
+    }
+    else {
+        self.navigationItem.rightBarButtonItem = editButton;
+    }
+    
+    
     
     //set global Trip
     //needed to transfer data between tabs
