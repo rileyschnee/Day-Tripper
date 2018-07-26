@@ -32,7 +32,7 @@
     newTrip.latitude = lat;
     newTrip.longitude = lon;
     newTrip.attendees = [NSMutableArray new];
-    [newTrip addUniqueObject:[PFUser currentUser].objectId forKey:@"attendees"];
+    [newTrip addUniqueObject:[PFUser currentUser] forKey:@"attendees"];
     
     //actually save the trip
     [newTrip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {

@@ -50,15 +50,11 @@
     }
 }
 
-
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
     cell.user = self.attendeeUsers[indexPath.item];
-    NSLog(@"%@", self.attendeeUsers);
-    NSLog(@"%@", cell.user);
     cell.profilePicView.file = cell.user[@"picture"];
     [cell.profilePicView loadInBackground];
-    NSLog(@"%lu", (unsigned long)self.attendeeUsers.count);
     return cell;
 }
 
@@ -136,23 +132,8 @@
     });
 }
 - (void)fetchAttendees{
-    NSLog(@"%@", self.trip.attendees);
-    //NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", self.trip.attendees];
-    PFQuery *query = [PFUser query /*WithPredicate:pred*/];
-    [query whereKey:@"objectId" containedIn:self.trip.attendees];
-    [query includeKey:@"picture"];
-    [query includeKey:@"username"];
-    query.limit = 20;
-    [query findObjectsInBackgroundWithBlock:^(NSArray *users, NSError *error) {
-        if (users != nil){
-            NSLog(@"%@", users);
-            self.attendeeUsers = [users mutableCopy];
-            [self.collectionView reloadData];
-        } else {
-            NSLog(@"%@", error.localizedDescription);
-            NSLog(@"Error fetching attendees");
-        }
-    }];
+    self.attendeeUsers = self.trip.attendees;
+    NSLog(@"%@", self.attendeeUsers);
 }
 
 - (double) kelvinToFahrenheit:(double)kelvin {

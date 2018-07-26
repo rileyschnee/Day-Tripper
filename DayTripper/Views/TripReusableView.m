@@ -82,7 +82,7 @@
                     if (succeeded) {
                         [self clearUsernameLabelAsync];
                         //send email to other user
-                        [self sendAdditionEmail:user];
+                        //[self sendAdditionEmail:user];
                         NSLog(@"Successfully saved attendees list");
                     } else {
                         NSLog(@"Problem saving attendee list");
@@ -98,6 +98,9 @@
 
 //sends an email to added user saying they were added
 - (void) sendAdditionEmail:(PFUser*) user {
+    
+    // TODO: case email
+    
     if([MFMailComposeViewController canSendMail]) {
         MFMailComposeViewController *mailCont = [[MFMailComposeViewController alloc] init];
         UINavigationController* navController = [UIApplication sharedApplication].keyWindow.rootViewController;

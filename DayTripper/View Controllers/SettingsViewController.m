@@ -15,7 +15,7 @@
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
-
+@property (strong, nonatomic) PFFile *selectedProfilePic;
 @end
 
 
@@ -53,9 +53,8 @@
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
 
     // Get the image captured by the UIImagePickerController
-    UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
-    
+    self.selectedProfilePic = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(editedImage)];
     // Do something with the images (based on your use case)
     //editedImage = [self resizeImage:originalImage withSize:CGSizeMake(100, 100)];
     [self.profilePicView setImage:editedImage];
@@ -65,10 +64,10 @@
 
 - (IBAction)saveProfile:(id)sender {
     NSLog(@"Saving...");
-    PFFile *file = [PFFile fileWithData:UIImagePNGRepresentation(self.profilePicView.image)];
-    [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+    PFUser.currentUser[@"picture"] = self.selectedProfilePic;
+    [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
-            PFUser.currentUser[@"picture"] = file;
+           
         }else{
             NSLog(@"Unable to save picture");
         }
