@@ -150,7 +150,7 @@ int MOVEMENT_KEYBOARD = 200;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
     ChatMessage* chat = self.chats[indexPath.row];
-    cell.usernameLabel.text = chat.username;
+    cell.usernameLabel.text = [NSString stringWithFormat:@"%@%@", chat.username, @":"];
     cell.messageLabel.text = chat.message;
     return cell;
 }

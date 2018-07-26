@@ -295,24 +295,26 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="30.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PD8-Sa-eSv">
-                                                    <rect key="frame" x="10" y="7" width="71" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Username:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PD8-Sa-eSv">
+                                                    <rect key="frame" x="10" y="7" width="70.5" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sC-lW-7is">
-                                                    <rect key="frame" x="89" y="7" width="243" height="17"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8sC-lW-7is">
+                                                    <rect key="frame" x="87" y="7" width="277" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="8sC-lW-7is" firstAttribute="top" secondItem="PD8-Sa-eSv" secondAttribute="top" id="9NA-vc-kiu"/>
-                                                <constraint firstItem="8sC-lW-7is" firstAttribute="leading" secondItem="PD8-Sa-eSv" secondAttribute="trailing" constant="8" id="EIr-QM-oA8"/>
-                                                <constraint firstItem="PD8-Sa-eSv" firstAttribute="top" secondItem="IeC-DD-QRn" secondAttribute="top" constant="7" id="OY9-f7-lnU"/>
-                                                <constraint firstItem="PD8-Sa-eSv" firstAttribute="leading" secondItem="IeC-DD-QRn" secondAttribute="leading" constant="10" id="gK6-Fs-jV0"/>
+                                                <constraint firstAttribute="bottom" secondItem="8sC-lW-7is" secondAttribute="bottom" constant="6.5" id="10K-Gv-V5H"/>
+                                                <constraint firstAttribute="trailing" secondItem="8sC-lW-7is" secondAttribute="trailing" constant="11" id="EEk-py-gi2"/>
+                                                <constraint firstItem="8sC-lW-7is" firstAttribute="top" secondItem="IeC-DD-QRn" secondAttribute="top" constant="7" id="HBB-MV-dB6"/>
+                                                <constraint firstItem="PD8-Sa-eSv" firstAttribute="top" secondItem="IeC-DD-QRn" secondAttribute="top" constant="7" id="TgM-PZ-GbS"/>
+                                                <constraint firstItem="PD8-Sa-eSv" firstAttribute="leading" secondItem="IeC-DD-QRn" secondAttribute="leading" constant="10" id="XdS-Kv-AvR"/>
+                                                <constraint firstItem="8sC-lW-7is" firstAttribute="leading" secondItem="PD8-Sa-eSv" secondAttribute="trailing" constant="6.5" id="us2-aS-feT"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
