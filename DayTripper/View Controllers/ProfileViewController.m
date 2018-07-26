@@ -24,6 +24,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.usernameLabel.text = self.user.username;
+    self.profilePicView.file = self.user[@"picture"];
+    [self.profilePicView loadInBackground];
+
     
     [self sortTrips:self.usernameLabel.text];
     
@@ -92,10 +96,5 @@
 }
 */
 
-- (void)setUser:(PFUser *)user{
-    _user = user;
-    self.profilePicView.file = user[@"picture"];
-    self.usernameLabel.text = user.username;
-}
 
 @end

@@ -11,6 +11,8 @@
 #import "MapViewController.h"
 #import "ResourcesViewController.h"
 #import "DetailsViewController.h"
+#import "ChatViewController.h"
+#import "AppDelegate.h"
 
 @interface ItinViewController () <UITableViewDataSource, UITableViewDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -34,7 +36,17 @@
     self.navigationItem.rightBarButtonItem = editButton;
     
     [self.tableView reloadData];
+    
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    //set global Trip
+    //needed to transfer data between tabs
+     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    delegate.currTrip = self.trip;
+}
+
+
 
 - (void)back{
     [self performSegueWithIdentifier:@"itinToHome" sender:nil];
