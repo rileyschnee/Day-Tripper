@@ -63,37 +63,26 @@
 
 //takes the user object and adds the object to the attendees for the trip
 - (void) addUserToAttendee:(PFUser*) user {
-//    //get the current trip
-//    PFQuery *query = [PFQuery queryWithClassName:@"Trip"];
-//    [query whereKey:@"name" equalTo:self.trip.name];
-//    [query includeKey:@"attendees"];
-//    query.limit = 1;
-//    // fetch data asynchronously
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
-//        if (trips != nil) {
-//            Trip* trip = trips[0];
-            //NSMutableArray* currAttendees = [self.trip.attendees mutableCopy];
-            if (![self.trip.attendees containsObject:user.objectId]) {
-                [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
-                //[currAttendees addObject:user];
-                //self.trip.attendees = [currAttendees mutableCopy];
-                //save trip
-                [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [self clearUsernameLabelAsync];
-                        //send email to other user
-                        //[self sendAdditionEmail:user];
-                        NSLog(@"Successfully saved attendees list");
-                    } else {
-                        NSLog(@"Problem saving attendee list");
-                    }
-                }];
+
+    if (![self.trip.attendees containsObject:user.objectId]) {
+        [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
+        //[currAttendees addObject:user];
+        //self.trip.attendees = [currAttendees mutableCopy];
+        //save trip
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [self clearUsernameLabelAsync];
+                //send email to other user
+                //[self sendAdditionEmail:user];
+                NSLog(@"Successfully saved attendees list");
+                [self.delegate reloadAttendeeData];
+            } else {
+                NSLog(@"Problem saving attendee list");
             }
-//            }
-//        } else {
-//            NSLog(@"%@", error.localizedDescription);
-//        }
-//    }];
+        }];
+    } else {
+        NSLog(@"User already added");
+    }
 }
 
 //sends an email to added user saying they were added

@@ -138,6 +138,7 @@
     newUser.username = self.usernameField.text;
     newUser.password = self.passwordField.text;
     newUser.email = self.emailField.text;
+    newUser[@"name"] = self.usernameField.text;
     UIImage *image = [UIImage imageNamed:@"profile-pic-placeholder"];
     PFFile *file = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(image)];
     [file saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {

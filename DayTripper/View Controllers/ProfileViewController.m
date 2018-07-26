@@ -18,7 +18,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *userMapView;
 @property (strong, nonatomic) NSMutableArray *triparray;
+
 - (IBAction)didTapBack:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+
 
 @end
 
@@ -28,9 +32,10 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.usernameLabel.text = self.user.username;
+    self.nameLabel.text = self.user[@"name"];
     self.profilePicView.file = self.user[@"picture"];
     [self.profilePicView loadInBackground];
-
+    self.profilePicView.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     
     [self sortTrips:self.usernameLabel.text];
     
