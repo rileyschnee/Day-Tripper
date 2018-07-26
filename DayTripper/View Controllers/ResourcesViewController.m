@@ -58,6 +58,7 @@
     PFFile* file = cell.user[@"picture"];
     cell.profilePicView.file = file;
     [cell.profilePicView loadInBackground];
+    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
     return cell;
 }
 

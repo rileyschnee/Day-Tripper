@@ -15,6 +15,6 @@
 @end
 
 @interface SettingsViewController : UIViewController
-@property (weak, nonatomic) IBOutlet PFImageView *profilePicImage;
+@property (weak, nonatomic) IBOutlet PFImageView *profilePicView;
 @property (strong, nonatomic) id<SettingsViewControllerDelegate> delegate;
 @end

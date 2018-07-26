@@ -13,7 +13,6 @@
 #import "AppDelegate.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UIImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFieldFirst;
@@ -35,9 +34,9 @@
     [self.passwordFieldSecond setBorderStyle:UITextBorderStyleNone];
     
     // Setting initial information
-    self.profilePicImage.file = PFUser.currentUser[@"picture"];
-    [self.profilePicImage loadInBackground];
-    self.profilePicImage.layer.cornerRadius = self.profilePicView.frame.size.width/2;
+    self.profilePicView.file = PFUser.currentUser[@"picture"];
+    [self.profilePicView loadInBackground];
+    self.profilePicView.layer.cornerRadius = self.profilePicView.frame.size.width/2;
     self.usernameField.text = PFUser.currentUser.username;
     self.nameField.text = PFUser.currentUser[@"name"];
     
