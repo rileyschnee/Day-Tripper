@@ -80,6 +80,8 @@
         ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
         //create edit bar button item
         itinerary.trip = trip;
+        //set the trip title
+        tabbar.title = trip.name;
     }
 }
 

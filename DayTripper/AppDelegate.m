@@ -8,7 +8,6 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
-#import "DTUser.h"
 @interface AppDelegate ()
 
 @end

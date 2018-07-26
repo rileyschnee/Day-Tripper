@@ -26,9 +26,9 @@
     
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (void)viewDidAppear:(BOOL)animated {
+    //hide bar button item
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
 
