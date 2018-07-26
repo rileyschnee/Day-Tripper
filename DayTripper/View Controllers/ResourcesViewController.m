@@ -70,7 +70,6 @@
     //get weather info
     [self getWeather:header];
     
-    
     return header;
 }
 
@@ -163,11 +162,5 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)shareToAlbum:(id)sender {
-    
-    
-    
-    
-}
 
 @end

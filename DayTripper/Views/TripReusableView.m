@@ -7,6 +7,7 @@
 //
 
 #import "TripReusableView.h"
+#import "APIManager.h"
 
 @implementation TripReusableView
 - (void)setTrip:(Trip *)trip{
@@ -54,6 +55,49 @@
     }];
 }
 
+// GOOGLE PHOTOS SHARING
+
+- (IBAction)shareToGPhotos:(id)sender {
+    if([self.trip.albumId isEqualToString:@""]){
+        APIManager *apiManager = [[APIManager alloc] init];
+        // CREATE ALBUM
+        NSString *baseURL =  @"https://photoslibrary.googleapis.com/v1/albums";
+        //params
+        NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+        NSString *albumName = [NSString stringWithFormat: @"%@ - %@", self.trip.name, self.trip.tripDate];;
+        [paramsDict setObject:albumName forKey:[paramsDict objectForKey:@"album"]];
+        [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
+        [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+        [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+            //parse the request
+            self.trip.albumId = responseDict[0][@"id"];
+        }];
+        // SHARE ALBUM
+        baseURL =  [NSString stringWithFormat:@"https://photoslibrary.googleapis.com/v1/albums/%@:share", self.trip.albumId];
+        //params
+        paramsDict = [[NSMutableDictionary alloc] init];
+        NSMutableDictionary *paramsDict2 = [[NSMutableArray alloc] init];
+        [paramsDict2 setObject:@"true" forKey:@"isCollaborative"];
+        [paramsDict setObject:paramsDict2 forKey:@"sharedAlbumOptions"];
+        [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
+        [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+        [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+            //parse the request
+            self.trip.shareToken = responseDict[0][@"shareToken"];
+            for(PFUser user in self.trip.attendees){
+                
+            }
+        }];
+    } else {
+        
+    }
+    
+}
+
+
+
+// HELPER FUNCTIONS
+
 //reloads the tableview asynchronously
 -(void) clearUsernameLabelAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -63,37 +107,22 @@
 
 //takes the user object and adds the object to the attendees for the trip
 - (void) addUserToAttendee:(PFUser*) user {
-//    //get the current trip
-//    PFQuery *query = [PFQuery queryWithClassName:@"Trip"];
-//    [query whereKey:@"name" equalTo:self.trip.name];
-//    [query includeKey:@"attendees"];
-//    query.limit = 1;
-//    // fetch data asynchronously
-//    [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
-//        if (trips != nil) {
-//            Trip* trip = trips[0];
-            //NSMutableArray* currAttendees = [self.trip.attendees mutableCopy];
-            if (![self.trip.attendees containsObject:user.objectId]) {
-                [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
-                //[currAttendees addObject:user];
-                //self.trip.attendees = [currAttendees mutableCopy];
-                //save trip
-                [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                    if (succeeded) {
-                        [self clearUsernameLabelAsync];
-                        //send email to other user
-                        //[self sendAdditionEmail:user];
-                        NSLog(@"Successfully saved attendees list");
-                    } else {
-                        NSLog(@"Problem saving attendee list");
-                    }
-                }];
+    if (![self.trip.attendees containsObject:user.objectId]) {
+        [self.trip addUniqueObject:user.objectId forKey:@"attendees"];
+        //[currAttendees addObject:user];
+        //self.trip.attendees = [currAttendees mutableCopy];
+        //save trip
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+                [self clearUsernameLabelAsync];
+                //send email to other user
+                //[self sendAdditionEmail:user];
+                NSLog(@"Successfully saved attendees list");
+            } else {
+                NSLog(@"Problem saving attendee list");
             }
-//            }
-//        } else {
-//            NSLog(@"%@", error.localizedDescription);
-//        }
-//    }];
+        }];
+    }
 }
 
 //sends an email to added user saying they were added

@@ -18,6 +18,7 @@
 @dynamic longitude;
 @dynamic attendees;
 @dynamic tripDate;
+@dynamic albumId;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";
@@ -31,6 +32,7 @@
     newTrip.tripDate = date;
     newTrip.latitude = lat;
     newTrip.longitude = lon;
+    newTrip.albumId = @"";
     newTrip.attendees = [NSMutableArray new];
     [newTrip addUniqueObject:[PFUser currentUser].objectId forKey:@"attendees"];
     
