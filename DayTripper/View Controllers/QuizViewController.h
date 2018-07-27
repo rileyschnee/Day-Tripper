@@ -9,12 +9,10 @@
 #import <UIKit/UIKit.h>
 #import "QuizReusableViewDelegate.h"
 #import "QuizViewControllerDelegate.h"
+#import "QuizViewControllerForCellDelegate.h"
 #import "QuizReusableView.h"
 #import "CategoryCollectionCell.h"
-
-//@protocol QuizViewControllerDelegate
-//@property (weak, nonatomic) IBOutlet UITextField *locationField;
-//@end
+#import "CategoryCollectionViewDelegate.h"
 
 @interface QuizViewController : UIViewController <QuizReusableViewDelegate, CategoryCollectionCellDelegate>
 @property (nonatomic) double latitude;
@@ -22,4 +20,6 @@
 @property (strong, nonatomic) NSString *location;
 @property (strong, nonatomic) NSDate *tripDate;
 @property (strong, nonatomic) id<QuizViewControllerDelegate> delegate;
+@property (strong, nonatomic) id<QuizViewControllerForCellDelegate> catDelegate;
+
 @end

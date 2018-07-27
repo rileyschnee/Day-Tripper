@@ -81,6 +81,7 @@
         }];
     } else {
         NSLog(@"User already added");
+        [self alertUserAlreadyAttending];
     }
 }
 
@@ -101,6 +102,15 @@
     }
 }
 
+
+- (void)alertUserAlreadyAttending{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"User Already Attending" message:[NSString stringWithFormat:@"%@ is already attending %@", self.usernameToAdd.text, self.trip.name] preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    [self.delegate showAlert:alert];
+}
 
 
 @end

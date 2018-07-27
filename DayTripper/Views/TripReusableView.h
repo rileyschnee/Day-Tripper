@@ -14,6 +14,7 @@
 
 @protocol TripReusableViewDelegate
 - (void)reloadAttendeeData;
+- (void)showAlert:(UIAlertController *)alert;
 @end
 
 

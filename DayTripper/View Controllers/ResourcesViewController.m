@@ -175,4 +175,10 @@
     [self fetchAttendees];
 }
 
+- (void)showAlert:(UIAlertController *)alert {
+    [self presentViewController:alert animated:YES completion:nil];
+
+}
+
+
 @end

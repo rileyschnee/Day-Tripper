@@ -49,21 +49,28 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    ResultsViewController *resultsViewController = [segue destinationViewController];
-    resultsViewController.location = self.location;
-    resultsViewController.latitude = self.latitude;
-    resultsViewController.longitude = self.longitude;
-    [self processCategories];
-    resultsViewController.placeCategories = self.chosenPlaceCategories;
-    resultsViewController.foodCategories = self.chosenFoodCategories;
-    resultsViewController.eventCategories = self.chosenEventCategories;
-    resultsViewController.tripDate = self.tripDate;
+    if([self.delegate.locationField.text isEqualToString:@""]){
+        [self alertNoLocation];
+    } else {
+        ResultsViewController *resultsViewController = [segue destinationViewController];
+        resultsViewController.location = self.location;
+        resultsViewController.latitude = self.latitude;
+        resultsViewController.longitude = self.longitude;
+        [self processCategories];
+        resultsViewController.placeCategories = self.chosenPlaceCategories;
+        resultsViewController.foodCategories = self.chosenFoodCategories;
+        resultsViewController.eventCategories = self.chosenEventCategories;
+        resultsViewController.tripDate = self.tripDate;
+    }
 }
 
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCell" forIndexPath:indexPath];
     cell.categoryLabel.text = self.allCategories[indexPath.item];
+    [cell setSelected:[self isCategoryInArray:cell.categoryLabel.text]];
+    self.catDelegate = cell;
+    [self.catDelegate toggleWordColor];
     //NSLog(@"%@", cell.categoryLabel.text);
     
     CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
@@ -73,18 +80,10 @@
     //self.layout.itemSize = labelSize;
     //cell.frame.size = labelSize;
     //NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
-     
     
-    CGRect temp = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, labelSize.width, 100);
+    CGRect temp = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, labelSize.width, 150);
     cell.frame = temp;
     cell.delegate = self;
-    //cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
-    cell.selected = [self isCategoryInArray:cell.categoryLabel.text];
-//    if(cell.selected){
-//        cell.backgroundColor = [UIColor yellowColor];
-//    } else {
-//        cell.backgroundColor = [UIColor whiteColor];
-//    }
     if([self.cats.placeCategories objectForKey:cell.categoryLabel.text] != nil){
         cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
     } else if([self.cats.foodCategories objectForKey:cell.categoryLabel.text] != nil){
@@ -146,5 +145,16 @@
     NSLog(@"Removed %@ from chosenCategories", cat);
     [self.chosenCategories removeObject:cat];
 }
+
+
+- (void)alertNoLocation{
+    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Location" message:@"You must enter a location" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+    }];
+    // add the OK action to the alert controller
+    [noLocaAlert addAction:okAction];
+    [self presentViewController:noLocaAlert animated:YES completion:nil];
+}
+
 
 @end

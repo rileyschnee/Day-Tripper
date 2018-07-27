@@ -7,14 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "QuizViewController.h"
+#import "CategoryCollectionViewDelegate.h"
+#import "QuizViewControllerForCellDelegate.h"
 
-@protocol CategoryCollectionCellDelegate
--(void)addCategoryToArray:(NSString *) cat;
--(void)removeCategoryFromArray:(NSString *) cat;
--(BOOL)isCategoryInArray:(NSString *) cat;
-@end
-
-@interface CategoryCollectionCell : UICollectionViewCell
+@interface CategoryCollectionCell : UICollectionViewCell <QuizViewControllerForCellDelegate>
 @property (weak, nonatomic) IBOutlet UILabel *categoryLabel;
 @property (strong, nonatomic) NSString *categoryAlias;
 @property (strong, nonatomic) id<CategoryCollectionCellDelegate> delegate;
