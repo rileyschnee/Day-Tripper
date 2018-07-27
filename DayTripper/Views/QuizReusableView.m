@@ -13,7 +13,10 @@
     [super awakeFromNib];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self addGestureRecognizer:tap];
-    
+    [self.datePicker setMinimumDate: [NSDate date]];
+    //set make date for trip only a week from the current day
+    NSDate *sevenDaysOut = [[NSDate date] dateByAddingTimeInterval:60*60*24*7];
+    [self.datePicker setMaximumDate: sevenDaysOut];
     [self.locationField setBorderStyle:UITextBorderStyleNone];
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
@@ -59,6 +62,9 @@
     UITextPosition *newPosition = [textField positionFromPosition:selectedRange.end offset:-positionToStartHighlighting];
     UITextRange *newRange = [textField textRangeFromPosition:newPosition toPosition:selectedRange.start];
     [textField setSelectedTextRange:newRange];
+}
+- (IBAction)changeDate:(id)sender {
+    self.delegate.tripDate = self.datePicker.date;
 }
 
 - (void) getAddressFromName:(NSString*) name {
