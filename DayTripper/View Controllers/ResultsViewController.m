@@ -86,7 +86,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         }
         //reaches here is a trip name exists
         else {
-            
             [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded){
                     NSLog(@"YAY! YOUR TRIP SAVED");
@@ -304,7 +303,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 //gets the current date in the format that four square wants
 - (NSString *) generatCurrentDateFourSquare {
-    NSDate *today = [NSDate date];
+    NSDate *today = self.tripDate;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyyMMdd"];
     return [dateFormatter stringFromDate:today];
@@ -312,7 +311,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 //gets current date in format that predicthq wants
 - (NSString *) generatCurrentDateEvents {
-    NSDate *today = [NSDate date];
+    NSDate *today = self.tripDate;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     return [dateFormatter stringFromDate:today];
@@ -320,7 +319,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 //gets the date one week from now
 - (NSString *) generatEndDateEvents {
-    NSDate *today = [NSDate date];
+    NSDate *today = self.tripDate;
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     //push 7 days ahead
     NSDateComponents *dateComponents = [[NSDateComponents alloc] init];

@@ -13,6 +13,7 @@
     [super awakeFromNib];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self addGestureRecognizer:tap];
+    [self.datePicker setMinimumDate: [NSDate date]];
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
     [self.locationField resignFirstResponder];
@@ -57,6 +58,9 @@
     UITextPosition *newPosition = [textField positionFromPosition:selectedRange.end offset:-positionToStartHighlighting];
     UITextRange *newRange = [textField textRangeFromPosition:newPosition toPosition:selectedRange.start];
     [textField setSelectedTextRange:newRange];
+}
+- (IBAction)changeDate:(id)sender {
+    self.delegate.tripDate = self.datePicker.date;
 }
 
 - (void) getAddressFromName:(NSString*) name {
