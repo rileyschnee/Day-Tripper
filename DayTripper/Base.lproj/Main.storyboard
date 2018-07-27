@@ -935,6 +935,9 @@
                                             <date key="date" timeIntervalSinceReferenceDate="553811434.620978">
                                                 <!--2018-07-20 20:30:34 +0000-->
                                             </date>
+                                            <connections>
+                                                <action selector="changeDate:" destination="Jic-eb-xpB" eventType="valueChanged" id="g2s-vl-Nuz"/>
+                                            </connections>
                                         </datePicker>
                                     </subviews>
                                     <gestureRecognizers/>
@@ -1221,7 +1224,6 @@
         <image name="profile-pic-placeholder" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="l4k-AO-cIN"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>

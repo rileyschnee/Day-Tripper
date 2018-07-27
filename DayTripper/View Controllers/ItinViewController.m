@@ -103,7 +103,8 @@
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.trip.activities[indexPath.row];
-        
+        detailPage.titleForItin = self.trip.name;
+
     }
 }
 

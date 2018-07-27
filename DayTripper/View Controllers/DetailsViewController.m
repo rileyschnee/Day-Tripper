@@ -32,6 +32,8 @@
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) double currentLat;
 @property (nonatomic) double currentLong;
+//for storing the previous back button
+@property (nonatomic,strong) UIBarButtonItem* prevBarButton;
 @end
 
 @implementation DetailsViewController
@@ -80,6 +82,21 @@
         [self getEventPhotoObjectsByLocation];
         [self.websiteLink setHidden:YES];
     }
+    
+    //if coming from itin
+    if (self.titleForItin.length > 0) {
+        //override back button because previous behavior takes you to wrong screen
+        self.prevBarButton = self.tabBarController.navigationItem.leftBarButtonItem;
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@%@", @"< ", self.titleForItin] style:UIBarButtonItemStylePlain target:self action:@selector(goBackToPrevScreen)];
+        self.tabBarController.navigationItem.hidesBackButton = YES;
+        self.tabBarController.navigationItem.leftBarButtonItem = item;
+    }
+}
+
+- (void) goBackToPrevScreen {
+    [self.navigationController popViewControllerAnimated:YES];
+    self.tabBarController.navigationItem.leftBarButtonItem = self.prevBarButton;
+    self.tabBarController.navigationItem.hidesBackButton = NO;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
