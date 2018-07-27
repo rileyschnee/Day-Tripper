@@ -13,29 +13,21 @@
     [super awakeFromNib];
     //UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(toggleCatStatus:)];
     //[self addGestureRecognizer:tap];
-    self.selected = [self.delegate isCategoryInArray:self.categoryLabel.text];
-//    if(self.selected){
-//        self.backgroundColor = [UIColor yellowColor];
-//    }
-    [self toggleWordColor];
+    //self.selected = [self.delegate isCategoryInArray:self.categoryLabel.text];
 
+    //[self toggleWordColor];
 }
+
 - (void)toggleCatStatus:(UITapGestureRecognizer *)sender{
     if(!self.selected){
         [self.delegate addCategoryToArray:self.categoryLabel.text];
-        self.selected = YES;
+        self.selected = true;
         
     } else {
         [self.delegate removeCategoryFromArray:self.categoryLabel.text];
-        self.selected = NO;
+        self.selected = false;
     }
     [self toggleWordColor];
-    
-//    if(self.selected){
-//        self.backgroundColor = [UIColor yellowColor];
-//    } else {
-//        self.backgroundColor = [UIColor whiteColor];
-//    }
 }
 
 - (void)toggleWordColor{
@@ -45,6 +37,7 @@
         self.categoryLabel.textColor = [UIColor blackColor];
     }
 }
+
 
 
 @end

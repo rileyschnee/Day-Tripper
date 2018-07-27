@@ -13,5 +13,5 @@
 @interface UserCollectionCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicView;
 @property (strong, nonatomic) PFUser *user;
-@property (strong, nonatomic) PFFile *image;
+@property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @end

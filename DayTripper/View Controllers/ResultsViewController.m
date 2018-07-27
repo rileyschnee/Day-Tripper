@@ -118,15 +118,37 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+//    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+//    if(section == 0){
+//        header.textLabel.text = @"Places";
+//    } else if(section == 1){
+//        header.textLabel.text = @"Food";
+//    } else {
+//        header.textLabel.text = @"Events";
+//    }
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, tableView.frame.size.width-15, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:20]];
+    // set font color to orange - [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0]
+    [label setTextColor:[UIColor whiteColor]];
+    /* Section header is in 0th index... */
+    NSString *string = @"";
     if(section == 0){
-        header.textLabel.text = @"Places";
+        string = @"Places";
     } else if(section == 1){
-        header.textLabel.text = @"Food";
+        string = @"Food";
     } else {
-        header.textLabel.text = @"Events";
+        string = @"Events";
     }
-    return header;
+    [label setText:string];
+    [view addSubview:label];
+    //Set background to blue - [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]
+    [view setBackgroundColor:[UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]]; //your background color...
+    return view;
+    
+//    return header;
 }
 
 

@@ -169,7 +169,7 @@ int MOVEMENT_KEYBOARD = 200;
     }
     
     //message styling
-    cell.messageContainerView.layer.cornerRadius = 16;
+    cell.messageContainerView.layer.cornerRadius = cell.messageContainerView.frame.size.height /2;
     cell.messageContainerView.clipsToBounds = true;
     return cell;
 }

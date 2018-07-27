@@ -17,7 +17,7 @@
     //set make date for trip only a week from the current day
     NSDate *sevenDaysOut = [[NSDate date] dateByAddingTimeInterval:60*60*24*7];
     [self.datePicker setMaximumDate: sevenDaysOut];
-    
+    [self.locationField setBorderStyle:UITextBorderStyleNone];
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
     [self.locationField resignFirstResponder];
