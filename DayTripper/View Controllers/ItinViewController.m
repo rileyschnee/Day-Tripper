@@ -87,10 +87,12 @@
         mapController.latitude = self.latitude;
         mapController.longitude = self.longitude;
     }
-    if([viewController isKindOfClass:[ResourcesViewController class]]){
-        ResourcesViewController *resController = (ResourcesViewController *) viewController;
+    if([viewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController =  (UINavigationController *) viewController;
+        //[tabBarController.viewControllers objectAtIndex:2];
+        
+        ResourcesViewController *resController = (ResourcesViewController *)navController.topViewController;
         resController.trip = self.trip;
-
     }
     return TRUE;
 }

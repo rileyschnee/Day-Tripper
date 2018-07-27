@@ -13,10 +13,10 @@
 - (void)awakeFromNib{
     [super awakeFromNib];
     // Add shadow to GPhotos button
-    [self.googlePhotosButton.layer setShadowOffset:CGSizeMake(5, 5)];
-    [self.googlePhotosButton.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.googlePhotosButton.layer setShadowOffset:CGSizeMake(2, 2)];
+    [self.googlePhotosButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
     [self.googlePhotosButton.layer setShadowOpacity:0.5];
-    
+
 }
 
 - (void)setTrip:(Trip *)trip{
@@ -27,6 +27,7 @@
     } else {
         self.tripCityLabel.text = self.trip.city;
     }
+    NSLog(@"Set trip - reusable view");
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy"];
     self.tripDateLabel.text = [dateFormatter stringFromDate:self.trip.tripDate];

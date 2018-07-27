@@ -23,7 +23,8 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
-    
+    self.edgesForExtendedLayout = UIRectEdgeNone;
+
     // Setup collection view interface
     CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -73,6 +74,7 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
     header.trip = self.trip;
+    NSLog(@"Set trip - resources view");
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
     
