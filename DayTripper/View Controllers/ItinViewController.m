@@ -26,6 +26,7 @@
     [super viewDidLoad];
     //fix extra space at the top of the table view
     self.edgesForExtendedLayout = UIRectEdgeNone;
+    self.navigationController.view.backgroundColor = [UIColor whiteColor];
     // Do any additional setup after loading the view.
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
