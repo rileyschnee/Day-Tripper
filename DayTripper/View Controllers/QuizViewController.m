@@ -26,6 +26,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.location = @"";
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -49,7 +50,7 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.delegate.locationField.text isEqualToString:@""]){
+    if([self.location isEqualToString:@""]){
         [self alertNoLocation];
     } else {
         ResultsViewController *resultsViewController = [segue destinationViewController];

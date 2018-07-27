@@ -1223,7 +1223,6 @@
         <image name="profile-pic-placeholder" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="l4k-AO-cIN"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>
