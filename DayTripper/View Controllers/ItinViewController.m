@@ -39,14 +39,19 @@
 - (void)viewDidAppear:(BOOL)animated {
     //create edit bar button item
     UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Edit" style: UIBarButtonItemStylePlain target:self action:@selector(editTableView:)];
-    if (self.fromHome) {
+    if (self.fromHomeEdit) {
         self.tabBarController.navigationItem.rightBarButtonItem = editButton;
     }
     else {
         self.navigationItem.rightBarButtonItem = editButton;
     }
     
-    
+    // switch to resource view if coming to itin for first time from home
+    if (self.fromHomeToResources) {
+        [self.tabBarController.delegate tabBarController:self.tabBarController shouldSelectViewController:[self.tabBarController.viewControllers objectAtIndex:2]];
+        [self.tabBarController setSelectedIndex:2];
+        self.fromHomeToResources = NO;
+    }
     
     //set global Trip
     //needed to transfer data between tabs
