@@ -13,7 +13,7 @@
 #import "ResourcesViewController.h"
 #import "ItinViewController.h"
 
-@interface ProfileViewController ()
+@interface ProfileViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet MKMapView *userMapView;
@@ -31,6 +31,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.userMapView.delegate = self;
     self.usernameLabel.text = self.user.username;
     self.nameLabel.text = self.user[@"name"];
     self.profilePicView.file = self.user[@"picture"];
@@ -68,7 +69,7 @@
 //                                    [self.triparray addObject:trip];
 //                                }
 //                            }
-//                        }
+//                         }
                         self.triparray = [NSMutableArray arrayWithArray:trips];
                         
                         
@@ -95,13 +96,18 @@
     }];
 }
 
-//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-//
-//    MKAnnotationView *theView = [[MKAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"pin"];
-//    theView.pinTintColor = MKPinAnnotationColorGreen;
-//
-//    return theView;
-//}
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+
+        MKPinAnnotationView *annotView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
+        if (annotView == nil) {
+            annotView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
+            UIColor *orange = [UIColor colorWithRed:240.0f/255.0f green:102.0f/255.0f blue:58.0f/255.0f alpha:1.0f];
+            UIColor *blue = [UIColor colorWithRed:92.0f/255.0f green:142.0f/255.0f blue:195.0f/255.0f alpha:1.0f];
+            annotView.pinTintColor = blue;
+        }
+
+    return annotView;
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
