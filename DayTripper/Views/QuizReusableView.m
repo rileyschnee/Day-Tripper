@@ -14,6 +14,10 @@
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self addGestureRecognizer:tap];
     [self.datePicker setMinimumDate: [NSDate date]];
+    //set make date for trip only a week from the current day
+    NSDate *sevenDaysOut = [[NSDate date] dateByAddingTimeInterval:60*60*24*7];
+    [self.datePicker setMaximumDate: sevenDaysOut];
+    
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
     [self.locationField resignFirstResponder];

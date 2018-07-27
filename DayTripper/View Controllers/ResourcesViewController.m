@@ -94,32 +94,49 @@
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
         //forecasts are every three hours and only go up to five days
-        NSArray *forecasts = responseDict[0][@"list"];
-        // TODO: get weather beyond today
-        NSString* currDay = @"";
+        //hence if the trip date is over 5 days we will treat the trip date as 5 days away
+        NSDate* tripDay = self.trip.tripDate;
+        //get the day difference
+        NSCalendar *gregorianCalendar = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+        NSDateComponents *components = [gregorianCalendar components:NSCalendarUnitDay
+                                                            fromDate:[NSDate date]
+                                                              toDate:tripDay
+                                                             options:0];
+        if ([components day] > 4) {
+            //set the tripDate equal to 4 days from now
+            NSDateComponents *dateComponents = [[NSDateComponents alloc] init];
+            [dateComponents setDay:4];
+            tripDay = [[NSCalendar currentCalendar]
+                                  dateByAddingComponents:dateComponents
+                                  toDate:[NSDate date] options:0];
+        }
+        
+        //transform date into yyyy-mm-dd
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        NSString* tripDayStringRep = [formatter stringFromDate:tripDay];
         double currHigh = 0;
         double currLow = 0;
+        NSArray *forecasts = responseDict[0][@"list"];
+        BOOL highAndLowSetSoFar = NO;
         for (NSDictionary* forecast in forecasts) {
             NSString* listedDateTime = forecast[@"dt_txt"];
-            double listedHigh = [forecast[@"main"][@"temp_max"] doubleValue];
-            double listedLow = [forecast[@"main"][@"temp_min"] doubleValue];
-            //extract date from date_time
-            NSString* listedDate = [listedDateTime componentsSeparatedByString:@" "][1];
-            // see if new day
-            if (currDay.length == 0) {
-                currDay = listedDate;
-                currHigh = listedHigh;
-                currLow = listedLow;
-            }
-            else {
-                if ([currDay isEqualToString:listedDate]) {
-                    //compare high and lows
+            NSString* listedDate = [listedDateTime componentsSeparatedByString:@" "][0];
+            if ([tripDayStringRep isEqualToString:listedDate]) {
+                double listedHigh = [forecast[@"main"][@"temp_max"] doubleValue];
+                double listedLow = [forecast[@"main"][@"temp_min"] doubleValue];
+                if (highAndLowSetSoFar) {
                     if (listedHigh > currHigh) {
                         currHigh = listedHigh;
                     }
                     if (listedLow < currLow) {
                         currLow = listedLow;
                     }
+                }
+                else {
+                    currHigh = listedHigh;
+                    currLow = listedLow;
+                    highAndLowSetSoFar = YES;
                 }
             }
             
