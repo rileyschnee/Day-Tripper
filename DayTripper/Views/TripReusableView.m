@@ -9,6 +9,16 @@
 #import "TripReusableView.h"
 
 @implementation TripReusableView
+
+- (void)awakeFromNib{
+    [super awakeFromNib];
+    // Add shadow to GPhotos button
+    [self.googlePhotosButton.layer setShadowOffset:CGSizeMake(5, 5)];
+    [self.googlePhotosButton.layer setShadowColor:[[UIColor blackColor] CGColor]];
+    [self.googlePhotosButton.layer setShadowOpacity:0.5];
+    
+}
+
 - (void)setTrip:(Trip *)trip{
     _trip = trip;
     self.tripNameLabel.text = self.trip.name;

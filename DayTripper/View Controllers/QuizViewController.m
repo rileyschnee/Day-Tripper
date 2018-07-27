@@ -32,7 +32,7 @@
     
     self.latitude = 0;
     self.longitude = 0;
-    
+        
     self.cats = [[Constants alloc] init];
     [self.cats setCategories];
     self.chosenCategories = [[NSMutableArray alloc] init];

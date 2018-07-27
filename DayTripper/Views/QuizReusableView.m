@@ -13,6 +13,8 @@
     [super awakeFromNib];
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard:)];
     [self addGestureRecognizer:tap];
+    
+    [self.locationField setBorderStyle:UITextBorderStyleNone];
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
     [self.locationField resignFirstResponder];

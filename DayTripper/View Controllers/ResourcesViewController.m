@@ -23,6 +23,12 @@
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    
+    // Setup collection view interface
+    CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
+    UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    layout.itemSize = CGSizeMake(itemWidth, itemWidth+25);
+    
     [self fetchAttendees];
     
 }
@@ -60,6 +66,7 @@
     cell.profilePicView.file = file;
     [cell.profilePicView loadInBackground];
     cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
+    cell.nameLabel.text = cell.user[@"name"];
     return cell;
 }
 
