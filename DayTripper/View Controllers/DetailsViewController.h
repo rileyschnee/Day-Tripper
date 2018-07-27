@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *locationLabel;
 @property (weak, nonatomic) IBOutlet UILabel *categoriesLabel;
 @property (strong, nonatomic) id<Activity> activity;
+@property (strong, nonatomic) NSString* titleForItin;
 
 @end
