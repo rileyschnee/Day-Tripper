@@ -22,7 +22,7 @@
         NSString *title = [cat objectForKey:@"name"];
         NSString *alias = [cat objectForKey:@"id"];
         // Add alias-title key-value pair to dictionary
-        [placeDictionary setObject:title forKey:alias];
+        [placeDictionary setObject:alias forKey:title];
         for (NSDictionary *cat2 in [cat objectForKey:@"categories"]){
             NSString *title = [cat2 objectForKey:@"name"];
             NSString *alias = [cat2 objectForKey:@"id"];

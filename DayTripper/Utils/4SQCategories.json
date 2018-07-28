@@ -11,17 +11,6 @@
                 },
                 "categories": [
                     {
-                        "id": "56aa371be4b08b9a8d5734db",
-                        "name": "Amphitheater",
-                        "pluralName": "Amphitheaters",
-                        "shortName": "Amphitheater",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4fceea171983d5d06c3e9823",
                         "name": "Aquarium",
                         "pluralName": "Aquariums",
@@ -121,32 +110,10 @@
                         "categories": []
                     },
                     {
-                        "id": "52e81612bcbc57f1066b79e8",
-                        "name": "Disc Golf",
-                        "pluralName": "Disc Golf Courses",
-                        "shortName": "Disc Golf",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "56aa371be4b08b9a8d573532",
                         "name": "Exhibit",
                         "pluralName": "Exhibits",
                         "shortName": "Exhibit",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1f1931735",
-                        "name": "General Entertainment",
-                        "pluralName": "General Entertainment",
-                        "shortName": "Entertainment",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
                             "suffix": ".png"
@@ -217,41 +184,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "56aa371be4b08b9a8d5734de",
-                                "name": "Drive-in Theater",
-                                "pluralName": "Drive-in Theaters",
-                                "shortName": "Drive-in Theater",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d17e941735",
-                                "name": "Indie Movie Theater",
-                                "pluralName": "Indie Movie Theaters",
-                                "shortName": "Indie Movies",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d180941735",
-                                "name": "Multiplex",
-                                "pluralName": "Multiplexes",
-                                "shortName": "Cineplex",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "4bf58dd8d48988d181941735",
@@ -270,17 +203,6 @@
                                 "shortName": "Art Museum",
                                 "icon": {
                                     "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/museum_art_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "559acbe0498e472f1a53fa23",
-                                "name": "Erotic Museum",
-                                "pluralName": "Erotic Museums",
-                                "shortName": "Erotic Museum",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/stripclub_",
                                     "suffix": ".png"
                                 },
                                 "categories": []
@@ -366,62 +288,6 @@
                         ]
                     },
                     {
-                        "id": "4bf58dd8d48988d1f2931735",
-                        "name": "Performing Arts Venue",
-                        "pluralName": "Performing Arts Venues",
-                        "shortName": "Performing Arts",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_",
-                            "suffix": ".png"
-                        },
-                        "categories": [
-                            {
-                                "id": "4bf58dd8d48988d134941735",
-                                "name": "Dance Studio",
-                                "pluralName": "Dance Studios",
-                                "shortName": "Dance Studio",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_dancestudio_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d135941735",
-                                "name": "Indie Theater",
-                                "pluralName": "Indie Theaters",
-                                "shortName": "Indie",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_theater_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d136941735",
-                                "name": "Opera House",
-                                "pluralName": "Opera Houses",
-                                "shortName": "Opera House",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_operahouse_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d137941735",
-                                "name": "Theater",
-                                "pluralName": "Theaters",
-                                "shortName": "Theater",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_theater_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
-                    },
-                    {
                         "id": "4bf58dd8d48988d1e3931735",
                         "name": "Pool Hall",
                         "pluralName": "Pool Halls",
@@ -441,30 +307,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "52e81612bcbc57f1066b79ed",
-                                "name": "Outdoor Sculpture",
-                                "pluralName": "Outdoor Sculptures",
-                                "shortName": "Outdoor Sculpture",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/sculpture_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "52e81612bcbc57f1066b79ee",
-                                "name": "Street Art",
-                                "pluralName": "Street Art Installations",
-                                "shortName": "Street Art",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "56aa371be4b08b9a8d573514",
@@ -519,107 +362,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "4bf58dd8d48988d18c941735",
-                                "name": "Baseball Stadium",
-                                "pluralName": "Baseball Stadiums",
-                                "shortName": "Baseball",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_baseball_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d18b941735",
-                                "name": "Basketball Stadium",
-                                "pluralName": "Basketball Stadiums",
-                                "shortName": "Basketball",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_basketball_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d18a941735",
-                                "name": "Cricket Ground",
-                                "pluralName": "Cricket Grounds",
-                                "shortName": "Cricket",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_cricket_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d189941735",
-                                "name": "Football Stadium",
-                                "pluralName": "Football Stadiums",
-                                "shortName": "Football",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_football_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d185941735",
-                                "name": "Hockey Arena",
-                                "pluralName": "Hockey Arenas",
-                                "shortName": "Hockey",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_hockey_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "56aa371be4b08b9a8d573556",
-                                "name": "Rugby Stadium",
-                                "pluralName": "Rugby Stadiums",
-                                "shortName": "Rugby",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_football_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d188941735",
-                                "name": "Soccer Stadium",
-                                "pluralName": "Soccer Stadiums",
-                                "shortName": "Soccer",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_soccer_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4e39a891bd410d7aed40cbc2",
-                                "name": "Tennis Stadium",
-                                "pluralName": "Tennis Stadiums",
-                                "shortName": "Tennis",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_tennis_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d187941735",
-                                "name": "Track Stadium",
-                                "pluralName": "Track Stadiums",
-                                "shortName": "Track",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_track_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "4bf58dd8d48988d182941735",
@@ -630,19 +373,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/themepark_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "5109983191d435c0d71c2bb1",
-                                "name": "Theme Park Ride / Attraction",
-                                "pluralName": "Theme Park Rides/Attractions",
-                                "shortName": "Theme Park",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/themepark_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "56aa371be4b08b9a8d573520",
@@ -675,19 +406,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/zoo_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "58daa1558bbb0b01f18ec1fd",
-                                "name": "Zoo Exhibit",
-                                "pluralName": "Zoo Exhibits",
-                                "shortName": "Zoo Exhibit",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/zoo_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     }
                 ]
             },
@@ -700,362 +419,7 @@
                     "prefix": "https://ss3.4sqi.net/img/categories_v2/education/default_",
                     "suffix": ".png"
                 },
-                "categories": [
-                    {
-                        "id": "4bf58dd8d48988d198941735",
-                        "name": "College Academic Building",
-                        "pluralName": "College Academic Buildings",
-                        "shortName": "Academic Building",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/academicbuilding_",
-                            "suffix": ".png"
-                        },
-                        "categories": [
-                            {
-                                "id": "4bf58dd8d48988d199941735",
-                                "name": "College Arts Building",
-                                "pluralName": "College Arts Buildings",
-                                "shortName": "Arts",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/default_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19a941735",
-                                "name": "College Communications Building",
-                                "pluralName": "College Communications Buildings",
-                                "shortName": "Communications",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_communications_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19e941735",
-                                "name": "College Engineering Building",
-                                "pluralName": "College Engineering Buildings",
-                                "shortName": "Engineering",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_engineering_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19d941735",
-                                "name": "College History Building",
-                                "pluralName": "College History Buildings",
-                                "shortName": "History",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_history_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19c941735",
-                                "name": "College Math Building",
-                                "pluralName": "College Math Buildings",
-                                "shortName": "Math",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_math_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19b941735",
-                                "name": "College Science Building",
-                                "pluralName": "College Science Buildings",
-                                "shortName": "Science",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_science_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d19f941735",
-                                "name": "College Technology Building",
-                                "pluralName": "College Technology Buildings",
-                                "shortName": "Technology",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/education/collegeacademicbuildings_technology_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
-                    },
-                    {
-                        "id": "4bf58dd8d48988d197941735",
-                        "name": "College Administrative Building",
-                        "pluralName": "College Administrative Buildings",
-                        "shortName": "Administrative Building",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/administrativebuilding_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1af941735",
-                        "name": "College Auditorium",
-                        "pluralName": "College Auditoriums",
-                        "shortName": "Auditorium",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/auditorium_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1b1941735",
-                        "name": "College Bookstore",
-                        "pluralName": "College Bookstores",
-                        "shortName": "College Bookstore",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/bookstore_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a1941735",
-                        "name": "College Cafeteria",
-                        "pluralName": "College Cafeterias",
-                        "shortName": "Cafeteria",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/cafeteria_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a0941735",
-                        "name": "College Classroom",
-                        "pluralName": "College Classrooms",
-                        "shortName": "Classroom",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/classroom_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1b2941735",
-                        "name": "College Gym",
-                        "pluralName": "College Gyms",
-                        "shortName": "Gym",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a5941735",
-                        "name": "College Lab",
-                        "pluralName": "College Labs",
-                        "shortName": "Lab",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/lab_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a7941735",
-                        "name": "College Library",
-                        "pluralName": "College Libraries",
-                        "shortName": "Library",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/library_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1aa941735",
-                        "name": "College Quad",
-                        "pluralName": "College Quads",
-                        "shortName": "Quad",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/quad_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a9941735",
-                        "name": "College Rec Center",
-                        "pluralName": "College Rec Centers",
-                        "shortName": "Rec Center",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/reccenter_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a3941735",
-                        "name": "College Residence Hall",
-                        "pluralName": "College Residence Halls",
-                        "shortName": "Residence Hall",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/residencehall_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1b4941735",
-                        "name": "College Stadium",
-                        "pluralName": "College Stadiums",
-                        "shortName": "Stadium",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_",
-                            "suffix": ".png"
-                        },
-                        "categories": [
-                            {
-                                "id": "4bf58dd8d48988d1bb941735",
-                                "name": "College Baseball Diamond",
-                                "pluralName": "College Baseball Diamonds",
-                                "shortName": "Baseball",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_baseball_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1ba941735",
-                                "name": "College Basketball Court",
-                                "pluralName": "College Basketball Courts",
-                                "shortName": "Basketball",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_basketball_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1b9941735",
-                                "name": "College Cricket Pitch",
-                                "pluralName": "College Cricket Pitches",
-                                "shortName": "Cricket",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_cricket_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1b8941735",
-                                "name": "College Football Field",
-                                "pluralName": "College Football Fields",
-                                "shortName": "Football",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_football_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1b5941735",
-                                "name": "College Hockey Rink",
-                                "pluralName": "College Hockey Rinks",
-                                "shortName": "Hockey",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_hockey_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1b7941735",
-                                "name": "College Soccer Field",
-                                "pluralName": "College Soccer Fields",
-                                "shortName": "Soccer",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_soccer_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4e39a9cebd410d7aed40cbc4",
-                                "name": "College Tennis Court",
-                                "pluralName": "College Tennis Courts",
-                                "shortName": "Tennis Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_tennis_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1b6941735",
-                                "name": "College Track",
-                                "pluralName": "College Tracks",
-                                "shortName": "Track",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_track_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1ac941735",
-                        "name": "College Theater",
-                        "pluralName": "College Theaters",
-                        "shortName": "Theater",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/performingarts_theater_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1a8941735",
-                        "name": "General College & University",
-                        "pluralName": "General Colleges & Universities",
-                        "shortName": "Education",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/other_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1ab941735",
-                        "name": "Student Center",
-                        "pluralName": "Student Centers",
-                        "shortName": "Student Center",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/studentcenter_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1ae941735",
-                        "name": "University",
-                        "pluralName": "Universities",
-                        "shortName": "University",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    }
-                ]
+                "categories": []
             },
             {
                 "id": "4d4b7105d754a06376d81259",
@@ -1099,17 +463,6 @@
                             "suffix": ".png"
                         },
                         "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d11a941735",
-                        "name": "Other Nightlife",
-                        "pluralName": "Other Nightlife",
-                        "shortName": "Nightlife",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
                     }
                 ]
             },
@@ -1130,360 +483,6 @@
                         "shortName": "Athletics & Sports",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/sports_outdoors_",
-                            "suffix": ".png"
-                        },
-                        "categories": [
-                            {
-                                "id": "52e81612bcbc57f1066b7a2b",
-                                "name": "Badminton Court",
-                                "pluralName": "Badminton Courts",
-                                "shortName": "Badminton Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_tennis_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1e8941735",
-                                "name": "Baseball Field",
-                                "pluralName": "Baseball Fields",
-                                "shortName": "Baseball Field",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/baseballfield_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1e1941735",
-                                "name": "Basketball Court",
-                                "pluralName": "Basketball Courts",
-                                "shortName": "Basketball Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/basketballcourt_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "52e81612bcbc57f1066b7a2f",
-                                "name": "Bowling Green",
-                                "pluralName": "Bowling Greens",
-                                "shortName": "Bowling Green",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/bowling_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "56aa371be4b08b9a8d57351a",
-                                "name": "Curling Ice",
-                                "pluralName": "Curling Ices",
-                                "shortName": "Curling Ice",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/skatingrink_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1e6941735",
-                                "name": "Golf Course",
-                                "pluralName": "Golf Courses",
-                                "shortName": "Golf Course",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/golfcourse_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "58daa1558bbb0b01f18ec1b0",
-                                "name": "Golf Driving Range",
-                                "pluralName": "Golf Driving Ranges",
-                                "shortName": "Golf Driving Range",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/golfcourse_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d175941735",
-                                "name": "Gym / Fitness Center",
-                                "pluralName": "Gyms or Fitness Centers",
-                                "shortName": "Gym / Fitness",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                    "suffix": ".png"
-                                },
-                                "categories": [
-                                    {
-                                        "id": "52f2ab2ebcbc57f1066b8b47",
-                                        "name": "Boxing Gym",
-                                        "pluralName": "Boxing Gyms",
-                                        "shortName": "Boxing Gym",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "503289d391d4c4b30a586d6a",
-                                        "name": "Climbing Gym",
-                                        "pluralName": "Climbing Gyms",
-                                        "shortName": "Climbing Gym",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "52f2ab2ebcbc57f1066b8b49",
-                                        "name": "Cycle Studio",
-                                        "pluralName": "Cycle Studios",
-                                        "shortName": "Cycle Studio",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/bikeshop_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "4bf58dd8d48988d105941735",
-                                        "name": "Gym Pool",
-                                        "pluralName": "Gym Pools",
-                                        "shortName": "Pool",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/pool_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "52f2ab2ebcbc57f1066b8b48",
-                                        "name": "Gymnastics Gym",
-                                        "pluralName": "Gymnastics Gyms",
-                                        "shortName": "Gymnastics Gym",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "4bf58dd8d48988d176941735",
-                                        "name": "Gym",
-                                        "pluralName": "Gyms",
-                                        "shortName": "Gym",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "4bf58dd8d48988d101941735",
-                                        "name": "Martial Arts Dojo",
-                                        "pluralName": "Martial Arts Dojos",
-                                        "shortName": "Martial Arts",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/gym_martialarts_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "58daa1558bbb0b01f18ec203",
-                                        "name": "Outdoor Gym",
-                                        "pluralName": "Outdoor Gyms",
-                                        "shortName": "Outdoor Gym",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "5744ccdfe4b0c0459246b4b2",
-                                        "name": "Pilates Studio",
-                                        "pluralName": "Pilates Studios",
-                                        "shortName": "Pilates Studio",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/gym_yogastudio_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "4bf58dd8d48988d106941735",
-                                        "name": "Track",
-                                        "pluralName": "Tracks",
-                                        "shortName": "Track",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_track_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "590a0744340a5803fd8508c3",
-                                        "name": "Weight Loss Center",
-                                        "pluralName": "Weight Loss Centers",
-                                        "shortName": "Weight Loss Center",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/gym_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    },
-                                    {
-                                        "id": "4bf58dd8d48988d102941735",
-                                        "name": "Yoga Studio",
-                                        "pluralName": "Yoga Studios",
-                                        "shortName": "Yoga Studio",
-                                        "icon": {
-                                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/gym_yogastudio_",
-                                            "suffix": ".png"
-                                        },
-                                        "categories": []
-                                    }
-                                ]
-                            },
-                            {
-                                "id": "4f452cd44b9081a197eba860",
-                                "name": "Hockey Field",
-                                "pluralName": "Hockey Fields",
-                                "shortName": "Hockey Field",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_hockey_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "56aa371be4b08b9a8d57352c",
-                                "name": "Hockey Rink",
-                                "pluralName": "Hockey Rinks",
-                                "shortName": "Hockey Rink",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_hockey_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "5032829591d4c4b30a586d5e",
-                                "name": "Paintball Field",
-                                "pluralName": "Paintball Fields",
-                                "shortName": "Paintball Field",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/default_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "52e81612bcbc57f1066b7a2c",
-                                "name": "Rugby Pitch",
-                                "pluralName": "Rugby Pitches",
-                                "shortName": "Pitch",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_football_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d167941735",
-                                "name": "Skate Park",
-                                "pluralName": "Skate Parks",
-                                "shortName": "Skate Park",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/skate_park_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d168941735",
-                                "name": "Skating Rink",
-                                "pluralName": "Skating Rinks",
-                                "shortName": "Skating Rink",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/skatingrink_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4cce455aebf7b749d5e191f5",
-                                "name": "Soccer Field",
-                                "pluralName": "Soccer Fields",
-                                "shortName": "Soccer Field",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_soccer_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "52e81612bcbc57f1066b7a2e",
-                                "name": "Sports Club",
-                                "pluralName": "Sports Clubs",
-                                "shortName": "Sports Club",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/sports_outdoors_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "52e81612bcbc57f1066b7a2d",
-                                "name": "Squash Court",
-                                "pluralName": "Squash Courts",
-                                "shortName": "Squash Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_tennis_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4e39a956bd410d7aed40cbc3",
-                                "name": "Tennis Court",
-                                "pluralName": "Tennis Courts",
-                                "shortName": "Tennis Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_tennis_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4eb1bf013b7b6f98df247e07",
-                                "name": "Volleyball Court",
-                                "pluralName": "Volleyball Courts",
-                                "shortName": "Volleyball Court",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/volleyballcourt_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a28",
-                        "name": "Bathing Area",
-                        "pluralName": "Bathing Areas",
-                        "shortName": "Bathing Area",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/default_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1508,30 +507,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/beach_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "52e81612bcbc57f1066b7a30",
-                                "name": "Nudist Beach",
-                                "pluralName": "Nudist Beaches",
-                                "shortName": "Nudist Beach",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/beach_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d1e3941735",
-                                "name": "Surf Spot",
-                                "pluralName": "Surf Spots",
-                                "shortName": "Surf Spot",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/surfspot_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "56aa371be4b08b9a8d57355e",
@@ -1573,17 +549,6 @@
                         "shortName": "Campground",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/campground_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "56aa371be4b08b9a8d57353b",
-                        "name": "Canal Lock",
-                        "pluralName": "Canal Locks",
-                        "shortName": "Canal Lock",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/bridge_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1633,28 +598,6 @@
                         "categories": []
                     },
                     {
-                        "id": "52e81612bcbc57f1066b7a12",
-                        "name": "Dive Spot",
-                        "pluralName": "Dive Spots",
-                        "shortName": "Dive Spot",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/divespot_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1e5941735",
-                        "name": "Dog Run",
-                        "pluralName": "Dog Runs",
-                        "shortName": "Dog Run",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/dogrun_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d15b941735",
                         "name": "Farm",
                         "pluralName": "Farms",
@@ -1672,28 +615,6 @@
                         "shortName": "Field",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/field_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a0f",
-                        "name": "Fishing Spot",
-                        "pluralName": "Fishing Spots",
-                        "shortName": "Fishing Spot",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/food_fishmarket_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a23",
-                        "name": "Forest",
-                        "pluralName": "Forests",
-                        "shortName": "Forest",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/default_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1721,17 +642,6 @@
                         "categories": []
                     },
                     {
-                        "id": "52e81612bcbc57f1066b7a11",
-                        "name": "Gun Range",
-                        "pluralName": "Gun Ranges",
-                        "shortName": "Gun Range",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/gun_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d1e0941735",
                         "name": "Harbor / Marina",
                         "pluralName": "Harbors / Marinas",
@@ -1749,17 +659,6 @@
                         "shortName": "Hot Spring",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/hotspring_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5744ccdfe4b0c0459246b4b5",
-                        "name": "Indoor Play Area",
-                        "pluralName": "Indoor Play Areas",
-                        "shortName": "Indoor Play Area",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/playground_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1826,17 +725,6 @@
                         "shortName": "Preserve",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/naturepreserve_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d162941735",
-                        "name": "Other Great Outdoors",
-                        "pluralName": "Other Great Outdoors",
-                        "shortName": "Other Outdoors",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/outdoors_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1930,34 +818,12 @@
                         "categories": []
                     },
                     {
-                        "id": "56aa371be4b08b9a8d573541",
-                        "name": "Reservoir",
-                        "pluralName": "Reservoirs",
-                        "shortName": "Reservoir",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/lake_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4eb1d4dd4b900d56c88a45fd",
                         "name": "River",
                         "pluralName": "Rivers",
                         "shortName": "River",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/river_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "50328a4b91d4c4b30a586d6b",
-                        "name": "Rock Climbing Spot",
-                        "pluralName": "Rock Climbing Spots",
-                        "shortName": "Rock Climbing",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/rockclimbing_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -2074,17 +940,6 @@
                 },
                 "categories": [
                     {
-                        "id": "4e52d2d203646f7c19daa8ae",
-                        "name": "Animal Shelter",
-                        "pluralName": "Animal Shelters",
-                        "shortName": "Animal Shelter",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/animalshelter_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "58daa1558bbb0b01f18ec1d6",
                         "name": "Art Studio",
                         "pluralName": "Art Studios",
@@ -2096,67 +951,12 @@
                         "categories": []
                     },
                     {
-                        "id": "56aa371be4b08b9a8d5734cf",
-                        "name": "Ballroom",
-                        "pluralName": "Ballrooms",
-                        "shortName": "Ballroom",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d130941735",
-                        "name": "Building",
-                        "pluralName": "Buildings",
-                        "shortName": "Building",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a35",
-                        "name": "Club House",
-                        "pluralName": "Club Houses",
-                        "shortName": "Club",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a34",
-                        "name": "Community Center",
-                        "pluralName": "Community Centers",
-                        "shortName": "Community Center",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "52e81612bcbc57f1066b7a32",
                         "name": "Cultural Center",
                         "pluralName": "Cultural Centers",
                         "shortName": "Cultural Center",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4e0e22f5a56208c4ea9a85a0",
-                        "name": "Distillery",
-                        "pluralName": "Distilleries",
-                        "shortName": "Distillery",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/food/brewery_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -2362,39 +1162,6 @@
                         "categories": []
                     },
                     {
-                        "id": "52f2ab2ebcbc57f1066b8b57",
-                        "name": "Recruiting Agency",
-                        "pluralName": "Recruiting Agencies",
-                        "shortName": "Recruiting Agency",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "58daa1558bbb0b01f18ec1b2",
-                        "name": "Research Station",
-                        "pluralName": "Research Stations",
-                        "shortName": "Research Station",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a33",
-                        "name": "Social Club",
-                        "pluralName": "Social Clubs",
-                        "shortName": "Social Club",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d131941735",
                         "name": "Spiritual Center",
                         "pluralName": "Spiritual Centers",
@@ -2550,39 +1317,6 @@
                         "categories": []
                     },
                     {
-                        "id": "4cae28ecbf23941eb1190695",
-                        "name": "Voting Booth",
-                        "pluralName": "Voting Booths",
-                        "shortName": "Voting Booth",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/votingbooth_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52e81612bcbc57f1066b7a36",
-                        "name": "Warehouse",
-                        "pluralName": "Warehouses",
-                        "shortName": "Warehouse",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "58daa1558bbb0b01f18ec1ac",
-                        "name": "Waste Facility",
-                        "pluralName": "Waste Facilities",
-                        "shortName": "Waste Facility",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "56aa371be4b08b9a8d5734c5",
                         "name": "Wedding Hall",
                         "pluralName": "Wedding Halls",
@@ -2617,28 +1351,6 @@
                 },
                 "categories": [
                     {
-                        "id": "52f2ab2ebcbc57f1066b8b56",
-                        "name": "ATM",
-                        "pluralName": "ATMs",
-                        "shortName": "ATM",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5267e446e4b0ec79466e48c4",
-                        "name": "Adult Boutique",
-                        "pluralName": "Adult Boutiques",
-                        "shortName": "Adult Boutique",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/nightlife/stripclub_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d116951735",
                         "name": "Antique Shop",
                         "pluralName": "Antique Shops",
@@ -2672,100 +1384,12 @@
                         "categories": []
                     },
                     {
-                        "id": "4eb1c1623b7b52c0e1adc2ec",
-                        "name": "Auto Dealership",
-                        "pluralName": "Auto Dealerships",
-                        "shortName": "Auto Dealer",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/automotive_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b44",
-                        "name": "Auto Garage",
-                        "pluralName": "Auto Garages",
-                        "shortName": "Auto Garage",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/automotive_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "56aa371be4b08b9a8d5734d3",
-                        "name": "Auto Workshop",
-                        "pluralName": "Auto Workshops",
-                        "shortName": "Auto Workshop",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/automotive_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d124951735",
-                        "name": "Automotive Shop",
-                        "pluralName": "Automotive Shops",
-                        "shortName": "Automotive",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/automotive_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b32",
-                        "name": "Baby Store",
-                        "pluralName": "Baby Stores",
-                        "shortName": "Baby Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_kids_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d10a951735",
-                        "name": "Bank",
-                        "pluralName": "Banks",
-                        "shortName": "Bank",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "52e81612bcbc57f1066b7a27",
                         "name": "Bath House",
                         "pluralName": "Bath Houses",
                         "shortName": "Bath House",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/parks_outdoors/neighborhood_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b40",
-                        "name": "Betting Shop",
-                        "pluralName": "Betting Shops",
-                        "shortName": "Betting Shop",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b42",
-                        "name": "Big Box Store",
-                        "pluralName": "Big Box Stores",
-                        "shortName": "Big Box Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -2815,17 +1439,6 @@
                         "categories": []
                     },
                     {
-                        "id": "5453de49498eade8af355881",
-                        "name": "Business Service",
-                        "pluralName": "Business Services",
-                        "shortName": "Business Services",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4eb1bdf03b7b55596b4a7491",
                         "name": "Camera Store",
                         "pluralName": "Camera Stores",
@@ -2848,62 +1461,6 @@
                         "categories": []
                     },
                     {
-                        "id": "4f04ae1f2fb6e1c99f3db0ba",
-                        "name": "Car Wash",
-                        "pluralName": "Car Washes",
-                        "shortName": "Car Washes",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/carwash_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b2a",
-                        "name": "Carpet Store",
-                        "pluralName": "Carpet Stores",
-                        "shortName": "Carpet Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b2d",
-                        "name": "Check Cashing Service",
-                        "pluralName": "Check Cashing Services",
-                        "shortName": "Check Cashing Service",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5744ccdfe4b0c0459246b4c7",
-                        "name": "Child Care Service",
-                        "pluralName": "Child Care Services",
-                        "shortName": "Child Care",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/daycare_",
-                            "suffix": ".png"
-                        },
-                        "categories": [
-                            {
-                                "id": "4f4532974b9074f6e4fb0104",
-                                "name": "Daycare",
-                                "pluralName": "Daycares",
-                                "shortName": "Daycare",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/daycare_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
-                    },
-                    {
                         "id": "52f2ab2ebcbc57f1066b8b31",
                         "name": "Chocolate Shop",
                         "pluralName": "Chocolate Shops",
@@ -2923,85 +1480,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "4bf58dd8d48988d102951735",
-                                "name": "Accessories Store",
-                                "pluralName": "Accessories Stores",
-                                "shortName": "Accessories",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_accessories_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d104951735",
-                                "name": "Boutique",
-                                "pluralName": "Boutiques",
-                                "shortName": "Boutique",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_boutique_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d105951735",
-                                "name": "Kids Store",
-                                "pluralName": "Kids Stores",
-                                "shortName": "Kids Store",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_kids_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d109951735",
-                                "name": "Lingerie Store",
-                                "pluralName": "Lingerie Stores",
-                                "shortName": "Lingerie",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_lingerie_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d106951735",
-                                "name": "Men's Store",
-                                "pluralName": "Men's Stores",
-                                "shortName": "Men's Store",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_men_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d107951735",
-                                "name": "Shoe Store",
-                                "pluralName": "Shoe Stores",
-                                "shortName": "Shoes",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_shoestore_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            },
-                            {
-                                "id": "4bf58dd8d48988d108951735",
-                                "name": "Women's Store",
-                                "pluralName": "Women's Stores",
-                                "shortName": "Women's Store",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_women_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "52f2ab2ebcbc57f1066b8b18",
@@ -3010,17 +1489,6 @@
                         "shortName": "Comic Shop",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/comic_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5454144b498ec1f095bff2f2",
-                        "name": "Construction & Landscaping",
-                        "pluralName": "Construction & Landscaping",
-                        "shortName": "Construction",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/realestate_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -3054,28 +1522,6 @@
                         "shortName": "Costume Shop",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5032850891d4c4b30a586d62",
-                        "name": "Credit Union",
-                        "pluralName": "Credit Unions",
-                        "shortName": "Credit Union",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5744ccdfe4b0c0459246b4be",
-                        "name": "Currency Exchange",
-                        "pluralName": "Currency Exchanges",
-                        "shortName": "Currency Exchange",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -3125,39 +1571,6 @@
                         "categories": []
                     },
                     {
-                        "id": "5745c2e4498e11e7bccabdbd",
-                        "name": "Drugstore",
-                        "pluralName": "Drugstores",
-                        "shortName": "Drugstore",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/pharmacy_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b1d",
-                        "name": "Dry Cleaner",
-                        "pluralName": "Dry Cleaners",
-                        "shortName": "Dry Cleaner",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/drycleaner_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5032872391d4c4b30a586d64",
-                        "name": "EV Charging Station",
-                        "pluralName": "EV Charging Stations",
-                        "shortName": "EV Charging",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/automotive_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d122951735",
                         "name": "Electronics Store",
                         "pluralName": "Electronics Stores",
@@ -3180,17 +1593,6 @@
                         "categories": []
                     },
                     {
-                        "id": "5454152e498ef71e2b9132c6",
-                        "name": "Event Service",
-                        "pluralName": "Event Services",
-                        "shortName": "Event Services",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/event/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "52f2ab2ebcbc57f1066b8b26",
                         "name": "Fabric Shop",
                         "pluralName": "Fabric Shops",
@@ -3208,17 +1610,6 @@
                         "shortName": "Film Studio",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "503287a291d4c4b30a586d65",
-                        "name": "Financial or Legal Service",
-                        "pluralName": "Financial or Legal Services",
-                        "shortName": "Financial / Legal",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/financial_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -3279,17 +1670,6 @@
                         "categories": []
                     },
                     {
-                        "id": "52f2ab2ebcbc57f1066b8b24",
-                        "name": "Frame Store",
-                        "pluralName": "Frame Stores",
-                        "shortName": "Frame Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/artgallery_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "52f2ab2ebcbc57f1066b8b1c",
                         "name": "Fruit & Vegetable Store",
                         "pluralName": "Fruit & Vegetable Stores",
@@ -3309,19 +1689,7 @@
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/furniture_",
                             "suffix": ".png"
                         },
-                        "categories": [
-                            {
-                                "id": "55888a5a498e782e3303b43a",
-                                "name": "Lighting Store",
-                                "pluralName": "Lighting Stores",
-                                "shortName": "Lighting",
-                                "icon": {
-                                    "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                                    "suffix": ".png"
-                                },
-                                "categories": []
-                            }
-                        ]
+                        "categories": []
                     },
                     {
                         "id": "4bf58dd8d48988d18d941735",
@@ -3665,28 +2033,6 @@
                         "categories": []
                     },
                     {
-                        "id": "5744ccdfe4b0c0459246b4cd",
-                        "name": "Supplement Shop",
-                        "pluralName": "Supplement Shops",
-                        "shortName": "Supplement Shop",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/education/lab_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "5032781d91d4c4b30a586d5b",
-                        "name": "Tailor Shop",
-                        "pluralName": "Tailor Shops",
-                        "shortName": "Tailor",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/apparel_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d1de931735",
                         "name": "Tattoo Parlor",
                         "pluralName": "Tattoo Parlors",
@@ -3740,18 +2086,7 @@
                             "suffix": ".png"
                         },
                         "categories": []
-                    },
-                    {
-                        "id": "52e816a6bcbc57f1066b7a54",
-                        "name": "Warehouse Store",
-                        "pluralName": "Warehouse Stores",
-                        "shortName": "Warehouse Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
+                    }
                 ]
             }
         ]

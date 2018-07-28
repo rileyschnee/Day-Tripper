@@ -40,9 +40,14 @@
     self.chosenPlaceCategories = [[NSMutableArray alloc] init];
     self.chosenFoodCategories = [[NSMutableArray alloc] init];
     self.chosenEventCategories = [[NSMutableArray alloc] init];
-    self.allCategories = [self.cats.placeCategories allKeys];
-    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
-    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+    [temp addEntriesFromDictionary:self.cats.placeCategories];
+    [temp addEntriesFromDictionary:self.cats.foodCategories];
+    [temp addEntriesFromDictionary:self.cats.eventCategories];
+    self.allCategories = [[temp allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+//    self.allCategories = [self.cats.placeCategories allKeys];
+//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
+//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
 }
 
 
