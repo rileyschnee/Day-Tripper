@@ -682,7 +682,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fBV-0q-IAK">
-                                <rect key="frame" x="16" y="580" width="340" height="53"/>
+                                <rect key="frame" x="16" y="545" width="340" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5sg-7S-EDc">
@@ -1224,6 +1224,7 @@
         <image name="profile-pic-placeholder" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="wNs-ne-OLL"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>
