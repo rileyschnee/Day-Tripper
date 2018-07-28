@@ -211,6 +211,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:apiToken forKey:@"Authorization"];
     if(![self.catQueryFood isEqualToString:@""]){
         [paramsDict setObject:self.catQueryFood forKey:@"categories"];
+    } else {
+        [paramsDict setObject:@"restaurants,food" forKey:@"categories"];
     }
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
