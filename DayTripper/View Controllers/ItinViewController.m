@@ -53,10 +53,6 @@
         self.fromHomeToResources = NO;
     }
     
-    //set global Trip
-    //needed to transfer data between tabs
-     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    delegate.currTrip = self.trip;
 }
 
 
@@ -95,11 +91,17 @@
     }
     if([viewController isKindOfClass:[UINavigationController class]]){
         UINavigationController *navController =  (UINavigationController *) viewController;
-        //[tabBarController.viewControllers objectAtIndex:2];
-        
-        ResourcesViewController *resController = (ResourcesViewController *)navController.topViewController;
-        resController.trip = self.trip;
+        UIViewController *vc = navController.topViewController;
+        if ([vc isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *chatController = (ChatViewController *)navController.topViewController;
+            chatController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[ResourcesViewController class]]) {
+            ResourcesViewController *resController = (ResourcesViewController *)navController.topViewController;
+            resController.trip = self.trip;
+        }
     }
+    
     return TRUE;
 }
 

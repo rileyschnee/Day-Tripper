@@ -37,10 +37,6 @@ int MOVEMENT_KEYBOARD = 200;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     self.chats = [[NSMutableArray alloc] init];
     
-    //get the trip from the itin view
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    self.trip = delegate.currTrip;
-    
     [self displayChatConversation];
     //start the message refresh method
     [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(displayChatConversation) userInfo:nil repeats:true];
