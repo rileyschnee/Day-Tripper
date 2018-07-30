@@ -93,6 +93,27 @@
     }
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    if (self.fromMap) {
+        //nav bar from map
+        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        
+        UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Details"];
+        // [navbar setBarTintColor:[UIColor lightGrayColor]];
+        UIBarButtonItem* backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBack:)];
+        navItem.leftBarButtonItem = backBtn;
+        
+        
+        [navbar setItems:@[navItem]];
+        [self.view addSubview:navbar];
+    }
+}
+
+// back to map view
+-(void)onTapBack:(UIBarButtonItem*)item{
+    [self dismissViewControllerAnimated:true completion:nil];
+}
+
 - (void) goBackToPrevScreen {
     [self.navigationController popViewControllerAnimated:YES];
     self.tabBarController.navigationItem.leftBarButtonItem = self.prevBarButton;
