@@ -715,7 +715,6 @@
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
                         <outlet property="uberView" destination="fBV-0q-IAK" id="Lvc-VZ-VFX"/>
                         <outlet property="websiteLink" destination="7bN-wR-qUV" id="4Vv-aM-c95"/>
-                        <segue destination="4OX-FQ-8wP" kind="presentation" identifier="backToMap" id="5mT-Xg-N5I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xzs-HC-Zqq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1227,7 +1226,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9MX-hJ-rhJ"/>
-        <segue reference="5mT-Xg-N5I"/>
         <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
