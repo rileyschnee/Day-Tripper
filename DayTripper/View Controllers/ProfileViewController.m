@@ -77,6 +77,7 @@
                             MKPointAnnotation *point = [MKPointAnnotation new];
                             CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(trip.latitude, trip.longitude);
                             point.coordinate = coor;
+                            point.title = trip.city;
                             [self.userMapView addAnnotation:point];
                         }
                         
@@ -101,9 +102,12 @@
         MKPinAnnotationView *annotView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
         if (annotView == nil) {
             annotView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-            UIColor *orange = [UIColor colorWithRed:240.0f/255.0f green:102.0f/255.0f blue:58.0f/255.0f alpha:1.0f];
+            // UIColor *orange = [UIColor colorWithRed:240.0f/255.0f green:102.0f/255.0f blue:58.0f/255.0f alpha:1.0f];
             UIColor *blue = [UIColor colorWithRed:92.0f/255.0f green:142.0f/255.0f blue:195.0f/255.0f alpha:1.0f];
             annotView.pinTintColor = blue;
+            
+            annotView.canShowCallout = YES;
+            annotView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
 
     return annotView;
