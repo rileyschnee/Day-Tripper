@@ -10,6 +10,7 @@
 #import "ResultsViewController.h"
 #import <MapKit/MapKit.h>
 #import "Constants.h"
+#import <TTGTagCollectionView/TTGTextTagCollectionView.h>
 
 @interface QuizViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -20,6 +21,7 @@
 @property (strong, nonatomic) NSMutableArray *chosenEventCategories;
 @property (strong, nonatomic) NSMutableArray *chosenCategories;
 @property (strong, nonatomic) UICollectionViewFlowLayout *layout;
+@property (strong, nonatomic) TTGTextTagCollectionView *tagCollectionView;
 @end
 
 @implementation QuizViewController
@@ -30,6 +32,15 @@
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     self.layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
+    // Setting up TextTagCollection of categories
+    self.tagCollectionView = [[TTGTextTagCollectionView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width, self.view.frame.size.height / 2)];
+    [self.view addSubview:self.tagCollectionView];
+    TTGTextTagConfig *config = self.tagCollectionView.defaultConfig;
+    config.tagTextColor = [UIColor whiteColor];
+    config.tagBackgroundColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    config.tagSelectedBackgroundColor = [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0];
+    self.tagCollectionView.alignment = TTGTagCollectionAlignmentFillByExpandingWidth;
+    
     
     self.latitude = 0;
     self.longitude = 0;
@@ -40,9 +51,15 @@
     self.chosenPlaceCategories = [[NSMutableArray alloc] init];
     self.chosenFoodCategories = [[NSMutableArray alloc] init];
     self.chosenEventCategories = [[NSMutableArray alloc] init];
-    self.allCategories = [self.cats.placeCategories allKeys];
-    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
-    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
+    NSMutableDictionary *temp = [[NSMutableDictionary alloc] init];
+    [temp addEntriesFromDictionary:self.cats.placeCategories];
+    [temp addEntriesFromDictionary:self.cats.foodCategories];
+    [temp addEntriesFromDictionary:self.cats.eventCategories];
+    self.allCategories = [[temp allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
+//    self.allCategories = [self.cats.placeCategories allKeys];
+//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
+//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
+    [self.tagCollectionView addTags:self.allCategories];
 }
 
 
@@ -50,7 +67,7 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.location isEqualToString:@""]){
+    if([self.location isEqualToString:@""] ||[self doublesAreEqual:self.latitude isEqualTo:(double) 0.0]){
         [self alertNoLocation];
     } else {
         ResultsViewController *resultsViewController = [segue destinationViewController];
@@ -100,7 +117,7 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.allCategories.count;
+    return 0;
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
@@ -114,6 +131,22 @@
 }
 
 - (void)processCategories{
+    
+    //TTGTextTagCollecitonViewProcessing
+    for(NSString * key in [self.tagCollectionView allSelectedTags]){
+        if([self.cats.placeCategories objectForKey:key] != nil){
+            [self.chosenPlaceCategories addObject:[self.cats.placeCategories objectForKey:key]];
+        } else if([self.cats.foodCategories objectForKey:key] != nil){
+            [self.chosenFoodCategories addObject:[self.cats.foodCategories objectForKey:key]];
+        } else if([self.cats.eventCategories objectForKey:key] != nil){
+            [self.chosenEventCategories addObject:[self.cats.eventCategories objectForKey:key]];
+        }
+    }
+    
+    
+    
+    // FOR USING NORMAL COLLECTION VIEW
+    /*
     for(NSString *key in self.chosenCategories){
         if([self.cats.placeCategories objectForKey:key] != nil){
             [self.chosenPlaceCategories addObject:[self.cats.placeCategories objectForKey:key]];
@@ -123,6 +156,7 @@
             [self.chosenEventCategories addObject:[self.cats.eventCategories objectForKey:key]];
         }
     }
+     */
     
 }
 
@@ -147,9 +181,16 @@
     [self.chosenCategories removeObject:cat];
 }
 
+- (BOOL)doublesAreEqual:(double)first isEqualTo:(double)second {
+    if(fabs(first - second) < DBL_EPSILON)
+        return YES;
+    else
+        return NO;
+}
+
 
 - (void)alertNoLocation{
-    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Location" message:@"You must enter a location" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Valid Location" message:@"You must enter a valid location" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
     }];
     // add the OK action to the alert controller

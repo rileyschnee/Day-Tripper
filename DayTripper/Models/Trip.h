@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Parse/Parse.h>
+#import "Activity.h"
 
 @interface Trip : PFObject <PFSubclassing>
 @property (strong, nonatomic) NSString *city;
@@ -21,5 +22,5 @@
 @property (strong, nonatomic) NSDate *tripDate;
 
 + (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withCompletion: (PFBooleanResultBlock  _Nullable)completion;
-
+- (void)addDTActionItemToChatWithMessage:(NSString * _Nonnull)message;
 @end

@@ -17,6 +17,7 @@
 		537A4B862108F42400E64CBD /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B852108F42400E64CBD /* ChatViewController.m */; };
 		537A4B892108FB8E00E64CBD /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B882108FB8E00E64CBD /* ChatCell.m */; };
 		537A4B8C210912B000E64CBD /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8B210912B000E64CBD /* ChatMessage.m */; };
+		53B43829210F80210015075B /* MPGTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B43827210F80210015075B /* MPGTextField.m */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -66,6 +67,8 @@
 		537A4B882108FB8E00E64CBD /* ChatCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatCell.m; sourceTree = "<group>"; };
 		537A4B8A210912B000E64CBD /* ChatMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ChatMessage.h; sourceTree = "<group>"; };
 		537A4B8B210912B000E64CBD /* ChatMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
+		53B43827210F80210015075B /* MPGTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPGTextField.m; sourceTree = "<group>"; };
+		53B43828210F80210015075B /* MPGTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPGTextField.h; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 		BEA5FD4D20F929B9005B79F5 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				53B43828210F80210015075B /* MPGTextField.h */,
+				53B43827210F80210015075B /* MPGTextField.m */,
 				BEB308FD210A8ACA00336EA4 /* CategoryCollectionViewDelegate.h */,
 				BEEA9D8820FCFEEB0048C0DB /* ResultsCell.h */,
 				BEEA9D8920FCFEEB0048C0DB /* ResultsCell.m */,
@@ -446,6 +451,7 @@
 				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
 				BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */,
 				0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */,
+				53B43829210F80210015075B /* MPGTextField.m in Sources */,
 				BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */,
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,

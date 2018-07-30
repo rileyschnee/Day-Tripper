@@ -22,7 +22,7 @@
         NSString *title = [cat objectForKey:@"name"];
         NSString *alias = [cat objectForKey:@"id"];
         // Add alias-title key-value pair to dictionary
-        [placeDictionary setObject:title forKey:alias];
+        [placeDictionary setObject:alias forKey:title];
         for (NSDictionary *cat2 in [cat objectForKey:@"categories"]){
             NSString *title = [cat2 objectForKey:@"name"];
             NSString *alias = [cat2 objectForKey:@"id"];
@@ -52,8 +52,7 @@
     NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
     NSArray *catarray = @[@"school-holidays", @"public-holidays", @"observances", @"politics",
                           @"conferences", @"expos", @"concerts", @"festivals", @"performing-arts",
-                          @"sports", @"community", @"daylight-savings", @"airport-delays", @"severe-weather",
-                          @"disasters", @"terror"];
+                          @"sports", @"community", @"terror"];
     //get JSON file
     for (NSString *cat in catarray) {
         NSString *title = [[cat stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];

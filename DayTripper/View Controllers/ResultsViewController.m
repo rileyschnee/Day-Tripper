@@ -175,6 +175,9 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     if(![self.catQueryPlace isEqualToString:@""]){
         [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
     }
+    else {
+        [paramsDict setObject:@"4d4b7104d754a06370d81259,4d4b7105d754a06372d81259,4d4b7105d754a06376d81259,4d4b7105d754a06377d81259,4d4b7105d754a06378d81259" forKey:@"categoryId"];
+    }
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -211,6 +214,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:apiToken forKey:@"Authorization"];
     if(![self.catQueryFood isEqualToString:@""]){
         [paramsDict setObject:self.catQueryFood forKey:@"categories"];
+    } else {
+        [paramsDict setObject:@"restaurants,food" forKey:@"categories"];
     }
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {

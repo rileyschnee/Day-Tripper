@@ -17,7 +17,9 @@
 @property (strong, nonatomic) Trip *trip;
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
-//property indicating if coming from home vc
-@property (nonatomic) BOOL fromHome;
+//property indicating if coming from home vc so we can make edit bar button
+@property (nonatomic) BOOL fromHomeEdit;
+//property indicating if coming from home for the first time so can redirect to resources
+@property (nonatomic) BOOL fromHomeToResources;
 - (void)back;
 @end
