@@ -54,7 +54,7 @@ int MOVEMENT_KEYBOARD = 200;
 
 //send a message
 - (IBAction)sendMessageTapped:(id)sender {
-    NSString *username = [PFUser currentUser][@"username"];
+    NSString *username = PFUser.currentUser.username;
     NSString *message = self.messageBody.text;
     ChatMessage* chat = [ChatMessage new];
     chat.username = username;
@@ -165,7 +165,7 @@ int MOVEMENT_KEYBOARD = 200;
     }
     
     //message styling
-    cell.messageContainerView.layer.cornerRadius = cell.messageContainerView.frame.size.height /2;
+    cell.messageContainerView.layer.cornerRadius = cell.messageContainerView.frame.size.height /4;
     cell.messageContainerView.clipsToBounds = true;
     return cell;
 }
