@@ -349,11 +349,12 @@
                     <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
                     <connections>
                         <outlet property="mapView" destination="yia-Ot-unD" id="sKC-fR-sem"/>
+                        <segue destination="6N9-Ay-TK4" kind="show" identifier="CallOutSegue" id="9MX-hJ-rhJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hc-X8-h2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-97" y="2621"/>
+            <point key="canvasLocation" x="-172" y="2621"/>
         </scene>
         <!--Chat-->
         <scene sceneID="tm3-OF-P7J">
@@ -728,7 +729,7 @@
                     </connections>
                 </swipeGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2741.5999999999999" y="133.5832083958021"/>
+            <point key="canvasLocation" x="2969" y="134"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="DqU-Vw-sSI">
@@ -1231,8 +1232,12 @@
         <image name="profile-pic-placeholder" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="9MX-hJ-rhJ"/>
+        <segue reference="Ikg-ro-xOw"/>
+
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
+
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
