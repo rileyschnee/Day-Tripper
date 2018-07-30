@@ -55,7 +55,7 @@
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if([self.location isEqualToString:@""]){
+    if([self.location isEqualToString:@""] ||[self doublesAreEqual:self.latitude isEqualTo:(double) 0.0]){
         [self alertNoLocation];
     } else {
         ResultsViewController *resultsViewController = [segue destinationViewController];
@@ -152,9 +152,16 @@
     [self.chosenCategories removeObject:cat];
 }
 
+- (BOOL)doublesAreEqual:(double)first isEqualTo:(double)second {
+    if(fabs(first - second) < DBL_EPSILON)
+        return YES;
+    else
+        return NO;
+}
+
 
 - (void)alertNoLocation{
-    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Location" message:@"You must enter a location" preferredStyle:(UIAlertControllerStyleAlert)];
+    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Valid Location" message:@"You must enter a valid location" preferredStyle:(UIAlertControllerStyleAlert)];
     UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
     }];
     // add the OK action to the alert controller

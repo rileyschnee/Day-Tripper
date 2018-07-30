@@ -25,15 +25,9 @@
 }
 
 - (void)textFieldDidChange:(UITextField *)textField {
-    if ([textField.text length] > 4)
+    if ([textField.text length] > 3)
     {
-        if (textField.text.length < self.prevTextFieldLength) {
-            self.prevTextFieldLength = (int) textField.text.length;
-        }
-        else {
-            self.lastEditedLocation = ((int) [textField.text length]);
-            [self completerRunText:textField.text];
-        }
+        [self completerRunText:textField.text];
     }
 }
 
@@ -46,23 +40,13 @@
 
 
 - (void) completerDidUpdateResults:(MKLocalSearchCompleter *)completer {
-    if (completer.results.count > 0) {
-        MKLocalSearchCompletion *result  = completer.results[0];
-        NSString *completion = [result.description componentsSeparatedByString:@">"][1];
-        [self getAddressFromName:completion];
-        self.locationField.text = completion;
-        [self selectPartOfTextField:self.locationField];
-        self.prevTextFieldLength = (int) self.locationField.text.length;
+    self.searchResults = [[NSMutableArray alloc] init];
+    for (MKLocalSearchCompletion* result in completer.results) {
+        NSString *completion = [result.description componentsSeparatedByString:@"> "][1];
+        [self.searchResults addObject:completion];
     }
 }
 
-- (void) selectPartOfTextField:(UITextField*) textField {
-    UITextRange *selectedRange = [textField selectedTextRange];
-    int positionToStartHighlighting = ( (int) self.locationField.text.length) - self.lastEditedLocation;
-    UITextPosition *newPosition = [textField positionFromPosition:selectedRange.end offset:-positionToStartHighlighting];
-    UITextRange *newRange = [textField textRangeFromPosition:newPosition toPosition:selectedRange.start];
-    [textField setSelectedTextRange:newRange];
-}
 - (IBAction)changeDate:(id)sender {
     self.delegate.tripDate = self.datePicker.date;
 }
@@ -88,16 +72,22 @@
 
 # pragma mark - MPGTextFieldDelegate
 - (NSArray*) dataForPopoverInTextField:(MPGTextField *)textField {
-    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
-    [dict setValue:@"yo" forKey:@"DisplayText"];
     NSMutableArray* array = [[NSMutableArray alloc] init];
-    [array addObject:[dict copy]];
+    for (NSString* result in self.searchResults) {
+        NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+        [dict setValue:result forKey:@"DisplayText"];
+        [array addObject:[dict copy]];
+    }
     return [array copy];
 }
 
 - (BOOL)textFieldShouldSelect:(MPGTextField *)textField
 {
     return YES;
+}
+
+- (void)textField:(MPGTextField *)textField didEndEditingWithSelection:(NSDictionary *)result {
+     [self getAddressFromName:result[@"DisplayText"]];
 }
 
 
