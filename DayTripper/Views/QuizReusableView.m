@@ -18,11 +18,11 @@
     NSDate *sevenDaysOut = [[NSDate date] dateByAddingTimeInterval:60*60*24*7];
     [self.datePicker setMaximumDate: sevenDaysOut];
     [self.locationField setBorderStyle:UITextBorderStyleNone];
+    self.locationField.delegate = self;
 }
 - (void)dismissKeyboard:(UITapGestureRecognizer *)sender {
     [self.locationField resignFirstResponder];
 }
-
 
 - (void)textFieldDidChange:(UITextField *)textField {
     if ([textField.text length] > 4)
@@ -85,5 +85,20 @@
 - (void) completer:(MKLocalSearchCompleter *)completer didFailWithError:(NSError *)error {
     NSLog(@"Completer failed with error: %@",error.description);
 }
+
+# pragma mark - MPGTextFieldDelegate
+- (NSArray*) dataForPopoverInTextField:(MPGTextField *)textField {
+    NSMutableDictionary* dict = [[NSMutableDictionary alloc] init];
+    [dict setValue:@"yo" forKey:@"DisplayText"];
+    NSMutableArray* array = [[NSMutableArray alloc] init];
+    [array addObject:[dict copy]];
+    return [array copy];
+}
+
+- (BOOL)textFieldShouldSelect:(MPGTextField *)textField
+{
+    return YES;
+}
+
 
 @end
