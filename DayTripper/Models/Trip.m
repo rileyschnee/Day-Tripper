@@ -59,9 +59,10 @@
             [self addDTActionItemToChatWithMessage:[NSString stringWithFormat:@"Check to see if %@ requires reservations!", activity.name]];
         }
         if([[activity activityType] isEqualToString:@"Place"]){
-            for(NSString *cat in activity.categories){
-                if([cat isEqualToString:@"Movie Theater"]){
-                        [self addDTActionItemToChatWithMessage:[NSString stringWithFormat:@"Don't forget to buy your movie tickets for %@ by %@!", activity.name, [dateFormatter stringFromDate:self.tripDate]]];
+            for(NSDictionary *cat in activity.categories){
+                if([[cat objectForKey:@"name"] isEqualToString:@"Movie Theater"]){
+                    //NSLog(@"%@ Activity : %@ Category", activity.name, cat);
+                    [self addDTActionItemToChatWithMessage:[NSString stringWithFormat:@"Don't forget to buy your movie tickets for %@ by %@!", activity.name, [dateFormatter stringFromDate:self.tripDate]]];
                 }
             }
         }
