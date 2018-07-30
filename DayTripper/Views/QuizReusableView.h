@@ -13,6 +13,8 @@
 #import "QuizReusableViewDelegate.h"
 #import "QuizViewController.h"
 
+#import "MPGTextField.h"
+
 
 //@protocol QuizReusableViewDelegate
 //@property (strong, nonatomic) NSString *location;
@@ -22,13 +24,14 @@
 //@end
 
 
-@interface QuizReusableView : UICollectionReusableView <MKLocalSearchCompleterDelegate, UITextFieldDelegate, QuizViewControllerDelegate>
+@interface QuizReusableView : UICollectionReusableView <MKLocalSearchCompleterDelegate, UITextFieldDelegate, QuizViewControllerDelegate, MPGTextFieldDelegate>
 
 @property (strong, nonatomic) MKLocalSearchCompleter *completer;
-@property(nonatomic, readonly, strong) NSArray <MKLocalSearchCompletion *> *results;
 @property (weak, nonatomic) IBOutlet UITextField *locationField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) id<QuizReusableViewDelegate> delegate;
+
+@property (strong, nonatomic) NSMutableArray* searchResults;
 
 @property (nonatomic) int lastEditedLocation;
 @property (nonatomic) int prevTextFieldLength;
