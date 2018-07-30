@@ -27,7 +27,6 @@
     } else {
         self.tripCityLabel.text = self.trip.city;
     }
-    NSLog(@"Set trip - reusable view");
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"EEEE, MMM d, yyyy"];
     self.tripDateLabel.text = [dateFormatter stringFromDate:self.trip.tripDate];

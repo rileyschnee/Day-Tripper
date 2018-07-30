@@ -75,7 +75,6 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
     header.trip = self.trip;
-    NSLog(@"Set trip - resources view");
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
     
@@ -127,6 +126,7 @@
         NSString* tripDayStringRep = [formatter stringFromDate:tripDay];
         double currHigh = 0;
         double currLow = 0;
+        NSString* weatherDesc = @"";
         NSArray *forecasts = responseDict[0][@"list"];
         BOOL highAndLowSetSoFar = NO;
         for (NSDictionary* forecast in forecasts) {
@@ -135,6 +135,8 @@
             if ([tripDayStringRep isEqualToString:listedDate]) {
                 double listedHigh = [forecast[@"main"][@"temp_max"] doubleValue];
                 double listedLow = [forecast[@"main"][@"temp_min"] doubleValue];
+                NSDictionary* weatherDict = forecast[@"weather"];
+                weatherDesc = forecast[@"weather"][0][@"description"];
                 if (highAndLowSetSoFar) {
                     if (listedHigh > currHigh) {
                         currHigh = listedHigh;
@@ -151,17 +153,25 @@
             }
             
         }
-        [weakSelf setWeatherLabels:header high:currHigh low:currLow];
+        [weakSelf setWeatherLabels:header high:currHigh low:currLow description:weatherDesc];
         
     }];
 }
 
-- (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low {
+- (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low description:(NSString *)description {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString* highString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:high], @" F"];
-        NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
-        header.highLabel.text = highString;
-        header.lowLabel.text = lowString;
+        // if there is no weather (the high and low both equal 0) then set the high and low equal to dash
+        if (high == 0.0 && low == 0.0) {
+            header.highLabel.text = @"-";
+            header.lowLabel.text = @"-";
+            header.descLabel.text = @"-";
+        } else {
+            NSString* highString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:high], @" F"];
+            NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
+            header.highLabel.text = highString;
+            header.lowLabel.text = lowString;
+            header.descLabel.text = description;
+        }
     });
 }
 - (void)fetchAttendees{
