@@ -11,6 +11,7 @@
 #import "ProfileViewController.h"
 #import "TripReusableView.h"
 #import "IOUViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -31,7 +32,7 @@
     CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = CGSizeMake(itemWidth, itemWidth+25);
-    
+    [SVProgressHUD show];
     [self fetchAttendees];
     
 }
@@ -197,6 +198,7 @@
             NSLog(@"%@", error.localizedDescription);
             NSLog(@"Error fetching attendees");
         }
+        [SVProgressHUD dismiss];
     }];
 }
 

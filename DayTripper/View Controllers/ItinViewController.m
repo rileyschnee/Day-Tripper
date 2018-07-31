@@ -33,7 +33,6 @@
     self.tabBarController.delegate = self;
     self.tableOrdering = [self.trip.activities mutableCopy];
     [self.tableView reloadData];
-    
 }
 
 - (void)viewDidAppear:(BOOL)animated {

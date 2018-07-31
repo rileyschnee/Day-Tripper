@@ -22,6 +22,7 @@ PODS:
   - ParseUI (1.2.0):
     - Bolts/Tasks (~> 1.3)
     - Parse (~> 1.9)
+  - SVProgressHUD (2.2.5)
   - TTGTagCollectionView (1.9.0)
   - UberCore (0.10.0)
   - UberRides (0.10.0):
@@ -31,6 +32,7 @@ DEPENDENCIES:
   - AFNetworking
   - Parse
   - ParseUI
+  - SVProgressHUD
   - TTGTagCollectionView
   - UberRides (~> 0.9)
 
@@ -40,6 +42,7 @@ SPEC REPOS:
     - Bolts
     - Parse
     - ParseUI
+    - SVProgressHUD
     - TTGTagCollectionView
     - UberCore
     - UberRides
@@ -49,10 +52,11 @@ SPEC CHECKSUMS:
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Parse: d3edaf8c7c722cb33cb83ba7821d015ae32d362d
   ParseUI: 2b37a0bc692a3e7666cf0c37b5521dfddd74a1af
+  SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TTGTagCollectionView: 958f20b946dee92a8ba20dc37d10a06737641ae9
   UberCore: 512950407dadc8045a583e4a509da2750ae7dc21
   UberRides: cc6d7c5232966e45229dda1534106b33e379dfbe
 
-PODFILE CHECKSUM: c401281a2b1d9d2a5d3fa74295e64abffebbb360
+PODFILE CHECKSUM: 0401ef3061a4a1ad48a203d0ff6f3f9a428fad1c
 
 COCOAPODS: 1.5.3
