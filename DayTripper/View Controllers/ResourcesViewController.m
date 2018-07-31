@@ -177,7 +177,7 @@
             NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
             header.highLabel.text = highString;
             header.lowLabel.text = lowString;
-            header.descLabel.text = description;
+            header.descLabel.text = [description capitalizedString];
         }
     });
 }

@@ -20,6 +20,9 @@
 
     // Configure the view for the selected state
 }
-
+- (void)setIou:(IOU *)iou {
+    _iou = iou;
+    
+}
 
 @end

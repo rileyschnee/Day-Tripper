@@ -12,6 +12,7 @@
 
 @interface IOUViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *iouArray;
 
 @end
 
@@ -25,7 +26,8 @@
     //fix extra space at the top of the table view
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-    [self.tableView reloadData];
+    [self fetchIOUs];
+    //[self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,14 +47,35 @@
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     IOUCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IOUCell" forIndexPath:indexPath];
-    cell.iou = self.trip.ious[indexPath.row];
-    cell.iouLabel.text = [NSString stringWithFormat:@"%@ owes %@ $%@ for %@", cell.iou.payer.username, cell.iou.payee.username, cell.iou.amount, cell.iou.description];
+    //IOU *temp = self.trip.ious[indexPath.row];
+    cell.iou = self.iouArray[indexPath.row];
+    NSLog(@"%lu # ious", (unsigned long)[self.trip.ious count]);
+    NSLog(@"%@ current iou", cell.iou);
+    cell.iouLabel.text = [NSString stringWithFormat:@"%@ owes %@ $%@ for %@", cell.iou[@"payer"][@"username"], cell.iou[@"payee"][@"username"], cell.iou[@"amount"], cell.iou[@"description"]];
     return cell;
 }
 
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.trip.ious.count;
+    return [self.iouArray count];
 }
+
+- (void)fetchIOUs{
+    PFQuery *query = [PFQuery queryWithClassName:@"IOU"];
+    [query whereKey:@"objectId" containedIn:self.trip.ious];
+    [query includeKeys:@[@"payer", @"payee", @"description", @"amount"]];
+    //query.limit = 20;
+    [query findObjectsInBackgroundWithBlock:^(NSArray *ious, NSError *error) {
+        if (ious != nil){
+            self.iouArray = [ious mutableCopy];
+            NSLog(@"%@", self.iouArray);
+            [self.tableView reloadData];
+        } else {
+            NSLog(@"%@", error.localizedDescription);
+            NSLog(@"Error fetching ious");
+        }
+    }];
+}
+
 
 - (IBAction)clickedAddIOU:(id)sender {
     
@@ -114,8 +137,16 @@
     }
     NSString *desc = description;
     
-    [IOU saveIOUwithAmount:amount fromPayer:payer toPayee:payee withDescription:desc toTrip:self.trip];
-    [self.tableView reloadData];
+    [IOU saveIOUwithAmount:amount fromPayer:payer toPayee:payee withDescription:desc toTrip:self.trip withCompletion:^(BOOL complete) {
+        NSLog(@"In completion block");
+        [self fetchIOUs];
+        //[self.tableView reloadData];
+    }];
+    
+}
+
+- (IBAction)back:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

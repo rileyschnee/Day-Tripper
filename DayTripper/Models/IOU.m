@@ -15,7 +15,7 @@
 @dynamic description;
 @dynamic completed;
 
-+ (void) saveIOUwithAmount: ( NSNumber * )amount fromPayer: (PFUser * )payer toPayee: (PFUser *)payee withDescription: (NSString * )description toTrip:(Trip * )trip{
++ (void) saveIOUwithAmount: ( NSNumber * )amount fromPayer: (PFUser * )payer toPayee: (PFUser *)payee withDescription: (NSString * )description toTrip:(Trip * )trip withCompletion:(void (^)(BOOL))completion{
     
     IOU *newIOU = [IOU new];
     newIOU.amount = amount;
@@ -27,20 +27,26 @@
     [newIOU saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"IOU successfully saved!");
+            NSMutableArray *tempIOUs = [NSMutableArray new];
+            tempIOUs = [trip.ious mutableCopy];
+            [tempIOUs addObject:newIOU.objectId];
+            trip.ious = [tempIOUs copy];
+            //[trip addUniqueObject:newIOU.objectId forKey:@"ious"];
+            [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    NSLog(@"Successfully updated IOUs in trip");
+                    completion(YES);
+                } else {
+                    NSLog(@"Error updating IOUs in trip");
+                    completion(NO);
+                }
+            }];
         } else {
             NSLog(@"Error saving IOU");
         }
     }];
-    [trip addUniqueObject:newIOU forKey:@"ious"];
-    [trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded){
-            NSLog(@"Successfully updated IOUs in trip");
-        } else {
-            NSLog(@"Error updating IOUs in trip");
-        }
-    }];
-    
 }
+
 + (nonnull NSString *)parseClassName {
     return @"IOU";
 }

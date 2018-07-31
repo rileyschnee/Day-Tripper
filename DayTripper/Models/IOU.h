@@ -13,9 +13,9 @@
 @property (strong, nonatomic) PFUser *payer;
 @property (strong, nonatomic) PFUser *payee;
 @property (strong, nonatomic) NSNumber *amount;
-@property (strong, nonatomic) NSString *description;
+@property (nonatomic, copy) NSString *description;
 @property (strong, nonatomic) NSNumber *completed;
 
-+ (void) saveIOUwithAmount: (NSNumber *)amount fromPayer: (PFUser *)payer toPayee: (PFUser *)payee withDescription: (NSString *)description toTrip:(Trip *)trip;
++ (void) saveIOUwithAmount: (NSNumber *)amount fromPayer: (PFUser *)payer toPayee: (PFUser *)payee withDescription: (NSString *)description toTrip:(Trip *)trip withCompletion:(void (^)(BOOL))completion;
 
 @end
