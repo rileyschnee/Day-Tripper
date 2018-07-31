@@ -25,6 +25,7 @@
 - (IBAction)didTapDirections:(id)sender;
 @property (nonatomic) int currNumEventPhotos;
 @property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
+@property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *websiteLink;
 @property (strong, nonatomic) NSString* websiteToGoTo;
 @property (weak, nonatomic) IBOutlet UIView *uberView;
@@ -73,8 +74,8 @@
     } else if([[self.activity activityType] isEqualToString:@"Food"]){
         //get yelp images
         [self fetchYelpPhotos:self.activity.apiId];
-        //get the hours
-        [self fetchYelpHours:self.activity.apiId];
+        //get the hours and rating
+        [self fetchYelpDetails:self.activity.apiId];
         //set website url
         self.websiteToGoTo = self.activity.website;
     } else if ([[self.activity activityType] isEqualToString:@"Event"]){
@@ -91,6 +92,27 @@
         self.tabBarController.navigationItem.hidesBackButton = YES;
         self.tabBarController.navigationItem.leftBarButtonItem = item;
     }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    if (self.fromMap) {
+        //nav bar from map
+        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        
+        UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Details"];
+        // [navbar setBarTintColor:[UIColor lightGrayColor]];
+        UIBarButtonItem* backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBack:)];
+        navItem.leftBarButtonItem = backBtn;
+        
+        
+        [navbar setItems:@[navItem]];
+        [self.view addSubview:navbar];
+    }
+}
+
+// back to map view
+-(void)onTapBack:(UIBarButtonItem*)item{
+    [self dismissViewControllerAnimated:true completion:nil];
 }
 
 - (void) goBackToPrevScreen {
@@ -233,8 +255,8 @@
     }];
 }
 
-//gets hours of operation
-- (void) fetchYelpHours: (NSString*) tripId {
+//gets hours and rating of operation
+- (void) fetchYelpDetails: (NSString*) tripId {
     //get index of current day of the week
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
@@ -252,11 +274,14 @@
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        //set the rating
+        double rating = [responseDict[0][@"rating"] doubleValue];
+        //set the hours
         NSArray *days = responseDict[0][@"hours"][0][@"open"];
         NSDictionary* currDayObject = days[weekdayIndex];
         NSString* startTimeString = [self militaryTimeToAMPM: currDayObject[@"start"]];
         NSString* endTimeString = [self militaryTimeToAMPM: currDayObject[@"end"]];
-        [weakSelf setHoursAsync:startTimeString endTimeString:endTimeString];
+        [weakSelf setHoursAndRatingAsync:startTimeString endTimeString:endTimeString rating:rating];
     }];
 }
 
@@ -324,9 +349,10 @@
     });
 }
 
--(void) setHoursAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString {
+-(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
          self.hoursLabel.text = [NSString stringWithFormat:@"%@%@%@", startTimeString, @" - ", endTimeString];
+        self.ratingsLabel.text = [NSString stringWithFormat:@"%@%.1f%@", @"Rating: ", rating, @"/5.0"];
     });
    
 }

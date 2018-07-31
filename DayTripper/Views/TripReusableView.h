@@ -28,5 +28,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *highLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
+//description of the weather
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (strong, nonatomic) id<TripReusableViewDelegate> delegate;
 @end
