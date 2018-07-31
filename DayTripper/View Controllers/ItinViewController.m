@@ -45,16 +45,16 @@
     else {
         self.navigationItem.rightBarButtonItem = editButton;
     }
-    
+}
+
+- (void) viewWillAppear:(BOOL)animated {
     // switch to resource view if coming to itin for first time from home
     if (self.fromHomeToResources) {
         [self.tabBarController.delegate tabBarController:self.tabBarController shouldSelectViewController:[self.tabBarController.viewControllers objectAtIndex:2]];
         [self.tabBarController setSelectedIndex:2];
         self.fromHomeToResources = NO;
     }
-
 }
-
 
 
 
