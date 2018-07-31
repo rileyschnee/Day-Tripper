@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -603,6 +604,14 @@
                                                 <color key="titleColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0e-PQ-g7W">
+                                            <rect key="frame" x="288" y="244" width="34" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="IOUs"/>
+                                            <connections>
+                                                <segue destination="zS8-l9-wtS" kind="show" id="LgW-2C-f53"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
@@ -1122,7 +1131,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mmy-NT-XU1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-745" y="134"/>
+            <point key="canvasLocation" x="-761" y="134"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="C8f-gn-VrH">
@@ -1180,6 +1189,65 @@
             </objects>
             <point key="canvasLocation" x="3716" y="1844.5277361319343"/>
         </scene>
+        <!--IOUs-->
+        <scene sceneID="MMN-C7-ssp">
+            <objects>
+                <viewController id="jzy-aC-Fbq" customClass="IOUViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Hgc-l0-oeg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="03c-uP-H92">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IOUCell" rowHeight="51" id="opW-Aj-1nA" customClass="IOUCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="51"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="opW-Aj-1nA" id="B0n-iZ-oh0">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WT-aG-TDs">
+                                                    <rect key="frame" x="15" y="15" width="345" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9WT-aG-TDs" firstAttribute="leading" secondItem="B0n-iZ-oh0" secondAttribute="leadingMargin" id="6V9-0d-koY"/>
+                                                <constraint firstItem="9WT-aG-TDs" firstAttribute="trailing" secondItem="B0n-iZ-oh0" secondAttribute="trailingMargin" id="QVa-WP-2dz"/>
+                                                <constraint firstItem="9WT-aG-TDs" firstAttribute="top" secondItem="B0n-iZ-oh0" secondAttribute="topMargin" constant="4" id="a4Y-rT-r1g"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="9WT-aG-TDs" secondAttribute="bottom" constant="4" id="rSP-wf-X3f"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iouLabel" destination="9WT-aG-TDs" id="hto-Mn-Fwf"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="pXN-w5-zya"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="IOUs" id="Tka-N6-F7T">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="gZe-IY-ptY">
+                            <connections>
+                                <action selector="clickedAddIOU:" destination="jzy-aC-Fbq" id="0cc-uX-l79"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tableView" destination="03c-uP-H92" id="zYV-j1-BKf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kfp-7X-a8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3716" y="2620.8395802098953"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tyv-pV-kXy">
             <objects>
@@ -1218,6 +1286,24 @@
             </objects>
             <point key="canvasLocation" x="1744.8" y="1844.5277361319343"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="UEB-Bf-NOQ">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="zS8-l9-wtS" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="7yN-M6-lZ4">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="jzy-aC-Fbq" kind="relationship" relationship="rootViewController" id="OZi-NW-DLV"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="vSm-ZO-Bni" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2684" y="2621"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chat" width="32" height="32"/>
@@ -1233,7 +1319,7 @@
     <inferredMetricsTieBreakers>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
-        <segue reference="irg-7C-q8O"/>
+        <segue reference="SUE-za-G0o"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

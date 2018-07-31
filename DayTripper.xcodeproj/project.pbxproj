@@ -27,6 +27,9 @@
 		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
 		BE69F26C21000631000122D6 /* yelpCategories.json in Resources */ = {isa = PBXBuildFile; fileRef = BE69F26B21000631000122D6 /* yelpCategories.json */; };
 		BE69F26E21001161000122D6 /* 4SQCategories.json in Resources */ = {isa = PBXBuildFile; fileRef = BE69F26D21001160000122D6 /* 4SQCategories.json */; };
+		BE6A1ED0210FBC86009F9186 /* IOUViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1ECF210FBC86009F9186 /* IOUViewController.m */; };
+		BE6A1ED3210FBC9B009F9186 /* IOU.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1ED2210FBC9B009F9186 /* IOU.m */; };
+		BE6A1ED6210FBF3D009F9186 /* IOUCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE6A1ED5210FBF3D009F9186 /* IOUCell.m */; };
 		BEA5FD3820F9298F005B79F5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BEA5FD3720F9298F005B79F5 /* AppDelegate.m */; };
 		BEA5FD3E20F9298F005B79F5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3C20F9298F005B79F5 /* Main.storyboard */; };
 		BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEA5FD3F20F92990005B79F5 /* Assets.xcassets */; };
@@ -88,6 +91,12 @@
 		BE69F2672100007F000122D6 /* Constants.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		BE69F26B21000631000122D6 /* yelpCategories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = yelpCategories.json; sourceTree = "<group>"; };
 		BE69F26D21001160000122D6 /* 4SQCategories.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = 4SQCategories.json; sourceTree = "<group>"; };
+		BE6A1ECE210FBC86009F9186 /* IOUViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUViewController.h; sourceTree = "<group>"; };
+		BE6A1ECF210FBC86009F9186 /* IOUViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOUViewController.m; sourceTree = "<group>"; };
+		BE6A1ED1210FBC9B009F9186 /* IOU.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOU.h; sourceTree = "<group>"; };
+		BE6A1ED2210FBC9B009F9186 /* IOU.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOU.m; sourceTree = "<group>"; };
+		BE6A1ED4210FBF3D009F9186 /* IOUCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IOUCell.h; sourceTree = "<group>"; };
+		BE6A1ED5210FBF3D009F9186 /* IOUCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = IOUCell.m; sourceTree = "<group>"; };
 		BEA5FD3320F9298F005B79F5 /* DayTripper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DayTripper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEA5FD3620F9298F005B79F5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BEA5FD3720F9298F005B79F5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -242,6 +251,8 @@
 				537A4B842108F42400E64CBD /* ChatViewController.h */,
 				537A4B852108F42400E64CBD /* ChatViewController.m */,
 				BEB308FE210A8BC000336EA4 /* QuizViewControllerForCellDelegate.h */,
+				BE6A1ECE210FBC86009F9186 /* IOUViewController.h */,
+				BE6A1ECF210FBC86009F9186 /* IOUViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -269,6 +280,8 @@
 				BEA6BFA3210262E300933DB7 /* TripReusableView.m */,
 				537A4B872108FB8E00E64CBD /* ChatCell.h */,
 				537A4B882108FB8E00E64CBD /* ChatCell.m */,
+				BE6A1ED4210FBF3D009F9186 /* IOUCell.h */,
+				BE6A1ED5210FBF3D009F9186 /* IOUCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -287,6 +300,8 @@
 				53E8421020FFA920003FE31A /* Event.m */,
 				537A4B8A210912B000E64CBD /* ChatMessage.h */,
 				537A4B8B210912B000E64CBD /* ChatMessage.m */,
+				BE6A1ED1210FBC9B009F9186 /* IOU.h */,
+				BE6A1ED2210FBC9B009F9186 /* IOU.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE6A1ED3210FBC9B009F9186 /* IOU.m in Sources */,
 				BEA6BFA4210262E300933DB7 /* TripReusableView.m in Sources */,
 				BEEA9D9420FD03BC0048C0DB /* ItinCell.m in Sources */,
 				537A4B8121065AA000E64CBD /* random.swift in Sources */,
@@ -456,11 +472,13 @@
 				BEEA9D8E20FD016E0048C0DB /* Place.m in Sources */,
 				53E8420620F9A060003FE31A /* APIManager.m in Sources */,
 				537A4B8C210912B000E64CBD /* ChatMessage.m in Sources */,
+				BE6A1ED0210FBC86009F9186 /* IOUViewController.m in Sources */,
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 				BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */,
 				53E8420920FCF386003FE31A /* Functions.m in Sources */,
 				BE69F2682100007F000122D6 /* Constants.m in Sources */,
+				BE6A1ED6210FBF3D009F9186 /* IOUCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

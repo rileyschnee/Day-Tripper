@@ -10,6 +10,7 @@
 #import "APIManager.h"
 #import "ProfileViewController.h"
 #import "TripReusableView.h"
+#import "IOUViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -57,6 +58,12 @@
         NSLog(@"%@", user.username);
         profileViewController.user = user;
         profileViewController.trip = self.trip;
+    }
+    if([sender isKindOfClass:[UIButton class]]){
+        UINavigationController *navController = [segue destinationViewController];
+        IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+        iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
+        iouVC.trip = self.trip;
     }
 }
 
@@ -192,9 +199,7 @@
 }
 
 - (IBAction)shareToAlbum:(id)sender {
-    
-    
-    
+    // GOOGLE PHOTOS FUNCTIONALITY HERE
     
 }
 

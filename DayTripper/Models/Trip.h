@@ -19,6 +19,7 @@
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSMutableArray *attendees;
+@property (strong, nonatomic) NSMutableArray *ious;
 @property (strong, nonatomic) NSDate *tripDate;
 
 + (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withCompletion: (PFBooleanResultBlock  _Nullable)completion;
