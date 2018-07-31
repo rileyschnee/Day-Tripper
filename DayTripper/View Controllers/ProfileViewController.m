@@ -12,6 +12,7 @@
 #import "Trip.h"
 #import "ResourcesViewController.h"
 #import "ItinViewController.h"
+#import "DMViewController.h"
 
 @interface ProfileViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicView;
@@ -129,13 +130,18 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    
-    UITabBarController *tabbar = [segue destinationViewController];
-    UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-    ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
-    itinerary.trip = self.trip;
-    //set the trip title
-    tabbar.title = self.trip.name;
+    if ([segue.destinationViewController isKindOfClass:[DMViewController class]]) {
+        DMViewController* dmViewController = [segue destinationViewController];
+        dmViewController.otherPersonUserName = self.user.username;
+    }
+    else {
+        UITabBarController *tabbar = [segue destinationViewController];
+        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+        ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
+        itinerary.trip = self.trip;
+        //set the trip title
+        tabbar.title = self.trip.name;
+    }
     
     
 //    ResourcesViewController *resourceViewController = [tabbar.viewControllers objectAtIndex:2];
