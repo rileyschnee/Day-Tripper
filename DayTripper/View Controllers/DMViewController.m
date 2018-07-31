@@ -16,6 +16,8 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UITextField *messageBody;
 @property (strong, nonatomic) NSString* chatName;
+//the name of the convo is user1-user2 but there is a chance that user2 logs in and it should be user2-user1
+@property (strong, nonatomic) NSString* chatNameReverse;
 @property (strong, nonatomic) NSMutableArray *chats;
 @property (weak, nonatomic) IBOutlet UIButton *submitButton;
 @property (strong, nonatomic) DMConvo* convo;
@@ -41,6 +43,7 @@ int MOVEMENT_KEYBOARD_DM = 200;
     
     // we have username of other user and current user which we combine to make chat convo name for db ref
     self.chatName = [NSString stringWithFormat:@"%@%@%@", [PFUser currentUser].username, @"-", self.otherPersonUserName];
+    self.chatNameReverse = [NSString stringWithFormat:@"%@%@%@", self.otherPersonUserName, @"-", [PFUser currentUser].username];
     
     //get the chat conversation
     
@@ -91,6 +94,7 @@ int MOVEMENT_KEYBOARD_DM = 200;
     PFQuery *query = [PFQuery queryWithClassName:@"DMConvo"]; //how to define a query
     [query includeKey:@"chats"];
     [query whereKey:@"name" equalTo:self.chatName];
+    [query whereKey:@"name" equalTo:self.chatNameReverse];
     query.limit = 1;
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *convoObj, NSError *error) {
