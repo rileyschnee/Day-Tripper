@@ -28,7 +28,7 @@
 #define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
 
 // constant for keyboard movement
-int MOVEMENT_KEYBOARD = 200;
+int MOVEMENT_KEYBOARD_DM = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -101,6 +101,19 @@ int MOVEMENT_KEYBOARD = 200;
             [self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
+            //no chat convo exists
+            if ([error.localizedDescription containsString:@"results matched the query"]) {
+                DMConvo* newConvo = [DMConvo new];
+                newConvo.chats = [[NSArray alloc] init];
+                newConvo.name = self.chatName;
+                self.convo = newConvo;
+                [self.convo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                    if (succeeded) {
+                    } else {
+                        NSLog(@"Problem saving convo: %@", error.localizedDescription);
+                    }
+                }];
+            }
         }
     }];
     
@@ -131,14 +144,14 @@ int MOVEMENT_KEYBOARD = 200;
 #pragma mark - UITextFieldDelegate Methods
 
 -(BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    [self reduceHeight:MOVEMENT_KEYBOARD];
-    [self moveElementVertically:(-1* MOVEMENT_KEYBOARD)];
+    [self reduceHeight:MOVEMENT_KEYBOARD_DM];
+    [self moveElementVertically:(-1* MOVEMENT_KEYBOARD_DM)];
     return YES;
 }
 
 - (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
-    [self reduceHeight:(-1 * MOVEMENT_KEYBOARD)];
-    [self moveElementVertically:MOVEMENT_KEYBOARD];
+    [self reduceHeight:(-1 * MOVEMENT_KEYBOARD_DM)];
+    [self moveElementVertically:MOVEMENT_KEYBOARD_DM];
     [self.view endEditing:YES];
     return YES;
 }
