@@ -18,6 +18,8 @@
 		537A4B892108FB8E00E64CBD /* ChatCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B882108FB8E00E64CBD /* ChatCell.m */; };
 		537A4B8C210912B000E64CBD /* ChatMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8B210912B000E64CBD /* ChatMessage.m */; };
 		53B43829210F80210015075B /* MPGTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B43827210F80210015075B /* MPGTextField.m */; };
+		53B4382C210FCD350015075B /* DMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B4382B210FCD350015075B /* DMViewController.m */; };
+		53B4382F2110A4820015075B /* DMConvo.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B4382E2110A4820015075B /* DMConvo.m */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -69,6 +71,10 @@
 		537A4B8B210912B000E64CBD /* ChatMessage.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ChatMessage.m; sourceTree = "<group>"; };
 		53B43827210F80210015075B /* MPGTextField.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPGTextField.m; sourceTree = "<group>"; };
 		53B43828210F80210015075B /* MPGTextField.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPGTextField.h; sourceTree = "<group>"; };
+		53B4382A210FCD350015075B /* DMViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMViewController.h; sourceTree = "<group>"; };
+		53B4382B210FCD350015075B /* DMViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMViewController.m; sourceTree = "<group>"; };
+		53B4382D2110A4820015075B /* DMConvo.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DMConvo.h; sourceTree = "<group>"; };
+		53B4382E2110A4820015075B /* DMConvo.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DMConvo.m; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -242,6 +248,8 @@
 				537A4B842108F42400E64CBD /* ChatViewController.h */,
 				537A4B852108F42400E64CBD /* ChatViewController.m */,
 				BEB308FE210A8BC000336EA4 /* QuizViewControllerForCellDelegate.h */,
+				53B4382A210FCD350015075B /* DMViewController.h */,
+				53B4382B210FCD350015075B /* DMViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -287,6 +295,8 @@
 				53E8421020FFA920003FE31A /* Event.m */,
 				537A4B8A210912B000E64CBD /* ChatMessage.h */,
 				537A4B8B210912B000E64CBD /* ChatMessage.m */,
+				53B4382D2110A4820015075B /* DMConvo.h */,
+				53B4382E2110A4820015075B /* DMConvo.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -436,6 +446,7 @@
 				537A4B892108FB8E00E64CBD /* ChatCell.m in Sources */,
 				BEB308F6210678DA00336EA4 /* SettingsViewController.m in Sources */,
 				0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */,
+				53B4382F2110A4820015075B /* DMConvo.m in Sources */,
 				BEA6BFA1210262B800933DB7 /* UserCollectionCell.m in Sources */,
 				BEEA9D9E20FD12310048C0DB /* Trip.m in Sources */,
 				BEEA9D8A20FCFEEB0048C0DB /* ResultsCell.m in Sources */,
@@ -459,6 +470,7 @@
 				BEA5FD5120F929CD005B79F5 /* QuizViewController.m in Sources */,
 				BEA5FD5420F929E2005B79F5 /* ResultsViewController.m in Sources */,
 				BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */,
+				53B4382C210FCD350015075B /* DMViewController.m in Sources */,
 				53E8420920FCF386003FE31A /* Functions.m in Sources */,
 				BE69F2682100007F000122D6 /* Constants.m in Sources */,
 			);
