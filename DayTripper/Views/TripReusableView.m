@@ -16,7 +16,26 @@
     [self.googlePhotosButton.layer setShadowOffset:CGSizeMake(2, 2)];
     [self.googlePhotosButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
     [self.googlePhotosButton.layer setShadowOpacity:0.5];
-
+    
+    // Add shadow to IOUs button
+    [self.iouButton.layer setShadowOffset:CGSizeMake(2, 2)];
+    [self.iouButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
+    [self.iouButton.layer setShadowOpacity:0.5];
+    
+    // Add shadow to weather view
+    [self.weatherView.layer setShadowOffset:CGSizeMake(2, 2)];
+    [self.weatherView.layer setShadowColor:[[UIColor grayColor] CGColor]];
+    [self.weatherView.layer setShadowOpacity:0.5];
+    [self.weatherView.layer setBorderColor:[[UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0] CGColor]];
+    [self.weatherView.layer setBorderWidth:1];
+    
+    // Set textField to Hidden
+    self.usernameToAdd.hidden = YES;
+    self.addAttendeeButton.selected = YES;
+    self.attendeeLabel.textAlignment = NSTextAlignmentCenter;
+    [self.attendeeLabel sizeToFit];
+    self.attendeeLabel.frame = CGRectMake(self.attendeeBar.frame.size.width/2 - self.attendeeLabel.frame.size.width/2, self.attendeeBar.frame.size.height/2 - self.attendeeLabel.frame.size.height/2, self.attendeeLabel.frame.size.width, self.attendeeLabel.frame.size.height);
+    
 }
 
 - (void)setTrip:(Trip *)trip{
@@ -34,9 +53,32 @@
 }
 
 //when clicked, this button will add the given username to the attendees trip array
-- (IBAction)addUserToTrip:(id)sender {    
-    NSString* usernameToAdd = [self.usernameToAdd.text lowercaseString];
-    [self getUserByUsername:usernameToAdd];
+- (IBAction)addUserToTrip:(id)sender {
+    if(self.addAttendeeButton.selected){
+        [UIView animateWithDuration:0.2f animations:^{
+            self.attendeeLabel.frame = CGRectMake(21, self.attendeeBar.frame.size.height/2 - self.attendeeLabel.frame.size.height/2, self.attendeeLabel.frame.size.width, self.attendeeLabel.frame.size.height);
+            //                self.attendeeLabel.transform = CGAffineTransformMakeTranslation(-100, 0);
+        }];
+        [UIView transitionWithView:self.attendeeBar duration:.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.addAttendeeButton.selected = NO;
+            self.usernameToAdd.hidden = NO;
+            
+        } completion:NULL];
+        
+        
+    } else {
+        NSString* usernameToAdd = [self.usernameToAdd.text lowercaseString];
+        [self getUserByUsername:usernameToAdd];
+        [UIView transitionWithView:self.attendeeBar duration:.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.addAttendeeButton.selected = YES;
+            self.usernameToAdd.hidden = YES;
+        } completion:NULL];
+        [UIView animateWithDuration:0.2f animations:^{
+            self.attendeeLabel.frame = CGRectMake(self.attendeeBar.frame.size.width/2 - self.attendeeLabel.frame.size.width/2, self.attendeeBar.frame.size.height/2 - self.attendeeLabel.frame.size.height/2, self.attendeeLabel.frame.size.width, self.attendeeLabel.frame.size.height);
+            //self.attendeeLabel.transform = CGAffineTransformMakeTranslation(100, 0);
+        }];
+        
+    }
 }
 
 - (IBAction)tapGestureTap:(id)sender {

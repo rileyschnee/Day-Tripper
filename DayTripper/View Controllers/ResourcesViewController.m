@@ -27,7 +27,7 @@
     self.collectionView.dataSource = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-
+    
     // Setup collection view interface
     CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
