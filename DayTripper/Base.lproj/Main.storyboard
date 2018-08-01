@@ -8,6 +8,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -239,11 +240,18 @@
                         <viewLayoutGuide key="safeArea" id="mTd-ow-E7N"/>
                     </view>
                     <navigationItem key="navigationItem" id="afG-Qw-OVf">
-                        <barButtonItem key="rightBarButtonItem" title="Settings" id="0Sb-iv-we1">
-                            <connections>
-                                <segue destination="sLQ-fk-Nd5" kind="presentation" id="qkH-ni-Ayp"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Settings" image="gear2" id="0Sb-iv-we1">
+                                <connections>
+                                    <segue destination="sLQ-fk-Nd5" kind="presentation" id="qkH-ni-Ayp"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem title="IOUs" image="money2" id="GTy-ji-D9Q">
+                                <connections>
+                                    <segue destination="zS8-l9-wtS" kind="presentation" id="Qz9-j1-qG0"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="nameLabel" destination="bhk-lz-h9u" id="kfh-lG-Mut"/>
@@ -632,21 +640,24 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Attendees" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L5d-3t-RZS">
                                                     <rect key="frame" x="18" y="12" width="105" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                                     <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ofz-cf-ve3">
-                                                    <rect key="frame" x="146" y="7" width="159" height="30"/>
+                                                    <rect key="frame" x="131" y="7" width="174" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
                                                 </textField>
                                                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VSt-OL-Cfq">
-                                                    <rect key="frame" x="321" y="7" width="30" height="30"/>
+                                                    <rect key="frame" x="317" y="3" width="40" height="39"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" title="Add"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                    <state key="normal" title="Add">
+                                                        <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    </state>
                                                     <connections>
                                                         <action selector="addUserToTrip:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="LeD-rb-4GD"/>
                                                     </connections>
@@ -1342,29 +1353,39 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IOUCell" rowHeight="51" id="opW-Aj-1nA" customClass="IOUCell">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="51"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="IOUCell" rowHeight="65" id="opW-Aj-1nA" customClass="IOUCell">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="opW-Aj-1nA" id="B0n-iZ-oh0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="50.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="64.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="mike owes riley $100 for Uber" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9WT-aG-TDs">
-                                                    <rect key="frame" x="15" y="15" width="345" height="21"/>
+                                                    <rect key="frame" x="15" y="15" width="258" height="35"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="unpaid" highlightedImage="paid" translatesAutoresizingMaskIntoConstraints="NO" id="HJP-TM-NGg">
+                                                    <rect key="frame" x="291" y="7" width="69" height="51"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="69" id="68K-qS-cmv"/>
+                                                        <constraint firstAttribute="height" constant="51" id="IOw-78-wd8"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="9WT-aG-TDs" firstAttribute="leading" secondItem="B0n-iZ-oh0" secondAttribute="leadingMargin" id="6V9-0d-koY"/>
-                                                <constraint firstItem="9WT-aG-TDs" firstAttribute="trailing" secondItem="B0n-iZ-oh0" secondAttribute="trailingMargin" id="QVa-WP-2dz"/>
+                                                <constraint firstItem="HJP-TM-NGg" firstAttribute="top" secondItem="B0n-iZ-oh0" secondAttribute="top" constant="7" id="MhW-aV-B1Q"/>
+                                                <constraint firstItem="9WT-aG-TDs" firstAttribute="trailing" secondItem="B0n-iZ-oh0" secondAttribute="trailingMargin" constant="-87" id="QVa-WP-2dz"/>
                                                 <constraint firstItem="9WT-aG-TDs" firstAttribute="top" secondItem="B0n-iZ-oh0" secondAttribute="topMargin" constant="4" id="a4Y-rT-r1g"/>
+                                                <constraint firstAttribute="trailing" secondItem="HJP-TM-NGg" secondAttribute="trailing" constant="15" id="jFq-z2-QL4"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9WT-aG-TDs" secondAttribute="bottom" constant="4" id="rSP-wf-X3f"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="iouLabel" destination="9WT-aG-TDs" id="hto-Mn-Fwf"/>
+                                            <outlet property="paidStatusImage" destination="HJP-TM-NGg" id="XgA-am-dHd"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1386,6 +1407,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="addIOUButton" destination="gZe-IY-ptY" id="Kbf-oR-dwG"/>
                         <outlet property="tableView" destination="03c-uP-H92" id="zYV-j1-BKf"/>
                     </connections>
                 </viewController>
@@ -1454,18 +1476,21 @@
         <image name="chat" width="32" height="32"/>
         <image name="circle" width="240" height="240"/>
         <image name="circle-checked" width="240" height="240"/>
+        <image name="gear2" width="32" height="32"/>
         <image name="icon" width="1024" height="1024"/>
         <image name="info-tab-small" width="31" height="31"/>
         <image name="itin-tab-small" width="31" height="31"/>
         <image name="map-tab-small" width="31" height="31"/>
+        <image name="money2" width="32" height="32"/>
+        <image name="paid" width="321" height="235"/>
         <image name="picture-placeholder" width="240" height="240"/>
         <image name="profile-pic-placeholder" width="240" height="240"/>
+        <image name="unpaid" width="321" height="235"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Qz9-j1-qG0"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
-        <segue reference="SUE-za-G0o"/>
-        <segue reference="Ikg-ro-xOw"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

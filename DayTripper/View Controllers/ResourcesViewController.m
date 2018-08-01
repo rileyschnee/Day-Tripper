@@ -64,6 +64,7 @@
         IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
         iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
         iouVC.trip = self.trip;
+        iouVC.isUsersIOUs = FALSE;
     }
 }
 

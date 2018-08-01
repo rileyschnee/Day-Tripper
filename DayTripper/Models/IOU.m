@@ -22,7 +22,9 @@
     newIOU.payer = payer;
     newIOU.payee = payee;
     newIOU.description = description;
-    newIOU.completed = @NO;
+    //newIOU.completed = @0;
+    [newIOU setObject:[NSNumber numberWithBool:FALSE] forKey:@"completed"];
+
     //actually save the IOU
     [newIOU saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {

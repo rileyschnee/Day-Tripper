@@ -13,6 +13,8 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "SettingsViewController.h"
+#import "IOUViewController.h"
+#import "Functions.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
@@ -59,7 +61,7 @@
     
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
         if (trips != nil) {
-            self.trips = trips;
+            self.trips = [trips mutableCopy];
             [self.tableView reloadData];
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -89,7 +91,20 @@
         //set the trip title
         tabbar.title = trip.name;
     }
+    else if([[segue destinationViewController] isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController = [segue destinationViewController];
+        if([navController.topViewController isKindOfClass:[IOUViewController class]]){
+            UINavigationController *navController = [segue destinationViewController];
+            IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+            iouVC.isUsersIOUs = TRUE;
+            [Functions fetchUserIOUs:PFUser.currentUser withCompletion:^(NSArray *ious) {
+                iouVC.iouArray = [ious mutableCopy];
+                NSLog(@"COMPLETION HANDLER %@", iouVC.iouArray);
+            }];
+        }
+    }
 }
+
 
  
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

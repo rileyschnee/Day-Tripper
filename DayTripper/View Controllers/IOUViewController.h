@@ -12,4 +12,7 @@
 @interface IOUViewController : UIViewController
 @property (strong, nonatomic) Trip *trip;
 @property (strong, nonatomic) NSMutableArray *attendeeUsers;
+@property (nonatomic) BOOL isUsersIOUs;
+@property (strong, nonatomic) NSMutableArray *iouArray;
+
 @end
