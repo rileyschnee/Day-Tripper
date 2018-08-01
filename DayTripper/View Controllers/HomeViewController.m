@@ -15,6 +15,7 @@
 #import "SettingsViewController.h"
 #import "IOUViewController.h"
 #import "Functions.h"
+#import "SVProgressHUD.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
@@ -58,11 +59,12 @@
     [query includeKey:@"activities"];
     [query whereKey:@"attendees" containsString:[PFUser currentUser].objectId];
     query.limit = 20;
-    
+    [SVProgressHUD show];
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
         if (trips != nil) {
             self.trips = [trips mutableCopy];
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }

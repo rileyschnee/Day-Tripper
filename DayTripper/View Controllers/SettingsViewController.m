@@ -11,6 +11,7 @@
 #import <ParseUI/ParseUI.h>
 #import "LoginViewController.h"
 #import "AppDelegate.h"
+#import "SVProgressHUD.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -91,12 +92,14 @@
     PFUser.currentUser.username = self.usernameField.text;
     PFUser.currentUser[@"name"] = self.nameField.text;
     // Save changes
+    [SVProgressHUD show];
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"Successfully saved profile changes");
         }else{
             NSLog(@"Unable to save profile changes");
         }
+        [SVProgressHUD dismiss];
     }];
     NSLog(@"Saved!");
     //[self.navigationController popViewControllerAnimated:YES];

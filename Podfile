@@ -11,4 +11,5 @@ target 'DayTripper' do
   pod 'ParseUI'
   pod 'UberRides', '~> 0.9'
   pod 'TTGTagCollectionView'
+  pod 'SVProgressHUD'
 end
