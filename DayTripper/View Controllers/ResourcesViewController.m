@@ -12,6 +12,7 @@
 #import "TripReusableView.h"
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
+#import "imgurShareViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -61,11 +62,18 @@
         profileViewController.trip = self.trip;
     }
     if([sender isKindOfClass:[UIButton class]]){
-        UINavigationController *navController = [segue destinationViewController];
-        IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
-        iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
-        iouVC.trip = self.trip;
+        if ([segue.destinationViewController isKindOfClass:[imgurShareViewController class]]) {
+            imgurShareViewController* imgurVC = segue.destinationViewController;
+            imgurVC.trip = self.trip;
+        }
+        else {
+            UINavigationController *navController = [segue destinationViewController];
+            IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+            iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
+            iouVC.trip = self.trip;
+        }
     }
+    
 }
 
 

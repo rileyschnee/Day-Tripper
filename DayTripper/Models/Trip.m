@@ -21,6 +21,7 @@
 @dynamic attendees;
 @dynamic tripDate;
 @dynamic ious;
+@dynamic albumId;
 
 + (nonnull NSString *)parseClassName {
     return @"Trip";
@@ -37,6 +38,7 @@
     newTrip.chats = [[NSMutableArray alloc] init];
     newTrip.ious = [NSMutableArray new];
     newTrip.attendees = [NSMutableArray new];
+    newTrip.albumId = @"";
     [newTrip addUniqueObject:[PFUser currentUser].objectId forKey:@"attendees"];
     
     //actually save the trip

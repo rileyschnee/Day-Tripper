@@ -7,15 +7,16 @@
 //
 
 #import "TripReusableView.h"
+#import "APIManager.h"
 
 @implementation TripReusableView
 
 - (void)awakeFromNib{
     [super awakeFromNib];
     // Add shadow to GPhotos button
-    [self.googlePhotosButton.layer setShadowOffset:CGSizeMake(2, 2)];
-    [self.googlePhotosButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
-    [self.googlePhotosButton.layer setShadowOpacity:0.5];
+    [self.shareToImgurButton.layer setShadowOffset:CGSizeMake(2, 2)];
+    [self.shareToImgurButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
+    [self.shareToImgurButton.layer setShadowOpacity:0.5];
 
 }
 
@@ -121,6 +122,8 @@
     [alert addAction:okAction];
     [self.delegate showAlert:alert];
 }
+
+
 
 
 @end

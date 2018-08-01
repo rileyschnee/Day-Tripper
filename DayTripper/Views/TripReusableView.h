@@ -19,13 +19,13 @@
 
 
 @interface TripReusableView : UICollectionReusableView 
-@property (weak, nonatomic) IBOutlet UIButton *googlePhotosButton;
 @property (strong, nonatomic) Trip *trip;
 @property (weak, nonatomic) IBOutlet UIView *weatherView;
 @property (weak, nonatomic) IBOutlet UILabel *tripNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tripCityLabel;
 @property (weak, nonatomic) IBOutlet UILabel *tripDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highLabel;
+@property (weak, nonatomic) IBOutlet UIButton *shareToImgurButton;
 @property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
 //description of the weather
