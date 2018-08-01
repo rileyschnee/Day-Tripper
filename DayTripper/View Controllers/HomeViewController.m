@@ -99,6 +99,7 @@
             UINavigationController *navController = [segue destinationViewController];
             IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
             iouVC.isUsersIOUs = TRUE;
+            iouVC.title = @"My IOUs";
             [Functions fetchUserIOUs:PFUser.currentUser withCompletion:^(NSArray *ious) {
                 iouVC.iouArray = [ious mutableCopy];
                 NSLog(@"COMPLETION HANDLER %@", iouVC.iouArray);
