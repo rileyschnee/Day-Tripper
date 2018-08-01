@@ -26,13 +26,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
      [IMGSession anonymousSessionWithClientID:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_IMGUR"] withDelegate:self];
+    //disable upload button until image view has something
+    [self.uploadButton setEnabled:NO];
+    self.imageToPost = nil;
 }
 
 
 - (void)viewDidAppear:(BOOL)animated {
-    self.imageToPost = nil;
-    //disable upload button until image view has something
-    [self.uploadButton setEnabled:NO];
     
     if ([self.trip.albumId isEqualToString:@""]) {
         //set up a new album
@@ -55,7 +55,6 @@
         } failure:^(NSError *error) {
             NSLog(error.localizedDescription);
         }];
-        
     } else {
         //already have album so load it
         NSString* albumURLStringLabel = [NSString stringWithFormat:@"Album URL: https://imgur.com/a/%@", self.trip.albumId];
@@ -92,6 +91,7 @@
 }
 
 - (IBAction)uploadButtonPressed:(id)sender {
+    
     //transform image to NSDATA
     NSData *imageData = UIImagePNGRepresentation(self.imageToPost);
     NSString* title = [self generateTitle];
@@ -99,8 +99,10 @@
         [SVProgressHUD show];
     } success:^(IMGImage *image) {
         [SVProgressHUD dismiss];
-        //refresh webview
-        [self.webView reload];
+        //set timer for 3 seconds then refresh webview
+        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+            [self.webView reload];
+        });
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD dismiss];
         NSLog(error.localizedDescription);
@@ -118,7 +120,7 @@
 - (NSString*) generateTitle {
     //get string of current date
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"dd-MM-yyyy "];
+    [formatter setDateFormat:@"MM-dd-yyyy "];
     NSDate *currentDate = [NSDate date];
     NSString *dateString = [formatter stringFromDate:currentDate];
     return [NSString stringWithFormat:@"%@ - %@", self.trip.name, dateString];
