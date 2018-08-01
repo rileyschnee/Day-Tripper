@@ -754,10 +754,26 @@
                                                 <color key="titleColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fz4-II-EA6">
+                                            <rect key="frame" x="8" y="125" width="110" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Add Description"/>
+                                            <connections>
+                                                <action selector="didTapDescription:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="5CJ-96-ZvR"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjQ-Rp-KUT">
+                                            <rect key="frame" x="8" y="130" width="228" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <connections>
+                                        <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
                                         <outlet property="addAttendeeButton" destination="VSt-OL-Cfq" id="hdK-3t-4Yc"/>
                                         <outlet property="attendeeBar" destination="Bc0-B6-rtK" id="sQt-5Y-hiI"/>
                                         <outlet property="attendeeLabel" destination="L5d-3t-RZS" id="0fb-Vb-YS5"/>
@@ -766,6 +782,7 @@
                                         <outlet property="highLabel" destination="fgg-vX-lda" id="t0d-2H-hqm"/>
                                         <outlet property="iouButton" destination="O0e-PQ-g7W" id="a02-ea-Daw"/>
                                         <outlet property="lowLabel" destination="l1E-8H-xpm" id="yOS-PG-PV0"/>
+                                        <outlet property="summaryBtn" destination="Fz4-II-EA6" id="Pue-ox-pxw"/>
                                         <outlet property="tripCityLabel" destination="93o-qz-ag8" id="SHI-3r-Z4V"/>
                                         <outlet property="tripDateLabel" destination="Lcr-96-5LE" id="poT-Kd-cu2"/>
                                         <outlet property="tripNameLabel" destination="l0K-YT-6c5" id="H3K-47-aNc"/>
@@ -781,11 +798,13 @@
                     <navigationItem key="navigationItem" id="khH-uK-1pa"/>
                     <connections>
                         <outlet property="collectionView" destination="A9f-9Y-uf3" id="QmR-EH-gLc"/>
+                        <outlet property="resourceView" destination="99P-hy-1xR" id="I1x-zQ-ogF"/>
+                        <segue destination="yXm-I6-Pgu" kind="show" identifier="addSummary" id="8eo-kk-6Dl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-PQ-zIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="1844.5277361319343"/>
+            <point key="canvasLocation" x="2682.4000000000001" y="1843.6281859070466"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="nqs-Um-67F">
