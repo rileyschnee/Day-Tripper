@@ -20,6 +20,7 @@
 @dynamic longitude;
 @dynamic attendees;
 @dynamic tripDate;
+@dynamic summary;
 @dynamic ious;
 @dynamic albumId;
 @dynamic albumHash;
@@ -36,6 +37,7 @@
     newTrip.tripDate = date;
     newTrip.latitude = lat;
     newTrip.longitude = lon;
+    newTrip.summary = @""; 
     newTrip.chats = [[NSMutableArray alloc] init];
     newTrip.ious = [NSMutableArray new];
     newTrip.attendees = [NSMutableArray new];

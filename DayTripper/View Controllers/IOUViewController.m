@@ -10,9 +10,10 @@
 #import "IOUCell.h"
 #import "IOU.h"
 
-@interface IOUViewController () <UITableViewDelegate, UITableViewDataSource>
+
+@interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *iouArray;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *addIOUButton;
 
 @end
 
@@ -26,8 +27,22 @@
     //fix extra space at the top of the table view
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-    [self fetchIOUs];
-    //[self.tableView reloadData];
+    self.addIOUButton.enabled = !self.isUsersIOUs;
+    if(!self.isUsersIOUs){
+        [self fetchIOUs];
+    }
+    NSLog(@"IOU VC %@", self.iouArray);
+    [self.tableView reloadData];
+}
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    self.addIOUButton.enabled = !self.isUsersIOUs;
+    if(!self.isUsersIOUs){
+        [self fetchIOUs];
+    }
+    NSLog(@"IOU VC %@", self.iouArray);
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,9 +64,19 @@
     IOUCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IOUCell" forIndexPath:indexPath];
     //IOU *temp = self.trip.ious[indexPath.row];
     cell.iou = self.iouArray[indexPath.row];
-    NSLog(@"%lu # ious", (unsigned long)[self.trip.ious count]);
+    cell.delegate = self;
     NSLog(@"%@ current iou", cell.iou);
     cell.iouLabel.text = [NSString stringWithFormat:@"%@ owes %@ $%@ for %@", cell.iou[@"payer"][@"username"], cell.iou[@"payee"][@"username"], cell.iou[@"amount"], cell.iou[@"description"]];
+    NSLog(@"%@ Completed", cell.iou[@"completed"]);
+    if([cell.iou[@"completed"] isEqual:[NSNumber numberWithBool:TRUE]]){
+        cell.paidStatusImage.image = [UIImage imageNamed:@"paid"];
+    } else {
+        cell.paidStatusImage.image = [UIImage imageNamed:@"unpaid"];
+    }
+
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(togglePaidStatus:)];
+    [cell addGestureRecognizer:tap];
+    
     return cell;
 }
 
@@ -62,7 +87,9 @@
 - (void)fetchIOUs{
     PFQuery *query = [PFQuery queryWithClassName:@"IOU"];
     [query whereKey:@"objectId" containedIn:self.trip.ious];
-    [query includeKeys:@[@"payer", @"payee", @"description", @"amount"]];
+    [query includeKeys:@[@"payer", @"payee", @"description", @"amount", @"completed"]];
+    [query orderByAscending:@"completed"];
+    
     //query.limit = 20;
     [query findObjectsInBackgroundWithBlock:^(NSArray *ious, NSError *error) {
         if (ious != nil){
@@ -147,6 +174,11 @@
 
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)showAlert:(UIAlertController *)alert {
+    [self presentViewController:alert animated:YES completion:nil];
+    
 }
 
 @end

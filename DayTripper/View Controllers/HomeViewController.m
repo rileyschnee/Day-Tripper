@@ -13,6 +13,8 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "SettingsViewController.h"
+#import "IOUViewController.h"
+#import "Functions.h"
 #import "SVProgressHUD.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
@@ -91,7 +93,21 @@
         //set the trip title
         tabbar.title = trip.name;
     }
+    else if([[segue destinationViewController] isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController = [segue destinationViewController];
+        if([navController.topViewController isKindOfClass:[IOUViewController class]]){
+            UINavigationController *navController = [segue destinationViewController];
+            IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+            iouVC.isUsersIOUs = TRUE;
+            iouVC.title = @"My IOUs";
+            [Functions fetchUserIOUs:PFUser.currentUser withCompletion:^(NSArray *ious) {
+                iouVC.iouArray = [ious mutableCopy];
+                NSLog(@"COMPLETION HANDLER %@", iouVC.iouArray);
+            }];
+        }
+    }
 }
+
 
  
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {

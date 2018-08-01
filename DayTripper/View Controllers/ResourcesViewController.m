@@ -17,6 +17,8 @@
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *attendeeUsers;
+@property (strong, nonatomic) IBOutlet UIView *resourceView;
+- (IBAction)onTapSummary:(id)sender;
 @end
 
 @implementation ResourcesViewController
@@ -28,7 +30,7 @@
     self.collectionView.dataSource = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-
+    
     // Setup collection view interface
     CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
@@ -36,7 +38,10 @@
     [SVProgressHUD show];
     [self fetchAttendees];
     
+   
+    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     //hide bar button item
@@ -68,8 +73,9 @@
             imgurVC.trip = self.trip;
         } else {
             IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
-            iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
-            iouVC.trip = self.trip;
+        iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
+        iouVC.trip = self.trip;
+        iouVC.isUsersIOUs = FALSE;
         }
         
     }
@@ -93,6 +99,16 @@
     header.trip = self.trip;
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
+    
+    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
+        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
+        // [self.resourceView addSubview:button];
+        header.summaryBtn.hidden = NO;
+    }else{
+        header.summaryBtn.hidden = YES;
+        header.descriptionLabel.hidden = NO;
+        header.descriptionLabel.text = self.trip.summary;
+    }
     
     //get weather info
     [self getWeather:header];
@@ -231,6 +247,8 @@
     [self presentViewController:alert animated:YES completion:nil];
 
 }
-
+- (void)showAlertView:(UIAlertView *)alert{
+    [alert show];
+}
 
 @end

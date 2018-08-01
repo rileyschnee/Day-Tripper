@@ -9,8 +9,14 @@
 #import <UIKit/UIKit.h>
 #import "IOU.h"
 
+@protocol IOUCellDelegate
+- (void)showAlert:(UIAlertController *)alert;
+@end
+
 @interface IOUCell : UITableViewCell
 @property (strong, nonatomic) IOU *iou;
 @property (weak, nonatomic) IBOutlet UILabel *iouLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *paidStatusImage;
+@property (strong, nonatomic) id<IOUCellDelegate> delegate;
+- (void)togglePaidStatus:(UITapGestureRecognizer *)sender;
 @end
