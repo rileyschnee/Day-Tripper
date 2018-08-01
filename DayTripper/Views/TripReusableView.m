@@ -181,18 +181,10 @@
                                           cancelButtonTitle:@"Cancel"
                                           otherButtonTitles:@"Done", nil];
     
-    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
-    [alert setValue:textView forKey:@"accessoryView"];
+    self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
+    [alert setValue:self.textView forKey:@"accessoryView"];
     [self.delegate showAlertView:alert];
-    self.trip.summary = textView.text;
-    [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
-        if(succeeded){
-            NSLog(@"succeeded saving descr");
-            [self refreshDescription];
-        } else {
-            NSLog(@"error saving descr");
-        }
-    }];
+    
     
     //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle: @"Trip Description"
     //                                                                              message: @"Enter the trip description"
@@ -234,5 +226,29 @@
     [self alertForSummary];
     
 }
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //Code for Cancel button
+    }
+    if (buttonIndex == 1)
+    {
+        self.delegate.trip.summary = self.textView.text;
+        NSLog(@"%@", self.textView.text);
+        [self.delegate.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                NSLog(@"succeeded saving descr: %@", self.delegate.trip.summary);
+                [self refreshDescription];
+            } else {
+                NSLog(@"error saving descr");
+            }
+        }];
+        //Code for Done button
+    }
+}
+
 
 @end

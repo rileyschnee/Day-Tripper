@@ -773,11 +773,11 @@
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <connections>
-                                        <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
                                         <outlet property="addAttendeeButton" destination="VSt-OL-Cfq" id="hdK-3t-4Yc"/>
                                         <outlet property="attendeeBar" destination="Bc0-B6-rtK" id="sQt-5Y-hiI"/>
                                         <outlet property="attendeeLabel" destination="L5d-3t-RZS" id="0fb-Vb-YS5"/>
                                         <outlet property="descLabel" destination="uQ6-jv-nXg" id="BgD-ad-q64"/>
+                                        <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
                                         <outlet property="googlePhotosButton" destination="meE-d1-hHQ" id="G7i-7Y-bb7"/>
                                         <outlet property="highLabel" destination="fgg-vX-lda" id="t0d-2H-hqm"/>
                                         <outlet property="iouButton" destination="O0e-PQ-g7W" id="a02-ea-Daw"/>
@@ -799,7 +799,6 @@
                     <connections>
                         <outlet property="collectionView" destination="A9f-9Y-uf3" id="QmR-EH-gLc"/>
                         <outlet property="resourceView" destination="99P-hy-1xR" id="I1x-zQ-ogF"/>
-                        <segue destination="yXm-I6-Pgu" kind="show" identifier="addSummary" id="8eo-kk-6Dl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-PQ-zIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1512,7 +1511,7 @@
         <image name="unpaid" width="321" height="235"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rHE-D3-NFR"/>
+        <segue reference="Qz9-j1-qG0"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
         <segue reference="irg-7C-q8O"/>

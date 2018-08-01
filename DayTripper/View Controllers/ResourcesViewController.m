@@ -92,7 +92,7 @@
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
     
-    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""]) {
+    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
         //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
         // [self.resourceView addSubview:button];
         header.summaryBtn.hidden = NO;
