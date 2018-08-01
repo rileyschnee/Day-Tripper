@@ -617,6 +617,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Eal-ll-By4"/>
                     </view>
+                    <navigationItem key="navigationItem" id="2u9-gD-48K">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="z79-wK-Ygh">
+                            <connections>
+                                <action selector="backButtonPressed:" destination="lzf-k0-QiM" id="y0s-VX-Tb7"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="LkY-Wv-xk0" id="1M5-ie-7h6"/>
                         <outlet property="uploadButton" destination="Jr5-J2-CyT" id="1in-lY-3rV"/>
@@ -626,7 +633,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="v0d-x1-chf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2685.5999999999999" y="1039.4302848575712"/>
+            <point key="canvasLocation" x="3495" y="1003"/>
         </scene>
         <!--Resources View Controller-->
         <scene sceneID="Ug4-9n-LTa">
@@ -795,7 +802,7 @@
                                                 <color key="titleColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
-                                                <segue destination="lzf-k0-QiM" kind="show" id="ziH-ur-dN6"/>
+                                                <segue destination="UMT-cc-NXc" kind="presentation" id="iYg-d7-4eB"/>
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O0e-PQ-g7W">
@@ -1514,6 +1521,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSm-ZO-Bni" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2684" y="2621"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Kyq-eK-J8F">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="UMT-cc-NXc" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="qdv-BK-4ke">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lzf-k0-QiM" kind="relationship" relationship="rootViewController" id="QkZ-tn-e4d"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="unF-fb-h8x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2684" y="1003"/>
         </scene>
     </scenes>
     <resources>

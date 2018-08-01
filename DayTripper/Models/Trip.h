@@ -21,8 +21,9 @@
 @property (strong, nonatomic) NSMutableArray *attendees;
 @property (strong, nonatomic) NSMutableArray *ious;
 @property (strong, nonatomic) NSDate *tripDate;
-//album id to represent google photos
+//album id to represent imgur album
 @property (strong, nonatomic) NSString *albumId;
+@property (strong, nonatomic) NSString *albumHash;
 
 + (void) saveTrip: ( Trip * _Nullable )trip withName: (NSString * _Nullable)name withDate: (NSDate *_Nullable)date withLat: (double)lat withLon:(double)lon withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 - (void)addDTActionItemToChatWithMessage:(NSString * _Nonnull)message;

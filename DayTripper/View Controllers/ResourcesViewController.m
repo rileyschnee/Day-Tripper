@@ -62,16 +62,16 @@
         profileViewController.trip = self.trip;
     }
     if([sender isKindOfClass:[UIButton class]]){
-        if ([segue.destinationViewController isKindOfClass:[imgurShareViewController class]]) {
-            imgurShareViewController* imgurVC = segue.destinationViewController;
+        UINavigationController *navController = [segue destinationViewController];
+        if (([navController.topViewController isKindOfClass:[imgurShareViewController class]])) {
+            imgurShareViewController* imgurVC = (imgurShareViewController *) navController.topViewController;
             imgurVC.trip = self.trip;
-        }
-        else {
-            UINavigationController *navController = [segue destinationViewController];
+        } else {
             IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
             iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
             iouVC.trip = self.trip;
         }
+        
     }
     
 }
