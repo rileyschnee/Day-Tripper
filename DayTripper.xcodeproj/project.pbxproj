@@ -63,6 +63,7 @@
 		0EAE0C6020FFF6F000D798A9 /* ResourcesViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResourcesViewController.m; sourceTree = "<group>"; };
 		0EAE0C6220FFF71D00D798A9 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0EAE0C6320FFF71D00D798A9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		0ED387992112210700F8B1F4 /* ResourcesViewControllerRefreshDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourcesViewControllerRefreshDelegate.h; sourceTree = "<group>"; };
 		537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DayTripper-Bridging-Header.h"; sourceTree = "<group>"; };
 		537A4B8021065AA000E64CBD /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
 		537A4B8221066FFC00E64CBD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -257,6 +258,7 @@
 				537A4B842108F42400E64CBD /* ChatViewController.h */,
 				537A4B852108F42400E64CBD /* ChatViewController.m */,
 				BEB308FE210A8BC000336EA4 /* QuizViewControllerForCellDelegate.h */,
+				0ED387992112210700F8B1F4 /* ResourcesViewControllerRefreshDelegate.h */,
 				BE6A1ECE210FBC86009F9186 /* IOUViewController.h */,
 				BE6A1ECF210FBC86009F9186 /* IOUViewController.m */,
 				53B4382A210FCD350015075B /* DMViewController.h */,

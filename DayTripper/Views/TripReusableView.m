@@ -7,6 +7,7 @@
 //
 
 #import "TripReusableView.h"
+#import "ResourcesViewController.h"
 
 @implementation TripReusableView
 
@@ -17,6 +18,9 @@
     [self.googlePhotosButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
     [self.googlePhotosButton.layer setShadowOpacity:0.5];
     
+    self.descriptionLabel.hidden = [self.trip.summary isEqualToString:@""];
+    self.descriptionLabel.text = self.trip.summary;
+
     // Add shadow to IOUs button
     [self.iouButton.layer setShadowOffset:CGSizeMake(2, 2)];
     [self.iouButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
@@ -83,6 +87,12 @@
 
 - (IBAction)tapGestureTap:(id)sender {
     [self.usernameToAdd resignFirstResponder];
+}
+
+- (void)refreshDescription{
+    self.descriptionLabel.hidden = [self.trip.summary isEqualToString:@""];
+    self.descriptionLabel.text = self.trip.summary;
+    self.summaryBtn.hidden = ![self.trip.summary isEqualToString:@""];
 }
 
 //gets the user by the given username
@@ -162,6 +172,82 @@
     // add the OK action to the alert controller
     [alert addAction:okAction];
     [self.delegate showAlert:alert];
+}
+
+-(void)alertForSummary{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@""
+                                                    message:@"Enter your summary"
+                                                   delegate:self
+                                          cancelButtonTitle:@"Cancel"
+                                          otherButtonTitles:@"Done", nil];
+    
+    self.textView = [[UITextView alloc] initWithFrame:CGRectZero];
+    [alert setValue:self.textView forKey:@"accessoryView"];
+    [self.delegate showAlertView:alert];
+    
+    
+    //    UIAlertController *alertController = [UIAlertController alertControllerWithTitle: @"Trip Description"
+    //                                                                              message: @"Enter the trip description"
+    //                                                                       preferredStyle:UIAlertControllerStyleAlert];
+    ////    alertController.view.autoresizesSubviews = YES;
+    ////    UITextView *textView = [[UITextView alloc] initWithFrame:CGRectZero];
+    ////    textView.translatesAutoresizingMaskIntoConstraints = NO;
+    //////    textView.editable = YES;
+    //////    textView.dataDetectorTypes = UIDataDetectorTypeAll;
+    //////    // textView.text = @"Some really long text here";
+    //////    textView.userInteractionEnabled = YES;
+    //////    textView.backgroundColor = [UIColor whiteColor];
+    //////    textView.scrollEnabled = YES;
+    ////    NSLayoutConstraint *leadConstraint = [NSLayoutConstraint constraintWithItem:alertController.view attribute:NSLayoutAttributeLeading relatedBy:NSLayoutRelationEqual toItem:textView attribute:NSLayoutAttributeLeading multiplier:1.0 constant:-8.0];
+    ////    NSLayoutConstraint *trailConstraint = [NSLayoutConstraint constraintWithItem:alertController.view attribute:NSLayoutAttributeTrailing relatedBy:NSLayoutRelationEqual toItem:textView attribute:NSLayoutAttributeTrailing multiplier:1.0 constant:8.0];
+    ////
+    ////    NSLayoutConstraint *topConstraint = [NSLayoutConstraint constraintWithItem:alertController.view attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:textView attribute:NSLayoutAttributeTop multiplier:1.0 constant:-64.0];
+    ////    NSLayoutConstraint *bottomConstraint = [NSLayoutConstraint constraintWithItem:alertController.view attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:textView attribute:NSLayoutAttributeBottom multiplier:1.0 constant:64.0];
+    ////    [alertController.view addSubview:textView];
+    ////    [NSLayoutConstraint activateConstraints:@[leadConstraint, trailConstraint, topConstraint, bottomConstraint]];
+    //
+    //
+    //    [alertController addAction:[UIAlertAction actionWithTitle:@"Done" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    //        self.trip.summary = textView.text;
+    //        [self.trip saveInBackground];
+    //        [alertController dismissViewControllerAnimated:YES completion:nil];
+    //
+    //
+    //    }]];
+    //    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+    //        [alertController dismissViewControllerAnimated:YES completion:nil];
+    //
+    //    }]];
+    //
+    //    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (IBAction)didTapDescription:(id)sender {
+    [self alertForSummary];
+    
+}
+
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 0)
+    {
+        //Code for Cancel button
+    }
+    if (buttonIndex == 1)
+    {
+        self.delegate.trip.summary = self.textView.text;
+        NSLog(@"%@", self.textView.text);
+        [self.delegate.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                NSLog(@"succeeded saving descr: %@", self.delegate.trip.summary);
+                [self refreshDescription];
+            } else {
+                NSLog(@"error saving descr");
+            }
+        }];
+        //Code for Done button
+    }
 }
 
 
