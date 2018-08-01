@@ -53,12 +53,6 @@
         self.fromHomeToResources = NO;
     }
    
-    
-    //set global Trip
-    //needed to transfer data between tabs
-     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    delegate.currTrip = self.trip;
-
 }
 
 

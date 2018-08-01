@@ -15,10 +15,11 @@
 @protocol TripReusableViewDelegate
 - (void)reloadAttendeeData;
 - (void)showAlert:(UIAlertController *)alert;
+- (void)showAlertView:(UIAlertView *)alert;
 @end
 
 
-@interface TripReusableView : UICollectionReusableView 
+@interface TripReusableView : UICollectionReusableView
 @property (weak, nonatomic) IBOutlet UIButton *googlePhotosButton;
 @property (strong, nonatomic) Trip *trip;
 @property (weak, nonatomic) IBOutlet UIView *weatherView;
@@ -29,4 +30,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
 @property (strong, nonatomic) id<TripReusableViewDelegate> delegate;
+@property (weak, nonatomic) IBOutlet UIButton *summaryBtn;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
+- (IBAction)didTapDescription:(id)sender;
 @end

@@ -10,10 +10,13 @@
 #import "APIManager.h"
 #import "ProfileViewController.h"
 #import "TripReusableView.h"
+#import "SummaryViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSMutableArray *attendeeUsers;
+@property (strong, nonatomic) IBOutlet UIView *resourceView;
+- (IBAction)onTapSummary:(id)sender;
 @end
 
 @implementation ResourcesViewController
@@ -33,7 +36,10 @@
     
     [self fetchAttendees];
     
+   
+    
 }
+
 
 - (void)viewDidAppear:(BOOL)animated {
     //hide bar button item
@@ -58,6 +64,12 @@
         profileViewController.user = user;
         profileViewController.trip = self.trip;
     }
+    
+    if([sender isKindOfClass:[UIButton class]]){
+        SummaryViewController *summaryVC = [segue destinationViewController];
+        summaryVC.trip = self.trip;
+        
+    }
 }
 
 
@@ -78,6 +90,16 @@
     NSLog(@"Set trip - resources view");
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
+    
+    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""]) {
+        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
+        // [self.resourceView addSubview:button];
+        header.summaryBtn.hidden = NO;
+    }else{
+        header.summaryBtn.hidden = YES;
+        header.descriptionLabel.hidden = NO;
+        header.descriptionLabel.text = self.trip.summary;
+    }
     
     //get weather info
     [self getWeather:header];
@@ -192,9 +214,7 @@
 }
 
 - (IBAction)shareToAlbum:(id)sender {
-    
-    
-    
+
     
 }
 
@@ -206,6 +226,8 @@
     [self presentViewController:alert animated:YES completion:nil];
 
 }
-
+- (void)showAlertView:(UIAlertView *)alert{
+    [alert show];
+}
 
 @end

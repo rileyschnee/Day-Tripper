@@ -597,20 +597,37 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="meE-d1-hHQ">
-                                            <rect key="frame" x="8" y="155" width="189" height="30"/>
+                                            <rect key="frame" x="8" y="206" width="189" height="30"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <state key="normal" title="Share to Google Photos">
                                                 <color key="titleColor" red="0.23529411764705882" green="0.25098039215686274" blue="0.2627450980392157" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                         </button>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fz4-II-EA6">
+                                            <rect key="frame" x="8" y="125" width="110" height="30"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" title="Add Description"/>
+                                            <connections>
+                                                <action selector="didTapDescription:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="5CJ-96-ZvR"/>
+                                            </connections>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MjQ-Rp-KUT">
+                                            <rect key="frame" x="8" y="130" width="228" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
                                     <connections>
+                                        <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
                                         <outlet property="googlePhotosButton" destination="meE-d1-hHQ" id="G7i-7Y-bb7"/>
                                         <outlet property="highLabel" destination="fgg-vX-lda" id="t0d-2H-hqm"/>
                                         <outlet property="lowLabel" destination="l1E-8H-xpm" id="yOS-PG-PV0"/>
+                                        <outlet property="summaryBtn" destination="Fz4-II-EA6" id="Pue-ox-pxw"/>
                                         <outlet property="tripCityLabel" destination="93o-qz-ag8" id="SHI-3r-Z4V"/>
                                         <outlet property="tripDateLabel" destination="Lcr-96-5LE" id="poT-Kd-cu2"/>
                                         <outlet property="tripNameLabel" destination="l0K-YT-6c5" id="H3K-47-aNc"/>
@@ -626,11 +643,13 @@
                     <navigationItem key="navigationItem" id="khH-uK-1pa"/>
                     <connections>
                         <outlet property="collectionView" destination="A9f-9Y-uf3" id="QmR-EH-gLc"/>
+                        <outlet property="resourceView" destination="99P-hy-1xR" id="I1x-zQ-ogF"/>
+                        <segue destination="yXm-I6-Pgu" kind="show" identifier="addSummary" id="8eo-kk-6Dl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-PQ-zIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="1844.5277361319343"/>
+            <point key="canvasLocation" x="2682.4000000000001" y="1843.6281859070466"/>
         </scene>
         <!--Details View Controller-->
         <scene sceneID="nqs-Um-67F">
@@ -1181,6 +1200,41 @@
             </objects>
             <point key="canvasLocation" x="3716" y="1844.5277361319343"/>
         </scene>
+        <!--Summary View Controller-->
+        <scene sceneID="Oit-ay-vbA">
+            <objects>
+                <viewController id="yXm-I6-Pgu" customClass="SummaryViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YUf-Fk-l7s">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Description..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Fjj-gS-alX">
+                                <rect key="frame" x="67" y="184" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r45-dD-1hv">
+                                <rect key="frame" x="125" y="320" width="120" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Add Description"/>
+                                <connections>
+                                    <action selector="onClickBtn:" destination="yXm-I6-Pgu" eventType="touchUpInside" id="TKv-JV-CSC"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="kCk-RZ-Chq"/>
+                    </view>
+                    <connections>
+                        <outlet property="summaryField" destination="Fjj-gS-alX" id="NAz-WQ-uBd"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="d87-K3-dQJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3981.5999999999999" y="2875.4122938530736"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="tyv-pV-kXy">
             <objects>
@@ -1233,11 +1287,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9MX-hJ-rhJ"/>
-        <segue reference="Ikg-ro-xOw"/>
-
-        <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
-
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
