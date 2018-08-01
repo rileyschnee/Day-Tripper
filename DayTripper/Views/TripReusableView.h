@@ -28,7 +28,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *tripDateLabel;
 @property (weak, nonatomic) IBOutlet UILabel *highLabel;
 @property (weak, nonatomic) IBOutlet UITextField *usernameToAdd;
+@property (weak, nonatomic) IBOutlet UIButton *iouButton;
+@property (weak, nonatomic) IBOutlet UIView *attendeeBar;
 @property (weak, nonatomic) IBOutlet UILabel *lowLabel;
+//description of the weather
+@property (weak, nonatomic) IBOutlet UILabel *attendeeLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addAttendeeButton;
+@property (weak, nonatomic) IBOutlet UILabel *descLabel;
 @property (strong, nonatomic) id<TripReusableViewDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *summaryBtn;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;

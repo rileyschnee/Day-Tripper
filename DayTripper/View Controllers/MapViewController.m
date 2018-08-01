@@ -12,6 +12,7 @@
 #import "Activity.h"
 #import <Corelocation/CoreLocation.h>
 #import "DetailsViewController.h"
+#import "SVProgressHUD.h"
 
 @interface MapViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet MKMapView *mapView;
@@ -27,6 +28,7 @@
     NSLog(@"%f", self.trip.latitude);
     self.mapView.delegate = self;
 
+    [SVProgressHUD show];
     MKCoordinateRegion region = MKCoordinateRegionMake(CLLocationCoordinate2DMake(self.trip.latitude, self.trip.longitude), MKCoordinateSpanMake(0.1, 0.1));
     [self.mapView setRegion:region animated:false];
     
@@ -37,6 +39,7 @@
         point.title = activity.name;
         [self.mapView addAnnotation:point];
     }
+    [SVProgressHUD dismiss];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {

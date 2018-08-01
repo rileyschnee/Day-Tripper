@@ -14,6 +14,7 @@
 #import "APIManager.h"
 #import "Activity.h"
 #import "DetailsViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
@@ -56,6 +57,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
     [self.activities addObject:self.events];
+    [SVProgressHUD show];
     [self setQueryStrings];
     [self fetchResults4SQ];
     [self fetchResultsYelp];
@@ -193,7 +195,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                 place.apiId = venue[@"id"];
                 [weakSelf.activities[0] addObject:place];
             }
-        [weakSelf refreshAsync];
         
     }];
 }
@@ -230,7 +231,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             food.apiId = venue[@"id"];
             [self.activities[1] addObject:food];
         }
-        [weakSelf refreshAsync];
         
     }];
 }
@@ -281,6 +281,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 -(void) refreshAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.tableView reloadData];
+        [SVProgressHUD dismiss];
     });
 }
 

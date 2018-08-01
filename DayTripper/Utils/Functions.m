@@ -46,4 +46,22 @@
     }
 }
 
++ (void)fetchUserIOUs:(PFUser *)user withCompletion:(void (^)(NSArray *ious))completionHandler {
+        NSPredicate *pred = [NSPredicate predicateWithFormat:@"payee == %@ OR payer == %@", PFUser.currentUser, PFUser.currentUser];
+        PFQuery *query = [PFQuery queryWithClassName:@"IOU" predicate:pred];
+        [query includeKeys:@[@"payer", @"payee", @"description", @"amount", @"completed"]];
+        [query orderByAscending:@"completed"];
+        //query.limit = 20;
+        [query findObjectsInBackgroundWithBlock:^(NSArray *ious, NSError *error) {
+            if (ious != nil){
+                NSLog(@"FUNCTIONS %@", ious);
+                completionHandler(ious);
+            } else {
+                NSLog(@"%@", error.localizedDescription);
+                NSLog(@"Error fetching ious");
+                //return [NSMutableArray new];
+            }
+        }];
+}
+
 @end

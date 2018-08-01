@@ -19,6 +19,7 @@
 @property (nonatomic) double latitude;
 @property (nonatomic) double longitude;
 @property (strong, nonatomic) NSMutableArray *attendees;
+@property (strong, nonatomic) NSMutableArray *ious;
 @property (strong, nonatomic) NSDate *tripDate;
 @property (strong, nonatomic) NSString *summary;
 

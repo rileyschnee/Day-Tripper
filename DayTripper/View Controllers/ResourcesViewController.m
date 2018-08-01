@@ -10,7 +10,8 @@
 #import "APIManager.h"
 #import "ProfileViewController.h"
 #import "TripReusableView.h"
-#import "SummaryViewController.h"
+#import "IOUViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -28,12 +29,12 @@
     self.collectionView.dataSource = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
-
+    
     // Setup collection view interface
     CGFloat itemWidth = (self.collectionView.frame.size.width - 60) / 3;
     UICollectionViewFlowLayout *layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     layout.itemSize = CGSizeMake(itemWidth, itemWidth+25);
-    
+    [SVProgressHUD show];
     [self fetchAttendees];
     
    
@@ -64,11 +65,12 @@
         profileViewController.user = user;
         profileViewController.trip = self.trip;
     }
-    
     if([sender isKindOfClass:[UIButton class]]){
-        SummaryViewController *summaryVC = [segue destinationViewController];
-        summaryVC.trip = self.trip;
-        
+        UINavigationController *navController = [segue destinationViewController];
+        IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+        iouVC.attendeeUsers = [self.attendeeUsers mutableCopy];
+        iouVC.trip = self.trip;
+        iouVC.isUsersIOUs = FALSE;
     }
 }
 
@@ -87,7 +89,6 @@
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
     TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
     header.trip = self.trip;
-    NSLog(@"Set trip - resources view");
     header.delegate = self;
     header.tripNameLabel.text = self.trip.name;
     
@@ -149,6 +150,7 @@
         NSString* tripDayStringRep = [formatter stringFromDate:tripDay];
         double currHigh = 0;
         double currLow = 0;
+        NSString* weatherDesc = @"";
         NSArray *forecasts = responseDict[0][@"list"];
         BOOL highAndLowSetSoFar = NO;
         for (NSDictionary* forecast in forecasts) {
@@ -157,6 +159,8 @@
             if ([tripDayStringRep isEqualToString:listedDate]) {
                 double listedHigh = [forecast[@"main"][@"temp_max"] doubleValue];
                 double listedLow = [forecast[@"main"][@"temp_min"] doubleValue];
+                NSDictionary* weatherDict = forecast[@"weather"];
+                weatherDesc = forecast[@"weather"][0][@"description"];
                 if (highAndLowSetSoFar) {
                     if (listedHigh > currHigh) {
                         currHigh = listedHigh;
@@ -173,17 +177,25 @@
             }
             
         }
-        [weakSelf setWeatherLabels:header high:currHigh low:currLow];
+        [weakSelf setWeatherLabels:header high:currHigh low:currLow description:weatherDesc];
         
     }];
 }
 
-- (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low {
+- (void) setWeatherLabels:(TripReusableView* ) header high:(double)high low:(double)low description:(NSString *)description {
     dispatch_async(dispatch_get_main_queue(), ^{
-        NSString* highString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:high], @" F"];
-        NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
-        header.highLabel.text = highString;
-        header.lowLabel.text = lowString;
+        // if there is no weather (the high and low both equal 0) then set the high and low equal to dash
+        if (high == 0.0 && low == 0.0) {
+            header.highLabel.text = @"-";
+            header.lowLabel.text = @"-";
+            header.descLabel.text = @"-";
+        } else {
+            NSString* highString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:high], @" F"];
+            NSString* lowString = [NSString stringWithFormat:@"%.1f%@", [self kelvinToFahrenheit:low], @" F"];
+            header.highLabel.text = highString;
+            header.lowLabel.text = lowString;
+            header.descLabel.text = [description capitalizedString];
+        }
     });
 }
 - (void)fetchAttendees{
@@ -202,6 +214,7 @@
             NSLog(@"%@", error.localizedDescription);
             NSLog(@"Error fetching attendees");
         }
+        [SVProgressHUD dismiss];
     }];
 }
 
@@ -214,7 +227,7 @@
 }
 
 - (IBAction)shareToAlbum:(id)sender {
-
+    // GOOGLE PHOTOS FUNCTIONALITY HERE
     
 }
 

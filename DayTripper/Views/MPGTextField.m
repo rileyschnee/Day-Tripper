@@ -170,9 +170,10 @@ NSArray *data;
         tableViewController = [[UITableViewController alloc] init];
         [tableViewController.tableView setDelegate:self];
         [tableViewController.tableView setDataSource:self];
+        tableViewController.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
         if (self.backgroundColor == nil) {
             //Background color has not been set by the user. Use default color instead.
-            [tableViewController.tableView setBackgroundColor:[UIColor colorWithRed:240.0/255.0 green:240.0/255.0 blue:240.0/255.0 alpha:1.0]];
+            [tableViewController.tableView setBackgroundColor:[UIColor colorWithRed:251.0/255.0 green:251.0/255.0 blue:255.0/251.0 alpha:1.0]];
         }
         else{
             [tableViewController.tableView setBackgroundColor:self.backgroundColor];
@@ -183,7 +184,7 @@ NSArray *data;
             //PopoverSize frame has not been set. Use default parameters instead.
             CGRect frameForPresentation = [self frame];
             frameForPresentation.origin.y += self.frame.size.height;
-            frameForPresentation.size.height = 200;
+            frameForPresentation.size.height = 100;
             [tableViewController.tableView setFrame:frameForPresentation];
         }
         else{

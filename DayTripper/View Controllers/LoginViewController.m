@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
+#import "SVProgressHUD.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -130,7 +131,7 @@
 - (void)loginUser{
     NSString *username = [self.usernameField.text lowercaseString];
     NSString *password = self.passwordField.text;
-    
+    [SVProgressHUD show];
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
@@ -139,6 +140,7 @@
             // display view controller that needs to shown after successful login
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
+        [SVProgressHUD dismiss];
     }];
     
     
@@ -160,6 +162,7 @@
         }
     }];
     // call sign up function on the object
+    [SVProgressHUD show];
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error != nil) {
             if ([error.localizedDescription containsString:@"Account already exists for this email"]) {
@@ -175,6 +178,7 @@
             // manually segue to logged in view
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
+        [SVProgressHUD dismiss];
     }];
 }
 

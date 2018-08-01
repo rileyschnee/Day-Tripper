@@ -13,6 +13,9 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "SettingsViewController.h"
+#import "IOUViewController.h"
+#import "Functions.h"
+#import "SVProgressHUD.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
@@ -56,11 +59,12 @@
     [query includeKey:@"activities"];
     [query whereKey:@"attendees" containsString:[PFUser currentUser].objectId];
     query.limit = 20;
-    
+    [SVProgressHUD show];
     [query findObjectsInBackgroundWithBlock:^(NSArray *trips, NSError *error) {
         if (trips != nil) {
-            self.trips = trips;
+            self.trips = [trips mutableCopy];
             [self.tableView reloadData];
+            [SVProgressHUD dismiss];
         } else {
             NSLog(@"%@", error.localizedDescription);
         }
@@ -89,7 +93,21 @@
         //set the trip title
         tabbar.title = trip.name;
     }
+    else if([[segue destinationViewController] isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController = [segue destinationViewController];
+        if([navController.topViewController isKindOfClass:[IOUViewController class]]){
+            UINavigationController *navController = [segue destinationViewController];
+            IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
+            iouVC.isUsersIOUs = TRUE;
+            iouVC.title = @"My IOUs";
+            [Functions fetchUserIOUs:PFUser.currentUser withCompletion:^(NSArray *ious) {
+                iouVC.iouArray = [ious mutableCopy];
+                NSLog(@"COMPLETION HANDLER %@", iouVC.iouArray);
+            }];
+        }
+    }
 }
+
 
  
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
