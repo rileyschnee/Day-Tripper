@@ -163,6 +163,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 //gets the places for the results
 - (void)fetchResults4SQ{
+    //access apikeys.plist
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *dict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
     NSString *baseURL =  @"https://api.foursquare.com/v2/venues/search";
@@ -172,8 +177,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     NSString *currDate = [self generatCurrentDateFourSquare];
     [paramsDict setObject:coordinates forKey:@"ll"];
     [paramsDict setObject:currDate forKey:@"v"];
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    [paramsDict setObject:[dict valueForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
+    [paramsDict setObject:[dict valueForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
     if(![self.catQueryPlace isEqualToString:@""]){
         [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
     }
@@ -201,6 +206,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 //gets the food results
 - (void)fetchResultsYelp{
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
     NSString *baseURL =  @"https://api.yelp.com/v3/businesses/search";
@@ -208,7 +217,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
     NSString *lat = [NSString stringWithFormat:@"%f",self.latitude];
     NSString *lon = [NSString stringWithFormat:@"%f",self.longitude];
-    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [apiDict valueForKey:@"APIKEY_YELP"]];
     [paramsDict setObject:lat forKey:@"latitude"];
     [paramsDict setObject:lon forKey:@"longitude"];
     [paramsDict setObject:@"food" forKey:@"categories"];
@@ -236,6 +245,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 }
 
 - (void)fetchResultsEvents{
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
     NSString *baseURL =  @"https://api.predicthq.com/v1/events/";
@@ -243,7 +256,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
     
     NSString *locationString = [NSString stringWithFormat:@"%f%@%f", self.latitude, @",", self.longitude];
-    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_PREDICTHQ"]];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [apiDict valueForKey:@"APIKEY_PREDICTHQ"]];
     
     //date processing
     NSString *startDate = [self generatCurrentDateEvents];

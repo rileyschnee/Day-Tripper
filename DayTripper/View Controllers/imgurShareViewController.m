@@ -23,7 +23,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-     [IMGSession anonymousSessionWithClientID:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_IMGUR"] withDelegate:self];
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+     [IMGSession anonymousSessionWithClientID:[apiDict valueForKey:@"CLIENT_ID_IMGUR"] withDelegate:self];
     //disable upload button until image view has something
     [self.uploadButton setEnabled:NO];
     self.imageToPost = nil;
