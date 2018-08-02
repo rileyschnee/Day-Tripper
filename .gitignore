@@ -7,7 +7,7 @@ build/
 DerivedData/
 
 #ignore API keys
-apikeys.plist
+DayTripper/apikeys.plist
 
 ## Various settings
 *.pbxuser
