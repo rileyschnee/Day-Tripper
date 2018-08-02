@@ -1516,6 +1516,7 @@
                                                 <constraint firstItem="9WT-aG-TDs" firstAttribute="leading" secondItem="B0n-iZ-oh0" secondAttribute="leadingMargin" id="6V9-0d-koY"/>
                                                 <constraint firstItem="HJP-TM-NGg" firstAttribute="top" secondItem="B0n-iZ-oh0" secondAttribute="top" constant="7" id="MhW-aV-B1Q"/>
                                                 <constraint firstItem="9WT-aG-TDs" firstAttribute="trailing" secondItem="B0n-iZ-oh0" secondAttribute="trailingMargin" constant="-87" id="QVa-WP-2dz"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="HJP-TM-NGg" secondAttribute="bottom" constant="7" id="QfZ-ez-VRw"/>
                                                 <constraint firstItem="9WT-aG-TDs" firstAttribute="top" secondItem="B0n-iZ-oh0" secondAttribute="topMargin" constant="4" id="a4Y-rT-r1g"/>
                                                 <constraint firstAttribute="trailing" secondItem="HJP-TM-NGg" secondAttribute="trailing" constant="15" id="jFq-z2-QL4"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="9WT-aG-TDs" secondAttribute="bottom" constant="4" id="rSP-wf-X3f"/>
@@ -1649,7 +1650,6 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Qz9-j1-qG0"/>
         <segue reference="rHE-D3-NFR"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
