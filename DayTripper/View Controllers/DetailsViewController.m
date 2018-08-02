@@ -101,6 +101,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    //remove edit button that sometimes comes from the itin view
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    
     if (self.fromMap) {
         //nav bar from map
         UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
