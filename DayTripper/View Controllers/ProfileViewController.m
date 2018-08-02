@@ -139,6 +139,8 @@
         UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
         ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
         itinerary.trip = self.trip;
+        //instructs app to go to resources
+        itinerary.fromHomeToResources = YES;
         //set the trip title
         tabbar.title = self.trip.name;
     }
