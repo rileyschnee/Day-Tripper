@@ -31,6 +31,10 @@ int MOVEMENT_KEYBOARD = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    //fix extra space at the top of the table view
+    //self.edgesForExtendedLayout = UIRectEdgeNone;
+    //self.navigationController.view.backgroundColor = [UIColor whiteColor];
+    
     self.messageBody.delegate = self;
     self.tableView.delegate = self;
     self.tableView.dataSource = self;

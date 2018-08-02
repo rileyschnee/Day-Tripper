@@ -12,4 +12,5 @@ target 'DayTripper' do
   pod 'UberRides', '~> 0.9'
   pod 'TTGTagCollectionView'
   pod 'SVProgressHUD'
+  pod 'LyftSDK'
 end

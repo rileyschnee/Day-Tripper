@@ -13,6 +13,7 @@
 #import "Functions.h"
 
 @import UberRides;
+@import LyftSDK;
 
 @interface DetailsViewController () <CLLocationManagerDelegate>
 
@@ -29,6 +30,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *websiteLink;
 @property (strong, nonatomic) NSString* websiteToGoTo;
 @property (weak, nonatomic) IBOutlet UIView *uberView;
+@property (weak, nonatomic) IBOutlet UIView *lyftButton;
+@property (weak, nonatomic) IBOutlet UIButton *directionsButton;
 @property (strong, nonatomic) CLLocationManager *locationManager;
 @property (strong, nonatomic) CLGeocoder *geocoder;
 @property (nonatomic) double currentLat;
@@ -42,7 +45,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.nameLabel.text = self.activity.name;
-    
+    self.lyftButton.layer.cornerRadius = self.lyftButton.frame.size.height / 4;
+    self.uberView.layer.cornerRadius = self.uberView.frame.size.height / 4;
+    self.directionsButton.layer.cornerRadius = self.directionsButton.frame.size.height / 4;
+    self.ratingsLabel.text = @"";
     //UBER + LOCATION
     self.geocoder = [[CLGeocoder alloc] init];
     self.locationManager = [[CLLocationManager alloc] init];
@@ -88,7 +94,7 @@
     if (self.titleForItin.length > 0) {
         //override back button because previous behavior takes you to wrong screen
         self.prevBarButton = self.tabBarController.navigationItem.leftBarButtonItem;
-        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"%@%@", @"< ", self.titleForItin] style:UIBarButtonItemStylePlain target:self action:@selector(goBackToPrevScreen)];
+        UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithTitle:[NSString stringWithFormat:@"Back"] style:UIBarButtonItemStylePlain target:self action:@selector(goBackToPrevScreen)];
         self.tabBarController.navigationItem.hidesBackButton = YES;
         self.tabBarController.navigationItem.leftBarButtonItem = item;
     }
@@ -148,22 +154,69 @@
             self.somePlacemark = [placemarks firstObject];
             
             NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
-            NSString *address = [partsAddr componentsJoinedByString:@", "];
-            self.locationLabel.text =  address;
+            //NSString *address = [partsAddr componentsJoinedByString:@", "];
+            NSString *displayAddress = [NSString stringWithFormat:@"%@\r%@, %@ %@\r%@", self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country];
+            self.locationLabel.text =  displayAddress;
             [builder setDropoffAddress:[NSString stringWithFormat:@"%@", self.somePlacemark.name]];
         }
     }];
     
     UBSDKRideRequestButton *button = [[UBSDKRideRequestButton alloc] initWithRideParameters:rideParameters];
+    //[button setFrame:CGRectMake(self.uberView.frame.origin.x, self.uberView.frame.origin.y, self.uberView.frame.size.width, self.uberView.frame.size.height)];
     [self.uberView addSubview:button];
-    //make button centered and at the bottom
+    //make button fill uberView
     button.translatesAutoresizingMaskIntoConstraints = false;
-    NSLayoutConstraint* horizontalConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterX multiplier:1 constant:0];
-    NSLayoutConstraint* verticalConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.view attribute:NSLayoutAttributeCenterY multiplier:1.7 constant:0];
-    [self.view addConstraint:horizontalConstraint];
-    [self.view addConstraint:verticalConstraint];
     
+//    NSLayoutConstraint* leftConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.uberView attribute:NSLayoutAttributeLeft multiplier:1 constant:0];
+//    NSLayoutConstraint* rightConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.uberView attribute:NSLayoutAttributeRight multiplier:1 constant:0];
+    NSLayoutConstraint* centeredConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.uberView attribute:NSLayoutAttributeCenterX multiplier:1 constant:self.uberView.frame.origin.x - button.frame.origin.x];
+    NSLayoutConstraint* topConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.uberView attribute:NSLayoutAttributeTop multiplier:1 constant:0];
+    
+    NSLayoutConstraint* bottomConstraint = [NSLayoutConstraint constraintWithItem:button attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.uberView attribute:NSLayoutAttributeBottom multiplier:1 constant:0];
+//    [self.view addConstraint:leftConstraint];
+//    [self.view addConstraint:rightConstraint];
+    [self.view addConstraint:centeredConstraint];
+    [self.view addConstraint:topConstraint];
+    [self.view addConstraint:bottomConstraint];
+
+    
+    
+    // Add Lyft Button
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(didPressLyft:)];
+    [self.lyftButton addGestureRecognizer:tap];
 }
+
+- (void)didPressLyft:(UITapGestureRecognizer *)sender{
+    if ([self lyftInstalled]) {
+        NSString *rideRequestURL = [NSString stringWithFormat:@"lyft://ridetype?id=lyft&pickup[latitude]=%f&pickup[longitude]=%f&destination[latitude]=%f&destination[longitude]=%f&partner=%@", self.currentLat, self.currentLong, self.activity.latitude, self.activity.longitude, [[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_LYFT"]];
+        [self open:rideRequestURL];
+        
+    }
+    else {
+        [self open:[NSString stringWithFormat:@"https://www.lyft.com/signup/SDKSIGNUP?clientId=%@&sdkName=iOS_direct", [[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_LYFT"]]];
+    }
+}
+
+- (BOOL)lyftInstalled {
+    return [[UIApplication sharedApplication] canOpenURL:[NSURL URLWithString:@"lyft://"]];
+}
+
+- (void)open:(NSString *)scheme {
+    UIApplication *application = [UIApplication sharedApplication];
+    NSURL *URL = [NSURL URLWithString:scheme];
+    
+    if ([application respondsToSelector:@selector(openURL:options:completionHandler:)]) {
+        [application openURL:URL options:@{} completionHandler:nil];
+    } else {
+        [application openURL:URL options:@{} completionHandler:^(BOOL success) {
+            if (success){
+                NSLog(@"Successfully navigated to Lyft!");
+            }
+        }];
+    }
+}
+
+
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"failed to fetch current location : %@", error);
@@ -352,7 +405,7 @@
 -(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
          self.hoursLabel.text = [NSString stringWithFormat:@"%@%@%@", startTimeString, @" - ", endTimeString];
-        self.ratingsLabel.text = [NSString stringWithFormat:@"%@%.1f%@", @"Rating: ", rating, @"/5.0"];
+        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
     });
    
 }

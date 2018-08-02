@@ -11,7 +11,6 @@
 		0EAE0C5E20FFA9A900D798A9 /* DetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C5D20FFA9A900D798A9 /* DetailsViewController.m */; };
 		0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6020FFF6F000D798A9 /* ResourcesViewController.m */; };
 		0EAE0C6420FFF71D00D798A9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6320FFF71D00D798A9 /* MapViewController.m */; };
-		2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */; };
 		537A4B8121065AA000E64CBD /* random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8021065AA000E64CBD /* random.swift */; };
 		537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537A4B8221066FFC00E64CBD /* MessageUI.framework */; };
 		537A4B862108F42400E64CBD /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B852108F42400E64CBD /* ChatViewController.m */; };
@@ -24,6 +23,7 @@
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
 		53E8421120FFA920003FE31A /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8421020FFA920003FE31A /* Event.m */; };
+		65023529DE0196A20345B726 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ACFB88D352439559867FC3 /* libPods-DayTripper.a */; };
 		BE45190B210104AB00CFA8AC /* CategoryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */; };
 		BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190D210104E600CFA8AC /* QuizReusableView.m */; };
 		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
@@ -64,6 +64,7 @@
 		0EAE0C6220FFF71D00D798A9 /* MapViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
 		0EAE0C6320FFF71D00D798A9 /* MapViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		0ED387992112210700F8B1F4 /* ResourcesViewControllerRefreshDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourcesViewControllerRefreshDelegate.h; sourceTree = "<group>"; };
+		12ACFB88D352439559867FC3 /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DayTripper-Bridging-Header.h"; sourceTree = "<group>"; };
 		537A4B8021065AA000E64CBD /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
 		537A4B8221066FFC00E64CBD /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
@@ -86,7 +87,6 @@
 		53E8420A20FE445A003FE31A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		53E8420F20FFA920003FE31A /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		53E8421020FFA920003FE31A /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
-		9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A59493FA9C312E5904AB92 /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
 		BE451909210104AB00CFA8AC /* CategoryCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionCell.h; sourceTree = "<group>"; };
 		BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionCell.m; sourceTree = "<group>"; };
@@ -152,7 +152,7 @@
 			files = (
 				537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */,
 				53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */,
-				2393580F3757A9ADC1E9F148 /* libPods-DayTripper.a in Frameworks */,
+				65023529DE0196A20345B726 /* libPods-DayTripper.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -188,7 +188,7 @@
 			children = (
 				537A4B8221066FFC00E64CBD /* MessageUI.framework */,
 				53E8420A20FE445A003FE31A /* MapKit.framework */,
-				9A10739DFCE1A4D5F2E2BB6E /* libPods-DayTripper.a */,
+				12ACFB88D352439559867FC3 /* libPods-DayTripper.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -329,7 +329,7 @@
 				BEA5FD2F20F9298F005B79F5 /* Sources */,
 				BEA5FD3020F9298F005B79F5 /* Frameworks */,
 				BEA5FD3120F9298F005B79F5 /* Resources */,
-				D25AF3BFBF7B863D2F3B85D5 /* [CP] Copy Pods Resources */,
+				B665BACFD5BD53AC4C98F5D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -412,13 +412,18 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D25AF3BFBF7B863D2F3B85D5 /* [CP] Copy Pods Resources */ = {
+		B665BACFD5BD53AC4C98F5D7 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper-resources.sh",
+				"${PODS_ROOT}/LyftSDK/Sources/LyftUI/Resources/LyftButtonFull.xib",
+				"${PODS_ROOT}/LyftSDK/Sources/LyftUI/Resources/LyftButtonNone.xib",
+				"${PODS_ROOT}/LyftSDK/Sources/LyftUI/Resources/LyftButtonRideTypeETA.xib",
+				"${PODS_ROOT}/LyftSDK/Sources/LyftUI/Resources/en.lproj",
+				"${PODS_ROOT}/LyftSDK/Sources/LyftUI/Resources/Images.xcassets",
 				"${PODS_CONFIGURATION_BUILD_DIR}/Parse/Parse.bundle",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/en.lproj",
 				"${PODS_ROOT}/ParseUI/ParseUI/Resources/Localization/fr.lproj",
@@ -437,13 +442,16 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LyftButtonFull.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LyftButtonNone.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/LyftButtonRideTypeETA.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/en.lproj",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Parse.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/fr.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-BR.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/hi-In.lproj",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/pt-br.lproj",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ru.lproj",
 			);
@@ -637,14 +645,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -660,14 +668,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

@@ -10,6 +10,6 @@
 #import <Parse/Parse.h>
 
 @interface DMConvo : PFObject  <PFSubclassing>
-@property (strong, nonatomic) NSArray* chats;
+@property (strong, nonatomic) NSMutableArray* chats;
 @property (strong, nonatomic) NSString* name;
 @end

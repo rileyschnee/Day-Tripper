@@ -20,6 +20,7 @@
 	<string>1</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
+		<string>lyft</string>
 		<string>uber</string>
 		<string>uberauth</string>
 	</array>

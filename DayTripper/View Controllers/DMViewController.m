@@ -91,10 +91,13 @@ int MOVEMENT_KEYBOARD_DM = 200;
 //this function will search conversations table for the current convo
 - (void) displayDMConversation {
     //perform query
-    PFQuery *query = [PFQuery queryWithClassName:@"DMConvo"]; //how to define a query
+    NSPredicate *pred = [NSPredicate predicateWithFormat:@"name == %@ OR name == %@", self.chatName, self.chatNameReverse];
+    PFQuery *query = [PFQuery queryWithClassName:@"DMConvo" predicate:pred];
     [query includeKey:@"chats"];
-    [query whereKey:@"name" equalTo:self.chatName];
-    [query whereKey:@"name" equalTo:self.chatNameReverse];
+    [query includeKey:@"name"];
+
+   // [query whereKey:@"name" equalTo:self.chatName];
+   // [query whereKey:@"name" equalTo:self.chatNameReverse];
     query.limit = 1;
     
     [query getFirstObjectInBackgroundWithBlock:^(PFObject *convoObj, NSError *error) {
@@ -108,7 +111,7 @@ int MOVEMENT_KEYBOARD_DM = 200;
             //no chat convo exists
             if ([error.localizedDescription containsString:@"results matched the query"]) {
                 DMConvo* newConvo = [DMConvo new];
-                newConvo.chats = [[NSArray alloc] init];
+                newConvo.chats = [[NSMutableArray alloc] init];
                 newConvo.name = self.chatName;
                 self.convo = newConvo;
                 [self.convo saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
