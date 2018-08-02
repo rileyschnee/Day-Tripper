@@ -43,7 +43,7 @@
                                     <action selector="saveProfile:" destination="ii9-Tj-1zu" eventType="touchUpInside" id="5vg-PO-yOP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USERNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO1-On-QlW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO1-On-QlW">
                                 <rect key="frame" x="29" y="328" width="124" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -141,11 +141,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emailField" destination="2vg-bp-Fwt" id="vUS-Qq-7Dt"/>
                         <outlet property="nameField" destination="DpJ-dm-ueJ" id="Ofb-1v-yAb"/>
                         <outlet property="passwordFieldFirst" destination="Uhb-t3-Wfk" id="DT1-MM-II0"/>
                         <outlet property="passwordFieldSecond" destination="lRp-f2-JUd" id="KM7-24-WxC"/>
                         <outlet property="profilePicView" destination="LBx-bi-7Oe" id="QQV-St-IZ1"/>
-                        <outlet property="usernameField" destination="2vg-bp-Fwt" id="pTW-nX-0Tk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAC-As-NEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -891,6 +891,14 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-BW-0kP">
+                                            <rect key="frame" x="216" y="130" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="edit"/>
+                                            <connections>
+                                                <action selector="didTapEdit:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="esf-kX-uiZ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
@@ -900,6 +908,7 @@
                                         <outlet property="attendeeLabel" destination="L5d-3t-RZS" id="0fb-Vb-YS5"/>
                                         <outlet property="descLabel" destination="uQ6-jv-nXg" id="BgD-ad-q64"/>
                                         <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
+                                        <outlet property="editDescripBtn" destination="cXW-BW-0kP" id="8nd-ei-3tq"/>
                                         <outlet property="googlePhotosButton" destination="meE-d1-hHQ" id="G7i-7Y-bb7"/>
                                         <outlet property="highLabel" destination="fgg-vX-lda" id="t0d-2H-hqm"/>
                                         <outlet property="iouButton" destination="O0e-PQ-g7W" id="a02-ea-Daw"/>
@@ -1021,8 +1030,8 @@
                                     <action selector="tapWebsiteLink:" destination="6N9-Ay-TK4" eventType="touchUpInside" id="mE9-wV-ucc"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-YA-jiw">
-                                <rect key="frame" x="191" y="389" width="165" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hours" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjg-YA-jiw">
+                                <rect key="frame" x="266" y="389" width="90" height="49"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -1665,6 +1674,7 @@
         <image name="chat" width="32" height="32"/>
         <image name="circle" width="240" height="240"/>
         <image name="circle-checked" width="240" height="240"/>
+        <image name="edit" width="240" height="240"/>
         <image name="gear2" width="32" height="32"/>
         <image name="icon" width="1024" height="1024"/>
         <image name="info-tab-small" width="31" height="31"/>
@@ -1680,6 +1690,7 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Qz9-j1-qG0"/>
         <segue reference="rHE-D3-NFR"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>

@@ -14,7 +14,7 @@
 #import "SVProgressHUD.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *emailField;
 @property (weak, nonatomic) IBOutlet UITextField *nameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFieldFirst;
 @property (weak, nonatomic) IBOutlet UITextField *passwordFieldSecond;
@@ -29,16 +29,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     // UI for Text Fields
-    [self.usernameField setBorderStyle:UITextBorderStyleNone];
+    [self.emailField setBorderStyle:UITextBorderStyleNone];
     [self.nameField setBorderStyle:UITextBorderStyleNone];
     [self.passwordFieldFirst setBorderStyle:UITextBorderStyleNone];
     [self.passwordFieldSecond setBorderStyle:UITextBorderStyleNone];
     
     // Setting initial information
     self.profilePicView.file = PFUser.currentUser[@"picture"];
-    [self.profilePicView loadInBackground];
+    [self.profilePicView loadInBackground:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if(error){
+            NSLog(@"Error loading picture");
+        }
+    }];
     self.profilePicView.layer.cornerRadius = self.profilePicView.frame.size.width/2;
-    self.usernameField.text = PFUser.currentUser.username;
+    self.emailField.text = PFUser.currentUser.email;
     self.nameField.text = PFUser.currentUser[@"name"];
     
     // Tap Gesture Recognizer
@@ -48,7 +52,7 @@
 
 -(void)dismissKeyboard {
     [self.nameField endEditing:YES];
-    [self.usernameField endEditing:YES];
+    [self.emailField endEditing:YES];
     [self.passwordFieldFirst endEditing:YES];
     [self.passwordFieldSecond endEditing:YES];
 }
@@ -89,22 +93,25 @@
     NSLog(@"Saving...");
     // Set current user's new information
     PFUser.currentUser[@"picture"] = [PFFile fileWithName:@"photo.png" data:UIImagePNGRepresentation(self.profilePicView.image)];
-    PFUser.currentUser.username = self.usernameField.text;
+    PFUser.currentUser.email = self.emailField.text;
     PFUser.currentUser[@"name"] = self.nameField.text;
     // Save changes
     [SVProgressHUD show];
     [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"Successfully saved profile changes");
+            
+
         }else{
             NSLog(@"Unable to save profile changes");
         }
         [SVProgressHUD dismiss];
+        
     }];
     NSLog(@"Saved!");
     //[self.navigationController popViewControllerAnimated:YES];
     [self dismissViewControllerAnimated:YES completion:nil];
-    [self.delegate reloadUserInfo];
+    //[self.delegate reloadUserInfo];
 
 }
 

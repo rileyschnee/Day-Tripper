@@ -38,6 +38,7 @@
 @property (nonatomic) double currentLong;
 //for storing the previous back button
 @property (nonatomic,strong) UIBarButtonItem* prevBarButton;
+@property (nonatomic) BOOL loaded;
 @end
 
 @implementation DetailsViewController
@@ -58,7 +59,7 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager startUpdatingLocation];
-    
+    self.loaded = false;
     //CATEGORIES
     self.categoriesLabel.text = [Functions primaryActivityCategory:self.activity];
     
@@ -102,11 +103,12 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     //remove edit button that sometimes comes from the itin view
+    [super viewDidAppear:YES];
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
-    
+    self.currentImageIndex = 0;
     if (self.fromMap) {
         //nav bar from map
-        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
         
         UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Details"];
         // [navbar setBarTintColor:[UIColor lightGrayColor]];
@@ -246,12 +248,14 @@
 
 
 - (IBAction)swipeLeft:(id)sender {
-    [self handleSwipeLeft:sender];
+    if(self.loaded)
+        [self handleSwipeLeft:sender];
 
 }
 
 - (IBAction)swipeRight:(id)sender {
-    [self handleSwipeRight:sender];
+    if(self.loaded)
+        [self handleSwipeRight:sender];
 }
 
 
@@ -393,6 +397,7 @@
         [self.images addObject:image];
     }
     [weakSelf setImageAsync];
+    self.loaded = true;
     
 }
 
@@ -407,8 +412,8 @@
 
 -(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
-         self.hoursLabel.text = [NSString stringWithFormat:@"%@%@%@", startTimeString, @" - ", endTimeString];
-        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
+        self.hoursLabel.text = [NSString stringWithFormat:@"%@\r%@%@", startTimeString, @"-", endTimeString];
+//        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
     });
    
 }

@@ -105,8 +105,10 @@
         //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
         // [self.resourceView addSubview:button];
         header.summaryBtn.hidden = NO;
+        header.editDescripBtn.hidden = YES;
     }else{
         header.summaryBtn.hidden = YES;
+        header.editDescripBtn.hidden = NO; 
         header.descriptionLabel.hidden = NO;
         header.descriptionLabel.text = self.trip.summary;
     }
