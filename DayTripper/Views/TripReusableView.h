@@ -42,4 +42,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (strong, nonatomic) UITextView *textView;
 - (IBAction)didTapDescription:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *editDescripBtn;
+- (IBAction)didTapEdit:(id)sender;
 @end

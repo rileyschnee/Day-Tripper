@@ -850,6 +850,14 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cXW-BW-0kP">
+                                            <rect key="frame" x="216" y="130" width="20" height="20"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <state key="normal" image="edit"/>
+                                            <connections>
+                                                <action selector="didTapEdit:" destination="Kjl-CK-SsL" eventType="touchUpInside" id="esf-kX-uiZ"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="calibratedRGB"/>
                                     <gestureRecognizers/>
@@ -859,6 +867,7 @@
                                         <outlet property="attendeeLabel" destination="L5d-3t-RZS" id="0fb-Vb-YS5"/>
                                         <outlet property="descLabel" destination="uQ6-jv-nXg" id="BgD-ad-q64"/>
                                         <outlet property="descriptionLabel" destination="MjQ-Rp-KUT" id="cS1-ZE-7vW"/>
+                                        <outlet property="editDescripBtn" destination="cXW-BW-0kP" id="8nd-ei-3tq"/>
                                         <outlet property="googlePhotosButton" destination="meE-d1-hHQ" id="G7i-7Y-bb7"/>
                                         <outlet property="highLabel" destination="fgg-vX-lda" id="t0d-2H-hqm"/>
                                         <outlet property="iouButton" destination="O0e-PQ-g7W" id="a02-ea-Daw"/>
@@ -1624,6 +1633,7 @@
         <image name="chat" width="32" height="32"/>
         <image name="circle" width="240" height="240"/>
         <image name="circle-checked" width="240" height="240"/>
+        <image name="edit" width="240" height="240"/>
         <image name="gear2" width="32" height="32"/>
         <image name="icon" width="1024" height="1024"/>
         <image name="info-tab-small" width="31" height="31"/>
