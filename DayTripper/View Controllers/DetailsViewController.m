@@ -104,9 +104,10 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    //remove edit button that sometimes comes from the itin view
     [super viewDidAppear:YES];
+    self.tabBarController.navigationItem.rightBarButtonItem = nil;
     self.currentImageIndex = 0;
-
     if (self.fromMap) {
         //nav bar from map
         UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
@@ -197,13 +198,16 @@
 }
 
 - (void)didPressLyft:(UITapGestureRecognizer *)sender{
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
     if ([self lyftInstalled]) {
-        NSString *rideRequestURL = [NSString stringWithFormat:@"lyft://ridetype?id=lyft&pickup[latitude]=%f&pickup[longitude]=%f&destination[latitude]=%f&destination[longitude]=%f&partner=%@", self.currentLat, self.currentLong, self.activity.latitude, self.activity.longitude, [[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_LYFT"]];
+        NSString *rideRequestURL = [NSString stringWithFormat:@"lyft://ridetype?id=lyft&pickup[latitude]=%f&pickup[longitude]=%f&destination[latitude]=%f&destination[longitude]=%f&partner=%@", self.currentLat, self.currentLong, self.activity.latitude, self.activity.longitude, [apiDict valueForKey:@"CLIENT_ID_LYFT"]];
         [self open:rideRequestURL];
         
     }
     else {
-        [self open:[NSString stringWithFormat:@"https://www.lyft.com/signup/SDKSIGNUP?clientId=%@&sdkName=iOS_direct", [[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_LYFT"]]];
+        [self open:[NSString stringWithFormat:@"https://www.lyft.com/signup/SDKSIGNUP?clientId=%@&sdkName=iOS_direct", [apiDict valueForKey:@"CLIENT_ID_LYFT"]]];
     }
 }
 
@@ -266,13 +270,17 @@
 
 #pragma mark - API requests
 - (void) fetch4SQPhotos: (NSString*) tripId {
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
     NSString *baseURL =  [NSString stringWithFormat:@"%@%@%@", @"https://api.foursquare.com/v2/venues/", tripId, @"/photos"];
     //params
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
+    [paramsDict setObject:[apiDict valueForKey:@"CLIENT_ID_4SQ"] forKey:@"client_id"];
+    [paramsDict setObject:[apiDict valueForKey:@"CLIENT_SECRET_4SQ"] forKey:@"client_secret"];
     NSString *currDate = [self generatCurrentDateFourSquare];
     [paramsDict setObject:currDate forKey:@"v"];
     
@@ -302,12 +310,16 @@
 }
 
 - (void) fetchYelpPhotos: (NSString*) tripId {
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
     NSString *baseURL =  [NSString stringWithFormat:@"%@%@", @"https://api.yelp.com/v3/businesses/", tripId];
     //params
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
-    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [apiDict valueForKey:@"APIKEY_YELP"]];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
 
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -322,6 +334,9 @@
 
 //gets hours and rating of operation
 - (void) fetchYelpDetails: (NSString*) tripId {
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
     //get index of current day of the week
     NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
     NSDateComponents *comps = [gregorian components:NSCalendarUnitWeekday fromDate:[NSDate date]];
@@ -334,7 +349,7 @@
     NSString *baseURL =  [NSString stringWithFormat:@"%@%@", @"https://api.yelp.com/v3/businesses/", tripId];
     //params
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
-    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_YELP"]];
+    NSString *apiToken = [NSString stringWithFormat:@"%@%@", @"Bearer ", [apiDict valueForKey:@"APIKEY_YELP"]];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
     
     __weak typeof(self) weakSelf = self;
@@ -502,6 +517,11 @@
 # pragma mark - Google Places Request for Event API
 //given a lat and long will search to find nearby places and their photo ids
 - (void) getEventPhotoObjectsByLocation {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     __weak typeof(self) weakSelf = self;
     APIManager *apiManager = [[APIManager alloc] init];
     //make the request
@@ -510,7 +530,7 @@
     NSString* locationParam = [NSString stringWithFormat:@"%f%@%f", self.activity.latitude, @",", self.activity.longitude];
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
     
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"] forKey:@"key"];
+    [paramsDict setObject:[apiDict valueForKey:@"APIKEY_GOOGLE"] forKey:@"key"];
     [paramsDict setObject:locationParam forKey:@"location"];
     [paramsDict setObject:@"100" forKey:@"radius"];
     
@@ -543,12 +563,17 @@
 }
 
 - (void) getImageFromPhotoRef:(NSString*) photoReference {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     
     NSString *baseURL = @"https://maps.googleapis.com/maps/api/place/photo";
     NSString* maxWidth = @"?maxwidth=600";
     NSString* photoRef = [NSString stringWithFormat:@"%@%@", @"&photoreference=", photoReference];
-    NSString* key = [NSString stringWithFormat:@"%@%@", @"&key=", [[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_GOOGLE"]];
+    NSString* key = [NSString stringWithFormat:@"%@%@", @"&key=", [apiDict valueForKey:@"APIKEY_GOOGLE"]];
     NSString* finalURL = [NSString stringWithFormat:@"%@%@%@%@", baseURL, maxWidth, photoRef, key];
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalURL]];
     UIImage *image = [UIImage imageWithData:data];

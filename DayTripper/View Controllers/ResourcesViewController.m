@@ -12,7 +12,7 @@
 #import "TripReusableView.h"
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
-#import "imgurShareViewController.h"
+#import "ImgurAlbumViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tabBarController setSelectedIndex:2];
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -68,8 +69,8 @@
     }
     if([sender isKindOfClass:[UIButton class]]){
         UINavigationController *navController = [segue destinationViewController];
-        if (([navController.topViewController isKindOfClass:[imgurShareViewController class]])) {
-            imgurShareViewController* imgurVC = (imgurShareViewController *) navController.topViewController;
+        if (([navController.topViewController isKindOfClass:[ImgurAlbumViewController class]])) {
+            ImgurAlbumViewController* imgurVC = (ImgurAlbumViewController *) navController.topViewController;
             imgurVC.trip = self.trip;
         } else {
             IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
@@ -127,12 +128,17 @@
 
 //gets the high and low for the day
 - (void) getWeather:(TripReusableView* ) header {
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
     APIManager *apiManager = [[APIManager alloc] init];
     NSString *baseURL =  @"https://api.openweathermap.org/data/2.5/forecast";
     NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
     [paramsDict setObject:[NSString stringWithFormat:@"%f", self.trip.latitude] forKey:@"lat"];
     [paramsDict setObject:[NSString stringWithFormat:@"%f", self.trip.longitude] forKey:@"lon"];
-    [paramsDict setObject:[[[NSProcessInfo processInfo] environment] objectForKey:@"APIKEY_OPENWEATHER"] forKey:@"appid"];
+    [paramsDict setObject:[apiDict valueForKey:@"APIKEY_OPENWEATHER"]  forKey:@"appid"];
     
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {

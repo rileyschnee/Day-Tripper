@@ -9,7 +9,7 @@
 #import "IOUViewController.h"
 #import "IOUCell.h"
 #import "IOU.h"
-
+#import "SVProgressHUD.h"
 
 @interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -91,6 +91,7 @@
     [query orderByAscending:@"completed"];
     
     //query.limit = 20;
+    [SVProgressHUD show];
     [query findObjectsInBackgroundWithBlock:^(NSArray *ious, NSError *error) {
         if (ious != nil){
             self.iouArray = [ious mutableCopy];
@@ -100,6 +101,7 @@
             NSLog(@"%@", error.localizedDescription);
             NSLog(@"Error fetching ious");
         }
+        [SVProgressHUD dismiss];
     }];
 }
 
