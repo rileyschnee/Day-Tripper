@@ -255,4 +255,7 @@
 
 
 
+- (IBAction)didTapEdit:(id)sender {
+    [self alertForSummary];
+}
 @end

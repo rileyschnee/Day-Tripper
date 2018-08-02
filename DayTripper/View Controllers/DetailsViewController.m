@@ -107,7 +107,7 @@
 
     if (self.fromMap) {
         //nav bar from map
-        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
         
         UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Details"];
         // [navbar setBarTintColor:[UIColor lightGrayColor]];
@@ -411,8 +411,8 @@
 
 -(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
-         self.hoursLabel.text = [NSString stringWithFormat:@"%@%@%@", startTimeString, @" - ", endTimeString];
-        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
+        self.hoursLabel.text = [NSString stringWithFormat:@"%@\r%@%@", startTimeString, @"-", endTimeString];
+//        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
     });
    
 }
