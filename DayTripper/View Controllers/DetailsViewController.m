@@ -103,7 +103,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     if (self.fromMap) {
         //nav bar from map
-        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
+        UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 150)];
         
         UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Details"];
         // [navbar setBarTintColor:[UIColor lightGrayColor]];
