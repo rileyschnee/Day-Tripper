@@ -38,6 +38,7 @@
 @property (nonatomic) double currentLong;
 //for storing the previous back button
 @property (nonatomic,strong) UIBarButtonItem* prevBarButton;
+@property (nonatomic) BOOL loaded;
 @end
 
 @implementation DetailsViewController
@@ -58,7 +59,7 @@
     [self.locationManager requestWhenInUseAuthorization];
     [self.locationManager startMonitoringSignificantLocationChanges];
     [self.locationManager startUpdatingLocation];
-    
+    self.loaded = false;
     //CATEGORIES
     self.categoriesLabel.text = [Functions primaryActivityCategory:self.activity];
     
@@ -101,6 +102,9 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    self.currentImageIndex = 0;
+
     if (self.fromMap) {
         //nav bar from map
         UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 100)];
@@ -243,12 +247,14 @@
 
 
 - (IBAction)swipeLeft:(id)sender {
-    [self handleSwipeLeft:sender];
+    if(self.loaded)
+        [self handleSwipeLeft:sender];
 
 }
 
 - (IBAction)swipeRight:(id)sender {
-    [self handleSwipeRight:sender];
+    if(self.loaded)
+        [self handleSwipeRight:sender];
 }
 
 
@@ -390,6 +396,7 @@
         [self.images addObject:image];
     }
     [weakSelf setImageAsync];
+    self.loaded = true;
     
 }
 

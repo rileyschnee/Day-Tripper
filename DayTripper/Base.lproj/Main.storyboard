@@ -43,7 +43,7 @@
                                     <action selector="saveProfile:" destination="ii9-Tj-1zu" eventType="touchUpInside" id="5vg-PO-yOP"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="USERNAME" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO1-On-QlW">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="EMAIL" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hO1-On-QlW">
                                 <rect key="frame" x="29" y="328" width="124" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -141,11 +141,11 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="emailField" destination="2vg-bp-Fwt" id="vUS-Qq-7Dt"/>
                         <outlet property="nameField" destination="DpJ-dm-ueJ" id="Ofb-1v-yAb"/>
                         <outlet property="passwordFieldFirst" destination="Uhb-t3-Wfk" id="DT1-MM-II0"/>
                         <outlet property="passwordFieldSecond" destination="lRp-f2-JUd" id="KM7-24-WxC"/>
                         <outlet property="profilePicView" destination="LBx-bi-7Oe" id="QQV-St-IZ1"/>
-                        <outlet property="usernameField" destination="2vg-bp-Fwt" id="pTW-nX-0Tk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CAC-As-NEq" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1639,10 +1639,8 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1ZN-pL-lbg"/>
         <segue reference="Qz9-j1-qG0"/>
         <segue reference="8ht-wb-x5R"/>
-        <segue reference="Ikg-ro-xOw"/>
         <segue reference="PNT-r8-qhW"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>

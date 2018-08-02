@@ -38,8 +38,13 @@
     [self.navigationItem setHidesBackButton:YES];
     // Do any additional setup after loading the view.
 
-    self.profileImageView.file = PFUser.currentUser[@"picture"];
-    [self.profileImageView loadInBackground];
+    self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
+    //[self.profileImageView loadInBackground];
+    [self.profileImageView loadInBackground:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if(error){
+            NSLog(@"Error loading picture");
+        }
+    }];
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
@@ -121,8 +126,12 @@
 }
 
 - (void)reloadUserInfo{
-    self.profileImageView.file = PFUser.currentUser[@"picture"];
-    [self.profileImageView loadInBackground];
+    self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
+    [self.profileImageView loadInBackground:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        if(error){
+            NSLog(@"Error loading profile picture");
+        }
+    }];
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
