@@ -50,9 +50,9 @@
     
     //EVENTS
     NSMutableDictionary *eventDictionary = [NSMutableDictionary dictionary];
-    NSArray *catarray = @[@"school-holidays", @"public-holidays", @"observances", @"politics",
+    NSArray *catarray = @[@"observances", @"politics",
                           @"conferences", @"expos", @"concerts", @"festivals", @"performing-arts",
-                          @"sports", @"community", @"terror"];
+                          @"sports", @"community"];
     //get JSON file
     for (NSString *cat in catarray) {
         NSString *title = [[cat stringByReplacingOccurrencesOfString:@"-" withString:@" "] capitalizedString];

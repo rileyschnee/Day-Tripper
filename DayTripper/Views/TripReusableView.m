@@ -14,26 +14,35 @@
 
 - (void)awakeFromNib{
     [super awakeFromNib];
-    // Add shadow to GPhotos button
+    
+    // Add shadow to Trip Photos button
+//    [self.shareToImgurButton.layer setShadowOffset:CGSizeMake(2, 2)];
+//    [self.shareToImgurButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
+//    [self.shareToImgurButton.layer setShadowOpacity:0.5];
+    self.shareToImgurButton.layer.cornerRadius = self.shareToImgurButton.frame.size.height / 4;
 
-    [self.shareToImgurButton.layer setShadowOffset:CGSizeMake(2, 2)];
-    [self.shareToImgurButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
-    [self.shareToImgurButton.layer setShadowOpacity:0.5];
+    // Configure description label
     self.descriptionLabel.hidden = [self.trip.summary isEqualToString:@""];
     self.descriptionLabel.text = self.trip.summary;
 
-
     // Add shadow to IOUs button
-    [self.iouButton.layer setShadowOffset:CGSizeMake(2, 2)];
-    [self.iouButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
-    [self.iouButton.layer setShadowOpacity:0.5];
+//    [self.iouButton.layer setShadowOffset:CGSizeMake(2, 2)];
+//    [self.iouButton.layer setShadowColor:[[UIColor grayColor] CGColor]];
+//    [self.iouButton.layer setShadowOpacity:0.5];
+    self.iouButton.layer.cornerRadius = self.iouButton.frame.size.height / 4;
     
     // Add shadow to weather view
-    [self.weatherView.layer setShadowOffset:CGSizeMake(2, 2)];
-    [self.weatherView.layer setShadowColor:[[UIColor grayColor] CGColor]];
-    [self.weatherView.layer setShadowOpacity:0.5];
+//    [self.weatherView.layer setShadowOffset:CGSizeMake(2, 2)];
+//    [self.weatherView.layer setShadowColor:[[UIColor grayColor] CGColor]];
+//    [self.weatherView.layer setShadowOpacity:0.5];
     [self.weatherView.layer setBorderColor:[[UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0] CGColor]];
     [self.weatherView.layer setBorderWidth:1];
+    self.weatherView.layer.cornerRadius = self.weatherView.frame.size.height / 8;
+
+//    [self.attendeeBar.layer setShadowOffset:CGSizeMake(2, 2)];
+//    [self.attendeeBar.layer setShadowColor:[[UIColor grayColor] CGColor]];
+//    [self.attendeeBar.layer setShadowOpacity:0.5];
+//
     
     // Set textField to Hidden
     self.usernameToAdd.hidden = YES;

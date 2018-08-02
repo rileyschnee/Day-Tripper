@@ -77,7 +77,7 @@
         self.tableView.editing = NO;
         sender.title = @"Edit";
         //save the table
-        self.trip.activities = [self.tableOrdering copy];
+        self.trip.activities = [self.tableOrdering mutableCopy];
         [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
             if (succeeded) {
             } else {
@@ -117,7 +117,7 @@
         ItinCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
-        detailPage.activity = self.trip.activities[indexPath.row];
+        detailPage.activity = self.tableOrdering[indexPath.row];
         detailPage.titleForItin = self.trip.name;
 
     }

@@ -58,34 +58,36 @@ int MOVEMENT_KEYBOARD = 200;
 
 //send a message
 - (IBAction)sendMessageTapped:(id)sender {
-    NSString *username = PFUser.currentUser.username;
-    NSString *message = self.messageBody.text;
-    ChatMessage* chat = [ChatMessage new];
-    chat.username = username;
-    chat.message = message;
-    //now save the message
-    [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (succeeded) {
-            //now make a pointer to trip
-            NSMutableArray* currChats = self.trip.chats;
-            if (currChats == nil) {
-                currChats = [[NSMutableArray alloc] init];
-            }
-            [currChats addObject:chat];
-            self.trip.chats = currChats;
-            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-                if (succeeded) {
-                    //clear chat message
-                    self.messageBody.text = @"";
-                    [self displayChatConversation];
-                } else {
-                    NSLog(@"Problem saving trip: %@", error.localizedDescription);
+    if(![self.messageBody.text isEqualToString:@""]){
+        NSString *username = PFUser.currentUser.username;
+        NSString *message = self.messageBody.text;
+        ChatMessage* chat = [ChatMessage new];
+        chat.username = username;
+        chat.message = message;
+        //now save the message
+        [chat saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+            if (succeeded) {
+                //now make a pointer to trip
+                NSMutableArray* currChats = self.trip.chats;
+                if (currChats == nil) {
+                    currChats = [[NSMutableArray alloc] init];
                 }
-            }];
-        } else {
-            NSLog(@"Problem saving chat: %@", error.localizedDescription);
-        }
-    }];
+                [currChats addObject:chat];
+                self.trip.chats = currChats;
+                [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
+                    if (succeeded) {
+                        //clear chat message
+                        self.messageBody.text = @"";
+                        [self displayChatConversation];
+                    } else {
+                        NSLog(@"Problem saving trip: %@", error.localizedDescription);
+                    }
+                }];
+            } else {
+                NSLog(@"Problem saving chat: %@", error.localizedDescription);
+            }
+        }];
+    }
     
 }
 

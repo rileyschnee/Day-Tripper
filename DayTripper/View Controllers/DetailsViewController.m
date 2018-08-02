@@ -50,6 +50,8 @@
     self.uberView.layer.cornerRadius = self.uberView.frame.size.height / 4;
     self.directionsButton.layer.cornerRadius = self.directionsButton.frame.size.height / 4;
     self.ratingsLabel.text = @"";
+
+    
     //UBER + LOCATION
     self.geocoder = [[CLGeocoder alloc] init];
     self.locationManager = [[CLLocationManager alloc] init];
@@ -157,10 +159,14 @@
             self.somePlacemarks = [placemarks copy];
             self.somePlacemark = [placemarks firstObject];
             
-            NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
+            //NSArray *partsAddr = [[NSArray alloc] initWithObjects: self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country, nil];
             //NSString *address = [partsAddr componentsJoinedByString:@", "];
             NSString *displayAddress = [NSString stringWithFormat:@"%@\r%@, %@ %@\r%@", self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.postalCode, self.somePlacemark.country];
+            if(self.somePlacemark.postalCode == nil){
+                displayAddress = [NSString stringWithFormat:@"%@\r%@, %@\r%@", self.somePlacemark.name, self.somePlacemark.locality, self.somePlacemark.administrativeArea, self.somePlacemark.country];
+            }
             self.locationLabel.text =  displayAddress;
+            [self.locationLabel sizeToFit];
             [builder setDropoffAddress:[NSString stringWithFormat:@"%@", self.somePlacemark.name]];
         }
     }];
@@ -337,10 +343,15 @@
         double rating = [responseDict[0][@"rating"] doubleValue];
         //set the hours
         NSArray *days = responseDict[0][@"hours"][0][@"open"];
-        NSDictionary* currDayObject = days[weekdayIndex];
-        NSString* startTimeString = [self militaryTimeToAMPM: currDayObject[@"start"]];
-        NSString* endTimeString = [self militaryTimeToAMPM: currDayObject[@"end"]];
-        [weakSelf setHoursAndRatingAsync:startTimeString endTimeString:endTimeString rating:rating];
+        if(days != nil && days.count > weekdayIndex){
+            NSDictionary* currDayObject = days[weekdayIndex];
+            NSString* startTimeString = [self militaryTimeToAMPM: currDayObject[@"start"]];
+            NSString* endTimeString = [self militaryTimeToAMPM: currDayObject[@"end"]];
+            [weakSelf setHoursAndRatingAsync:startTimeString endTimeString:endTimeString rating:rating];
+        } else {
+            [weakSelf setHoursAndRatingAsync:@"" endTimeString:@"" rating:rating];
+        }
+        
     }];
 }
 
@@ -411,8 +422,12 @@
 
 -(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
-        self.hoursLabel.text = [NSString stringWithFormat:@"%@\r%@%@", startTimeString, @"-", endTimeString];
-//        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
+        if(![endTimeString isEqualToString:@""] && ![startTimeString isEqualToString:@""]){
+            self.hoursLabel.text = [NSString stringWithFormat:@"%@\r%@%@", startTimeString, @"-", endTimeString];
+        } else {
+            self.hoursLabel.text = @"";
+        }
+        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
     });
    
 }

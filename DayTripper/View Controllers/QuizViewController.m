@@ -33,12 +33,17 @@
     self.collectionView.dataSource = self;
     self.layout = (UICollectionViewFlowLayout *)self.collectionView.collectionViewLayout;
     // Setting up TextTagCollection of categories
-    self.tagCollectionView = [[TTGTextTagCollectionView alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height / 2, self.view.frame.size.width, self.view.frame.size.height / 2)];
+    self.tagCollectionView = [[TTGTextTagCollectionView alloc] initWithFrame:CGRectMake(8, self.view.frame.size.height / 2, self.view.frame.size.width-16, self.view.frame.size.height / 2)];
     [self.view addSubview:self.tagCollectionView];
     TTGTextTagConfig *config = self.tagCollectionView.defaultConfig;
     config.tagTextColor = [UIColor whiteColor];
     config.tagBackgroundColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
     config.tagSelectedBackgroundColor = [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0];
+    config.tagShadowColor = [UIColor whiteColor];
+    config.tagCornerRadius = 0;
+    config.tagBorderWidth = 0;
+    // Add padding to sides
+    self.tagCollectionView.horizontalSpacing = 10;
     self.tagCollectionView.alignment = TTGTagCollectionAlignmentFillByExpandingWidth;
     
     

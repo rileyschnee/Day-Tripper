@@ -109,15 +109,19 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add IOU" message:@"" preferredStyle:UIAlertControllerStyleAlert];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payer Username";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payee Username";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Amount";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
     [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Description";
+        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
     UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         [self processAddIOUParamsWithAmount:[alertController textFields][2].text fromPayer:[alertController textFields][0].text toPayee:[alertController textFields][1].text withDescription:[alertController textFields][3].text];

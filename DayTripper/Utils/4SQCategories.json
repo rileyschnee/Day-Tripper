@@ -310,17 +310,6 @@
                         "categories": []
                     },
                     {
-                        "id": "56aa371be4b08b9a8d573514",
-                        "name": "Racecourse",
-                        "pluralName": "Racecourses",
-                        "shortName": "Racecourse",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/stadium_track_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "4bf58dd8d48988d1f4931735",
                         "name": "Racetrack",
                         "pluralName": "Racetracks",
@@ -1106,34 +1095,12 @@
                         "categories": []
                     },
                     {
-                        "id": "50328a8e91d4c4b30a586d6c",
-                        "name": "Non-Profit",
-                        "pluralName": "Non-Profits",
-                        "shortName": "Non-Profit",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "5744ccdfe4b0c0459246b4d9",
                         "name": "Observatory",
                         "pluralName": "Observatories",
                         "shortName": "Observatory",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/museum_planetarium_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d174941735",
-                        "name": "Coworking Space",
-                        "pluralName": "Coworking Spaces",
-                        "shortName": "Coworking Space",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/building/office_coworkingspace_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1373,17 +1340,6 @@
                         "categories": []
                     },
                     {
-                        "id": "52f2ab2ebcbc57f1066b8b43",
-                        "name": "Astrologer",
-                        "pluralName": "Astrologers",
-                        "shortName": "Astrologer",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "52e81612bcbc57f1066b7a27",
                         "name": "Bath House",
                         "pluralName": "Bath Houses",
@@ -1434,17 +1390,6 @@
                         "shortName": "Bridal",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/bridal_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4eb1bdf03b7b55596b4a7491",
-                        "name": "Camera Store",
-                        "pluralName": "Camera Stores",
-                        "shortName": "Camera Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/camerastore_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1593,34 +1538,12 @@
                         "categories": []
                     },
                     {
-                        "id": "52f2ab2ebcbc57f1066b8b26",
-                        "name": "Fabric Shop",
-                        "pluralName": "Fabric Shops",
-                        "shortName": "Fabric Shop",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
                         "id": "56aa371be4b08b9a8d573523",
                         "name": "Film Studio",
                         "pluralName": "Film Studios",
                         "shortName": "Film Studio",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/arts_entertainment/movietheater_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "52f2ab2ebcbc57f1066b8b3a",
-                        "name": "Fireworks Store",
-                        "pluralName": "Fireworks Stores",
-                        "shortName": "Fireworks Store",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/default_",
                             "suffix": ".png"
                         },
                         "categories": []
@@ -1731,17 +1654,6 @@
                         "shortName": "Hobbies",
                         "icon": {
                             "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/hobbyshop_",
-                            "suffix": ".png"
-                        },
-                        "categories": []
-                    },
-                    {
-                        "id": "4bf58dd8d48988d1f0941735",
-                        "name": "Internet Cafe",
-                        "pluralName": "Internet Cafes",
-                        "shortName": "Internet Cafe",
-                        "icon": {
-                            "prefix": "https://ss3.4sqi.net/img/categories_v2/shops/internetcafe_",
                             "suffix": ".png"
                         },
                         "categories": []

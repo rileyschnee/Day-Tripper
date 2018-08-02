@@ -1783,19 +1783,6 @@
         ]
     },
     {
-        "alias": "pretzels",
-        "title": "Pretzels",
-        "parents": [
-            "food"
-        ],
-        "country_whitelist": [
-            "US",
-            "DE",
-            "CH",
-            "PT"
-        ]
-    },
-    {
         "alias": "pubs",
         "title": "Pubs",
         "parents": [
@@ -1964,21 +1951,6 @@
             "CZ",
             "US",
             "MX",
-            "SG"
-        ]
-    },
-    {
-        "alias": "shavedsnow",
-        "title": "Shaved Snow",
-        "parents": [
-            "food"
-        ],
-        "country_whitelist": [
-            "CA",
-            "MY",
-            "HK",
-            "TW",
-            "US",
             "SG"
         ]
     },
@@ -2329,17 +2301,6 @@
         "title": "Wine Bars",
         "parents": [
             "bars"
-        ]
-    },
-    {
-        "alias": "wineries",
-        "title": "Wineries",
-        "parents": [
-            "food",
-            "arts"
-        ],
-        "country_blacklist": [
-            "FI"
         ]
     },
     {
