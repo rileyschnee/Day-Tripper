@@ -12,7 +12,7 @@
 #import "TripReusableView.h"
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
-#import "imgurShareViewController.h"
+#import "ImgurAlbumViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -25,6 +25,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    [self.tabBarController setSelectedIndex:2];
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
@@ -68,8 +69,8 @@
     }
     if([sender isKindOfClass:[UIButton class]]){
         UINavigationController *navController = [segue destinationViewController];
-        if (([navController.topViewController isKindOfClass:[imgurShareViewController class]])) {
-            imgurShareViewController* imgurVC = (imgurShareViewController *) navController.topViewController;
+        if (([navController.topViewController isKindOfClass:[ImgurAlbumViewController class]])) {
+            ImgurAlbumViewController* imgurVC = (ImgurAlbumViewController *) navController.topViewController;
             imgurVC.trip = self.trip;
         } else {
             IOUViewController *iouVC = (IOUViewController *)navController.topViewController;
