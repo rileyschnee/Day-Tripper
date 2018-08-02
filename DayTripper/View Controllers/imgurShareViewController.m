@@ -13,8 +13,6 @@
 
 @interface imgurShareViewController () <IMGSessionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
-@property (weak, nonatomic) IBOutlet UILabel *urlLabel;
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) NSString* albumUrlString;
 @property (strong, nonatomic) UIImage* imageToPost;
@@ -31,38 +29,21 @@
     self.imageToPost = nil;
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    //create nav bar because does not have one
+    //offset by 20 to account for status bar
+    UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 150)];
+    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Upload Photo"];
+    UIBarButtonItem* backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBack)];
+    navItem.leftBarButtonItem = backBtn;
+    [navbar setItems:@[navItem]];
+    [self.view addSubview:navbar];
+}
 
-- (void)viewDidAppear:(BOOL)animated {
-    
-    if ([self.trip.albumId isEqualToString:@""]) {
-        //set up a new album
-        [IMGAlbumRequest createAlbumWithTitle:self.trip.name imageIDs:[NSArray new] success:^(NSString *albumID, NSString *albumDeleteHash) {
-            self.trip.albumId = albumID;
-            self.trip.albumHash = albumDeleteHash;
-            [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-                if (succeeded) {
-                    //set the url to the album url
-                    NSString* albumURLStringLabel = [NSString stringWithFormat:@"Album URL: https://imgur.com/a/%@", self.trip.albumId];
-                    NSString* albumURLString = [NSString stringWithFormat:@"https://imgur.com/a/%@", self.trip.albumId];
-                    self.urlLabel.text = albumURLStringLabel;
-                    [self setWebViewWithString:albumURLString];
-                    self.albumUrlString = albumURLString;
-                } else {
-                    NSLog(@"Error saving trip");
-                }
-            }];
-            
-        } failure:^(NSError *error) {
-            NSLog(error.localizedDescription);
-        }];
-    } else {
-        //already have album so load it
-        NSString* albumURLStringLabel = [NSString stringWithFormat:@"Album URL: https://imgur.com/a/%@", self.trip.albumId];
-        NSString* albumURLString = [NSString stringWithFormat:@"https://imgur.com/a/%@", self.trip.albumId];
-        self.urlLabel.text = albumURLStringLabel;
-        self.albumUrlString = albumURLString;
-        [self setWebViewWithString:albumURLString];
-    }
+
+//go back to prev screen
+- (void) onTapBack {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // open image picker
@@ -83,13 +64,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-//sets the webview with a url in the form of string
-- (void) setWebViewWithString:(NSString*) stringUrl {
-    NSURL *url = [NSURL URLWithString:stringUrl];
-    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:requestObj];
-}
-
 - (IBAction)uploadButtonPressed:(id)sender {
     
     //transform image to NSDATA
@@ -99,20 +73,14 @@
         [SVProgressHUD show];
     } success:^(IMGImage *image) {
         [SVProgressHUD dismiss];
-        //set timer for 3 seconds then refresh webview
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self.webView reload];
-        });
+        // go back to album screen
+        [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD dismiss];
         NSLog(error.localizedDescription);
+        [self dismissViewControllerAnimated:YES completion:nil];
     }];
     
-}
-
-//copy imgur album url to clipboard
-- (IBAction)copyURLPressed:(id)sender {
-    [UIPasteboard generalPasteboard].string = self.albumUrlString ;
 }
 
 // creates a title and description for Imgur image post
