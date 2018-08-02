@@ -44,6 +44,13 @@
     else {
         self.navigationItem.rightBarButtonItem = editButton;
     }
+    
+    UIBarButtonItem *currLeftButton = self.navigationItem.leftBarButtonItem;
+    if (currLeftButton == nil) {
+        //create back button if it does not exist
+        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
+        self.navigationItem.leftBarButtonItem = backButton;
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated {
