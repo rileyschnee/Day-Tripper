@@ -43,6 +43,7 @@
             
         } failure:^(NSError *error) {
             NSLog(error.localizedDescription);
+            
         }];
     } else {
         //already have album so load it

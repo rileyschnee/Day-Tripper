@@ -49,6 +49,17 @@ int MOVEMENT_KEYBOARD = 200;
 - (void)viewDidAppear:(BOOL)animated {
     //hide bar button item
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    
+    //if no backbutton
+    if (self.navigationController.navigationBar.backItem == nil) {
+        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
+        self.navigationItem.leftBarButtonItem = homeButton;
+    }
+}
+
+- (void)back{
+    [self performSegueWithIdentifier:@"chatToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 
