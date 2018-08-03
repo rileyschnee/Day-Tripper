@@ -13,4 +13,5 @@ target 'DayTripper' do
   pod 'TTGTagCollectionView'
   pod 'SVProgressHUD'
   pod 'LyftSDK'
+  pod 'NYAlertViewController'
 end

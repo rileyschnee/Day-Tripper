@@ -15,7 +15,7 @@
 
 @interface Functions : NSObject
 
-- (NSArray*) getCellsFromTable:(UITableView*)tableView;
++ (NSArray*) getCellsFromTable:(UITableView*)tableView;
 + (NSString *)primaryActivityCategory:(id<Activity>)activity;
 + (void)fetchUserIOUs:(PFUser *)user withCompletion:(void (^)(NSArray *ious))completionHandler;
 @end

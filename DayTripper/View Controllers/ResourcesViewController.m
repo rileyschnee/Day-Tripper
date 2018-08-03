@@ -13,6 +13,7 @@
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
 #import "ImgurAlbumViewController.h"
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -251,12 +252,16 @@
     [self fetchAttendees];
 }
 
-- (void)showAlert:(UIAlertController *)alert {
+- (void)showAlert:(NYAlertViewController *)alert {
     [self presentViewController:alert animated:YES completion:nil];
 
 }
 - (void)showAlertView:(UIAlertView *)alert{
     [alert show];
 }
+- (void)dismissAlert:(NYAlertViewController *)alert{
+    [self dismissViewControllerAnimated:alert completion:nil];
+}
+
 
 @end

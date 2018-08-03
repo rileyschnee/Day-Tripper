@@ -14,7 +14,7 @@
 // common functions that will be needed
 
 
-- (NSArray*) getCellsFromTable:(UITableView*)tableView {
++ (NSArray*) getCellsFromTable:(UITableView*)tableView {
     NSMutableArray *cells = [[NSMutableArray alloc] init];
     for (NSInteger j = 0; j < [tableView numberOfSections]; ++j)
     {

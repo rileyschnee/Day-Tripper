@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *uploadButton;
 @property (strong, nonatomic) NSString* albumUrlString;
 @property (strong, nonatomic) UIImage* imageToPost;
+@property (weak, nonatomic) IBOutlet UIButton *selectImageButton;
 
 @end
 
@@ -32,13 +33,15 @@
     //disable upload button until image view has something
     [self.uploadButton setEnabled:NO];
     self.imageToPost = nil;
+    self.uploadButton.layer.cornerRadius = self.uploadButton.frame.size.height / 4;
+    self.selectImageButton.layer.cornerRadius = self.selectImageButton.frame.size.height / 4;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     //create nav bar because does not have one
     //offset by 20 to account for status bar
     UINavigationBar* navbar = [[UINavigationBar alloc] initWithFrame:CGRectMake(0, 20, self.view.frame.size.width, 150)];
-    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Upload Photo"];
+    UINavigationItem* navItem = [[UINavigationItem alloc] initWithTitle:@"Upload Photo to Imgur"];
     UIBarButtonItem* backBtn = [[UIBarButtonItem alloc] initWithTitle:@"Back" style:UIBarButtonItemStylePlain target:self action:@selector(onTapBack)];
     navItem.leftBarButtonItem = backBtn;
     [navbar setItems:@[navItem]];
@@ -82,7 +85,7 @@
         [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
         [SVProgressHUD dismiss];
-        NSLog(error.localizedDescription);
+        NSLog(@"%@", error.localizedDescription);
         [self dismissViewControllerAnimated:YES completion:nil];
     }];
     

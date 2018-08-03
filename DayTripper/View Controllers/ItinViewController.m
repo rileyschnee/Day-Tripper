@@ -62,69 +62,7 @@
     }
 }
 
-
-
-- (void)back{
-    [self performSegueWithIdentifier:@"itinToHome" sender:nil];
-}
-
-- (IBAction)editTableView:(UIBarButtonItem*)sender {
-    if ([sender.title isEqualToString:@"Edit"]) {
-        self.tableView.editing = YES;
-        sender.title = @"Done";
-    }
-    else {
-        self.tableView.editing = NO;
-        sender.title = @"Edit";
-        //save the table
-        self.trip.activities = [self.tableOrdering mutableCopy];
-        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (succeeded) {
-            } else {
-                NSLog(@"Error saving trip");
-            }
-        }];
-        
-    }
-}
-
--(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
-    //pass data to map view if going to map view
-    if([viewController isKindOfClass:[MapViewController class]]){
-        MapViewController *mapController = (MapViewController *) viewController;
-        mapController.trip = self.trip;
-        mapController.latitude = self.latitude;
-        mapController.longitude = self.longitude;
-    }
-    if([viewController isKindOfClass:[UINavigationController class]]){
-        UINavigationController *navController =  (UINavigationController *) viewController;
-        UIViewController *vc = navController.topViewController;
-        if ([vc isKindOfClass:[ChatViewController class]]) {
-            ChatViewController *chatController = (ChatViewController *)navController.topViewController;
-            chatController.trip = self.trip;
-        }
-        else if ([vc isKindOfClass:[ResourcesViewController class]]) {
-            ResourcesViewController *resController = (ResourcesViewController *)navController.topViewController;
-            resController.trip = self.trip;
-        }
-    }
-    
-    return TRUE;
-}
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
-    if([sender isKindOfClass:[ItinCell class]]){
-        ItinCell *tappedCell = sender;
-        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
-        DetailsViewController * detailPage = [segue destinationViewController];
-        detailPage.activity = self.tableOrdering[indexPath.row];
-        detailPage.titleForItin = self.trip.name;
-
-    }
-}
-
-
-#pragma mark - Table View methods
+#pragma mark - Table View Functions
 
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ItinCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItinCell" forIndexPath:indexPath];
@@ -152,6 +90,69 @@
     [self.tableView reloadData];
 }
 
+# pragma mark - Navigation
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender{
+    if([sender isKindOfClass:[ItinCell class]]){
+        ItinCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        DetailsViewController * detailPage = [segue destinationViewController];
+        detailPage.activity = self.tableOrdering[indexPath.row];
+        detailPage.titleForItin = self.trip.name;
+        
+    }
+}
+
+- (void)back{
+    [self performSegueWithIdentifier:@"itinToHome" sender:nil];
+}
+
+# pragma mark - Button Functions
+
+- (IBAction)editTableView:(UIBarButtonItem*)sender {
+    if ([sender.title isEqualToString:@"Edit"]) {
+        self.tableView.editing = YES;
+        sender.title = @"Done";
+    }
+    else {
+        self.tableView.editing = NO;
+        sender.title = @"Edit";
+        //save the table
+        self.trip.activities = [self.tableOrdering mutableCopy];
+        [self.trip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (succeeded) {
+            } else {
+                NSLog(@"Error saving trip");
+            }
+        }];
+        
+    }
+}
+
+# pragma mark - Helper Functions
+
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    //pass data to map view if going to map view
+    if([viewController isKindOfClass:[MapViewController class]]){
+        MapViewController *mapController = (MapViewController *) viewController;
+        mapController.trip = self.trip;
+        mapController.latitude = self.latitude;
+        mapController.longitude = self.longitude;
+    }
+    if([viewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController =  (UINavigationController *) viewController;
+        UIViewController *vc = navController.topViewController;
+        if ([vc isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *chatController = (ChatViewController *)navController.topViewController;
+            chatController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[ResourcesViewController class]]) {
+            ResourcesViewController *resController = (ResourcesViewController *)navController.topViewController;
+            resController.trip = self.trip;
+        }
+    }
+    
+    return TRUE;
+}
 
 @end

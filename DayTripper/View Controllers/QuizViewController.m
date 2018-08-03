@@ -11,6 +11,7 @@
 #import <MapKit/MapKit.h>
 #import "Constants.h"
 #import <TTGTagCollectionView/TTGTextTagCollectionView.h>
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @interface QuizViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -61,12 +62,56 @@
     [temp addEntriesFromDictionary:self.cats.foodCategories];
     [temp addEntriesFromDictionary:self.cats.eventCategories];
     self.allCategories = [[temp allKeys] sortedArrayUsingSelector:@selector(caseInsensitiveCompare:)];
-//    self.allCategories = [self.cats.placeCategories allKeys];
-//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.foodCategories allKeys]];
-//    self.allCategories = [self.allCategories arrayByAddingObjectsFromArray:[self.cats.eventCategories allKeys]];
     [self.tagCollectionView addTags:self.allCategories];
 }
 
+# pragma mark - Collection View Functions
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCell" forIndexPath:indexPath];
+    cell.categoryLabel.text = self.allCategories[indexPath.item];
+    [cell setSelected:[self isCategoryInArray:cell.categoryLabel.text]];
+    self.catDelegate = cell;
+    [self.catDelegate toggleWordColor];
+    //NSLog(@"%@", cell.categoryLabel.text);
+    
+    CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
+    [cell.categoryLabel sizeThatFits:textSize];
+    //get the width and height of the label (CGSize contains two parameters: width and height)
+    CGSize labelSize = cell.categoryLabel.frame.size;
+    //self.layout.itemSize = labelSize;
+    //cell.frame.size = labelSize;
+    //NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
+    
+    CGRect temp = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, labelSize.width, 150);
+    cell.frame = temp;
+    cell.delegate = self;
+    if([self.cats.placeCategories objectForKey:cell.categoryLabel.text] != nil){
+        cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
+    } else if([self.cats.foodCategories objectForKey:cell.categoryLabel.text] != nil){
+        cell.categoryAlias = [self.cats.foodCategories objectForKey:cell.categoryLabel.text];
+    } else if([self.cats.eventCategories objectForKey:cell.categoryLabel.text] != nil){
+        cell.categoryAlias = [self.cats.eventCategories objectForKey:cell.categoryLabel.text];
+    }
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(toggleCatStatus:)];
+    [cell addGestureRecognizer:tap];
+    return cell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    return 0;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    QuizReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"QuizReusableView" forIndexPath:indexPath];
+    [header.locationField setDelegate:header];
+    self.delegate = header;
+    header.delegate = self;
+    [header.locationField addTarget:header action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
+    
+    return header;
+}
 
 #pragma mark - Navigation
 
@@ -87,53 +132,7 @@
     }
 }
 
-
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    CategoryCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"CategoryCollectionCell" forIndexPath:indexPath];
-    cell.categoryLabel.text = self.allCategories[indexPath.item];
-    [cell setSelected:[self isCategoryInArray:cell.categoryLabel.text]];
-    self.catDelegate = cell;
-    [self.catDelegate toggleWordColor];
-    //NSLog(@"%@", cell.categoryLabel.text);
-    
-    CGSize textSize = [cell.categoryLabel.text sizeWithAttributes:@{NSFontAttributeName:[UIFont systemFontOfSize:17.0f]}];
-    [cell.categoryLabel sizeThatFits:textSize];
-        //get the width and height of the label (CGSize contains two parameters: width and height)
-    CGSize labelSize = cell.categoryLabel.frame.size;
-    //self.layout.itemSize = labelSize;
-    //cell.frame.size = labelSize;
-    //NSLog(@"\n width  = %f height = %f", labelSize.width,labelSize.height);
-    
-    CGRect temp = CGRectMake(cell.frame.origin.x, cell.frame.origin.y, labelSize.width, 150);
-    cell.frame = temp;
-    cell.delegate = self;
-    if([self.cats.placeCategories objectForKey:cell.categoryLabel.text] != nil){
-        cell.categoryAlias = [self.cats.placeCategories objectForKey:cell.categoryLabel.text];
-    } else if([self.cats.foodCategories objectForKey:cell.categoryLabel.text] != nil){
-        cell.categoryAlias = [self.cats.foodCategories objectForKey:cell.categoryLabel.text];
-    } else if([self.cats.eventCategories objectForKey:cell.categoryLabel.text] != nil){
-        cell.categoryAlias = [self.cats.eventCategories objectForKey:cell.categoryLabel.text];
-    }
-    
-    
-    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:cell action:@selector(toggleCatStatus:)];
-    [cell addGestureRecognizer:tap];
-    return cell;
-}
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 0;
-}
-
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    QuizReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"QuizReusableView" forIndexPath:indexPath];
-    [header.locationField setDelegate:header];
-    self.delegate = header;
-    header.delegate = self;
-    [header.locationField addTarget:header action:@selector(textFieldDidChange:) forControlEvents:UIControlEventEditingChanged];
-
-    return header;
-}
+# pragma mark - Helper Functions
 
 - (void)processCategories{
     
@@ -147,8 +146,6 @@
             [self.chosenEventCategories addObject:[self.cats.eventCategories objectForKey:key]];
         }
     }
-    
-    
     
     // FOR USING NORMAL COLLECTION VIEW
     /*
@@ -165,11 +162,7 @@
     
 }
 
-
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath{
-//
-//    return [(NSString*)[self.allCategories objectAtIndex:indexPath.item] sizeWithAttributes:NULL];
-//}
+# pragma mark - Protocol Implementations
 
 - (void)addCategoryToArray:(NSString *)cat {
     NSLog(@"Added %@ to chosenCategories", cat);
@@ -186,6 +179,9 @@
     [self.chosenCategories removeObject:cat];
 }
 
+
+# pragma mark - Helper Functions
+
 - (BOOL)doublesAreEqual:(double)first isEqualTo:(double)second {
     if(fabs(first - second) < DBL_EPSILON)
         return YES;
@@ -193,14 +189,40 @@
         return NO;
 }
 
+# pragma mark - Alert Functions
 
 - (void)alertNoLocation{
-    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Valid Location" message:@"You must enter a valid location" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [noLocaAlert addAction:okAction];
-    [self presentViewController:noLocaAlert animated:YES completion:nil];
+    NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alert.title = NSLocalizedString(@"No Valid Location", nil);
+    alert.message = NSLocalizedString(@"You must enter a valid location", nil);
+    
+    // Customize appearance as desired
+    alert.buttonCornerRadius = 20.0f;
+    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
+    alert.view.tintColor = [UIColor blueColor];
+    
+    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    
+    alert.swipeDismissalGestureEnabled = NO;
+    alert.backgroundTapDismissalGestureEnabled = NO;
+    
+    // Add alert actions
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:alert completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+
+//    UIAlertController *noLocaAlert = [UIAlertController alertControllerWithTitle:@"No Valid Location" message:@"You must enter a valid location" preferredStyle:(UIAlertControllerStyleAlert)];
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [noLocaAlert addAction:okAction];
+//    [self presentViewController:noLocaAlert animated:YES completion:nil];
 }
 
 

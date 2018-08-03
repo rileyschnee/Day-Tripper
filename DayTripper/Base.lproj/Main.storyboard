@@ -254,6 +254,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="addTripButton" destination="ZkX-Vc-ODq" id="KDW-Sv-CeN"/>
                         <outlet property="nameLabel" destination="bhk-lz-h9u" id="kfh-lG-Mut"/>
                         <outlet property="profileImageView" destination="zdp-fV-RYe" id="IjH-vo-oKq"/>
                         <outlet property="tableView" destination="D75-7w-sTR" id="zxd-7e-VV0"/>
@@ -284,7 +285,7 @@
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuo-d6-5YC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="343" y="1003"/>
+            <point key="canvasLocation" x="358" y="1459"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="2UG-0a-ZgM">
@@ -589,33 +590,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="LkY-Wv-xk0">
-                                <rect key="frame" x="25" y="133" width="325" height="252"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="LkY-Wv-xk0">
+                                <rect key="frame" x="16" y="133" width="343" height="268"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jr5-J2-CyT">
-                                <rect key="frame" x="277" y="458" width="63" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Upload"/>
-                                <connections>
-                                    <action selector="uploadButtonPressed:" destination="lzf-k0-QiM" eventType="touchUpInside" id="AJ3-ew-j0L"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upload a photo to Imgur" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gRZ-Cw-rzM">
-                                <rect key="frame" x="94" y="86" width="186" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbr-YS-vwD">
-                                <rect key="frame" x="32" y="458" width="113" height="36"/>
+                                <rect key="frame" x="16" y="458" width="160" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                <state key="normal" title="Select Image"/>
+                                <state key="normal" title="Select Image">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                                 <connections>
                                     <action selector="selectImageTapped:" destination="lzf-k0-QiM" eventType="touchUpInside" id="scu-pQ-m9o"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jr5-J2-CyT">
+                                <rect key="frame" x="198" y="458" width="160" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Upload">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="uploadButtonPressed:" destination="lzf-k0-QiM" eventType="touchUpInside" id="AJ3-ew-j0L"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -631,6 +631,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="imageView" destination="LkY-Wv-xk0" id="1M5-ie-7h6"/>
+                        <outlet property="selectImageButton" destination="bbr-YS-vwD" id="rpL-0r-PEh"/>
                         <outlet property="uploadButton" destination="Jr5-J2-CyT" id="1in-lY-3rV"/>
                     </connections>
                 </viewController>
@@ -651,27 +652,30 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </webView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqE-p8-IYX">
+                                <rect key="frame" x="282" y="622" width="77" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Copy URL">
+                                    <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="copyUrlButtonPressed:" destination="mXY-y4-KKJ" eventType="touchUpInside" id="C7u-Mc-M2V"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="URL" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ic2-ab-2Hf">
-                                <rect key="frame" x="16" y="622" width="266" height="21"/>
+                                <rect key="frame" x="16" y="627" width="258" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oqE-p8-IYX">
-                                <rect key="frame" x="290" y="617" width="69" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Copy URL"/>
-                                <connections>
-                                    <action selector="copyUrlButtonPressed:" destination="mXY-y4-KKJ" eventType="touchUpInside" id="C7u-Mc-M2V"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="vNz-Xw-EC2"/>
                     </view>
                     <navigationItem key="navigationItem" id="HCu-0M-RFz">
-                        <barButtonItem key="leftBarButtonItem" title="&lt; Back" id="h7d-rX-6fO">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="h7d-rX-6fO">
                             <connections>
                                 <action selector="backButtonPressed:" destination="mXY-y4-KKJ" id="11T-ZA-f1d"/>
                             </connections>
@@ -1690,8 +1694,8 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rHE-D3-NFR"/>
-        <segue reference="8ht-wb-x5R"/>
+        <segue reference="Qz9-j1-qG0"/>
+        <segue reference="xhp-4N-gxW"/>
         <segue reference="PNT-r8-qhW"/>
         <segue reference="irg-7C-q8O"/>
     </inferredMetricsTieBreakers>

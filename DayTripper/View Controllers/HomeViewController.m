@@ -22,6 +22,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addTripButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -48,12 +49,24 @@
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
+    self.addTripButton.layer.cornerRadius = self.addTripButton.frame.size.height / 4;
+
     [self fetchTrips];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TripCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
+    cell.trip = self.trips[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.trips.count;
 }
 
 - (void)fetchTrips {
@@ -113,18 +126,6 @@
     }
 }
 
-
- 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    TripCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
-    cell.trip = self.trips[indexPath.row];
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.trips.count;
-}
-
 - (void)reloadUserInfo{
     self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
     [self.profileImageView loadInBackground:^(UIImage * _Nullable image, NSError * _Nullable error) {
@@ -135,7 +136,6 @@
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
-    
 }
 
 @end
