@@ -49,11 +49,6 @@
     
 }
 
-- (void)back{
-    [self performSegueWithIdentifier:@"itinToHome" sender:nil];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
 - (void) viewWillAppear:(BOOL)animated {
     // switch to resource view if coming to itin for first time from home
     if (self.fromHomeToResources) {
@@ -106,6 +101,7 @@
 
 - (void)back{
     [self performSegueWithIdentifier:@"itinToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 # pragma mark - Button Functions

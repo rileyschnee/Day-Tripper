@@ -16,7 +16,6 @@
 @protocol TripReusableViewDelegate
 - (void)reloadAttendeeData;
 - (void)showAlert:(NYAlertViewController *)alert;
-- (void)showAlertView:(UIAlertView *)alert;
 - (void)dismissAlert:(NYAlertViewController *)alert;
 @property (strong, nonatomic) Trip *trip;
 @end

@@ -84,6 +84,10 @@
     
 }
 
+- (void)back{
+    [self performSegueWithIdentifier:@"resToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
+}
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
@@ -243,11 +247,6 @@
     [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)shareToAlbum:(id)sender {
-    // GOOGLE PHOTOS FUNCTIONALITY HERE
-    
-}
-
 - (void)reloadAttendeeData {
     [self fetchAttendees];
 }
@@ -256,19 +255,10 @@
     [self presentViewController:alert animated:YES completion:nil];
 
 }
-- (void)showAlertView:(UIAlertView *)alert{
-    [alert show];
-}
+
 - (void)dismissAlert:(NYAlertViewController *)alert{
     [self dismissViewControllerAnimated:alert completion:nil];
 }
-
-
-- (void)back{
-    [self performSegueWithIdentifier:@"resToHome" sender:nil];
-    self.tabBarController.tabBar.hidden = YES;
-}
-
 
 
 // handle tab bar switches
