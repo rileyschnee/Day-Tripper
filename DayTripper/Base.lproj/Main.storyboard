@@ -277,10 +277,10 @@
                         <color key="selectedImageTintColor" red="0.93333333330000001" green="0.35294117650000001" blue="0.019607843140000001" alpha="1" colorSpace="calibratedRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="rsN-eR-3wP" kind="relationship" relationship="viewControllers" id="1ZN-pL-lbg"/>
-                        <segue destination="4OX-FQ-8wP" kind="relationship" relationship="viewControllers" id="3Dn-lQ-eCR"/>
-                        <segue destination="cQl-W7-9Ys" kind="relationship" relationship="viewControllers" id="wNs-ne-OLL"/>
-                        <segue destination="MmI-ym-13J" kind="relationship" relationship="viewControllers" id="ana-OB-KJg"/>
+                        <segue destination="cQl-W7-9Ys" kind="relationship" relationship="viewControllers" id="npe-Nr-5Vd"/>
+                        <segue destination="3pn-Wu-Gpb" kind="relationship" relationship="viewControllers" id="gQ2-SK-ibg"/>
+                        <segue destination="rsN-eR-3wP" kind="relationship" relationship="viewControllers" id="tEx-Oi-OPK"/>
+                        <segue destination="MmI-ym-13J" kind="relationship" relationship="viewControllers" id="lsb-rC-0bI"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fuo-d6-5YC" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -453,7 +453,7 @@
             </objects>
             <point key="canvasLocation" x="5584.8000000000002" y="1844.5277361319343"/>
         </scene>
-        <!--Map View Controller-->
+        <!--Map-->
         <scene sceneID="CK3-X5-INY">
             <objects>
                 <viewController storyboardIdentifier="MapViewController" id="4OX-FQ-8wP" customClass="MapViewController" sceneMemberID="viewController">
@@ -470,15 +470,16 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="uex-PT-5dn"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
+                    <navigationItem key="navigationItem" title="Map" id="h9P-Tn-TpM"/>
                     <connections>
                         <outlet property="mapView" destination="yia-Ot-unD" id="sKC-fR-sem"/>
                         <segue destination="6N9-Ay-TK4" kind="show" identifier="CallOutSegue" id="9MX-hJ-rhJ"/>
+                        <segue destination="Gze-x7-aax" kind="show" identifier="mapToHome" id="ov6-PR-ii0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5hc-X8-h2f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-172" y="2621"/>
+            <point key="canvasLocation" x="767.20000000000005" y="2620.8395802098953"/>
         </scene>
         <!--Chat-->
         <scene sceneID="tm3-OF-P7J">
@@ -571,6 +572,7 @@
                         <outlet property="messageBody" destination="aVm-JR-ehZ" id="ElH-ju-xOX"/>
                         <outlet property="submitButton" destination="OVm-bk-y4x" id="jvU-PA-1Bb"/>
                         <outlet property="tableView" destination="CtS-fC-lxw" id="l1q-q6-PHd"/>
+                        <segue destination="Gze-x7-aax" kind="show" identifier="chatToHome" id="Tnj-00-tfS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CF8-3c-dye" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -580,7 +582,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1767.2" y="2620.8395802098953"/>
+            <point key="canvasLocation" x="2706.4000000000001" y="2620.8395802098953"/>
         </scene>
         <!--Imgur Share View Controller-->
         <scene sceneID="WX0-8V-5h1">
@@ -934,6 +936,7 @@
                     <connections>
                         <outlet property="collectionView" destination="A9f-9Y-uf3" id="QmR-EH-gLc"/>
                         <outlet property="resourceView" destination="99P-hy-1xR" id="I1x-zQ-ogF"/>
+                        <segue destination="Gze-x7-aax" kind="show" identifier="resToHome" id="CtT-1j-sSq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hZu-PQ-zIx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1440,7 +1443,7 @@
                     <navigationItem key="navigationItem" title="Itinerary" id="Ruz-WR-9XW"/>
                     <connections>
                         <outlet property="tableView" destination="CHf-HN-S0X" id="9mY-g6-AHh"/>
-                        <segue destination="Gze-x7-aax" kind="show" identifier="itinToHome" id="irg-7C-q8O"/>
+                        <segue destination="Gze-x7-aax" kind="show" identifier="itinToHome" id="grz-iJ-Dwf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YL6-ty-OXR" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1596,7 +1599,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kfp-7X-a8m" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3716" y="2620.8395802098953"/>
+            <point key="canvasLocation" x="4655.1999999999998" y="2620.8395802098953"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="tyv-pV-kXy">
@@ -1615,7 +1618,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q5j-e8-32E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="828" y="2620.8395802098953"/>
+            <point key="canvasLocation" x="1767.2" y="2620.8395802098953"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="o6p-SB-ygV">
@@ -1652,7 +1655,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vSm-ZO-Bni" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2684" y="2621"/>
+            <point key="canvasLocation" x="3623.1999999999998" y="2620.8395802098953"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="mwZ-tL-3By">
@@ -1671,6 +1674,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMH-Pr-Cmm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2682" y="1033"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ttt-hG-zpy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3pn-Wu-Gpb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XSm-za-RPe">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4OX-FQ-8wP" kind="relationship" relationship="rootViewController" id="fub-Jw-SZA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TQC-Jp-TYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-172" y="2620.8395802098953"/>
         </scene>
     </scenes>
     <resources>
@@ -1696,8 +1718,10 @@
     <inferredMetricsTieBreakers>
         <segue reference="Qz9-j1-qG0"/>
         <segue reference="xhp-4N-gxW"/>
+        <segue reference="rHE-D3-NFR"/>
+        <segue reference="9MX-hJ-rhJ"/>
         <segue reference="PNT-r8-qhW"/>
-        <segue reference="irg-7C-q8O"/>
+        <segue reference="ov6-PR-ii0"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>

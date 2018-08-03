@@ -14,7 +14,11 @@
 #import "Activity.h"
 #import "DetailsViewController.h"
 #import "SVProgressHUD.h"
+<<<<<<< HEAD
 #import <NYAlertViewController/NYAlertViewController.h>
+=======
+#import "ResourcesViewController.h"
+>>>>>>> 57010718d7037416b3c77166a629291e31e9480d
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
@@ -109,6 +113,51 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.activities.count;
+}
+
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+    
+    if([sender isKindOfClass:[ResultsCell class]]){
+        ResultsCell *tappedCell = sender;
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
+        DetailsViewController * detailPage = [segue destinationViewController];
+        detailPage.activity = self.activities[indexPath.section][indexPath.row];
+
+    }
+    
+    //this is called if the "Done" button is pressed
+    else {
+        //if there is no trip name yet, then ask the user for a trip name
+        if (self.tripName.length == 0) {
+            [self alertForTripName];
+        }
+        //reaches here is a trip name exists
+        else {
+            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    NSLog(@"YAY! YOUR TRIP SAVED");
+                } else {
+                    NSLog(@"Trip didn't save");
+                }
+            }];
+            
+            UITabBarController *tabbar = [segue destinationViewController];
+            UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+            ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
+            
+            //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+            resViewController.trip = self.trip;
+            //create a home button that goes to Home View Controller
+            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:resViewController action:@selector(back)];
+            resViewController.navigationItem.hidesBackButton = YES;
+            resViewController.navigationItem.leftBarButtonItem = homeButton;
+        }
+    }
 }
 
 #pragma mark - Fetch Functions

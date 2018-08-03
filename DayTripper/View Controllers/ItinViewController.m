@@ -43,14 +43,15 @@
     }
     else {
         self.navigationItem.rightBarButtonItem = editButton;
+        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
+        self.navigationItem.leftBarButtonItem = homeButton;
     }
     
-    UIBarButtonItem *currLeftButton = self.navigationItem.leftBarButtonItem;
-    if (currLeftButton == nil) {
-        //create back button if it does not exist
-        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"< Back" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
-        self.navigationItem.leftBarButtonItem = backButton;
-    }
+}
+
+- (void)back{
+    [self performSegueWithIdentifier:@"itinToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 - (void) viewWillAppear:(BOOL)animated {

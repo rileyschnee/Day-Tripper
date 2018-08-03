@@ -42,6 +42,7 @@
     [SVProgressHUD dismiss];
 }
 
+
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
     MKPinAnnotationView *annotView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
@@ -70,6 +71,16 @@
 - (void)viewDidAppear:(BOOL)animated {
     //hide bar button item
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    
+    if (self.navigationController.navigationBar.backItem == nil) {
+        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
+        self.navigationItem.leftBarButtonItem = homeButton;
+    }
+}
+
+- (void)back{
+    [self performSegueWithIdentifier:@"mapToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
 
@@ -79,14 +90,15 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-    DetailsViewController *detailPage = [segue destinationViewController];
-    for (id<Activity> activity in self.trip.activities) {
-        if ([activity.name isEqualToString:self.name]) {
-            detailPage.activity = activity;
+    if ([segue.destinationViewController isKindOfClass:[DetailsViewController class]]) {
+        DetailsViewController *detailPage = [segue destinationViewController];
+        for (id<Activity> activity in self.trip.activities) {
+            if ([activity.name isEqualToString:self.name]) {
+                detailPage.activity = activity;
+            }
         }
+        detailPage.fromMap = YES;
     }
-    detailPage.fromMap = YES; 
 }
 
 
