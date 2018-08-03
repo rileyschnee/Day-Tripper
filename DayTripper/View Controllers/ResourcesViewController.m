@@ -13,6 +13,9 @@
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
 #import "ImgurAlbumViewController.h"
+#import "MapViewController.h"
+#import "ChatViewController.h"
+#import "ItinViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -25,10 +28,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tabBarController setSelectedIndex:2];
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.tabBarController.delegate = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     
@@ -38,9 +41,6 @@
     layout.itemSize = CGSizeMake(itemWidth, itemWidth+25);
     [SVProgressHUD show];
     [self fetchAttendees];
-    
-   
-    
 }
 
 
@@ -258,5 +258,46 @@
 - (void)showAlertView:(UIAlertView *)alert{
     [alert show];
 }
+
+- (void)back{
+    [self performSegueWithIdentifier:@"resToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+
+
+// handle tab bar switches
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    
+    if([viewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController =  (UINavigationController *) viewController;
+        UIViewController *vc = navController.topViewController;
+        if ([vc isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *chatController = (ChatViewController *)navController.topViewController;
+            chatController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[MapViewController class]]){
+            MapViewController *mapController = (MapViewController *) navController.topViewController;
+            mapController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[ItinViewController class]]) {
+            ItinViewController *itinController = (ItinViewController *)navController.topViewController;
+            itinController.trip = self.trip;
+            // fromHomeEdit should be NO if the top left button is home
+            if (self.navigationItem.leftBarButtonItem == nil) {
+                itinController.fromHomeEdit = YES;
+            }
+            else {
+                itinController.fromHomeEdit = NO;
+            }
+            
+        }
+    }
+    
+    return TRUE;
+}
+
+
+
 
 @end

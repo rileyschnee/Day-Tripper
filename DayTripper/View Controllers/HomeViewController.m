@@ -16,6 +16,7 @@
 #import "IOUViewController.h"
 #import "Functions.h"
 #import "SVProgressHUD.h"
+#import "ResourcesViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
@@ -90,11 +91,9 @@
         Trip *trip = self.trips[indexPath.item];
         UITabBarController *tabbar = [segue destinationViewController];
         UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-        ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
+        ResourcesViewController *resources = (ResourcesViewController *) navController.topViewController;
         //create edit bar button item
-        itinerary.trip = trip;
-        itinerary.fromHomeEdit = YES;
-        itinerary.fromHomeToResources = YES;
+        resources.trip = trip;
         //set the trip title
         tabbar.title = trip.name;
     }

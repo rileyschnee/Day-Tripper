@@ -15,6 +15,7 @@
 #import "Activity.h"
 #import "DetailsViewController.h"
 #import "SVProgressHUD.h"
+#import "ResourcesViewController.h"
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
@@ -98,16 +99,14 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             
             UITabBarController *tabbar = [segue destinationViewController];
             UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-            ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
+            ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
             
             //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
-            itinViewController.trip = self.trip;
-            itinViewController.latitude = self.latitude;
-            itinViewController.longitude = self.longitude;
+            resViewController.trip = self.trip;
             //create a home button that goes to Home View Controller
-            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:itinViewController action:@selector(back)];
-            itinViewController.navigationItem.hidesBackButton = YES;
-            itinViewController.navigationItem.leftBarButtonItem = homeButton;
+            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:resViewController action:@selector(back)];
+            resViewController.navigationItem.hidesBackButton = YES;
+            resViewController.navigationItem.leftBarButtonItem = homeButton;
         }
     }
 }
