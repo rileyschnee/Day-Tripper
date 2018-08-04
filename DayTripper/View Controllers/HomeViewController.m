@@ -60,6 +60,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+# pragma mark - Table View Functions
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     TripCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
     cell.trip = self.trips[indexPath.row];
@@ -69,6 +71,8 @@
 - (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.trips.count;
 }
+
+# pragma mark - Fetch Function
 
 - (void)fetchTrips {
     
@@ -88,7 +92,6 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
 }
 
 
@@ -124,6 +127,8 @@
         }
     }
 }
+
+# pragma mark - Helper Functions
 
 - (void)reloadUserInfo{
     self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];

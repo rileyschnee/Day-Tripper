@@ -8,6 +8,7 @@
 
 #import "IOUCell.h"
 #import <Parse/Parse.h>
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @implementation IOUCell
 
@@ -36,8 +37,29 @@
         } else{
             switchToStatus = @"paid";
         }
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:[NSString stringWithFormat:@"Mark as %@?", switchToStatus]  message:@"" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction *yesAction = [UIAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        
+        NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+        
+        // Set a title and message
+        NSString *title = [NSString stringWithFormat:@"Mark as %@?", switchToStatus];
+        alert.title = NSLocalizedString(title, nil);
+        alert.message = NSLocalizedString(@"", nil);
+        
+        // Customize appearance as desired
+        alert.buttonCornerRadius = 20.0f;
+        alert.alertViewCornerRadius = 20.0f;
+        alert.view.tintColor = [UIColor blueColor];
+        
+        alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+        alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+        alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
+        alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+        
+        alert.swipeDismissalGestureEnabled = NO;
+        alert.backgroundTapDismissalGestureEnabled = NO;
+        
+        // Add alert actions
+        [alert addAction:[NYAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
             NSLog(@"%@ completed bool before", self.iou[@"completed"]);
             
             if([self.iou[@"completed"] isEqual:[NSNumber numberWithBool:TRUE]]){
@@ -48,15 +70,15 @@
                 self.paidStatusImage.image = [UIImage imageNamed:@"paid"];
             }
             NSLog(@"%@ completed bool after", self.iou[@"completed"]);
-
+            
             [self.iou saveInBackground];
-        }];
-        [alertController addAction:yesAction];
-        UIAlertAction *noAction = [UIAlertAction actionWithTitle:@"No" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-            NSLog(@"Cancelled");
-        }];
-        [alertController addAction:noAction];
-        [self.delegate showAlert:alertController];
+        }]];
+        
+        [alert addAction:[NYAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+            [self.delegate dismissAlert:alert];
+        }]];
+        [self.delegate showAlert:alert];
+        
     }
 }
 

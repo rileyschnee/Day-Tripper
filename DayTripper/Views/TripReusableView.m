@@ -63,7 +63,7 @@
         [UIView transitionWithView:self.attendeeBar duration:.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.addAttendeeButton.selected = NO;
             self.usernameToAdd.hidden = NO;
-            
+            self.usernameToAdd.text = @"";
         } completion:NULL];
         
         
@@ -106,7 +106,7 @@
             }
             else {
                 [self alertUserNotFound];
-                // TODO handle user not existing
+                self.usernameToAdd.text = @"";
             }
         } else {
             NSLog(@"%@", error.localizedDescription);
@@ -212,7 +212,7 @@
     
     // Customize appearance as desired
     alert.buttonCornerRadius = 20.0f;
-    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
+    alert.alertViewCornerRadius = 20.0f;
     alert.view.tintColor = [UIColor blueColor];
     
     alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
@@ -229,7 +229,8 @@
     }]];
     
     // Present the alert view controller
-    
+    [self.delegate showAlert:alert];
+
     
     /* // OLD
      UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"User Already Attending" message:[NSString stringWithFormat:@"%@ is already attending %@", self.usernameToAdd.text, self.trip.name] preferredStyle:(UIAlertControllerStyleAlert)];
@@ -238,7 +239,6 @@
      // add the OK action to the alert controller
      [alert addAction:okAction];
      */
-    [self.delegate showAlert:alert];
 }
 
 -(void)alertForSummaryWithMessage:(NSString *)message{
@@ -270,6 +270,7 @@
 
     // Customize appearance as desired
     alert.buttonCornerRadius = 20.0f;
+    alert.alertViewCornerRadius = 20.0f;
     alert.view.tintColor = [UIColor blueColor];
     
     alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];

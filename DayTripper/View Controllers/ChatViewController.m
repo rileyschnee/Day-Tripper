@@ -62,6 +62,7 @@ int MOVEMENT_KEYBOARD = 200;
     self.tabBarController.tabBar.hidden = YES;
 }
 
+# pragma mark - Button functions
 
 - (IBAction)onTapGestureRecognizer:(id)sender {
     [self.messageBody resignFirstResponder];
@@ -102,6 +103,7 @@ int MOVEMENT_KEYBOARD = 200;
     
 }
 
+# pragma mark - Chat Functions
 
 //function that will load the chat conversation
 - (void) displayChatConversation {
@@ -124,10 +126,9 @@ int MOVEMENT_KEYBOARD = 200;
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
 }
 
-#pragma mark - animation methods
+#pragma mark - Animation Methods
 
 //function that moves element by delta y
 - (void) moveElementVertically:(int) points {

@@ -50,6 +50,48 @@
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
+# pragma mark - Collection View Functions
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
+    cell.user = self.attendeeUsers[indexPath.item];
+    PFFile* file = cell.user[@"picture"];
+    cell.profilePicView.file = file;
+    [cell.profilePicView loadInBackground];
+    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
+    cell.nameLabel.text = cell.user[@"name"];
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
+    header.trip = self.trip;
+    header.delegate = self;
+    header.tripNameLabel.text = self.trip.name;
+    
+    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
+        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
+        // [self.resourceView addSubview:button];
+        header.summaryBtn.hidden = NO;
+        header.editDescripBtn.hidden = YES;
+    }else{
+        header.summaryBtn.hidden = YES;
+        header.editDescripBtn.hidden = NO;
+        header.descriptionLabel.hidden = NO;
+        header.descriptionLabel.text = self.trip.summary;
+    }
+    
+    //get weather info
+    [self getWeather:header];
+    
+    
+    return header;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"%lu", self.attendeeUsers.count);
+    return self.attendeeUsers.count;
+}
 
 #pragma mark - Navigation
 
@@ -89,47 +131,8 @@
     self.tabBarController.tabBar.hidden = YES;
 }
 
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
-    cell.user = self.attendeeUsers[indexPath.item];
-    PFFile* file = cell.user[@"picture"];
-    cell.profilePicView.file = file;
-    [cell.profilePicView loadInBackground];
-    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
-    cell.nameLabel.text = cell.user[@"name"];
-    return cell;
-}
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
-    header.trip = self.trip;
-    header.delegate = self;
-    header.tripNameLabel.text = self.trip.name;
-    
-    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
-        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
-        // [self.resourceView addSubview:button];
-        header.summaryBtn.hidden = NO;
-        header.editDescripBtn.hidden = YES;
-    }else{
-        header.summaryBtn.hidden = YES;
-        header.editDescripBtn.hidden = NO; 
-        header.descriptionLabel.hidden = NO;
-        header.descriptionLabel.text = self.trip.summary;
-    }
-    
-    //get weather info
-    [self getWeather:header];
-    
-    
-    return header;
-}
-
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"%lu", self.attendeeUsers.count);
-    return self.attendeeUsers.count;
-}
-
+# pragma mark - Weather Functions
 
 //gets the high and low for the day
 - (void) getWeather:(TripReusableView* ) header {
@@ -219,6 +222,13 @@
         }
     });
 }
+
+- (double) kelvinToFahrenheit:(double)kelvin {
+    return (kelvin * (9.0/5.0)) - 459.67;
+}
+
+# pragma mark - Attendee Functions
+
 - (void)fetchAttendees{
     NSLog(@"%@", self.trip.attendees);
     //NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", self.trip.attendees];
@@ -239,27 +249,22 @@
     }];
 }
 
-- (double) kelvinToFahrenheit:(double)kelvin {
-    return (kelvin * (9.0/5.0)) - 459.67;
-}
-
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
 - (void)reloadAttendeeData {
     [self fetchAttendees];
 }
 
+
+# pragma mark - Protocol Implementations
+
 - (void)showAlert:(NYAlertViewController *)alert {
     [self presentViewController:alert animated:YES completion:nil];
-
 }
 
 - (void)dismissAlert:(NYAlertViewController *)alert{
-    [self dismissViewControllerAnimated:alert completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+# pragma mark - Navigation (Tab Bar)
 
 // handle tab bar switches
 -(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
@@ -288,11 +293,13 @@
             
         }
     }
-    
     return TRUE;
 }
 
+# pragma mark - Other Helper Functions
 
-
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
+}
 
 @end

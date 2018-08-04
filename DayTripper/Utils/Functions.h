@@ -12,10 +12,12 @@
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
 #import "Place.h"
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @interface Functions : NSObject
 
 + (NSArray*) getCellsFromTable:(UITableView*)tableView;
 + (NSString *)primaryActivityCategory:(id<Activity>)activity;
 + (void)fetchUserIOUs:(PFUser *)user withCompletion:(void (^)(NSArray *ious))completionHandler;
++ (NYAlertViewController *)alertWithTitle:(NSString *)title withMessage:(NSString *)message;
 @end

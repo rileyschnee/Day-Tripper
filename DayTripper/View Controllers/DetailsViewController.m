@@ -123,6 +123,9 @@
     }
 }
 
+
+# pragma mark - Navigation
+
 // back to map view
 -(void)onTapBack:(UIBarButtonItem*)item{
     [self dismissViewControllerAnimated:true completion:nil];
@@ -133,6 +136,8 @@
     self.tabBarController.navigationItem.leftBarButtonItem = self.prevBarButton;
     self.tabBarController.navigationItem.hidesBackButton = NO;
 }
+
+# pragma mark - Uber and Lyft Functions
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
@@ -231,11 +236,11 @@
 }
 
 
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     NSLog(@"failed to fetch current location : %@", error);
 }
 
+# pragma mark - Directions Function
 
 - (IBAction)didTapDirections:(id)sender {
     NSString *baseURL = @"https://www.google.com/maps/dir/?api=1";
@@ -255,11 +260,11 @@
     _activity = activity;
 }
 
+# pragma mark - UI Functions
 
 - (IBAction)swipeLeft:(id)sender {
     if(self.loaded)
         [self handleSwipeLeft:sender];
-
 }
 
 - (IBAction)swipeRight:(id)sender {
@@ -268,7 +273,8 @@
 }
 
 
-#pragma mark - API requests
+#pragma mark - FourSquare fetch function
+
 - (void) fetch4SQPhotos: (NSString*) tripId {
     NSString *path = [[NSBundle mainBundle] pathForResource:
                       @"apikeys" ofType:@"plist"];
@@ -294,6 +300,8 @@
     }];
 }
 
+# pragma mark - FourSquare date and time functions
+
 - (NSString *) generatCurrentDateFourSquare {
     NSDate *today = [NSDate date];
     NSDateFormatter *dateFormatter=[[NSDateFormatter alloc] init];
@@ -308,6 +316,8 @@
     NSString* height = [dict[@"height"] stringValue];
     return [NSString stringWithFormat:@"%@%@%@%@%@", prefix, width, @"x", height, suffix];
 }
+
+# pragma mark - Yelp fetch function
 
 - (void) fetchYelpPhotos: (NSString*) tripId {
     NSString *path = [[NSBundle mainBundle] pathForResource:
@@ -370,6 +380,8 @@
     }];
 }
 
+# pragma mark - Yelp date and time functions
+
 //this function converts the Yelp Military time to normal AM/PM time
 - (NSString*) militaryTimeToAMPM: (NSString *) milTime {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -412,7 +424,7 @@
     }
 }
 
-
+# pragma mark - Image functions
 
 - (void) populateImageArray {
     __weak typeof(self) weakSelf = self;
@@ -447,6 +459,7 @@
    
 }
 
+# pragma mark - Button functions
 
 - (IBAction)tapWebsiteLink:(id)sender {
     if (![self.websiteLink isHidden]) {
@@ -455,13 +468,9 @@
     }
 }
 
-
-
-
 #pragma mark - Image Scroll Animation
 
-- (void)addAnimationPresentToView:(UIView *)viewTobeAnimated
-{
+- (void)addAnimationPresentToView:(UIView *)viewTobeAnimated {
     CATransition *transition = [CATransition animation];
     transition.duration = 0.30;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -473,8 +482,7 @@
     
 }
 
-- (void)addAnimationPresentToViewOut:(UIView *)viewTobeAnimated
-{
+- (void)addAnimationPresentToViewOut:(UIView *)viewTobeAnimated {
     CATransition *transition = [CATransition animation];
     transition.duration = 0.30;
     transition.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionLinear];
@@ -486,14 +494,12 @@
     
 }
 
--(void)changeImage
-{
+-(void)changeImage {
     //set image with url
     UIImage *image = self.images[self.currentImageIndex];
     [self.imageView setImage:image];
 }
--(void)handleSwipeLeft:(id)sender
-{
+-(void)handleSwipeLeft:(id)sender {
     if(self.currentImageIndex < (self.images.count - 1))
     {
         self.currentImageIndex = self.currentImageIndex + 1;
@@ -502,8 +508,7 @@
     }
     
 }
--(void)handleSwipeRight:(id)sender
-{
+-(void)handleSwipeRight:(id)sender {
     if (self.currentImageIndex > 0)
     {
         self.currentImageIndex = self.currentImageIndex - 1;
@@ -514,7 +519,7 @@
 }
 
 
-# pragma mark - Google Places Request for Event API
+# pragma mark - Google Places Request for Event API and helper functions
 //given a lat and long will search to find nearby places and their photo ids
 - (void) getEventPhotoObjectsByLocation {
     

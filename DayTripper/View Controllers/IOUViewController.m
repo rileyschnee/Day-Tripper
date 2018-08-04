@@ -10,6 +10,7 @@
 #import "IOUCell.h"
 #import "IOU.h"
 #import "SVProgressHUD.h"
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -60,6 +61,8 @@
 }
 */
 
+# pragma mark - Table View Functions
+
 - (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
     IOUCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IOUCell" forIndexPath:indexPath];
     //IOU *temp = self.trip.ious[indexPath.row];
@@ -84,6 +87,8 @@
     return [self.iouArray count];
 }
 
+# pragma mark - Fetch Functions
+
 - (void)fetchIOUs{
     PFQuery *query = [PFQuery queryWithClassName:@"IOU"];
     [query whereKey:@"objectId" containedIn:self.trip.ious];
@@ -105,37 +110,92 @@
     }];
 }
 
+# pragma mark - Button functions
 
 - (IBAction)clickedAddIOU:(id)sender {
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add IOU" message:@"" preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alert.title = NSLocalizedString(@"Add IOU", nil);
+    alert.message = NSLocalizedString(@"", nil);
+    
+    // Customize appearance as desired
+    alert.buttonCornerRadius = 20.0f;
+    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
+    alert.view.tintColor = [UIColor blueColor];
+    
+    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    
+    alert.swipeDismissalGestureEnabled = NO;
+    alert.backgroundTapDismissalGestureEnabled = NO;
+    
+    //Add textfields
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payer Username";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payee Username";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Amount";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Description";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
     }];
-    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        [self processAddIOUParamsWithAmount:[alertController textFields][2].text fromPayer:[alertController textFields][0].text toPayee:[alertController textFields][1].text withDescription:[alertController textFields][3].text];
-    }];
-    [alertController addAction:confirmAction];
-    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
-        NSLog(@"Cancelled");
-    }];
-    [alertController addAction:cancelAction];
-    [self presentViewController:alertController animated:YES completion:nil];
+    
+    // Add alert actions
+    [alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [alert addAction:[NYAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self processAddIOUParamsWithAmount:((UITextField *)[alert textFields][2]).text fromPayer:((UITextField *)[alert textFields][0]).text toPayee:((UITextField *)[alert textFields][1]).text withDescription:((UITextField *)[alert textFields][3]).text];
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+
+    
+    
+    // OLD WAY
+//
+//    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Add IOU" message:@"" preferredStyle:UIAlertControllerStyleAlert];
+//    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//        textField.placeholder = @"Payer Username";
+//        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    }];
+//    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//        textField.placeholder = @"Payee Username";
+//        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    }];
+//    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//        textField.placeholder = @"Amount";
+//        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    }];
+//    [alertController addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+//        textField.placeholder = @"Description";
+//        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    }];
+//    UIAlertAction *confirmAction = [UIAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+//        [self processAddIOUParamsWithAmount:[alertController textFields][2].text fromPayer:[alertController textFields][0].text toPayee:[alertController textFields][1].text withDescription:[alertController textFields][3].text];
+//    }];
+//    [alertController addAction:confirmAction];
+//    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:^(UIAlertAction * _Nonnull action) {
+//        NSLog(@"Cancelled");
+//    }];
+//    [alertController addAction:cancelAction];
+//    [self presentViewController:alertController animated:YES completion:nil];
     
 }
+
+# pragma mark - Helper Functions
 
 - (void)processAddIOUParamsWithAmount:(NSString *)amountString fromPayer:(NSString *)payerString toPayee:(NSString *)payeeString withDescription:(NSString *)description {
     // format amount
@@ -184,7 +244,10 @@
 
 - (void)showAlert:(UIAlertController *)alert {
     [self presentViewController:alert animated:YES completion:nil];
-    
+}
+
+- (void)dismissAlert:(NYAlertViewController *)alert{
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
