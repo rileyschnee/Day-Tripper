@@ -108,7 +108,7 @@
             annotView.pinTintColor = blue;
             
             annotView.canShowCallout = YES;
-            annotView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+            // annotView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         }
 
     return annotView;
