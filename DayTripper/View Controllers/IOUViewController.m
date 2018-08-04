@@ -11,6 +11,7 @@
 #import "IOU.h"
 #import "SVProgressHUD.h"
 #import <NYAlertViewController/NYAlertViewController.h>
+#import "Functions.h"
 
 @interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -122,7 +123,7 @@
     
     // Customize appearance as desired
     alert.buttonCornerRadius = 20.0f;
-    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
+    alert.alertViewCornerRadius = 20.0f;
     alert.view.tintColor = [UIColor blueColor];
     
     alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
@@ -209,10 +210,12 @@
     // find and verify users
     if([payeeString isEqualToString:payerString]){
         NSLog(@"Invalid");
+        [self alertPayerIsPayee];
         return;
     }
     if(![PFUser.currentUser.username isEqualToString:payerString] && ![PFUser.currentUser.username isEqualToString:payeeString]){
         NSLog(@"You cannot make an IOU that doesn't involve yourself");
+        [self alertCurrentUserNotInvolved];
         return;
     }
     PFUser *payer;
@@ -226,6 +229,7 @@
     }
     if(payer == nil || payee == nil){
         NSLog(@"Payer or Payee not included in attendee list");
+        [self alertNotInAttendeeList];
         return;
     }
     NSString *desc = description;
@@ -238,9 +242,38 @@
     
 }
 
+# pragma mark - Alert Functions
+- (void)alertPayerIsPayee{
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Invalid Entry" withMessage:@"Payer cannot be the same as payee."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissAlert:alert];
+    }]];
+    [self showAlert:alert];
+}
+
+- (void)alertCurrentUserNotInvolved{
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Invalid Entry" withMessage:@"You must either be the payer or the payee."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissAlert:alert];
+    }]];
+    [self showAlert:alert];
+}
+
+- (void)alertNotInAttendeeList{
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Invalid Entry" withMessage:@"Payer or payee not in attendee list."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissAlert:alert];
+    }]];
+    [self showAlert:alert];
+}
+
+# pragma mark - Navigation
+
 - (IBAction)back:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+# pragma mark - Protocol Implementations
 
 - (void)showAlert:(UIAlertController *)alert {
     [self presentViewController:alert animated:YES completion:nil];

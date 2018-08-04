@@ -66,7 +66,6 @@
             self.usernameToAdd.text = @"";
         } completion:NULL];
         
-        
     } else {
         NSString* usernameToAdd = [self.usernameToAdd.text lowercaseString];
         [self getUserByUsername:usernameToAdd];
@@ -78,7 +77,6 @@
             self.attendeeLabel.frame = CGRectMake(self.attendeeBar.frame.size.width/2 - self.attendeeLabel.frame.size.width/2, self.attendeeBar.frame.size.height/2 - self.attendeeLabel.frame.size.height/2, self.attendeeLabel.frame.size.width, self.attendeeLabel.frame.size.height);
             //self.attendeeLabel.transform = CGAffineTransformMakeTranslation(100, 0);
         }];
-        
     }
 }
 

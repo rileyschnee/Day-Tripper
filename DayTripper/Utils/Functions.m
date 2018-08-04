@@ -77,10 +77,10 @@
     alert.alertViewCornerRadius = 20.0f;
     alert.view.tintColor = [UIColor blueColor];
     
-    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
-    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
-    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
-    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    alert.titleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.cancelButtonTitleFont.pointSize];
     
     alert.swipeDismissalGestureEnabled = NO;
     alert.backgroundTapDismissalGestureEnabled = NO;

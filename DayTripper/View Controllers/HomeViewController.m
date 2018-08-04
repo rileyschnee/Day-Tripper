@@ -38,7 +38,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.navigationItem setHidesBackButton:YES];
-    // Do any additional setup after loading the view.
+    self.title = @"Home";
 
     self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
     //[self.profileImageView loadInBackground];
