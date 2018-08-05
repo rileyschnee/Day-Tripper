@@ -90,7 +90,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         mapResults.activities = self.activities;
         
     }
-    if([sender isKindOfClass:[ResultsCell class]]){
+    else if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
@@ -99,34 +99,32 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }
     
     //this is called if the "Done" button is pressed
-    if([sender isKindOfClass:[UIBarButtonItem class]]) {
+    else if([sender isKindOfClass:[UIBarButtonItem class]]) {
         //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             [self alertForTripName];
         }
         //reaches here is a trip name exists
-        else {
-            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                if(succeeded){
-                    NSLog(@"YAY! YOUR TRIP SAVED");
-                } else {
-                    NSLog(@"Trip didn't save");
-                }
-            }];
-            
-            UITabBarController *tabbar = [segue destinationViewController];
-            UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-            ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
-            
-            //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
-            itinViewController.trip = self.trip;
-            itinViewController.latitude = self.latitude;
-            itinViewController.longitude = self.longitude;
-            //create a home button that goes to Home View Controller
-            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:itinViewController action:@selector(back)];
-            itinViewController.navigationItem.hidesBackButton = YES;
-            itinViewController.navigationItem.leftBarButtonItem = homeButton;
-        }
+        [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+            if(succeeded){
+                NSLog(@"YAY! YOUR TRIP SAVED");
+            } else {
+                NSLog(@"Trip didn't save");
+            }
+        }];
+    
+        UITabBarController *tabbar = [segue destinationViewController];
+        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+        ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
+    
+        //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+        itinViewController.trip = self.trip;
+        itinViewController.latitude = self.latitude;
+        itinViewController.longitude = self.longitude;
+        //create a home button that goes to Home View Controller
+        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:itinViewController action:@selector(back)];
+        itinViewController.navigationItem.hidesBackButton = YES;
+        itinViewController.navigationItem.leftBarButtonItem = homeButton;
     }
 }
 

@@ -13,6 +13,8 @@
 
 @interface MapResultsViewController () <MKMapViewDelegate> 
 @property (strong, nonatomic) NSString *name;
+// contains all activities
+@property (strong, nonatomic) NSMutableArray *allActivities;
 
 @end
 
@@ -24,7 +26,14 @@
     self.resultsMap.delegate = self;
     [SVProgressHUD show];
     NSMutableArray *arrayOfPoints = [[NSMutableArray alloc] init];
-    for (id<Activity> activity in self.activities) {
+    // iterate through the three sub arrays of activities to make one array consisting of all activities
+    self.allActivities = [[NSMutableArray alloc] init];
+    for (NSMutableArray* placeFoodEventArray in self.activities) {
+        for (id<Activity> activity in placeFoodEventArray) {
+            [self.allActivities addObject:activity];
+        }
+    }
+    for (id<Activity> activity in self.allActivities) {
         MKPointAnnotation *point = [MKPointAnnotation new];
         CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(activity.latitude, activity.longitude);
         point.coordinate = coor;
@@ -37,8 +46,8 @@
     CLLocation *center = [self centerOfAnnotations:arrayOfPoints];
     CLLocationDistance maxdistance = 0.0;
     
-    for (int i = 1; i < [self.activities count]; i++) {
-        CLLocation *temploc = [[CLLocation alloc] initWithLatitude:[[self.activities objectAtIndex:i] latitude] longitude:[[self.activities objectAtIndex:i] longitude]];
+    for (int i = 1; i < [self.allActivities count]; i++) {
+        CLLocation *temploc = [[CLLocation alloc] initWithLatitude:[[self.allActivities objectAtIndex:i] latitude] longitude:[[self.allActivities objectAtIndex:i] longitude]];
         CLLocationDistance distant = [center distanceFromLocation:temploc];
         if (distant > maxdistance) {
             maxdistance = distant;
