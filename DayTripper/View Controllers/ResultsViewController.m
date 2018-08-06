@@ -385,17 +385,25 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
     // Customize appearance as desired
     alert.buttonCornerRadius = 20.0f;
-    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
-    alert.view.tintColor = [UIColor blueColor];
+    alert.alertViewCornerRadius = 20.0f;
+    alert.view.tintColor = [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0];
     
     alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
     alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
     alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
     alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    alert.cancelButtonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    alert.buttonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    alert.titleColor = [UIColor blackColor];
+    alert.messageColor = [UIColor blackColor];
     
     alert.swipeDismissalGestureEnabled = NO;
     alert.backgroundTapDismissalGestureEnabled = NO;
-    
+    [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+                textField.placeholder = @"Trip Name";
+                textField.textColor = [UIColor blackColor];
+                textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        }];
     // Add alert actions
     [alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
         [self dismissViewControllerAnimated:alert completion:nil];
@@ -410,6 +418,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         else {
             self.tripName = namefield.text;
         }
+        [self dismissViewControllerAnimated:alert completion:nil];
         [self performSegueWithIdentifier:@"toItinView" sender:nil];
 
     }]];

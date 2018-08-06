@@ -9,9 +9,13 @@
 #import "ImgurAlbumViewController.h"
 #import "ImgurSession.h"
 #import "imgurShareViewController.h"
-@interface ImgurAlbumViewController ()
+#import "ImgurCell.h"
+
+@interface ImgurAlbumViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
+@property (weak, nonatomic) IBOutlet UIButton *cpURLButton;
+@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 @property (strong, nonatomic) NSString* albumUrlString;
 @end
 
@@ -19,7 +23,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.collectionView.delegate = self;
+    self.collectionView.dataSource = self;
     // Do any additional setup after loading the view.
+    self.cpURLButton.layer.cornerRadius = self.cpURLButton.frame.size.height / 4;
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -86,5 +94,13 @@
 - (IBAction)copyUrlButtonPressed:(id)sender {
     [UIPasteboard generalPasteboard].string = self.albumUrlString;
 }
+
+//- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+//    ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
+//}
+//
+//- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+//    
+//}
 
 @end

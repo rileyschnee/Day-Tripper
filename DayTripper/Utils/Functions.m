@@ -75,12 +75,16 @@
     // Customize appearance as desired
     alert.buttonCornerRadius = 20.0f;
     alert.alertViewCornerRadius = 20.0f;
-    alert.view.tintColor = [UIColor blueColor];
+    alert.view.tintColor = [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0];
     
-    alert.titleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:19.0f];
-    alert.messageFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:16.0f];
-    alert.buttonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.buttonTitleFont.pointSize];
-    alert.cancelButtonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.cancelButtonTitleFont.pointSize];
+    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    alert.cancelButtonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    alert.buttonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    alert.titleColor = [UIColor blackColor];
+    alert.messageColor = [UIColor blackColor];
     
     alert.swipeDismissalGestureEnabled = NO;
     alert.backgroundTapDismissalGestureEnabled = NO;

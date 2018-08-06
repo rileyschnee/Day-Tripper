@@ -55,6 +55,7 @@
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
 		53E8421120FFA920003FE31A /* Event.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8421020FFA920003FE31A /* Event.m */; };
 		65023529DE0196A20345B726 /* libPods-DayTripper.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 12ACFB88D352439559867FC3 /* libPods-DayTripper.a */; };
+		BE1E5C9B2118B668007D2211 /* ImgurCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE1E5C9A2118B668007D2211 /* ImgurCell.m */; };
 		BE45190B210104AB00CFA8AC /* CategoryCollectionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */; };
 		BE45190E210104E600CFA8AC /* QuizReusableView.m in Sources */ = {isa = PBXBuildFile; fileRef = BE45190D210104E600CFA8AC /* QuizReusableView.m */; };
 		BE69F2682100007F000122D6 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = BE69F2672100007F000122D6 /* Constants.m */; };
@@ -183,6 +184,8 @@
 		53E8420F20FFA920003FE31A /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		53E8421020FFA920003FE31A /* Event.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Event.m; sourceTree = "<group>"; };
 		B7A59493FA9C312E5904AB92 /* Pods-DayTripper.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DayTripper.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DayTripper/Pods-DayTripper.debug.xcconfig"; sourceTree = "<group>"; };
+		BE1E5C992118B668007D2211 /* ImgurCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImgurCell.h; sourceTree = "<group>"; };
+		BE1E5C9A2118B668007D2211 /* ImgurCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImgurCell.m; sourceTree = "<group>"; };
 		BE451909210104AB00CFA8AC /* CategoryCollectionCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CategoryCollectionCell.h; sourceTree = "<group>"; };
 		BE45190A210104AB00CFA8AC /* CategoryCollectionCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CategoryCollectionCell.m; sourceTree = "<group>"; };
 		BE45190C210104E600CFA8AC /* QuizReusableView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuizReusableView.h; sourceTree = "<group>"; };
@@ -475,6 +478,8 @@
 				537A4B882108FB8E00E64CBD /* ChatCell.m */,
 				BE6A1ED4210FBF3D009F9186 /* IOUCell.h */,
 				BE6A1ED5210FBF3D009F9186 /* IOUCell.m */,
+				BE1E5C992118B668007D2211 /* ImgurCell.h */,
+				BE1E5C9A2118B668007D2211 /* ImgurCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -684,6 +689,7 @@
 				53B43940211382F50015075B /* IMGResponseSerializer.m in Sources */,
 				BEEA9DA120FD12970048C0DB /* HomeViewController.m in Sources */,
 				53B43932211382ED0015075B /* IMGGalleryImage.m in Sources */,
+				BE1E5C9B2118B668007D2211 /* ImgurCell.m in Sources */,
 				0EAE0C5B20FEC07500D798A9 /* Food.m in Sources */,
 				BEB308FC21079B1A00336EA4 /* ProfileViewController.m in Sources */,
 				53B4393A211382ED0015075B /* IMGNotification.m in Sources */,
@@ -859,14 +865,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -882,14 +888,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = J73QEJBHCK;
+				DEVELOPMENT_TEAM = 8E3CSXA9JT;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;

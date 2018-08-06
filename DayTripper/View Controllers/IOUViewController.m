@@ -13,13 +13,17 @@
 #import <NYAlertViewController/NYAlertViewController.h>
 #import "Functions.h"
 
-@interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate>
+@interface IOUViewController () <UITableViewDelegate, UITableViewDataSource, IOUCellDelegate, UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *addIOUButton;
+@property (strong, nonatomic) NYAlertViewController *alert;
 
 @end
 
 @implementation IOUViewController
+
+// constant for keyboard movement
+int MOVEMENT_NUM = 200;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -115,53 +119,73 @@
 
 - (IBAction)clickedAddIOU:(id)sender {
     
-    NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    self.alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
     // Set a title and message
-    alert.title = NSLocalizedString(@"Add IOU", nil);
-    alert.message = NSLocalizedString(@"", nil);
+    self.alert.title = NSLocalizedString(@"Add IOU", nil);
+    self.alert.message = NSLocalizedString(@"", nil);
     
     // Customize appearance as desired
-    alert.buttonCornerRadius = 20.0f;
-    alert.alertViewCornerRadius = 20.0f;
-    alert.view.tintColor = [UIColor blueColor];
+    self.alert.buttonCornerRadius = 20.0f;
+    self.alert.alertViewCornerRadius = 20.0f;
+    self.alert.view.tintColor = [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0];
     
-    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
-    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
-    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
-    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    self.alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    self.alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    self.alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:self.alert.buttonTitleFont.pointSize];
+    self.alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:self.alert.cancelButtonTitleFont.pointSize];
+    self.alert.cancelButtonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    self.alert.buttonColor = [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0];
+    self.alert.titleColor = [UIColor blackColor];
+    self.alert.messageColor = [UIColor blackColor];
     
-    alert.swipeDismissalGestureEnabled = NO;
-    alert.backgroundTapDismissalGestureEnabled = NO;
+    self.alert.swipeDismissalGestureEnabled = NO;
+    self.alert.backgroundTapDismissalGestureEnabled = NO;
     
     //Add textfields
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payer Username";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
     }];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Payee Username";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+
     }];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Amount";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+
     }];
-    [alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
+    [self.alert addTextFieldWithConfigurationHandler:^(UITextField * _Nonnull textField) {
         textField.placeholder = @"Description";
         textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+        textField.autocorrectionType = UITextAutocorrectionTypeNo;
+
     }];
     
     // Add alert actions
-    [alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+    [self.alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
-    [alert addAction:[NYAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
-        [self processAddIOUParamsWithAmount:((UITextField *)[alert textFields][2]).text fromPayer:((UITextField *)[alert textFields][0]).text toPayee:((UITextField *)[alert textFields][1]).text withDescription:((UITextField *)[alert textFields][3]).text];
+    [self.alert addAction:[NYAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        NSString *amt = ((UITextField *)[self.alert textFields][2]).text;
+        NSString *payer = [((UITextField *)[self.alert textFields][0]).text lowercaseString];
+        NSString *payee = [((UITextField *)[self.alert textFields][1]).text lowercaseString];
+        NSString *desc = ((UITextField *)[self.alert textFields][3]).text;
         [self dismissViewControllerAnimated:YES completion:nil];
+        if([amt isEqualToString:@""] || [payer isEqualToString:@""] ||
+           [payee isEqualToString:@""] || [desc isEqualToString:@""]){
+            [self alertIncomplete];
+        } else {
+            [self processAddIOUParamsWithAmount:amt fromPayer:payer toPayee:payee withDescription:desc];
+        }
     }]];
     
-    [self presentViewController:alert animated:YES completion:nil];
+    [self presentViewController:self.alert animated:YES completion:nil];
 
     
     
@@ -261,6 +285,14 @@
 
 - (void)alertNotInAttendeeList{
     NYAlertViewController *alert = [Functions alertWithTitle:@"Invalid Entry" withMessage:@"Payer or payee not in attendee list."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissAlert:alert];
+    }]];
+    [self showAlert:alert];
+}
+
+- (void)alertIncomplete{
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Incomplete Entry" withMessage:@"A field was left blank."];
     [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
         [self dismissAlert:alert];
     }]];
