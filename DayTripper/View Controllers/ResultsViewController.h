@@ -26,5 +26,7 @@
 @property (strong, nonatomic) NSMutableArray *foodCategories;
 @property (strong, nonatomic) NSMutableArray *eventCategories;
 @property (strong, nonatomic) NSDate *tripDate;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *mapBtn;
+- (IBAction)onTapMap:(id)sender;
 
 @end

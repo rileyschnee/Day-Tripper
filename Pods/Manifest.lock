@@ -15,6 +15,7 @@ PODS:
   - AFNetworking/UIKit (3.2.1):
     - AFNetworking/NSURLSession
   - Bolts/Tasks (1.9.0)
+  - HCSStarRatingView (1.5)
   - LyftSDK (1.0.6):
     - LyftSDK/Core (= 1.0.6)
   - LyftSDK/Core (1.0.6)
@@ -34,6 +35,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - HCSStarRatingView (~> 1.5)
   - LyftSDK
   - NYAlertViewController
   - Parse
@@ -46,6 +48,7 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - AFNetworking
     - Bolts
+    - HCSStarRatingView
     - LyftSDK
     - NYAlertViewController
     - Parse
@@ -58,6 +61,7 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   AFNetworking: b6f891fdfaed196b46c7a83cf209e09697b94057
   Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
+  HCSStarRatingView: 1d18f79654735514cd6f00e6d90e38cb6320dc31
   LyftSDK: 17eb5abdb12f72203b68a1eac982823bfadda743
   NYAlertViewController: b93f82e2c1fc6d5e9485512ddbe7b481f463a074
   Parse: d3edaf8c7c722cb33cb83ba7821d015ae32d362d
@@ -67,6 +71,6 @@ SPEC CHECKSUMS:
   UberCore: 512950407dadc8045a583e4a509da2750ae7dc21
   UberRides: cc6d7c5232966e45229dda1534106b33e379dfbe
 
-PODFILE CHECKSUM: 6cd58b6e9dadd32c436a8912776cac3fba8f1387
+PODFILE CHECKSUM: 4475839b2d79c54d02f2f45871db8138fbf1a42d
 
 COCOAPODS: 1.5.3

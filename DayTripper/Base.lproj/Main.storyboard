@@ -505,7 +505,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CtS-fC-lxw">
-                                <rect key="frame" x="0.0" y="64" width="375" height="502"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="566"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -1045,13 +1045,6 @@
                                     <action selector="didTapDirections:" destination="6N9-Ay-TK4" eventType="touchUpInside" id="Wgq-nY-mMh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj4-rl-Tiw">
-                                <rect key="frame" x="235" y="360" width="124" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAW-CK-1tY">
                                 <rect key="frame" x="16" y="508" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1098,7 +1091,6 @@
                         <outlet property="locationLabel" destination="I1e-Lc-xk8" id="U7O-Gv-WaP"/>
                         <outlet property="lyftButton" destination="UAW-CK-1tY" id="3de-Eo-bdK"/>
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
-                        <outlet property="ratingsLabel" destination="Mj4-rl-Tiw" id="aEU-hb-fCI"/>
                         <outlet property="uberView" destination="fBV-0q-IAK" id="Lvc-VZ-VFX"/>
                         <outlet property="websiteLink" destination="7bN-wR-qUV" id="4Vv-aM-c95"/>
                     </connections>
@@ -1382,6 +1374,38 @@
             </objects>
             <point key="canvasLocation" x="924" y="133.5832083958021"/>
         </scene>
+        <!--Map Results View Controller-->
+        <scene sceneID="Epy-vp-Jk0">
+            <objects>
+                <viewController id="STr-ll-A5n" customClass="MapResultsViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GjL-yJ-Pny">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="rrm-7K-DKD">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </mapView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Jt8-tr-0fz"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="yGW-pM-vpc">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="H2v-L9-sZW">
+                            <connections>
+                                <action selector="didTapBack:" destination="STr-ll-A5n" id="T5s-H5-psY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="resultsMap" destination="rrm-7K-DKD" id="gK2-xL-KQi"/>
+                        <segue destination="6N9-Ay-TK4" kind="show" identifier="resultsCallOut" id="MQf-Vo-7P7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JGm-2e-fJ1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3196" y="-615.74212893553226"/>
+        </scene>
         <!--Results-->
         <scene sceneID="DVV-4I-Nwd">
             <objects>
@@ -1441,13 +1465,22 @@
                         <viewLayoutGuide key="safeArea" id="4Cb-Ua-p8s"/>
                     </view>
                     <navigationItem key="navigationItem" title="Results" id="KoM-Z7-VML">
-                        <barButtonItem key="rightBarButtonItem" title="Done" id="aJ8-JO-5jn">
-                            <connections>
-                                <segue destination="3cp-a0-XYn" kind="presentation" identifier="toItinView" id="wJV-j0-lVJ"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Done" id="aJ8-JO-5jn">
+                                <connections>
+                                    <segue destination="3cp-a0-XYn" kind="presentation" identifier="toItinView" id="wJV-j0-lVJ"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="map-tab-small" id="Sms-xM-yyY">
+                                <connections>
+                                    <action selector="onTapMap:" destination="XAg-Ss-bUC" id="7qk-rj-j7b"/>
+                                    <segue destination="lqr-4u-ebN" kind="show" identifier="toResultsMap" id="iG3-ZG-0kg"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="mapBtn" destination="Sms-xM-yyY" id="Vqh-M3-c1X"/>
                         <outlet property="tableView" destination="Ken-iu-OHb" id="VCZ-OR-jMA"/>
                     </connections>
                 </viewController>
@@ -1739,6 +1772,24 @@
             <point key="canvasLocation" x="2682" y="1033"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="qRv-CL-fIr">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lqr-4u-ebN" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9cQ-OQ-Se6">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="STr-ll-A5n" kind="relationship" relationship="rootViewController" id="oW8-QS-gXY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jdA-SM-C8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2256.8000000000002" y="-615.74212893553226"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="Ttt-hG-zpy">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3pn-Wu-Gpb" sceneMemberID="viewController">
@@ -1779,9 +1830,15 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="Qz9-j1-qG0"/>
         <segue reference="8ht-wb-x5R"/>
         <segue reference="PNT-r8-qhW"/>
+=======
+        <segue reference="rHE-D3-NFR"/>
+        <segue reference="xhp-4N-gxW"/>
+        <segue reference="wJV-j0-lVJ"/>
+>>>>>>> 9c1c9e8e8eb565e4bbdce2b07555fc0e67b5421d
         <segue reference="CtT-1j-sSq"/>
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

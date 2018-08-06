@@ -14,4 +14,5 @@ target 'DayTripper' do
   pod 'SVProgressHUD'
   pod 'LyftSDK'
   pod 'NYAlertViewController'
+  pod 'HCSStarRatingView', '~> 1.5'
 end

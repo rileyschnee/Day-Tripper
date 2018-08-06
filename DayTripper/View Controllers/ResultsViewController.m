@@ -14,8 +14,10 @@
 #import "Activity.h"
 #import "DetailsViewController.h"
 #import "SVProgressHUD.h"
+#import "MapResultsViewController.h"
 #import <NYAlertViewController/NYAlertViewController.h>
 #import "ResourcesViewController.h"
+
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
@@ -60,6 +62,18 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self fetchResults4SQ];
     [self fetchResultsYelp];
     [self fetchResultsEvents];
+    
+    // UIBarButtonItem *map = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"map-tab"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapMap:)];
+
+}
+
+
+//- (void)onTapMap:(UIBarButtonItem *)mapButton {
+//
+//}
+
+- (IBAction)onTapMap:(id)sender {
+    [sender performSegueWithIdentifier:@"toResultsMap" sender:nil];
 }
 
 #pragma mark - Table View Functions
@@ -110,6 +124,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 }
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.activities.count;
+
 }
 
 #pragma mark - Navigation
@@ -119,7 +134,13 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([sender isKindOfClass:[ResultsCell class]]){
+    if([[segue destinationViewController] isKindOfClass:[UINavigationController class]]) {
+        UINavigationController *navControl = [segue destinationViewController];
+        MapResultsViewController *mapResults = (MapResultsViewController *) navControl.topViewController;
+        mapResults.activities = self.activities;
+        
+    }
+    else if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
@@ -128,7 +149,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }
     
     //this is called if the "Done" button is pressed
-    else {
+    else if([sender isKindOfClass:[UIBarButtonItem class]]) {
         //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             [self alertForTripName];
