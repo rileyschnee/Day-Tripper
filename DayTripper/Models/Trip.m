@@ -49,11 +49,13 @@
     [newTrip saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (succeeded) {
             NSLog(@"Trip successfully saved!");
+            [newTrip checkForActionItems];
+            completion(succeeded, error);
         } else {
             NSLog(@"Error saving trip");
         }
     }];
-    [newTrip checkForActionItems];
+    
     
 }
 
