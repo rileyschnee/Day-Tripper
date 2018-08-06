@@ -136,7 +136,7 @@
     // Pass the selected object to the new view controller.
     
     DetailsViewController *detailPage = [segue destinationViewController];
-    for (id<Activity> activity in self.activities) {
+    for (id<Activity> activity in self.allActivities) {
         if ([activity.name isEqualToString:self.name]) {
             detailPage.activity = activity;
         }
@@ -144,6 +144,7 @@
     detailPage.fromMap = YES;
 }
 
-
-
+- (IBAction)didTapBack:(id)sender {
+    [self dismissViewControllerAnimated:true completion:nil];
+}
 @end

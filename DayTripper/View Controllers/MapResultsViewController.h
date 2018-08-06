@@ -12,4 +12,5 @@
 @interface MapResultsViewController : UIViewController
 @property (strong, nonatomic) NSMutableArray *activities; 
 @property (weak, nonatomic) IBOutlet MKMapView *resultsMap;
+- (IBAction)didTapBack:(id)sender;
 @end

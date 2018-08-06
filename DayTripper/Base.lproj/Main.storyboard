@@ -1328,7 +1328,13 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="Jt8-tr-0fz"/>
                     </view>
-                    <navigationItem key="navigationItem" id="yGW-pM-vpc"/>
+                    <navigationItem key="navigationItem" id="yGW-pM-vpc">
+                        <barButtonItem key="leftBarButtonItem" title="Back" id="H2v-L9-sZW">
+                            <connections>
+                                <action selector="didTapBack:" destination="STr-ll-A5n" id="T5s-H5-psY"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="resultsMap" destination="rrm-7K-DKD" id="gK2-xL-KQi"/>
                         <segue destination="6N9-Ay-TK4" kind="show" identifier="resultsCallOut" id="MQf-Vo-7P7"/>

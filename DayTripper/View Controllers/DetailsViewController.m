@@ -577,7 +577,9 @@
     NSString* finalURL = [NSString stringWithFormat:@"%@%@%@%@", baseURL, maxWidth, photoRef, key];
     NSData *data = [NSData dataWithContentsOfURL:[NSURL URLWithString:finalURL]];
     UIImage *image = [UIImage imageWithData:data];
-    [self.images addObject:image];
+    if (image != nil) {
+        [self.images addObject:image];
+    }
     
 }
 
