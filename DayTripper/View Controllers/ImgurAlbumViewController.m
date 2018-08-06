@@ -130,8 +130,6 @@
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
         ImgurDetailViewController *imgurDetailVC = (ImgurDetailViewController*) segue.destinationViewController;
         imgurDetailVC.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
-        imgurDetailVC.poster = tappedCell.poster;
-        imgurDetailVC.posterLabel.text = [NSString stringWithFormat:@"Posted By: %@", imgurDetailVC.poster[@"name"]];
         [imgurDetailVC.pictureView setImageWithURL:imgurDetailVC.imageURL];
     }
 }
@@ -151,7 +149,6 @@
     ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
     cell.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
     [cell.pictureView setImageWithURL:cell.imageURL];
-    cell.poster = PFUser.currentUser;
     return cell;
 }
 

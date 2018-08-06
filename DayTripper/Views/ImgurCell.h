@@ -7,10 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
 @interface ImgurCell : UICollectionViewCell
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (strong, nonatomic) NSURL *imageURL;
-@property (strong, nonatomic) PFUser *poster;
 @end
