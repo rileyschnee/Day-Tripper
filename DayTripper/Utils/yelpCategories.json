@@ -608,19 +608,6 @@
         ]
     },
     {
-        "alias": "chimneycakes",
-        "title": "Chimney Cakes",
-        "parents": [
-            "food"
-        ],
-        "country_whitelist": [
-            "FR",
-            "US",
-            "PL",
-            "CZ"
-        ]
-    },
-    {
         "alias": "chinese",
         "title": "Chinese",
         "parents": [

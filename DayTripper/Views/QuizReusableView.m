@@ -71,6 +71,7 @@
 }
 
 # pragma mark - MPGTextFieldDelegate
+
 - (NSArray*) dataForPopoverInTextField:(MPGTextField *)textField {
     NSMutableArray* array = [[NSMutableArray alloc] init];
     for (NSString* result in self.searchResults) {
@@ -81,8 +82,7 @@
     return [array copy];
 }
 
-- (BOOL)textFieldShouldSelect:(MPGTextField *)textField
-{
+- (BOOL)textFieldShouldSelect:(MPGTextField *)textField {
     return YES;
 }
 

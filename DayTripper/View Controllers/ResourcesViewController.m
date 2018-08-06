@@ -13,6 +13,10 @@
 #import "IOUViewController.h"
 #import "SVProgressHUD.h"
 #import "ImgurAlbumViewController.h"
+#import <NYAlertViewController/NYAlertViewController.h>
+#import "MapViewController.h"
+#import "ChatViewController.h"
+#import "ItinViewController.h"
 
 @interface ResourcesViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, MFMailComposeViewControllerDelegate, TripReusableViewDelegate>
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -25,10 +29,10 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self.tabBarController setSelectedIndex:2];
     // Do any additional setup after loading the view.
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
+    self.tabBarController.delegate = self;
     self.edgesForExtendedLayout = UIRectEdgeNone;
     self.navigationController.view.backgroundColor = [UIColor whiteColor];
     
@@ -38,9 +42,6 @@
     layout.itemSize = CGSizeMake(itemWidth, itemWidth+25);
     [SVProgressHUD show];
     [self fetchAttendees];
-    
-   
-    
 }
 
 
@@ -49,6 +50,48 @@
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
 }
 
+# pragma mark - Collection View Functions
+
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
+    cell.user = self.attendeeUsers[indexPath.item];
+    PFFile* file = cell.user[@"picture"];
+    cell.profilePicView.file = file;
+    [cell.profilePicView loadInBackground];
+    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
+    cell.nameLabel.text = cell.user[@"name"];
+    return cell;
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
+    TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
+    header.trip = self.trip;
+    header.delegate = self;
+    header.tripNameLabel.text = self.trip.name;
+    
+    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
+        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
+        // [self.resourceView addSubview:button];
+        header.summaryBtn.hidden = NO;
+        header.editDescripBtn.hidden = YES;
+    }else{
+        header.summaryBtn.hidden = YES;
+        header.editDescripBtn.hidden = NO;
+        header.descriptionLabel.hidden = NO;
+        header.descriptionLabel.text = self.trip.summary;
+    }
+    
+    //get weather info
+    [self getWeather:header];
+    
+    
+    return header;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"%lu", self.attendeeUsers.count);
+    return self.attendeeUsers.count;
+}
 
 #pragma mark - Navigation
 
@@ -83,48 +126,13 @@
     
 }
 
-
-- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    UserCollectionCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"UserCollectionCell" forIndexPath:indexPath];
-    cell.user = self.attendeeUsers[indexPath.item];
-    PFFile* file = cell.user[@"picture"];
-    cell.profilePicView.file = file;
-    [cell.profilePicView loadInBackground];
-    cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
-    cell.nameLabel.text = cell.user[@"name"];
-    return cell;
+- (void)back{
+    [self performSegueWithIdentifier:@"resToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
 }
 
-- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath{
-    TripReusableView *header = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"TripReusableView" forIndexPath:indexPath];
-    header.trip = self.trip;
-    header.delegate = self;
-    header.tripNameLabel.text = self.trip.name;
-    
-    if ([[self.trip objectForKey:@"summary"] isEqualToString:@""] || [self.trip objectForKey:@"summary"] == nil) {
-        //[header.summaryBtn addTarget:self action:@selector(didTapDescription:) forControlEvents:UIControlEventTouchDown];
-        // [self.resourceView addSubview:button];
-        header.summaryBtn.hidden = NO;
-        header.editDescripBtn.hidden = YES;
-    }else{
-        header.summaryBtn.hidden = YES;
-        header.editDescripBtn.hidden = NO; 
-        header.descriptionLabel.hidden = NO;
-        header.descriptionLabel.text = self.trip.summary;
-    }
-    
-    //get weather info
-    [self getWeather:header];
-    
-    
-    return header;
-}
 
-- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    NSLog(@"%lu", self.attendeeUsers.count);
-    return self.attendeeUsers.count;
-}
-
+# pragma mark - Weather Functions
 
 //gets the high and low for the day
 - (void) getWeather:(TripReusableView* ) header {
@@ -214,6 +222,13 @@
         }
     });
 }
+
+- (double) kelvinToFahrenheit:(double)kelvin {
+    return (kelvin * (9.0/5.0)) - 459.67;
+}
+
+# pragma mark - Attendee Functions
+
 - (void)fetchAttendees{
     NSLog(@"%@", self.trip.attendees);
     //NSPredicate *pred = [NSPredicate predicateWithFormat:@"objectId IN %@", self.trip.attendees];
@@ -234,29 +249,57 @@
     }];
 }
 
-- (double) kelvinToFahrenheit:(double)kelvin {
-    return (kelvin * (9.0/5.0)) - 459.67;
-}
-
-- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
-    [controller dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (IBAction)shareToAlbum:(id)sender {
-    // GOOGLE PHOTOS FUNCTIONALITY HERE
-    
-}
-
 - (void)reloadAttendeeData {
     [self fetchAttendees];
 }
 
-- (void)showAlert:(UIAlertController *)alert {
-    [self presentViewController:alert animated:YES completion:nil];
 
+# pragma mark - Protocol Implementations
+
+- (void)showAlert:(NYAlertViewController *)alert {
+    [self presentViewController:alert animated:YES completion:nil];
 }
-- (void)showAlertView:(UIAlertView *)alert{
-    [alert show];
+
+- (void)dismissAlert:(NYAlertViewController *)alert{
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+# pragma mark - Navigation (Tab Bar)
+
+// handle tab bar switches
+-(BOOL)tabBarController:(UITabBarController *)tabBarController shouldSelectViewController:(UIViewController *)viewController{
+    
+    if([viewController isKindOfClass:[UINavigationController class]]){
+        UINavigationController *navController =  (UINavigationController *) viewController;
+        UIViewController *vc = navController.topViewController;
+        if ([vc isKindOfClass:[ChatViewController class]]) {
+            ChatViewController *chatController = (ChatViewController *)navController.topViewController;
+            chatController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[MapViewController class]]){
+            MapViewController *mapController = (MapViewController *) navController.topViewController;
+            mapController.trip = self.trip;
+        }
+        else if ([vc isKindOfClass:[ItinViewController class]]) {
+            ItinViewController *itinController = (ItinViewController *)navController.topViewController;
+            itinController.trip = self.trip;
+            // fromHomeEdit should be NO if the top left button is home
+            if (self.navigationItem.leftBarButtonItem == nil) {
+                itinController.fromHomeEdit = YES;
+            }
+            else {
+                itinController.fromHomeEdit = NO;
+            }
+            
+        }
+    }
+    return TRUE;
+}
+
+# pragma mark - Other Helper Functions
+
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    [controller dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

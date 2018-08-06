@@ -16,12 +16,14 @@
 #import "IOUViewController.h"
 #import "Functions.h"
 #import "SVProgressHUD.h"
+#import "ResourcesViewController.h"
 
 @interface HomeViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (strong, nonatomic) NSMutableArray *trips;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet UIButton *addTripButton;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
@@ -36,7 +38,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     [self.navigationItem setHidesBackButton:YES];
-    // Do any additional setup after loading the view.
+    self.title = @"Home";
 
     self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
     //[self.profileImageView loadInBackground];
@@ -48,6 +50,8 @@
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
+    self.addTripButton.layer.cornerRadius = self.addTripButton.frame.size.height / 4;
+
     [self fetchTrips];
 }
 
@@ -55,6 +59,20 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+# pragma mark - Table View Functions
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    TripCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
+    cell.trip = self.trips[indexPath.row];
+    return cell;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.trips.count;
+}
+
+# pragma mark - Fetch Function
 
 - (void)fetchTrips {
     
@@ -74,7 +92,6 @@
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
 }
 
 
@@ -90,11 +107,9 @@
         Trip *trip = self.trips[indexPath.item];
         UITabBarController *tabbar = [segue destinationViewController];
         UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-        ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
+        ResourcesViewController *resources = (ResourcesViewController *) navController.topViewController;
         //create edit bar button item
-        itinerary.trip = trip;
-        itinerary.fromHomeEdit = YES;
-        itinerary.fromHomeToResources = YES;
+        resources.trip = trip;
         //set the trip title
         tabbar.title = trip.name;
     }
@@ -113,17 +128,7 @@
     }
 }
 
-
- 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    TripCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TripCell" forIndexPath:indexPath];
-    cell.trip = self.trips[indexPath.row];
-    return cell;
-}
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.trips.count;
-}
+# pragma mark - Helper Functions
 
 - (void)reloadUserInfo{
     self.profileImageView.file = (PFFile *)PFUser.currentUser[@"picture"];
@@ -135,7 +140,6 @@
     self.usernameLabel.text = PFUser.currentUser.username;
     self.nameLabel.text = PFUser.currentUser[@"name"];
     self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.height / 2;
-    
 }
 
 @end

@@ -9,18 +9,19 @@
 #import "ResultsViewController.h"
 #import "ResultsCell.h"
 #import "ItinViewController.h"
-#import "Functions.h"
 #import "Trip.h"
 #import "APIManager.h"
 #import "Activity.h"
 #import "DetailsViewController.h"
 #import "SVProgressHUD.h"
 #import "MapResultsViewController.h"
+#import <NYAlertViewController/NYAlertViewController.h>
+#import "ResourcesViewController.h"
+
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) Functions *functions;
 @property (strong, nonatomic) Trip *trip;
 @property (strong, nonatomic) NSMutableArray *food;
 @property (strong, nonatomic) NSMutableArray *places;
@@ -41,8 +42,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     self.tableView.dataSource = self;
     
     self.tripName = @"";
-    
-    self.functions = [[Functions alloc] init];
     
     self.trip = [Trip new];
     self.trip.city = self.location;
@@ -68,6 +67,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 }
 
+
 //- (void)onTapMap:(UIBarButtonItem *)mapButton {
 //
 //}
@@ -75,6 +75,56 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 - (IBAction)onTapMap:(id)sender {
     [sender performSegueWithIdentifier:@"toResultsMap" sender:nil];
     
+
+#pragma mark - Table View Functions
+
+- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
+    cell.delegate = self;
+    cell.activity = self.activities[indexPath.section][indexPath.row];
+    return cell;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    //    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
+    //    if(section == 0){
+    //        header.textLabel.text = @"Places";
+    //    } else if(section == 1){
+    //        header.textLabel.text = @"Food";
+    //    } else {
+    //        header.textLabel.text = @"Events";
+    //    }
+    
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
+    /* Create custom view to display section header... */
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, tableView.frame.size.width-15, 30)];
+    [label setFont:[UIFont boldSystemFontOfSize:20]];
+    // set font color to orange - [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0]
+    [label setTextColor:[UIColor whiteColor]];
+    /* Section header is in 0th index... */
+    NSString *string = @"";
+    if(section == 0){
+        string = @"Places";
+    } else if(section == 1){
+        string = @"Food";
+    } else {
+        string = @"Events";
+    }
+    [label setText:string];
+    [view addSubview:label];
+    //Set background to blue - [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]
+    [view setBackgroundColor:[UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]]; //your background color...
+    return view;
+    
+    //    return header;
+}
+
+- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.activities[section] count];
+}
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return self.activities.count;
+
 }
 
 #pragma mark - Navigation
@@ -105,77 +155,30 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             [self alertForTripName];
         }
         //reaches here is a trip name exists
-        [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if(succeeded){
-                NSLog(@"YAY! YOUR TRIP SAVED");
-            } else {
-                NSLog(@"Trip didn't save");
-            }
-        }];
-    
-        UITabBarController *tabbar = [segue destinationViewController];
-        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-        ItinViewController *itinViewController = (ItinViewController *) navController.topViewController;
-    
-        //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
-        itinViewController.trip = self.trip;
-        itinViewController.latitude = self.latitude;
-        itinViewController.longitude = self.longitude;
-        //create a home button that goes to Home View Controller
-        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:itinViewController action:@selector(back)];
-        itinViewController.navigationItem.hidesBackButton = YES;
-        itinViewController.navigationItem.leftBarButtonItem = homeButton;
+        else {
+            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    NSLog(@"YAY! YOUR TRIP SAVED");
+                } else {
+                    NSLog(@"Trip didn't save");
+                }
+            }];
+            
+            UITabBarController *tabbar = [segue destinationViewController];
+            UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
+            ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
+            
+            //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
+            resViewController.trip = self.trip;
+            //create a home button that goes to Home View Controller
+            UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:resViewController action:@selector(back)];
+            resViewController.navigationItem.hidesBackButton = YES;
+            resViewController.navigationItem.leftBarButtonItem = homeButton;
+        }
     }
 }
 
-- (nonnull UITableViewCell *)tableView:(nonnull UITableView *)tableView cellForRowAtIndexPath:(nonnull NSIndexPath *)indexPath {
-    ResultsCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ResultsCell" forIndexPath:indexPath];
-    cell.delegate = self;
-    cell.activity = self.activities[indexPath.section][indexPath.row];
-    return cell;
-}
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UITableViewHeaderFooterView *header = [tableView dequeueReusableHeaderFooterViewWithIdentifier:HeaderViewIdentifier];
-//    if(section == 0){
-//        header.textLabel.text = @"Places";
-//    } else if(section == 1){
-//        header.textLabel.text = @"Food";
-//    } else {
-//        header.textLabel.text = @"Events";
-//    }
-    
-    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 30)];
-    /* Create custom view to display section header... */
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(15, 0, tableView.frame.size.width-15, 30)];
-    [label setFont:[UIFont boldSystemFontOfSize:20]];
-    // set font color to orange - [UIColor colorWithRed:0.94 green:0.40 blue:0.23 alpha:1.0]
-    [label setTextColor:[UIColor whiteColor]];
-    /* Section header is in 0th index... */
-    NSString *string = @"";
-    if(section == 0){
-        string = @"Places";
-    } else if(section == 1){
-        string = @"Food";
-    } else {
-        string = @"Events";
-    }
-    [label setText:string];
-    [view addSubview:label];
-    //Set background to blue - [UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]
-    [view setBackgroundColor:[UIColor colorWithRed:0.36 green:0.56 blue:0.76 alpha:1.0]]; //your background color...
-    return view;
-    
-//    return header;
-}
-
-
-- (NSInteger)tableView:(nonnull UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [self.activities[section] count];
-}
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.activities.count;
-}
+#pragma mark - Fetch Functions
 
 //gets the places for the results
 - (void)fetchResults4SQ{
@@ -205,17 +208,17 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
         //parse the request
-            NSArray *venues = responseDict[0][@"response"][@"venues"];
-            for (NSDictionary *venue in venues) {
-                Place *place = [Place new];
-                place.name = venue[@"name"];
-                place.website = venue[@"url"];
-                place.latitude = [venue[@"location"][@"lat"] doubleValue];
-                place.longitude = [venue[@"location"][@"lng"] doubleValue];
-                place.categories = venue[@"categories"];
-                place.apiId = venue[@"id"];
-                [weakSelf.activities[0] addObject:place];
-            }
+        NSArray *venues = responseDict[0][@"response"][@"venues"];
+        for (NSDictionary *venue in venues) {
+            Place *place = [Place new];
+            place.name = venue[@"name"];
+            place.website = venue[@"url"];
+            place.latitude = [venue[@"location"][@"lat"] doubleValue];
+            place.longitude = [venue[@"location"][@"lng"] doubleValue];
+            place.categories = venue[@"categories"];
+            place.apiId = venue[@"id"];
+            [weakSelf.activities[0] addObject:place];
+        }
         
     }];
 }
@@ -306,14 +309,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }];
 }
 
-//reloads the tableview asynchronously
--(void) refreshAsync {
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-        [SVProgressHUD dismiss];
-    });
-}
-
+#pragma mark - Protocol Implementations
 
 -(void)addActivityToTrip:(id <Activity>) activity {
     [self.trip addUniqueObject:activity forKey:@"activities"];
@@ -327,6 +323,16 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     return [self.trip.activities containsObject:activity];
 }
 
+
+#pragma mark - Helper Functions
+
+//reloads the tableview asynchronously
+-(void) refreshAsync {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+        [SVProgressHUD dismiss];
+    });
+}
 
 //sets up querying for all of the categories
 -(void)setQueryStrings{
@@ -356,7 +362,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     NSLog(@"%@", self.catQueryEvent);
 }
 
-#pragma mark - date functions
+#pragma mark - Date Functions
 
 //gets the current date in the format that four square wants
 - (NSString *) generatCurrentDateFourSquare {
@@ -389,17 +395,34 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 }
 
 
+#pragma mark - Alert Functions
+
 - (void)alertForTripName{
-    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
-                                                                              message: @"Enter the trip name"
-                                                                       preferredStyle:UIAlertControllerStyleAlert];
-    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
-        textField.placeholder = @"Trip Name";
-        textField.textColor = [UIColor blueColor];
-        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
-    }];
-    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
-        NSArray * textfields = alertController.textFields;
+    NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alert.title = NSLocalizedString(@"Trip Name", nil);
+    alert.message = NSLocalizedString(@"What would you like to call this trip?", nil);
+    
+    // Customize appearance as desired
+    alert.buttonCornerRadius = 20.0f;
+    alert.alertViewCornerRadius = alert.accessibilityFrame.size.height / 4;
+    alert.view.tintColor = [UIColor blueColor];
+    
+    alert.titleFont = [UIFont fontWithName:@"AvenirNext-Bold" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"AvenirNext-Medium" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"AvenirNext-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"AvenirNext-Medium" size:alert.cancelButtonTitleFont.pointSize];
+    
+    alert.swipeDismissalGestureEnabled = NO;
+    alert.backgroundTapDismissalGestureEnabled = NO;
+    
+    // Add alert actions
+    [alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:alert completion:nil];
+    }]];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        NSArray * textfields = alert.textFields;
         UITextField * namefield = textfields[0];
         //if the user does not provide a trip name, then set the name equal to the city
         if (namefield.text.length == 0) {
@@ -409,9 +432,39 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             self.tripName = namefield.text;
         }
         [self performSegueWithIdentifier:@"toItinView" sender:nil];
-        
+
     }]];
-    [self presentViewController:alertController animated:YES completion:nil];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    
+    
+//   // OLD
+//    UIAlertController * alertController = [UIAlertController alertControllerWithTitle: @"Trip Name"
+//                                                                              message: @"Enter the trip name"
+//                                                                       preferredStyle:UIAlertControllerStyleAlert];
+//    [alertController addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+//        textField.placeholder = @"Trip Name";
+//        textField.textColor = [UIColor blueColor];
+//        textField.clearButtonMode = UITextFieldViewModeWhileEditing;
+//    }];
+//    [alertController addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        [self dismissViewControllerAnimated:alertController completion:nil];
+//    }]];
+//    [alertController addAction:[UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action) {
+//        NSArray * textfields = alertController.textFields;
+//        UITextField * namefield = textfields[0];
+//        //if the user does not provide a trip name, then set the name equal to the city
+//        if (namefield.text.length == 0) {
+//            self.tripName = self.trip.city;
+//        }
+//        else {
+//            self.tripName = namefield.text;
+//        }
+//        [self performSegueWithIdentifier:@"toItinView" sender:nil];
+//
+//    }]];
+//    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 @end

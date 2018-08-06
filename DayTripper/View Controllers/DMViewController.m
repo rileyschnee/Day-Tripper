@@ -130,14 +130,16 @@ int MOVEMENT_KEYBOARD_DM = 200;
 
 //function that moves element by delta y
 - (void) moveElementVertically:(int) points {
-    //move text field
-    CGRect frame = self.messageBody.frame;
-    frame.origin.y = frame.origin.y + points;
-    [self.messageBody setFrame:frame];
-    //move submit button
-    CGRect frame2 = self.submitButton.frame;
-    frame2.origin.y = frame2.origin.y + points;
-    [self.submitButton setFrame:frame2];
+    [UIView animateWithDuration:0.25f animations:^{
+        //move text field
+        CGRect frame = self.messageBody.frame;
+        frame.origin.y = frame.origin.y + points;
+        [self.messageBody setFrame:frame];
+        //move submit button
+        CGRect frame2 = self.submitButton.frame;
+        frame2.origin.y = frame2.origin.y + points;
+        [self.submitButton setFrame:frame2];
+    }];
 }
 
 //function that reduces the height of an element

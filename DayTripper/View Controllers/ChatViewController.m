@@ -49,8 +49,20 @@ int MOVEMENT_KEYBOARD = 200;
 - (void)viewDidAppear:(BOOL)animated {
     //hide bar button item
     self.tabBarController.navigationItem.rightBarButtonItem = nil;
+    
+    //if no backbutton
+    if (self.navigationController.navigationBar.backItem == nil) {
+        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:self action:@selector(back)];
+        self.navigationItem.leftBarButtonItem = homeButton;
+    }
 }
 
+- (void)back{
+    [self performSegueWithIdentifier:@"chatToHome" sender:nil];
+    self.tabBarController.tabBar.hidden = YES;
+}
+
+# pragma mark - Button functions
 
 - (IBAction)onTapGestureRecognizer:(id)sender {
     [self.messageBody resignFirstResponder];
@@ -91,6 +103,7 @@ int MOVEMENT_KEYBOARD = 200;
     
 }
 
+# pragma mark - Chat Functions
 
 //function that will load the chat conversation
 - (void) displayChatConversation {
@@ -113,21 +126,22 @@ int MOVEMENT_KEYBOARD = 200;
             NSLog(@"%@", error.localizedDescription);
         }
     }];
-    
 }
 
-#pragma mark - animation methods
+#pragma mark - Animation Methods
 
 //function that moves element by delta y
 - (void) moveElementVertically:(int) points {
-    //move text field
-    CGRect frame = self.messageBody.frame;
-    frame.origin.y = frame.origin.y + points;
-    [self.messageBody setFrame:frame];
-    //move submit button
-    CGRect frame2 = self.submitButton.frame;
-    frame2.origin.y = frame2.origin.y + points;
-    [self.submitButton setFrame:frame2];
+    [UIView animateWithDuration:0.25f animations:^{
+        //move text field
+        CGRect frame = self.messageBody.frame;
+        frame.origin.y = frame.origin.y + points;
+        [self.messageBody setFrame:frame];
+        //move submit button
+        CGRect frame2 = self.submitButton.frame;
+        frame2.origin.y = frame2.origin.y + points;
+        [self.submitButton setFrame:frame2];
+    }];
 }
 
 //function that reduces the height of an element

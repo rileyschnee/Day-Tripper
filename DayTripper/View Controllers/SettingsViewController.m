@@ -12,6 +12,8 @@
 #import "LoginViewController.h"
 #import "AppDelegate.h"
 #import "SVProgressHUD.h"
+#import <NYAlertViewController/NYAlertViewController.h>
+#import "Functions.h"
 
 @interface SettingsViewController () <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -50,17 +52,13 @@
     [self.view addGestureRecognizer:tap];
 }
 
--(void)dismissKeyboard {
-    [self.nameField endEditing:YES];
-    [self.emailField endEditing:YES];
-    [self.passwordFieldFirst endEditing:YES];
-    [self.passwordFieldSecond endEditing:YES];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+# pragma mark - Image Picker Functions
+
 - (IBAction)clickedChangePic:(id)sender {
     UIImagePickerController *imagePickerVC = [UIImagePickerController new];
     imagePickerVC.delegate = self;
@@ -81,6 +79,8 @@
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+# pragma mark - Button Functions
 
 - (IBAction)saveProfile:(id)sender {
     if((![self.passwordFieldFirst.text isEqualToString:@""] && ![self.passwordFieldSecond.text isEqualToString:@""]) && [self.passwordFieldFirst.text isEqualToString:self.passwordFieldSecond.text]){
@@ -117,6 +117,19 @@
 
 - (IBAction)clickedLogout:(id)sender {
     
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Confirm Logout" withMessage:@"Are you sure you want to log out?"];
+    [alert addAction:[NYAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [alert addAction:[NYAlertAction actionWithTitle:@"Yes" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self logout];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    //[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)logout{
     [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
         // PFUser.current() will now be nil
         AppDelegate *appDelegate = (AppDelegate *)[UIApplication sharedApplication].delegate;
@@ -125,24 +138,40 @@
         LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
         appDelegate.window.rootViewController = loginViewController;
     }];
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
+
 - (IBAction)clickedCancel:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
+# pragma mark - Alert Functions
 
 - (void)sendPasswordAlert{
-    UIAlertController *pwdAlert = [UIAlertController alertControllerWithTitle:@"Password Error" message:@"Passwords do not match" preferredStyle:(UIAlertControllerStyleAlert)];
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Password Error" withMessage:@"Passwords do not match. Try again."];
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [pwdAlert addAction:okAction];
-    [self presentViewController:pwdAlert animated:YES completion:nil];
+    [alert addAction:[NYAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+
+//    UIAlertController *pwdAlert = [UIAlertController alertControllerWithTitle:@"Password Error" message:@"Passwords do not match" preferredStyle:(UIAlertControllerStyleAlert)];
+//
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [pwdAlert addAction:okAction];
+//    [self presentViewController:pwdAlert animated:YES completion:nil];
 }
 
+# pragma mark - Other Helper Functions
+
+-(void)dismissKeyboard {
+    [self.nameField endEditing:YES];
+    [self.emailField endEditing:YES];
+    [self.passwordFieldFirst endEditing:YES];
+    [self.passwordFieldSecond endEditing:YES];
+}
 
 
 @end

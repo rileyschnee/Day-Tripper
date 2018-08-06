@@ -13,6 +13,7 @@
 #import "ResourcesViewController.h"
 #import "ItinViewController.h"
 #import "DMViewController.h"
+#import "ResourcesViewController.h"
 
 @interface ProfileViewController () <MKMapViewDelegate>
 @property (weak, nonatomic) IBOutlet PFImageView *profilePicView;
@@ -135,19 +136,9 @@
         dmViewController.otherPersonUserName = self.user.username;
     }
     else {
-        UITabBarController *tabbar = [segue destinationViewController];
-        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-        ItinViewController *itinerary = (ItinViewController *) navController.topViewController;
-        itinerary.trip = self.trip;
-        //instructs app to go to resources
-        itinerary.fromHomeToResources = YES;
-        //set the trip title
-        tabbar.title = self.trip.name;
+        [self.navigationController dismissModalViewControllerAnimated:YES];
     }
     
-    
-//    ResourcesViewController *resourceViewController = [tabbar.viewControllers objectAtIndex:2];
-//    resourceViewController.trip = self.trip;
 }
 
 

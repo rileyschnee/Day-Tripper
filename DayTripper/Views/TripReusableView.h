@@ -11,11 +11,12 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import <MessageUI/MFMailComposeViewController.h>
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @protocol TripReusableViewDelegate
 - (void)reloadAttendeeData;
-- (void)showAlert:(UIAlertController *)alert;
-- (void)showAlertView:(UIAlertView *)alert;
+- (void)showAlert:(NYAlertViewController *)alert;
+- (void)dismissAlert:(NYAlertViewController *)alert;
 @property (strong, nonatomic) Trip *trip;
 @end
 

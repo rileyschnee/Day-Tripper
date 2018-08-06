@@ -10,6 +10,8 @@
 #import <Parse/Parse.h>
 #import <ParseUI/ParseUI.h>
 #import "SVProgressHUD.h"
+#import <NYAlertViewController/NYAlertViewController.h>
+#import "Functions.h"
 
 @interface LoginViewController () <UITextFieldDelegate>
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -186,64 +188,103 @@
 /****** ALERT FUNCTIONS ******/
 
 - (void)noPasswordAlert{
-    UIAlertController *emptyPWDAlert = [UIAlertController alertControllerWithTitle:@"Empty Password" message:@"You must enter a password" preferredStyle:(UIAlertControllerStyleAlert)];
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Password Empty" withMessage:@"Please enter password."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
     
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [emptyPWDAlert addAction:okAction];
-    [self presentViewController:emptyPWDAlert animated:YES completion:nil];
+//    UIAlertController *emptyPWDAlert = [UIAlertController alertControllerWithTitle:@"Empty Password" message:@"You must enter a password" preferredStyle:(UIAlertControllerStyleAlert)];
+//
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [emptyPWDAlert addAction:okAction];
+//    [self presentViewController:emptyPWDAlert animated:YES completion:nil];
 }
 
 - (void)noUsernameAlert{
-    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Username" message:@"You must enter an username" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [emptyUSRAlert addAction:okAction];
-    [self presentViewController:emptyUSRAlert animated:YES completion:nil];
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Username Empty" withMessage:@"Please enter username."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+//    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Username" message:@"You must enter an username" preferredStyle:(UIAlertControllerStyleAlert)];
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [emptyUSRAlert addAction:okAction];
+//    [self presentViewController:emptyUSRAlert animated:YES completion:nil];
 }
 
 - (void)noEmailAlert{
-    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Email" message:@"You must enter an email" preferredStyle:(UIAlertControllerStyleAlert)];
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [emptyUSRAlert addAction:okAction];
-    [self presentViewController:emptyUSRAlert animated:YES completion:nil];
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Email Empty" withMessage:@"Please enter an email."];
+    [alert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+//    UIAlertController *emptyUSRAlert = [UIAlertController alertControllerWithTitle:@"Empty Email" message:@"You must enter an email" preferredStyle:(UIAlertControllerStyleAlert)];
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [emptyUSRAlert addAction:okAction];
+//    [self presentViewController:emptyUSRAlert animated:YES completion:nil];
 }
 
 - (void)usernameAlreadyExistsAlert{
-    // Present error alert controller
-    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Username already exists" message:@"Please try using a different username" preferredStyle:(UIAlertControllerStyleAlert)];
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [errorAlert addAction:okAction];
+    NYAlertViewController *errorAlert = [Functions alertWithTitle:@"Username Taken" withMessage:@"An account already exists with this username. Please choose a different username."];
+    [errorAlert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
     [self presentViewController:errorAlert animated:YES completion:nil];
+    
+//    // Present error alert controller
+//    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Username already exists" message:@"Please try using a different username" preferredStyle:(UIAlertControllerStyleAlert)];
+//    // create an OK action
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [errorAlert addAction:okAction];
+//    [self presentViewController:errorAlert animated:YES completion:nil];
 }
 
 - (void) emailAlreadyExistsAlert{
-    // Present error alert controller
-    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Email already exists" message:@"Please try using a different email" preferredStyle:(UIAlertControllerStyleAlert)];
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [errorAlert addAction:okAction];
+    
+    NYAlertViewController *errorAlert = [Functions alertWithTitle:@"Email Taken" withMessage:@"An account already exists with this email. Please try using a different email."];
+    [errorAlert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
     [self presentViewController:errorAlert animated:YES completion:nil];
+
+//    // Present error alert controller
+//    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"Email already exists" message:@"Please try using a different email" preferredStyle:(UIAlertControllerStyleAlert)];
+//    // create an OK action
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [errorAlert addAction:okAction];
+//    [self presentViewController:errorAlert animated:YES completion:nil];
 }
 
 - (void)errorAlert{
-    // Present error alert controller
-    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"An Error Occurred" message:@"Please try again later" preferredStyle:(UIAlertControllerStyleAlert)];
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
-    }];
-    // add the OK action to the alert controller
-    [errorAlert addAction:okAction];
+    NYAlertViewController *errorAlert = [Functions alertWithTitle:@"An Error Occurred" withMessage:@"Please try again later"];
+    [errorAlert addAction:[NYAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
     [self presentViewController:errorAlert animated:YES completion:nil];
+
+//    // Present error alert controller
+//    UIAlertController *errorAlert = [UIAlertController alertControllerWithTitle:@"An Error Occurred" message:@"Please try again later" preferredStyle:(UIAlertControllerStyleAlert)];
+//    // create an OK action
+//    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) { // handle response here.
+//    }];
+//    // add the OK action to the alert controller
+//    [errorAlert addAction:okAction];
+//    [self presentViewController:errorAlert animated:YES completion:nil];
 }
+
+
 
 @end

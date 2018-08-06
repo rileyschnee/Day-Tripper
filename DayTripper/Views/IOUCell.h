@@ -8,9 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "IOU.h"
+#import <NYAlertViewController/NYAlertViewController.h>
 
 @protocol IOUCellDelegate
-- (void)showAlert:(UIAlertController *)alert;
+- (void)showAlert:(NYAlertViewController *)alert;
+- (void)dismissAlert:(NYAlertViewController *)alert;
+
 @end
 
 @interface IOUCell : UITableViewCell

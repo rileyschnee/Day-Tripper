@@ -14,7 +14,7 @@
 // common functions that will be needed
 
 
-- (NSArray*) getCellsFromTable:(UITableView*)tableView {
++ (NSArray*) getCellsFromTable:(UITableView*)tableView {
     NSMutableArray *cells = [[NSMutableArray alloc] init];
     for (NSInteger j = 0; j < [tableView numberOfSections]; ++j)
     {
@@ -62,6 +62,29 @@
                 //return [NSMutableArray new];
             }
         }];
+}
+
++ (NYAlertViewController *)alertWithTitle:(NSString *)title withMessage:(NSString *)message{
+    
+    NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
+    
+    // Set a title and message
+    alert.title = NSLocalizedString(title, nil);
+    alert.message = NSLocalizedString(message, nil);
+    
+    // Customize appearance as desired
+    alert.buttonCornerRadius = 20.0f;
+    alert.alertViewCornerRadius = 20.0f;
+    alert.view.tintColor = [UIColor blueColor];
+    
+    alert.titleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:19.0f];
+    alert.messageFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:16.0f];
+    alert.buttonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.buttonTitleFont.pointSize];
+    alert.cancelButtonTitleFont = [UIFont fontWithName:@"Helvetica Neue-Regular" size:alert.cancelButtonTitleFont.pointSize];
+    
+    alert.swipeDismissalGestureEnabled = NO;
+    alert.backgroundTapDismissalGestureEnabled = NO;
+    return alert;
 }
 
 @end
