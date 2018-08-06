@@ -9,17 +9,12 @@
 #import "ImgurAlbumViewController.h"
 #import "ImgurSession.h"
 #import "imgurShareViewController.h"
-<<<<<<< HEAD
 #import "ImgurCell.h"
+#import "APIManager.h"
+#import <AFNetworking/UIImageView+AFNetworking.h>
+#import "ImgurDetailViewController.h"
 
 @interface ImgurAlbumViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
-=======
-#import "APIManager.h"
-
-
-@interface ImgurAlbumViewController ()
->>>>>>> 9c1c9e8e8eb565e4bbdce2b07555fc0e67b5421d
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (weak, nonatomic) IBOutlet UIButton *cpURLButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
@@ -32,18 +27,18 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-<<<<<<< HEAD
     self.collectionView.delegate = self;
     self.collectionView.dataSource = self;
     // Do any additional setup after loading the view.
     self.cpURLButton.layer.cornerRadius = self.cpURLButton.frame.size.height / 4;
-
-=======
+    self.title = @"Trip Photos";
     self.imageStringUrls = [NSMutableArray new];
->>>>>>> 9c1c9e8e8eb565e4bbdce2b07555fc0e67b5421d
+    [self.collectionView reloadData];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+    self.imageStringUrls = [NSMutableArray new];
+
     if ([self.trip.albumId isEqualToString:@""]) {
         //set up a new album
         [IMGAlbumRequest createAlbumWithTitle:self.trip.name imageIDs:[NSArray new] success:^(NSString *albumID, NSString *albumDeleteHash) {
@@ -55,7 +50,7 @@
                     NSString* albumURLStringLabel = [NSString stringWithFormat:@"Album URL: https://imgur.com/a/%@", self.trip.albumId];
                     NSString* albumURLString = [NSString stringWithFormat:@"https://imgur.com/a/%@", self.trip.albumId];
                     self.urlLabel.text = albumURLStringLabel;
-                    [self setWebViewWithString:albumURLString];
+                  //  [self setWebViewWithString:albumURLString];
                     self.albumUrlString = albumURLString;
                 } else {
                     NSLog(@"Error saving trip");
@@ -72,18 +67,26 @@
         self.urlLabel.text = albumURLStringLabel;
         self.albumUrlString = albumURLString;
         
-        [self populateUrls];
+        [self populateUrls:^{
+            [self refreshAsync];
+        }];
         
         [self setWebViewWithString:albumURLString];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-            [self.webView reload];
-        });
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
+//            [self.webView reload];
+//        });
     }
 }
 
+-(void) refreshAsync {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.collectionView reloadData];
+        //[SVProgressHUD dismiss];
+    });
+}
 
 
-- (void) populateUrls {
+- (void) populateUrls:(void (^)(void))completion {
     NSString *path = [[NSBundle mainBundle] pathForResource:
                       @"apikeys" ofType:@"plist"];
     NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -101,15 +104,18 @@
         for (NSDictionary* image in images) {
             [self.imageStringUrls addObject:image[@"link"]];
             // now have image urls here
+            
         }
+        completion();
     }];
+    
 }
 
 //sets the webview with a url in the form of string
 - (void) setWebViewWithString:(NSString*) stringUrl {
     NSURL *url = [NSURL URLWithString:stringUrl];
     NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:requestObj];
+  //  [self.webView loadRequest:requestObj];
 }
 
 
@@ -120,6 +126,14 @@
     if ([segue.destinationViewController isKindOfClass:[imgurShareViewController class]]) {
         imgurShareViewController *imgurVC = (imgurShareViewController*) segue.destinationViewController;
         imgurVC.trip = self.trip;
+    } else if ([sender isKindOfClass:[ImgurCell class]]){
+        ImgurCell  *tappedCell = sender;
+        NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
+        ImgurDetailViewController *imgurDetailVC = (ImgurDetailViewController*) segue.destinationViewController;
+        imgurDetailVC.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
+        imgurDetailVC.poster = tappedCell.poster;
+        imgurDetailVC.posterLabel.text = [NSString stringWithFormat:@"Posted By: %@", imgurDetailVC.poster[@"name"]];
+        [imgurDetailVC.pictureView setImageWithURL:imgurDetailVC.imageURL];
     }
 }
 
@@ -134,12 +148,17 @@
     [UIPasteboard generalPasteboard].string = self.albumUrlString;
 }
 
-//- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
-//    ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
-//}
-//
-//- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-//    
-//}
+- (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
+    ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
+    cell.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
+    [cell.pictureView setImageWithURL:cell.imageURL];
+    cell.poster = PFUser.currentUser;
+    return cell;
+}
+
+- (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    NSLog(@"%lu", self.imageStringUrls.count);
+    return self.imageStringUrls.count;
+}
 
 @end
