@@ -149,7 +149,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }
     
     //this is called if the "Done" button is pressed
-    else if([sender isKindOfClass:[UIBarButtonItem class]]) {
+    else {
         //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             [self alertForTripName];
