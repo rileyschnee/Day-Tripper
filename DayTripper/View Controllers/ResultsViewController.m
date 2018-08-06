@@ -74,7 +74,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 - (IBAction)onTapMap:(id)sender {
     [sender performSegueWithIdentifier:@"toResultsMap" sender:nil];
-    
+}
 
 #pragma mark - Table View Functions
 

@@ -1419,7 +1419,7 @@
                             <barButtonItem image="map-tab-small" id="Sms-xM-yyY">
                                 <connections>
                                     <action selector="onTapMap:" destination="XAg-Ss-bUC" id="7qk-rj-j7b"/>
-                                    <segue destination="lqr-4u-ebN" kind="presentation" identifier="toResultsMap" id="qpY-CG-FVx"/>
+                                    <segue destination="lqr-4u-ebN" kind="show" identifier="toResultsMap" id="iG3-ZG-0kg"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>
@@ -1717,41 +1717,42 @@
             <point key="canvasLocation" x="2682" y="1033"/>
         </scene>
         <!--Navigation Controller-->
- <!--
         <scene sceneID="qRv-CL-fIr">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="lqr-4u-ebN" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="9cQ-OQ-Se6">
- -->
-        <scene sceneID="Ttt-hG-zpy">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3pn-Wu-Gpb" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XSm-za-RPe">
-                        
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-<!--
                         <segue destination="STr-ll-A5n" kind="relationship" relationship="rootViewController" id="oW8-QS-gXY"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jdA-SM-C8D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2256.8000000000002" y="-615.74212893553226"/>
- -->
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Ttt-hG-zpy">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="3pn-Wu-Gpb" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" image="map-tab-small" id="owS-Ax-KjH"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="XSm-za-RPe">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
                         <segue destination="4OX-FQ-8wP" kind="relationship" relationship="rootViewController" id="fub-Jw-SZA"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TQC-Jp-TYr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-172" y="2620.8395802098953"/>
-
-      </scene>
+        </scene>
     </scenes>
     <resources>
         <image name="add-attendee-white" width="64" height="64"/>
@@ -1774,16 +1775,10 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
-
-        <segue reference="Qz9-j1-qG0"/>
-        <segue reference="MQf-Vo-7P7"/>
-        <segue reference="SUE-za-G0o"/>
-
         <segue reference="rHE-D3-NFR"/>
-        <segue reference="8ht-wb-x5R"/>
+        <segue reference="xhp-4N-gxW"/>
         <segue reference="wJV-j0-lVJ"/>
         <segue reference="CtT-1j-sSq"/>
-
     </inferredMetricsTieBreakers>
     <color key="tintColor" red="0.94117647059999998" green="0.40000000000000002" blue="0.2274509804" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
 </document>
