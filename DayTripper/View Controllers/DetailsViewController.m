@@ -11,6 +11,11 @@
 #import "APIManager.h"
 #import "UIImageView+AFNetworking.h"
 #import "Functions.h"
+#import <HCSStarRatingView/HCSStarRatingView.h>
+
+// macro to convert hex to uicolor
+#define UIColorFromRGB(rgbValue) [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 green:((float)((rgbValue & 0xFF00) >> 8))/255.0 blue:((float)(rgbValue & 0xFF))/255.0 alpha:1.0]
+
 
 @import UberRides;
 @import LyftSDK;
@@ -26,7 +31,6 @@
 - (IBAction)didTapDirections:(id)sender;
 @property (nonatomic) int currNumEventPhotos;
 @property (weak, nonatomic) IBOutlet UILabel *hoursLabel;
-@property (weak, nonatomic) IBOutlet UILabel *ratingsLabel;
 @property (weak, nonatomic) IBOutlet UIButton *websiteLink;
 @property (strong, nonatomic) NSString* websiteToGoTo;
 @property (weak, nonatomic) IBOutlet UIView *uberView;
@@ -49,7 +53,6 @@
     self.lyftButton.layer.cornerRadius = self.lyftButton.frame.size.height / 4;
     self.uberView.layer.cornerRadius = self.uberView.frame.size.height / 4;
     self.directionsButton.layer.cornerRadius = self.directionsButton.frame.size.height / 4;
-    self.ratingsLabel.text = @"";
 
     
     //UBER + LOCATION
@@ -454,9 +457,25 @@
         } else {
             self.hoursLabel.text = @"";
         }
-        self.ratingsLabel.text = [NSString stringWithFormat:@"%.1f%@", rating, @"/5.0"];
+        
+        [self setUpFiveStars:rating];
     });
    
+}
+
+// sets up the five star rating
+- (void) setUpFiveStars:(double) rating {
+    // rating variable is out of five
+    HCSStarRatingView *starRatingView = [[HCSStarRatingView alloc] initWithFrame:CGRectMake(210, 350, 160, 50)];
+    starRatingView.maximumValue = 5;
+    starRatingView.minimumValue = 0;
+    starRatingView.enabled = NO;
+    starRatingView.alpha = 1.0;
+    starRatingView.allowsHalfStars = YES;
+    starRatingView.value = ((float) rating);
+    starRatingView.tintColor = UIColorFromRGB(0xF0663A);
+    [starRatingView addTarget:self action:nil forControlEvents:UIControlEventValueChanged];
+    [self.view addSubview:starRatingView];
 }
 
 # pragma mark - Button functions
