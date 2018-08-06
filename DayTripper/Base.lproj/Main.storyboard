@@ -1003,13 +1003,6 @@
                                     <action selector="didTapDirections:" destination="6N9-Ay-TK4" eventType="touchUpInside" id="Wgq-nY-mMh"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Rating" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mj4-rl-Tiw">
-                                <rect key="frame" x="235" y="360" width="124" height="21"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UAW-CK-1tY">
                                 <rect key="frame" x="16" y="508" width="343" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1056,7 +1049,6 @@
                         <outlet property="locationLabel" destination="I1e-Lc-xk8" id="U7O-Gv-WaP"/>
                         <outlet property="lyftButton" destination="UAW-CK-1tY" id="3de-Eo-bdK"/>
                         <outlet property="nameLabel" destination="0FQ-wd-SUU" id="pFS-8n-6pT"/>
-                        <outlet property="ratingsLabel" destination="Mj4-rl-Tiw" id="aEU-hb-fCI"/>
                         <outlet property="uberView" destination="fBV-0q-IAK" id="Lvc-VZ-VFX"/>
                         <outlet property="websiteLink" destination="7bN-wR-qUV" id="4Vv-aM-c95"/>
                     </connections>
