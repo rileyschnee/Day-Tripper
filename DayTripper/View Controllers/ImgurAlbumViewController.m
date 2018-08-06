@@ -9,17 +9,22 @@
 #import "ImgurAlbumViewController.h"
 #import "ImgurSession.h"
 #import "imgurShareViewController.h"
+#import "APIManager.h"
+
+
 @interface ImgurAlbumViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
 @property (strong, nonatomic) NSString* albumUrlString;
+// mutable array to hold all imgur image urls
+@property (strong, nonatomic) NSMutableArray *imageStringUrls;
 @end
 
 @implementation ImgurAlbumViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    self.imageStringUrls = [NSMutableArray new];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -43,7 +48,6 @@
             
         } failure:^(NSError *error) {
             NSLog(error.localizedDescription);
-            
         }];
     } else {
         //already have album so load it
@@ -51,11 +55,38 @@
         NSString* albumURLString = [NSString stringWithFormat:@"https://imgur.com/a/%@", self.trip.albumId];
         self.urlLabel.text = albumURLStringLabel;
         self.albumUrlString = albumURLString;
+        
+        [self populateUrls];
+        
         [self setWebViewWithString:albumURLString];
         dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
             [self.webView reload];
         });
     }
+}
+
+
+
+- (void) populateUrls {
+    NSString *path = [[NSBundle mainBundle] pathForResource:
+                      @"apikeys" ofType:@"plist"];
+    NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
+    
+    APIManager *apiManager = [[APIManager alloc] init];
+    NSString *baseURL =  [NSString stringWithFormat:@"https://api.imgur.com/3/album/%@/images", self.trip.albumId];
+    NSMutableDictionary *paramsDict = [[NSMutableDictionary alloc] init];
+    
+    NSString *clientId = [NSString stringWithFormat:@"%@%@", @"Client-ID ", [apiDict valueForKey:@"CLIENT_ID_IMGUR"]];
+    [paramsDict setObject:clientId forKey:@"Authorization"];
+
+    __weak typeof(self) weakSelf = self;
+    [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
+        NSArray *images = responseDict[0][@"data"];
+        for (NSDictionary* image in images) {
+            [self.imageStringUrls addObject:image[@"link"]];
+            // now have image urls here
+        }
+    }];
 }
 
 //sets the webview with a url in the form of string
