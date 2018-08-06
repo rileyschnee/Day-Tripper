@@ -7,11 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Parse/Parse.h>
 
 @interface ImgurDetailViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UIImageView *pictureView;
 @property (strong, nonatomic) NSURL *imageURL;
 @property (weak, nonatomic) IBOutlet UILabel *posterLabel;
-@property (strong, nonatomic) PFUser *poster;
 @end

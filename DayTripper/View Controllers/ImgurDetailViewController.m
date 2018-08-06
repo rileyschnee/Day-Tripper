@@ -7,6 +7,7 @@
 //
 
 #import "ImgurDetailViewController.h"
+#import "UIImageView+AFNetworking.h"
 
 @interface ImgurDetailViewController ()
 
@@ -17,6 +18,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.pictureView setImageWithURL:self.imageURL];
 }
 
 - (void)didReceiveMemoryWarning {
