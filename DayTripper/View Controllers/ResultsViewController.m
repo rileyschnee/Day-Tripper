@@ -60,8 +60,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [SVProgressHUD show];
     [self setQueryStrings];
     [self fetchResults4SQ];
-    [self fetchResultsYelp];
-    [self fetchResultsEvents];
+//    [self fetchResultsYelp];
+//    [self fetchResultsEvents];
     
     // UIBarButtonItem *map = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"map-tab"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapMap:)];
 }
@@ -224,6 +224,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             place.apiId = venue[@"id"];
             [weakSelf.activities[0] addObject:place];
         }
+        [self fetchResultsYelp];
     }];
 }
 
@@ -263,7 +264,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             food.apiId = venue[@"id"];
             [self.activities[1] addObject:food];
         }
-        
+        [self fetchResultsEvents];
     }];
 }
 
