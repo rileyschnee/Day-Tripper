@@ -22,5 +22,7 @@
 @property (strong, nonatomic) NSString* titleForItin;
 @property (nonatomic) BOOL fromMap;
 @property (strong, nonatomic) id<ResultsCellDelegate> delegate;
+@property (nonatomic) BOOL allowAddToTrip;
+
 
 @end

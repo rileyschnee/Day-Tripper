@@ -14,6 +14,7 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    self.checkButton.selected = [self.delegate isActivityInTrip:self.activity];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

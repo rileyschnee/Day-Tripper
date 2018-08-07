@@ -64,7 +64,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self fetchResultsEvents];
     
     // UIBarButtonItem *map = [[UIBarButtonItem alloc]initWithImage:[UIImage imageNamed:@"map-tab"] style:UIBarButtonItemStylePlain target:self action:@selector(onTapMap:)];
+}
 
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    [self.tableView reloadData];
 }
 
 
@@ -138,13 +142,15 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         UINavigationController *navControl = [segue destinationViewController];
         MapResultsViewController *mapResults = (MapResultsViewController *) navControl.topViewController;
         mapResults.activities = self.activities;
-        
+        mapResults.trip = self.trip;
     }
     else if([sender isKindOfClass:[ResultsCell class]]){
         ResultsCell *tappedCell = sender;
         NSIndexPath *indexPath = [self.tableView indexPathForCell:tappedCell];
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.activities[indexPath.section][indexPath.row];
+        detailPage.allowAddToTrip = TRUE;
+        detailPage.delegate = self;
 
     }
     
@@ -218,7 +224,6 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             place.apiId = venue[@"id"];
             [weakSelf.activities[0] addObject:place];
         }
-        
     }];
 }
 

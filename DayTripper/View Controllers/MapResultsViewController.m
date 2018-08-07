@@ -11,11 +11,13 @@
 #import "SVProgressHUD.h"
 #import "DetailsViewController.h"
 
-@interface MapResultsViewController () <MKMapViewDelegate> 
+@interface MapResultsViewController () <MKMapViewDelegate, ResultsCellDelegate>
 @property (strong, nonatomic) NSString *name;
 // contains all activities
 @property (strong, nonatomic) NSMutableArray *allActivities;
-
+@property (strong, nonatomic) NSMutableArray *tempArray;
+@property (strong, nonatomic) NSMutableArray *arrayOfPoints;
+@property (nonatomic) MKCoordinateRegion region;
 @end
 
 @implementation MapResultsViewController
@@ -25,7 +27,7 @@
     // Do any additional setup after loading the view.
     self.resultsMap.delegate = self;
     [SVProgressHUD show];
-    NSMutableArray *arrayOfPoints = [[NSMutableArray alloc] init];
+    self.arrayOfPoints = [[NSMutableArray alloc] init];
     // iterate through the three sub arrays of activities to make one array consisting of all activities
     self.allActivities = [[NSMutableArray alloc] init];
     for (NSMutableArray* placeFoodEventArray in self.activities) {
@@ -39,11 +41,11 @@
         point.coordinate = coor;
         point.title = activity.name;
         //[self.mapView addAnnotation:point];
-        [arrayOfPoints addObject:point];
+        [self.arrayOfPoints addObject:point];
     }
     
     // Calculate center of points
-    CLLocation *center = [self centerOfAnnotations:arrayOfPoints];
+    CLLocation *center = [self centerOfAnnotations:self.arrayOfPoints];
     CLLocationDistance maxdistance = 0.0;
     
     for (int i = 1; i < [self.allActivities count]; i++) {
@@ -55,16 +57,28 @@
     }
     
     // Set region
-    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(center.coordinate.latitude, center.coordinate.longitude), 1.5*maxdistance, 1.5*maxdistance);
-    [self.resultsMap setRegion:region animated:false];
+    self.region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(center.coordinate.latitude, center.coordinate.longitude), 1.5*maxdistance, 1.5*maxdistance);
+    [self.resultsMap setRegion:self.region animated:false];
     // Add points to map
-    for(MKPointAnnotation *point in arrayOfPoints){
+    for(MKPointAnnotation *point in self.arrayOfPoints){
         [self.resultsMap addAnnotation:point];
     }
     
     [SVProgressHUD dismiss];
 }
 // returns a MKCoordinateRegion that encompasses an array of MKAnnotations
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    //buggy
+    [self.resultsMap removeAnnotations:self.resultsMap.annotations];
+    [self.resultsMap setRegion:self.region animated:false];
+    for(MKPointAnnotation *point in self.arrayOfPoints){
+        [self.resultsMap addAnnotation:point];
+    }
+}
+
+
 
 - (CLLocation *)centerOfAnnotations:(NSArray *)annotations {
     
@@ -101,10 +115,14 @@
     MKPinAnnotationView *annotView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"Pin"];
     if (annotView == nil) {
         annotView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation reuseIdentifier:@"Pin"];
-        // UIColor *orange = [UIColor colorWithRed:240.0f/255.0f green:102.0f/255.0f blue:58.0f/255.0f alpha:1.0f];
+        UIColor *orange = [UIColor colorWithRed:240.0f/255.0f green:102.0f/255.0f blue:58.0f/255.0f alpha:1.0f];
         UIColor *blue = [UIColor colorWithRed:92.0f/255.0f green:142.0f/255.0f blue:195.0f/255.0f alpha:1.0f];
         annotView.pinTintColor = blue;
-        
+        for (id<Activity> activity in self.trip.activities) {
+            if ([activity.name isEqualToString:annotation.title]) {
+                annotView.pinTintColor = orange;
+            }
+        }
         annotView.canShowCallout = YES;
         annotView.rightCalloutAccessoryView = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
         
@@ -142,9 +160,24 @@
         }
     }
     detailPage.fromMap = YES;
+    detailPage.delegate = self;
+    detailPage.allowAddToTrip = TRUE;
 }
 
 - (IBAction)didTapBack:(id)sender {
     [self dismissViewControllerAnimated:true completion:nil];
 }
+
+-(void)addActivityToTrip:(id <Activity>) activity {
+    [self.trip addUniqueObject:activity forKey:@"activities"];
+}
+-(void)removeActivityFromTrip:(id <Activity>) activity {
+    self.tempArray = self.trip[@"activities"];
+    [self.tempArray removeObject:activity];
+    self.trip[@"activities"] = self.tempArray;
+}
+-(BOOL)isActivityInTrip:(id <Activity>) activity {
+    return [self.trip.activities containsObject:activity];
+}
+
 @end

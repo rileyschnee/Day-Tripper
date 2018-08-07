@@ -95,6 +95,7 @@
         DetailsViewController * detailPage = [segue destinationViewController];
         detailPage.activity = self.tableOrdering[indexPath.row];
         detailPage.titleForItin = self.trip.name;
+        detailPage.allowAddToTrip = FALSE;
         
     }
 }

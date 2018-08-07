@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import <MapKit/MapKit.h>
+#import "Trip.h"
 
 @interface MapResultsViewController : UIViewController
 @property (strong, nonatomic) NSMutableArray *activities; 
 @property (weak, nonatomic) IBOutlet MKMapView *resultsMap;
+@property (strong, nonatomic) Trip *trip;
 - (IBAction)didTapBack:(id)sender;
 @end

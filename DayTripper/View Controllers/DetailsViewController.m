@@ -43,7 +43,7 @@
 //for storing the previous back button
 @property (nonatomic,strong) UIBarButtonItem* prevBarButton;
 @property (nonatomic) BOOL loaded;
-@property (nonatomic) BOOL allowAddToTrip;
+@property (strong, nonatomic) UIBarButtonItem *addToTrip;
 @end
 
 @implementation DetailsViewController
@@ -104,6 +104,14 @@
         self.tabBarController.navigationItem.hidesBackButton = YES;
         self.tabBarController.navigationItem.leftBarButtonItem = item;
     }
+    if(self.allowAddToTrip){
+        UIImage *addToTripIcon = [UIImage imageNamed:@"circle"];
+        if([self.delegate isActivityInTrip:self.activity]){
+            addToTripIcon = [UIImage imageNamed:@"circle-checked"];
+        }
+        self.addToTrip = [[UIBarButtonItem alloc] initWithImage:addToTripIcon style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus)];
+        self.navigationItem.rightBarButtonItem = self.addToTrip;
+    }
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -126,17 +134,26 @@
     }
     // Add to trip button
     if(self.allowAddToTrip){
-        UIBarButtonItem *addToTrip = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"circle"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus:)];
-        self.navigationItem.rightBarButtonItem = addToTrip;
+        UIImage *addToTripIcon = [UIImage imageNamed:@"circle"];
+        if([self.delegate isActivityInTrip:self.activity]){
+            addToTripIcon = [UIImage imageNamed:@"circle-checked"];
+        }
+        self.addToTrip = [[UIBarButtonItem alloc] initWithImage:addToTripIcon style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus)];
+        self.navigationItem.rightBarButtonItem = self.addToTrip;
     }
 }
 
-//
-//- (void)toggleActivityInTripStatus{
-//    if(self.delegate.chosenActivities)
-//    [self.delegate addActivityToTrip:self.activity];
-//}
-//
+
+- (void)toggleActivityInTripStatus{
+        if(![self.delegate isActivityInTrip:self.activity]){
+            [self.delegate addActivityToTrip:self.activity];
+            self.addToTrip.image = [UIImage imageNamed:@"circle-checked"];
+        } else {
+            [self.delegate removeActivityFromTrip:self.activity];
+            self.addToTrip.image = [UIImage imageNamed:@"circle"];
+        }
+}
+
 
 # pragma mark - Navigation
 

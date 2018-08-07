@@ -151,6 +151,7 @@
             }
         }
         detailPage.fromMap = YES;
+        detailPage.allowAddToTrip = FALSE;
     }
 }
 
