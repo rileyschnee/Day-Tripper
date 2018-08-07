@@ -169,9 +169,18 @@ int MOVEMENT_NUM = 200;
     
     // Add alert actions
     [self.alert addAction:[NYAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self.alert.textFields[0] resignFirstResponder];
+        [self.alert.textFields[1] resignFirstResponder];
+        [self.alert.textFields[2] resignFirstResponder];
+        [self.alert.textFields[3] resignFirstResponder];
+
         [self dismissViewControllerAnimated:YES completion:nil];
     }]];
     [self.alert addAction:[NYAlertAction actionWithTitle:@"Save IOU" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self.alert.textFields[0] resignFirstResponder];
+        [self.alert.textFields[1] resignFirstResponder];
+        [self.alert.textFields[2] resignFirstResponder];
+        [self.alert.textFields[3] resignFirstResponder];
         NSString *amt = ((UITextField *)[self.alert textFields][2]).text;
         NSString *payer = [((UITextField *)[self.alert textFields][0]).text lowercaseString];
         NSString *payee = [((UITextField *)[self.alert textFields][1]).text lowercaseString];
