@@ -92,6 +92,7 @@
 
 //gets the user by the given username
 - (void) getUserByUsername:(NSString*) username {
+    [self.usernameToAdd resignFirstResponder];
     PFQuery *query = [PFUser query];
     [query whereKey:@"username" equalTo:username];
     [query includeKey:@"picture"];
@@ -314,6 +315,7 @@
         }];
     }]];
     [self.delegate showAlert:alert];
+
     
     
     /* // OLD
