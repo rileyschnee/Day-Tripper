@@ -13,6 +13,7 @@
 #import "APIManager.h"
 #import <AFNetworking/UIImageView+AFNetworking.h>
 #import "ImgurDetailViewController.h"
+#import "SVProgressHUD.h"
 
 @interface ImgurAlbumViewController () <UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 @property (weak, nonatomic) IBOutlet UILabel *urlLabel;
@@ -67,21 +68,19 @@
         self.urlLabel.text = albumURLStringLabel;
         self.albumUrlString = albumURLString;
         
+        [SVProgressHUD show];
         [self populateUrls:^{
             [self refreshAsync];
         }];
         
         [self setWebViewWithString:albumURLString];
-//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, 5 * NSEC_PER_SEC), dispatch_get_main_queue(), ^{
-//            [self.webView reload];
-//        });
     }
 }
 
 -(void) refreshAsync {
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
-        //[SVProgressHUD dismiss];
+        [SVProgressHUD dismiss];
     });
 }
 

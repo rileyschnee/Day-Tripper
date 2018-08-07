@@ -150,7 +150,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
     //this is called if the "Done" button is pressed
     else {
-        if (self.tripName.length == 0){
+        //if there is no trip name yet, then ask the user for a trip name
+        if (self.tripName.length == 0) {
             [self alertForTripName];
         } else {
             [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {

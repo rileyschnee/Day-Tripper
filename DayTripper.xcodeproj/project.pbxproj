@@ -12,7 +12,6 @@
 		0EAE0C6120FFF6F000D798A9 /* ResourcesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6020FFF6F000D798A9 /* ResourcesViewController.m */; };
 		0EAE0C6420FFF71D00D798A9 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0EAE0C6320FFF71D00D798A9 /* MapViewController.m */; };
 		0ED3879E2115222300F8B1F4 /* MapResultsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0ED3879D2115222300F8B1F4 /* MapResultsViewController.m */; };
-		0EE1E0E0211644B40076BD54 /* apikeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0EE1E0DF211644B40076BD54 /* apikeys.plist */; };
 		537A4B8121065AA000E64CBD /* random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B8021065AA000E64CBD /* random.swift */; };
 		537A4B8321066FFC00E64CBD /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 537A4B8221066FFC00E64CBD /* MessageUI.framework */; };
 		537A4B862108F42400E64CBD /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 537A4B852108F42400E64CBD /* ChatViewController.m */; };
@@ -51,6 +50,7 @@
 		53B43945211383010015075B /* NSError+IMGError.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B43942211383010015075B /* NSError+IMGError.m */; };
 		53B43946211383010015075B /* NSDictionary+IMG.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B43943211383010015075B /* NSDictionary+IMG.m */; };
 		53B4394A2113A97B0015075B /* ImgurAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 53B439492113A97B0015075B /* ImgurAlbumViewController.m */; };
+		53B43952211907140015075B /* apikeys.plist in Resources */ = {isa = PBXBuildFile; fileRef = 53B43951211907140015075B /* apikeys.plist */; };
 		53E8420620F9A060003FE31A /* APIManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420520F9A060003FE31A /* APIManager.m */; };
 		53E8420920FCF386003FE31A /* Functions.m in Sources */ = {isa = PBXBuildFile; fileRef = 53E8420820FCF386003FE31A /* Functions.m */; };
 		53E8420B20FE445A003FE31A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 53E8420A20FE445A003FE31A /* MapKit.framework */; };
@@ -100,8 +100,6 @@
 		0ED387992112210700F8B1F4 /* ResourcesViewControllerRefreshDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResourcesViewControllerRefreshDelegate.h; sourceTree = "<group>"; };
 		0ED3879C2115222300F8B1F4 /* MapResultsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MapResultsViewController.h; sourceTree = "<group>"; };
 		0ED3879D2115222300F8B1F4 /* MapResultsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MapResultsViewController.m; sourceTree = "<group>"; };
-		0EE1E0DF211644B40076BD54 /* apikeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = apikeys.plist; path = ../../../../../../Downloads/apikeys.plist; sourceTree = "<group>"; };
-		0EE1E0E1211644BB0076BD54 /* apikeys.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = apikeys.plist; sourceTree = "<group>"; };
 		12ACFB88D352439559867FC3 /* libPods-DayTripper.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-DayTripper.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		537A4B7F21065A9F00E64CBD /* DayTripper-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "DayTripper-Bridging-Header.h"; sourceTree = "<group>"; };
 		537A4B8021065AA000E64CBD /* random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = random.swift; sourceTree = "<group>"; };
@@ -181,6 +179,7 @@
 		53B43947211383570015075B /* NSDictionary+IMG.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+IMG.h"; sourceTree = "<group>"; };
 		53B439482113A97B0015075B /* ImgurAlbumViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImgurAlbumViewController.h; sourceTree = "<group>"; };
 		53B439492113A97B0015075B /* ImgurAlbumViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImgurAlbumViewController.m; sourceTree = "<group>"; };
+		53B43951211907140015075B /* apikeys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = apikeys.plist; sourceTree = "<group>"; };
 		53E8420420F9A060003FE31A /* APIManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = APIManager.h; sourceTree = "<group>"; };
 		53E8420520F9A060003FE31A /* APIManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = APIManager.m; sourceTree = "<group>"; };
 		53E8420720FCF386003FE31A /* Functions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Functions.h; sourceTree = "<group>"; };
@@ -401,13 +400,13 @@
 		BEA5FD3520F9298F005B79F5 /* DayTripper */ = {
 			isa = PBXGroup;
 			children = (
+				53B43951211907140015075B /* apikeys.plist */,
 				53B43897211380FC0015075B /* ImgurSession */,
 				53E8420320F9A03F003FE31A /* Utils */,
 				BEA5FD4E20F929BF005B79F5 /* Models */,
 				BEA5FD4D20F929B9005B79F5 /* Views */,
 				BEA5FD4C20F929AF005B79F5 /* View Controllers */,
 				BEA5FD3620F9298F005B79F5 /* AppDelegate.h */,
-				0EE1E0E1211644BB0076BD54 /* apikeys.plist */,
 				BEA5FD3720F9298F005B79F5 /* AppDelegate.m */,
 				BEA5FD3C20F9298F005B79F5 /* Main.storyboard */,
 				BEA5FD3F20F92990005B79F5 /* Assets.xcassets */,
@@ -423,7 +422,6 @@
 		BEA5FD4C20F929AF005B79F5 /* View Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				0EE1E0DF211644B40076BD54 /* apikeys.plist */,
 				BEA5FD4F20F929CD005B79F5 /* QuizViewController.h */,
 				BEA5FD5020F929CD005B79F5 /* QuizViewController.m */,
 				BEA5FD5220F929E2005B79F5 /* ResultsViewController.h */,
@@ -584,7 +582,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE69F26E21001161000122D6 /* 4SQCategories.json in Resources */,
-				0EE1E0E0211644B40076BD54 /* apikeys.plist in Resources */,
+				53B43952211907140015075B /* apikeys.plist in Resources */,
 				BEA5FD4320F92990005B79F5 /* LaunchScreen.storyboard in Resources */,
 				BE69F26C21000631000122D6 /* yelpCategories.json in Resources */,
 				BEA5FD4020F92990005B79F5 /* Assets.xcassets in Resources */,
@@ -879,14 +877,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8E3CSXA9JT;
+				DEVELOPMENT_TEAM = J73QEJBHCK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -902,14 +900,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8E3CSXA9JT;
+				DEVELOPMENT_TEAM = J73QEJBHCK;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = DayTripper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = makerappsriley.DayTripper;
+				PRODUCT_BUNDLE_IDENTIFIER = makerappsmike.DayTripper;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "DayTripper/DayTripper-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
