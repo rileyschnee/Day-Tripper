@@ -70,12 +70,53 @@
 
 - (void)viewDidAppear:(BOOL)animated{
     [super viewDidAppear:YES];
-    //buggy
-    [self.resultsMap removeAnnotations:self.resultsMap.annotations];
+    
+    [SVProgressHUD show];
+    self.arrayOfPoints = [[NSMutableArray alloc] init];
+    // iterate through the three sub arrays of activities to make one array consisting of all activities
+    self.allActivities = [[NSMutableArray alloc] init];
+    for (NSMutableArray* placeFoodEventArray in self.activities) {
+        for (id<Activity> activity in placeFoodEventArray) {
+            [self.allActivities addObject:activity];
+        }
+    }
+    for (id<Activity> activity in self.allActivities) {
+        MKPointAnnotation *point = [MKPointAnnotation new];
+        CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(activity.latitude, activity.longitude);
+        point.coordinate = coor;
+        point.title = activity.name;
+        //[self.mapView addAnnotation:point];
+        [self.arrayOfPoints addObject:point];
+    }
+    
+    // Calculate center of points
+    CLLocation *center = [self centerOfAnnotations:self.arrayOfPoints];
+    CLLocationDistance maxdistance = 0.0;
+    
+    for (int i = 1; i < [self.allActivities count]; i++) {
+        CLLocation *temploc = [[CLLocation alloc] initWithLatitude:[[self.allActivities objectAtIndex:i] latitude] longitude:[[self.allActivities objectAtIndex:i] longitude]];
+        CLLocationDistance distant = [center distanceFromLocation:temploc];
+        if (distant > maxdistance) {
+            maxdistance = distant;
+        }
+    }
+    
+    // Set region
+    self.region = MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(center.coordinate.latitude, center.coordinate.longitude), 1.5*maxdistance, 1.5*maxdistance);
     [self.resultsMap setRegion:self.region animated:false];
+    // Add points to map
     for(MKPointAnnotation *point in self.arrayOfPoints){
         [self.resultsMap addAnnotation:point];
     }
+    
+    [SVProgressHUD dismiss];
+    //buggy
+    //[self.resultsMap reloadInputViews];
+//    [self.resultsMap removeAnnotations:self.resultsMap.annotations];
+//    [self.resultsMap setRegion:self.region animated:false];
+//    for(MKPointAnnotation *point in self.arrayOfPoints){
+//        [self.resultsMap addAnnotation:point];
+//    }
 }
 
 

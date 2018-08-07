@@ -105,11 +105,12 @@
         self.tabBarController.navigationItem.leftBarButtonItem = item;
     }
     if(self.allowAddToTrip){
-        UIImage *addToTripIcon = [UIImage imageNamed:@"circle"];
+        UIImage *addToTripIcon = [UIImage imageNamed:@"circle-detail"];
         if([self.delegate isActivityInTrip:self.activity]){
-            addToTripIcon = [UIImage imageNamed:@"circle-checked"];
+            addToTripIcon = [UIImage imageNamed:@"circle-detail-checked"];
         }
         self.addToTrip = [[UIBarButtonItem alloc] initWithImage:addToTripIcon style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus)];
+        self.addToTrip.width = 30.0f;
         self.navigationItem.rightBarButtonItem = self.addToTrip;
     }
 }
@@ -134,9 +135,9 @@
     }
     // Add to trip button
     if(self.allowAddToTrip){
-        UIImage *addToTripIcon = [UIImage imageNamed:@"circle"];
+        UIImage *addToTripIcon = [UIImage imageNamed:@"circle-detail"];
         if([self.delegate isActivityInTrip:self.activity]){
-            addToTripIcon = [UIImage imageNamed:@"circle-checked"];
+            addToTripIcon = [UIImage imageNamed:@"circle-detail-check"];
         }
         self.addToTrip = [[UIBarButtonItem alloc] initWithImage:addToTripIcon style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus)];
         self.navigationItem.rightBarButtonItem = self.addToTrip;
@@ -147,10 +148,10 @@
 - (void)toggleActivityInTripStatus{
         if(![self.delegate isActivityInTrip:self.activity]){
             [self.delegate addActivityToTrip:self.activity];
-            self.addToTrip.image = [UIImage imageNamed:@"circle-checked"];
+            self.addToTrip.image = [UIImage imageNamed:@"circle-detail-check"];
         } else {
             [self.delegate removeActivityFromTrip:self.activity];
-            self.addToTrip.image = [UIImage imageNamed:@"circle"];
+            self.addToTrip.image = [UIImage imageNamed:@"circle-detail"];
         }
 }
 
