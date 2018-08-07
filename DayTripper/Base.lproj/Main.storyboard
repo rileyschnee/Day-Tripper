@@ -1837,6 +1837,7 @@
         <image name="website" width="240" height="240"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="drR-1Q-ghe"/>
         <segue reference="rHE-D3-NFR"/>
         <segue reference="xhp-4N-gxW"/>
         <segue reference="wJV-j0-lVJ"/>
