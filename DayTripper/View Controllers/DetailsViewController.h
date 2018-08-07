@@ -11,6 +11,8 @@
 #import "Place.h"
 #import "Food.h"
 #import "Event.h"
+#import "ResultsCell.h"
+
 
 @interface DetailsViewController : UIViewController
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
@@ -19,5 +21,6 @@
 @property (strong, nonatomic) id<Activity> activity;
 @property (strong, nonatomic) NSString* titleForItin;
 @property (nonatomic) BOOL fromMap;
+@property (strong, nonatomic) id<ResultsCellDelegate> delegate;
 
 @end

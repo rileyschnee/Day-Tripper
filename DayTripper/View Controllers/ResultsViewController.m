@@ -149,13 +149,11 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     }
     
     //this is called if the "Done" button is pressed
-    else{
+    else {
         //if there is no trip name yet, then ask the user for a trip name
         if (self.tripName.length == 0) {
             [self alertForTripName];
-        }
-        //reaches here is a trip name exists
-        else {
+        } else {
             [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                 if(succeeded){
                     NSLog(@"YAY! YOUR TRIP SAVED");
@@ -163,11 +161,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
                     NSLog(@"Trip didn't save");
                 }
             }];
-            
             UITabBarController *tabbar = [segue destinationViewController];
             UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
             ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
-            
+    
             //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             resViewController.trip = self.trip;
             //create a home button that goes to Home View Controller
@@ -175,8 +172,10 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
             resViewController.navigationItem.hidesBackButton = YES;
             resViewController.navigationItem.leftBarButtonItem = homeButton;
         }
+        
     }
 }
+
 
 #pragma mark - Fetch Functions
 
@@ -441,7 +440,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         }
         [self dismissViewControllerAnimated:alert completion:nil];
         [self performSegueWithIdentifier:@"toItinView" sender:nil];
-
+        
     }]];
     
     [self presentViewController:alert animated:YES completion:nil];

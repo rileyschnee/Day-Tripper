@@ -43,6 +43,7 @@
 //for storing the previous back button
 @property (nonatomic,strong) UIBarButtonItem* prevBarButton;
 @property (nonatomic) BOOL loaded;
+@property (nonatomic) BOOL allowAddToTrip;
 @end
 
 @implementation DetailsViewController
@@ -53,7 +54,6 @@
     self.lyftButton.layer.cornerRadius = self.lyftButton.frame.size.height / 4;
     self.uberView.layer.cornerRadius = self.uberView.frame.size.height / 4;
     self.directionsButton.layer.cornerRadius = self.directionsButton.frame.size.height / 4;
-
     
     //UBER + LOCATION
     self.geocoder = [[CLGeocoder alloc] init];
@@ -124,8 +124,19 @@
         [navbar setItems:@[navItem]];
         [self.view addSubview:navbar];
     }
+    // Add to trip button
+    if(self.allowAddToTrip){
+        UIBarButtonItem *addToTrip = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"circle"] style:UIBarButtonItemStylePlain target:self action:@selector(toggleActivityInTripStatus:)];
+        self.navigationItem.rightBarButtonItem = addToTrip;
+    }
 }
 
+//
+//- (void)toggleActivityInTripStatus{
+//    if(self.delegate.chosenActivities)
+//    [self.delegate addActivityToTrip:self.activity];
+//}
+//
 
 # pragma mark - Navigation
 
