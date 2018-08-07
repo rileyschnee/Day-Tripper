@@ -150,47 +150,27 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     
     //this is called if the "Done" button is pressed
     else {
-        
-//        UITabBarController *tabbar = [segue destinationViewController];
-//        UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
-//        ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
-//
-//        //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
-//        resViewController.trip = self.trip;
-//        //create a home button that goes to Home View Controller
-//        UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:resViewController action:@selector(back)];
-//        resViewController.navigationItem.hidesBackButton = YES;
-//        resViewController.navigationItem.leftBarButtonItem = homeButton;
-        
-        //if there is no trip name yet, then ask the user for a trip name
-        [self alertForTripName:^(BOOL succeeded, BOOL error) {
-            [self dismissViewControllerAnimated:YES completion:nil];
-            
+        if (self.tripName.length == 0){
+            [self alertForTripName];
+        } else {
+            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                if(succeeded){
+                    NSLog(@"YAY! YOUR TRIP SAVED");
+                } else {
+                    NSLog(@"Trip didn't save");
+                }
+            }];
             UITabBarController *tabbar = [segue destinationViewController];
             UINavigationController *navController = [tabbar.viewControllers objectAtIndex:0];
             ResourcesViewController *resViewController = (ResourcesViewController *) navController.topViewController;
-            
+    
             //ItinViewController *itinViewController = (ItinViewController *) [tabbar.viewControllers objectAtIndex:0];
             resViewController.trip = self.trip;
             //create a home button that goes to Home View Controller
             UIBarButtonItem *homeButton = [[UIBarButtonItem alloc] initWithTitle:@"Home" style: UIBarButtonItemStylePlain target:resViewController action:@selector(back)];
             resViewController.navigationItem.hidesBackButton = YES;
             resViewController.navigationItem.leftBarButtonItem = homeButton;
-            
-            if(succeeded){
-                [self performSegueWithIdentifier:@"toItinView" sender:nil];
-            }
-        }];
-        
-        //reaches here is a trip name exists
-//            [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-//                if(succeeded){
-//                    NSLog(@"YAY! YOUR TRIP SAVED");
-//                } else {
-//                    NSLog(@"Trip didn't save");
-//                }
-//            }];
-        
+        }
         
     }
 }
@@ -415,7 +395,7 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
 
 #pragma mark - Alert Functions
 
-- (void)alertForTripName:(void (^)(BOOL succeeded, BOOL error))completion{
+- (void)alertForTripName{
     NYAlertViewController *alert = [[NYAlertViewController alloc] initWithNibName:nil bundle:nil];
     
     // Set a title and message
@@ -457,15 +437,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         else {
             self.tripName = namefield.text;
         }
-        [Trip saveTrip:self.trip withName:self.tripName withDate:self.tripDate withLat:self.latitude withLon:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-            if(succeeded){
-                NSLog(@"YAY! YOUR TRIP SAVED");
-                completion(succeeded, error);
-            } else {
-                NSLog(@"Trip didn't save");
-                completion(succeeded, error);
-            }
-        }];
+        [self dismissViewControllerAnimated:alert completion:nil];
+        [self performSegueWithIdentifier:@"toItinView" sender:nil];
         
     }]];
     
