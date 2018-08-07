@@ -68,17 +68,29 @@
 }
 // returns a MKCoordinateRegion that encompasses an array of MKAnnotations
 
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:YES];
+
+- (void)viewDidAppear:(BOOL)animated{
+    [super viewDidAppear:YES];
+    
+    [SVProgressHUD show];
+    
+
+    for (id<Activity> activity in self.allActivities) {
+        MKPointAnnotation *point = [MKPointAnnotation new];
+        CLLocationCoordinate2D coor = CLLocationCoordinate2DMake(activity.latitude, activity.longitude);
+        point.coordinate = coor;
+        point.title = activity.name;
+        //[self.mapView addAnnotation:point];
+        [self.arrayOfPoints addObject:point];
+    }
+
+    for(MKPointAnnotation *point in self.arrayOfPoints){
+        [self.resultsMap addAnnotation:point];
+    }
+    
     NSArray *selectedAnnotations = self.resultsMap.selectedAnnotations;
     for(id annotation in selectedAnnotations) {
         [self.resultsMap deselectAnnotation:annotation animated:NO];
-    }
-    [self.resultsMap removeAnnotations:self.resultsMap.annotations];
-    [self.resultsMap setRegion:self.region animated:false];
-    // Add points to map
-    for(MKPointAnnotation *point in self.arrayOfPoints){
-        [self.resultsMap addAnnotation:point];
     }
     
     [SVProgressHUD dismiss];

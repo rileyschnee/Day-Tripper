@@ -401,10 +401,10 @@
 			isa = PBXGroup;
 			children = (
 				53B43951211907140015075B /* apikeys.plist */,
-				53B43897211380FC0015075B /* ImgurSession */,
 				53E8420320F9A03F003FE31A /* Utils */,
 				BEA5FD4E20F929BF005B79F5 /* Models */,
 				BEA5FD4D20F929B9005B79F5 /* Views */,
+				53B43897211380FC0015075B /* ImgurSession */,
 				BEA5FD4C20F929AF005B79F5 /* View Controllers */,
 				BEA5FD3620F9298F005B79F5 /* AppDelegate.h */,
 				BEA5FD3720F9298F005B79F5 /* AppDelegate.m */,
