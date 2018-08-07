@@ -13,6 +13,7 @@
 #import "Functions.h"
 
 @interface ImgurDetailViewController ()
+@property (weak, nonatomic) IBOutlet UIButton *downloadButton;
 
 @end
 
@@ -22,6 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self.pictureView setImageWithURL:self.imageURL];
+    self.downloadButton.layer.cornerRadius = self.downloadButton.frame.size.height / 4;
 }
 
 - (IBAction)didTapDownloadImage:(id)sender {

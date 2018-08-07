@@ -17,7 +17,7 @@
 #import "MapResultsViewController.h"
 #import <NYAlertViewController/NYAlertViewController.h>
 #import "ResourcesViewController.h"
-
+#import "Constants.h"
 
 @interface ResultsViewController () <UITableViewDelegate, UITableViewDataSource, ResultsCellDelegate>
 @property (strong, nonatomic) NSMutableArray *activities;
@@ -31,6 +31,7 @@
 @property (strong, nonatomic) NSMutableString *catQueryPlace;
 @property (strong, nonatomic) NSMutableString *catQueryFood;
 @property (strong, nonatomic) NSMutableString *catQueryEvent;
+@property (strong, nonatomic) Constants *cats;
 @end
 
 @implementation ResultsViewController
@@ -57,6 +58,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [self.activities addObject:self.places];
     [self.activities addObject:self.food];
     [self.activities addObject:self.events];
+    self.cats = [[Constants alloc] init];
+
     [SVProgressHUD show];
     [self setQueryStrings];
     [self fetchResults4SQ];
@@ -207,7 +210,15 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
         [paramsDict setObject:self.catQueryPlace forKey:@"categoryId"];
     }
     else {
-        [paramsDict setObject:@"4d4b7104d754a06370d81259,4d4b7105d754a06372d81259,4d4b7105d754a06376d81259,4d4b7105d754a06377d81259,4d4b7105d754a06378d81259" forKey:@"categoryId"];
+        NSMutableString *cats = [[NSMutableString alloc] initWithString:@""];
+        for(NSString *cat in [self.cats.placeCategories allValues]){
+            [cats appendString:[NSString stringWithFormat:@"%@", cat]];
+            if(![cat isEqual:[self.placeCategories lastObject]]){
+                [cats appendString:@","];
+            }
+        }
+        [paramsDict setObject:cats forKey:@"categoryId"];
+        //[paramsDict setObject:@"4d4b7104d754a06370d81259,4d4b7105d754a06372d81259,4d4b7105d754a06376d81259,4d4b7105d754a06377d81259,4d4b7105d754a06378d81259" forKey:@"categoryId"];
     }
     
     __weak typeof(self) weakSelf = self;
@@ -247,9 +258,19 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:@"food" forKey:@"categories"];
     [paramsDict setObject:apiToken forKey:@"Authorization"];
     if(![self.catQueryFood isEqualToString:@""]){
+        
         [paramsDict setObject:self.catQueryFood forKey:@"categories"];
     } else {
-        [paramsDict setObject:@"restaurants,food" forKey:@"categories"];
+        NSMutableString *cats = [[NSMutableString alloc] initWithString:@""];
+        for(NSString *cat in [self.cats.foodCategories allValues]){
+            [cats appendString:[NSString stringWithFormat:@"%@", cat]];
+            if(![cat isEqual:[self.foodCategories lastObject]]){
+                [cats appendString:@","];
+            }
+        }
+        [paramsDict setObject:cats forKey:@"categoryId"];
+        
+        //[paramsDict setObject:@"restaurants,food" forKey:@"categories"];
     }
     __weak typeof(self) weakSelf = self;
     [apiManager getRequest:baseURL params:[paramsDict copy] completion:^(NSArray* responseDict) {
@@ -294,6 +315,8 @@ NSString *HeaderViewIdentifier = @"ResultsViewHeaderView";
     [paramsDict setObject:apiToken forKey:@"Authorization"];
     if(![self.catQueryEvent isEqualToString:@""]){
         [paramsDict setObject:self.catQueryEvent forKey:@"category"];
+    } else {
+        [paramsDict setObject:@"observances,politics,conferences,expos,concerts,festivals,performing-arts,sports,community" forKey:@"category"];
     }
     
     __weak typeof(self) weakSelf = self;

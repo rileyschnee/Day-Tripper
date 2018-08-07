@@ -148,7 +148,13 @@
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
     cell.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
+    cell.pictureView.alpha = 0.0;
     [cell.pictureView setImageWithURL:cell.imageURL];
+    
+    //Animate UIImageView back to alpha 1 over 0.3sec
+    [UIView animateWithDuration:0.3 animations:^{
+        cell.pictureView.alpha = 1.0;
+    }];
     return cell;
 }
 
