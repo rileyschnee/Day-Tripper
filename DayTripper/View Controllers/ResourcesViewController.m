@@ -57,9 +57,15 @@
     cell.user = self.attendeeUsers[indexPath.item];
     PFFile* file = cell.user[@"picture"];
     cell.profilePicView.file = file;
-    [cell.profilePicView loadInBackground];
+    cell.profilePicView.alpha = 0.0;
+    [cell.profilePicView loadInBackground:^(UIImage * _Nullable image, NSError * _Nullable error) {
+        //Animate UIImageView back to alpha 1 over 0.3sec
+        [UIView animateWithDuration:0.3 animations:^{
+            cell.profilePicView.alpha = 1.0;
+            cell.nameLabel.text = cell.user[@"name"];
+        }];
+    }];
     cell.profilePicView.layer.cornerRadius = cell.profilePicView.frame.size.width/2;
-    cell.nameLabel.text = cell.user[@"name"];
     return cell;
 }
 

@@ -75,6 +75,8 @@
             NSLog(@"%@ completed bool after", self.iou[@"completed"]);
             
             [self.iou saveInBackground];
+            [self.delegate dismissAlert:alert];
+
         }]];
         
         [alert addAction:[NYAlertAction actionWithTitle:@"No" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {

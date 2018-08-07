@@ -8,7 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "Trip.h"
+#import "imgurShareViewController.h"
 
-@interface ImgurAlbumViewController : UIViewController
+@interface ImgurAlbumViewController : UIViewController <ImgurPicturePasser>
 @property (strong, nonatomic) Trip* trip;
+@property (strong, nonatomic) UIImage *imageUpload;
 @end

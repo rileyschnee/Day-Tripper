@@ -10,6 +10,8 @@
 #import "APIManager.h"
 #import "ImgurSession.h"
 #import "SVProgressHUD.h"
+#import <NYAlertViewController/NYAlertViewController.h>
+#import "Functions.h"
 
 @interface imgurShareViewController () <IMGSessionDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate>
 @property (weak, nonatomic) IBOutlet UIImageView *imageView;
@@ -24,7 +26,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     NSString *path = [[NSBundle mainBundle] pathForResource:
                       @"apikeys" ofType:@"plist"];
     NSDictionary *apiDict = [[NSDictionary alloc] initWithContentsOfFile:path];
@@ -78,17 +79,27 @@
     NSData *imageData = UIImagePNGRepresentation(self.imageToPost);
     NSString* title = [self generateTitle];
     [IMGImageRequest uploadImageWithData:imageData title:title description:title linkToAlbumWithID:self.trip.albumHash progress:^(NSProgress *progress) {
-        [SVProgressHUD show];
+       // [SVProgressHUD show];
     } success:^(IMGImage *image) {
-        [SVProgressHUD dismiss];
+        self.delegate.imageUpload = nil;
+        double delayInSeconds = 180.0;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+
+        dispatch_after(popTime, dispatch_get_main_queue(), ^{
+            NSLog(@"HELLOOOOO");
+            [self.delegate reloadCollectionView];
+        });
         // go back to album screen
-        [self dismissViewControllerAnimated:YES completion:nil];
+       // [self dismissViewControllerAnimated:YES completion:nil];
     } failure:^(NSURLSessionDataTask *task, NSError *error) {
-        [SVProgressHUD dismiss];
         NSLog(@"%@", error.localizedDescription);
-        [self dismissViewControllerAnimated:YES completion:nil];
+   //     [self dismissViewControllerAnimated:YES completion:nil];
+        self.delegate.imageUpload = nil;
+        [self alertFailedUpload];
     }];
-    
+   // [SVProgressHUD dismiss];
+    self.delegate.imageUpload = self.imageToPost;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 // creates a title and description for Imgur image post
@@ -104,6 +115,15 @@
 
 - (IBAction)backButtonPressed:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)alertFailedUpload{
+    NYAlertViewController *alert = [Functions alertWithTitle:@"Upload Failed" withMessage:@"Try again later."];
+    
+    [alert addAction:[NYAlertAction actionWithTitle:@"Ok" style:UIAlertActionStyleDefault handler:^(NYAlertAction *action) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }]];
+    [self presentViewController:alert animated:YES completion:nil];
 }
 
 

@@ -176,6 +176,9 @@ int MOVEMENT_KEYBOARD = 200;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     ChatCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ChatCell" forIndexPath:indexPath];
     ChatMessage* chat = self.chats[indexPath.row];
+    //message styling
+    cell.messageContainerView.layer.cornerRadius = cell.messageContainerView.frame.size.height /8;
+    cell.messageContainerView.clipsToBounds = true;
     cell.usernameLabel.text = [NSString stringWithFormat:@"%@%@", chat.username, @":"];
     cell.messageLabel.text = chat.message;
     //color the message blue if from user
@@ -184,9 +187,7 @@ int MOVEMENT_KEYBOARD = 200;
         cell.messageLabel.textColor = [UIColor whiteColor];
     }
     
-    //message styling
-    cell.messageContainerView.layer.cornerRadius = cell.messageContainerView.frame.size.height /4;
-    cell.messageContainerView.clipsToBounds = true;
+   
     return cell;
 }
 

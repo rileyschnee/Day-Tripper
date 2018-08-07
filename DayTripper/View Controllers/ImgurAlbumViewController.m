@@ -35,11 +35,17 @@
     self.title = @"Trip Photos";
     self.imageStringUrls = [NSMutableArray new];
     [self.collectionView reloadData];
+
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     self.imageStringUrls = [NSMutableArray new];
-
+    if([self.trip.albumId isEqualToString:@""]){
+        self.cpURLButton.enabled = FALSE;
+        self.urlLabel.text = @"No images in album";
+    } else {
+        self.cpURLButton.enabled = TRUE;
+    }
     if ([self.trip.albumId isEqualToString:@""]) {
         //set up a new album
         [IMGAlbumRequest createAlbumWithTitle:self.trip.name imageIDs:[NSArray new] success:^(NSString *albumID, NSString *albumDeleteHash) {
@@ -81,6 +87,7 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.collectionView reloadData];
         [SVProgressHUD dismiss];
+        NSLog(@"DONE!!!!!!!!!!");
     });
 }
 
@@ -125,12 +132,19 @@
     if ([segue.destinationViewController isKindOfClass:[imgurShareViewController class]]) {
         imgurShareViewController *imgurVC = (imgurShareViewController*) segue.destinationViewController;
         imgurVC.trip = self.trip;
+        imgurVC.delegate = self;
     } else if ([sender isKindOfClass:[ImgurCell class]]){
         ImgurCell  *tappedCell = sender;
         NSIndexPath *indexPath = [self.collectionView indexPathForCell:tappedCell];
         ImgurDetailViewController *imgurDetailVC = (ImgurDetailViewController*) segue.destinationViewController;
-        imgurDetailVC.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
-        [imgurDetailVC.pictureView setImageWithURL:imgurDetailVC.imageURL];
+
+        if(indexPath.row < self.imageStringUrls.count){
+            imgurDetailVC.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
+            [imgurDetailVC.pictureView setImageWithURL:imgurDetailVC.imageURL];
+        } else {
+            [imgurDetailVC.pictureView setImage:self.imageUpload];
+        }
+        
     }
 }
 
@@ -147,9 +161,14 @@
 
 - (nonnull __kindof UICollectionViewCell *)collectionView:(nonnull UICollectionView *)collectionView cellForItemAtIndexPath:(nonnull NSIndexPath *)indexPath {
     ImgurCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"ImgurCell" forIndexPath:indexPath];
-    cell.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
     cell.pictureView.alpha = 0.0;
-    [cell.pictureView setImageWithURL:cell.imageURL];
+
+    if(indexPath.item >= self.imageStringUrls.count){
+        [cell.pictureView setImage:self.imageUpload];
+    } else {
+        cell.imageURL = [NSURL URLWithString:self.imageStringUrls[indexPath.item]];
+        [cell.pictureView setImageWithURL:cell.imageURL];
+    }
     
     //Animate UIImageView back to alpha 1 over 0.3sec
     [UIView animateWithDuration:0.3 animations:^{
@@ -159,7 +178,17 @@
 }
 
 - (NSInteger)collectionView:(nonnull UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return self.imageStringUrls.count;
+    if(self.imageUpload == nil)
+        return self.imageStringUrls.count;
+    else
+        return (self.imageStringUrls.count + 1);
+}
+
+- (void)reloadCollectionView{
+    self.imageStringUrls = [NSMutableArray new];
+    [self populateUrls:^{
+        [self refreshAsync];
+    }];
 }
 
 @end
