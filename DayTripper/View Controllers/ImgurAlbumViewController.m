@@ -43,6 +43,9 @@
     if([self.trip.albumId isEqualToString:@""]){
         self.cpURLButton.enabled = FALSE;
         self.urlLabel.text = @"No images in album";
+        if(self.imageUpload != nil){
+            [self.collectionView reloadData];
+        }
     } else {
         self.cpURLButton.enabled = TRUE;
     }
