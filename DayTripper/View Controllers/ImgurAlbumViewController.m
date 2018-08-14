@@ -66,7 +66,7 @@
                     NSLog(@"Error saving trip");
                 }
             }];
-            
+            self.cpURLButton.enabled = TRUE;
         } failure:^(NSError *error) {
             NSLog(error.localizedDescription);
         }];
