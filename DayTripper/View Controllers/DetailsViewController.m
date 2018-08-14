@@ -474,7 +474,11 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.images.count > 0) {
             UIImage *image = self.images[0];
-            [self.imageView setImage:image];
+            self.imageView.alpha = 0.0;
+            [UIView animateWithDuration:0.3 animations:^{
+                self.imageView.alpha = 1.0;
+                [self.imageView setImage:image];
+            }];
         }
     });
 }
@@ -482,7 +486,7 @@
 -(void) setHoursAndRatingAsync:(NSString*)startTimeString endTimeString:(NSString*)endTimeString rating:(double)rating {
     dispatch_async(dispatch_get_main_queue(), ^{
         if(![endTimeString isEqualToString:@""] && ![startTimeString isEqualToString:@""]){
-            self.hoursLabel.text = [NSString stringWithFormat:@"%@\r%@%@", startTimeString, @"-", endTimeString];
+            self.hoursLabel.text = [NSString stringWithFormat:@"%@ %@ %@", startTimeString, @"-", endTimeString];
         } else {
             self.hoursLabel.text = @"";
         }
